@@ -1,5 +1,12 @@
 # Everything Is Vine
 
+## Design
+
+* [API DESIGN](docs/apis.md)
+* [DATA MODEL](docs/data-model.md)
+* [GRAPHICAL HUMAN INTERFACE](docs/ghi.md)
+* [INTEGRATIONS](docs/integrations.md)
+
 ## Developers
 * Jennifer W.
 * Kayli R.
