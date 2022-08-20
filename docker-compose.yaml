@@ -1,0 +1,55 @@
+volumes:
+    postgres-data:
+        external: true
+    winery:
+        external: true
+    sales:
+        external: true
+
+services:
+    postgres:
+        build:
+            context: ./relational-data
+            dockerfile: ./Dockerfile.dev
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_MULTIPLE_DATABASES=winery, sales
+            - POSTGRES_PASSWORD=test-databases
+        ports:
+            - 15432:5432
+    winery:
+        build:
+            context: ./winery
+            dockerfile: ./Dockerfile.dev
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./winery:/app
+        environment:
+            DATABASE_URL: postgresql://winery:password@postgres/winery
+            WAIT_HOSTS: postgres:5432
+    sales:
+        build:
+            context: ./sales
+            dockerfile: ./Dockerfile.dev
+        ports:
+            - "8010:8000"
+        volumes:
+            - ./sales:/app
+        environment:
+            DATABASE_URL: postgresql://sales:password@postgres/sales
+            WAIT_HOSTS: postgres:5432
+    ghi:
+        image: node:lts-bullseye
+        command: /bin/bash run.sh
+        working_dir: /app
+        volumes:
+            - ./ghi:/app
+        ports:
+            - "3000:3000"
+        environment:
+            HOST_OS: ${OS}
+            NODE_ENV: development
+            HOST: "0.0.0.0"
+            REACT_APP_DJANGO_SERVICE: http://localhost:8000
