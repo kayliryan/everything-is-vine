@@ -2,15 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Winery(models.Model):
-    id = models.SmallIntegerField()
     name = models.CharField(max_length=254)
-    url = models.URLField(max_length=220)
+    url = models.URLField(max_length=220, null=True)
     address = models.CharField(max_length=254)
     description = models.TextField()
-    owner = models.CharField(max_length=110)
+    owner = models.CharField(max_length=110, null=True)
 
 class Wine(models.Model):
-    id = models.SmallIntegerField()
     winery_id = models.ForeignKey(
         Winery,
         related_name="+",
@@ -30,14 +28,13 @@ class Wine(models.Model):
     
     
 class User(models.Model):
-    id = models.SmallIntegerField()
     name = models.CharField(max_length=110)
     address = models.CharField(max_length=254)
     phone = models.CharField(max_length=9)
     email =models.CharField(max_length=110)
     winery_id = models.ForeignKey(
         Winery,
-        related_name="+",
+        related_name="wineries",
         on_delete=models.PROTECT
     )
     membership_level = models.SmallIntegerField()
