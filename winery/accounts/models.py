@@ -1,5 +1,5 @@
 from django.db import models
-from .models import Winery
+from inventory.models import Winery
 
 # Create your models here.
 class User(models.Model):
