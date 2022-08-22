@@ -11,7 +11,7 @@ class Winery(models.Model):
 class Wine(models.Model):
     winery_id = models.ForeignKey(
         Winery,
-        related_name="+",
+        related_name="wines",
         on_delete=models.PROTECT
     ) 
     brand = models.CharField(max_length=110)
@@ -26,17 +26,4 @@ class Wine(models.Model):
     picture_url = models.URLField(max_length=220, null=True)
     quantity = models.SmallIntegerField()
     
-    
-class User(models.Model):
-    name = models.CharField(max_length=110)
-    address = models.CharField(max_length=254)
-    phone = models.CharField(max_length=9)
-    email =models.CharField(max_length=110)
-    winery_id = models.ForeignKey(
-        Winery,
-        related_name="wineries",
-        on_delete=models.PROTECT
-    )
-    membership_level = models.SmallIntegerField()
-    employee = models.BooleanField()
     

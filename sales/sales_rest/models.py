@@ -11,17 +11,17 @@ class Order(models.Model):
 class ShoppingItem(models.Model):
     user_id = models.ForeignKey(
         User,
-        related_name="user",
+        related_name="shopping_items",
         on_delete=models.PROTECT
     )
     order_id = models.ManyToOne(
         Order,
-        related_name="order",
+        related_name="shopping_items",
         on_delete=models.PROTECT
     )
     item = models.ForeignKey(
         Wine,
-        related_name="items",
+        related_name="shopping_items",
         on_delete=models.PROTECT
     )
     quantity = models.SmallIntegerField()

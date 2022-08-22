@@ -9,7 +9,7 @@ class User(models.Model):
     email =models.CharField(max_length=110)
     winery_id = models.ForeignKey(
         Winery,
-        related_name="wineries",
+        related_name="users",
         on_delete=models.PROTECT
     )
     membership_level = models.SmallIntegerField()
