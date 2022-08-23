@@ -12,7 +12,7 @@
 # # from sales_rest.models import WineVO
 
 # def get_wines():
-#     response = requests.get("http://winery-api:8000/api/wines/")
+#     response = requests.get("http://winery-api:8000/api/inventory/")
 #     content = json.loads(response.content)
 #     for wine in content["wines"]:
 #         WineVo.objects.update_or_create(
