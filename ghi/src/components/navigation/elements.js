@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Link as LinkRouter } from 'react-router-dom';
+
 
 export const Nav = styled.nav`
     background: #000;
@@ -25,6 +27,18 @@ export const NavigationBarContainer = styled.div`
     width: 100%;
     padding: 0 24px;
     max-width: 1100px;
+`;
+
+export const NavigationLogo = styled(LinkRouter)`
+    color: #fff;
+    justify-self: flex-start;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    font-weight: bold;
+    text-decoration: none;
 `;
 
 export const MobileIcon = styled.div`
