@@ -10,24 +10,24 @@ import {
     MenuRoute,
 } from './menuElements';
 
-const Menu = () => {
+const Menu = ({isOpen, toggle}) => {
   return (
-    <MenuContainer>
-        <Icon>
+    <MenuContainer isOpen={isOpen} onClick={toggle}>
+        <Icon onClick={toggle}>
             <CloseIcon />
         </Icon>
         <MenuWrapper>
             <MenuSubMenu>
-                <MenuLink to='wines'>
+                <MenuLink to='wines' onClick={toggle}>
                     Wines
                 </MenuLink>
-                <MenuLink to='contact'>
+                <MenuLink to='contact' onClick={toggle}>
                     Contact
                 </MenuLink>
-                <MenuLink to='shopping'>
+                <MenuLink to='shopping' onClick={toggle}>
                     Cart
                 </MenuLink>
-                <MenuLink to='signup'>
+                <MenuLink to='signup' onClick={toggle}>
                     Sign Up
                 </MenuLink>
             </MenuSubMenu>

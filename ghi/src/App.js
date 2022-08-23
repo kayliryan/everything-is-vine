@@ -1,13 +1,11 @@
 import './App.css';
-import NavigationBar from './components/navigation';
-import Menu from './components/menu';
+import Home from './pages';
 import { BrowserRouter as Router } from 'react-router-dom'; 
 
 function App() {
   return (
     <Router>
-      <Menu />
-      <NavigationBar />
+      <Home />
     </Router>
   );
 }

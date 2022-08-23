@@ -13,14 +13,14 @@ import {
 import { FaBars } from 'react-icons/fa';
 
 
-const NavigationBar = () => {
+const NavigationBar = ({ toggle }) => {
     return (
         <Navigation>
             <NavigationBarContainer>
                 <NavigationLogo to='/'>
                     Everything's Vine
                 </NavigationLogo>
-                <MobileIcon>
+                <MobileIcon onClick={toggle}>
                     <FaBars />
                 </MobileIcon>
                 <NavigationMenu>
