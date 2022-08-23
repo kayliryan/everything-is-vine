@@ -1,4 +1,6 @@
 import React from 'react';
+import { Nav, NavigationBarContainer } from './elements';
+
 
 const NavigationBar = () => {
     return (
@@ -8,3 +10,5 @@ const NavigationBar = () => {
         </Nav>
     );
 };
+
+export default NavigationBar;
