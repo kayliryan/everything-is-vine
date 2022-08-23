@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-    Nav, 
+    Navigation, 
     NavigationBarContainer, 
     NavigationLogo, 
     MobileIcon, 
@@ -15,7 +15,7 @@ import { FaBars } from 'react-icons/fa';
 
 const NavigationBar = () => {
     return (
-        <Nav>
+        <Navigation>
             <NavigationBarContainer>
                 <NavigationLogo to='/'>
                     Everything's Vine
@@ -41,7 +41,7 @@ const NavigationBar = () => {
                     <NavigationButtonLink to='/signin'>Sign In</NavigationButtonLink>
                 </NavigationButton>
             </NavigationBarContainer>
-        </Nav>
+        </Navigation>
     );
 };
 

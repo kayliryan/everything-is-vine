@@ -3,9 +3,9 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { Link as LinkScroll } from 'react-scroll';
 
 
-export const Nav = styled.nav`
+export const Navigation = styled.nav`
     background: #000;
-    height: 80px;
+    height: 85px;
     // margin-top: -80px;
     display: flex;
     justify-content: center;
@@ -34,10 +34,10 @@ export const NavigationLogo = styled(LinkRouter)`
     color: #fff;
     justify-self: flex-start;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     display: flex;
     align-items: center;
-    margin-left: 24px;
+    margin-left: 16px;
     font-weight: bold;
     text-decoration: none;
 `;
@@ -63,6 +63,7 @@ export const NavigationMenu = styled.ul`
     list-style: none;
     text-align: center;
     margin-right: -22px;
+    margin-left: -78px;
 
     @media screen and (max-width: 768px) {
         display: none;
@@ -100,7 +101,7 @@ export const NavigationButtonLink = styled(LinkRouter)`
     border-radius: 50px;
     background: #01bf71;
     white-space: nowrap;
-    padding: 10px 22px;
+    padding: 10px 30px;
     color: #010606;
     font-size: 16px;
     outline: none;
