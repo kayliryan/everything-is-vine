@@ -27,7 +27,7 @@ export const NavigationBarContainer = styled.div`
     z-index: 1;
     width: 100%;
     padding: 0 24px;
-    max-width: 1100px;
+    max-width: 1600px;
 `;
 
 export const NavigationLogo = styled(LinkRouter)`
@@ -79,7 +79,7 @@ export const NavigationLinks = styled(LinkScroll)`
     color: #fff;
     display: flex;
     align-items: center;
-    margin-left: 28px;
+    margin-left: 16px;
     font-size: 1.3rem;
     text-decoration: none;
     padding: 0 1rem;
