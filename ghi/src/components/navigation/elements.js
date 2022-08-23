@@ -4,7 +4,7 @@ import { Link as LinkScroll } from 'react-scroll';
 
 
 export const Navigation = styled.nav`
-    background: #000;
+    background: #A6A6C7;
     height: 85px;
     // margin-top: -80px;
     display: flex;
@@ -31,7 +31,7 @@ export const NavigationBarContainer = styled.div`
 `;
 
 export const NavigationLogo = styled(LinkRouter)`
-    color: #fff;
+    color: #070723;
     justify-self: flex-start;
     cursor: pointer;
     font-size: 1.3rem;
@@ -76,7 +76,7 @@ export const NavigationItem = styled.li`
 `;
 
 export const NavigationLinks = styled(LinkScroll)`
-    color: #fff;
+    color: #070723;
     display: flex;
     align-items: center;
     margin-left: 16px;
@@ -105,8 +105,8 @@ export const NavigationButtonLink = styled(LinkRouter)`
     background: #01bf71;
     white-space: nowrap;
     padding: 10px 30px;
-    color: #010606;
-    font-size: 16px;
+    color: #070723;
+    font-size: 1.2rem;
     outline: none;
     border: none;
     cursor: pointer;
