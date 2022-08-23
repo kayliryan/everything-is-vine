@@ -14,7 +14,7 @@ class WineVO(models.Model):
     winery_id = models.ForeignKey(
     WineryVO,
     related_name="wines",
-    on_delete=models.PROTECT
+    on_delete=models.CASCADE
     ) 
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
@@ -31,7 +31,7 @@ class WineVO(models.Model):
 
 
 class Order(models.Model):
-    confirmation_number = models.IntegerField()
+    confirmation_number = models.CharField(max_length=17, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     
 
@@ -45,7 +45,7 @@ class ShoppingItem(models.Model):
     order_id = models.ForeignKey(
         Order,
         related_name="shopping_items",
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
     item = models.ForeignKey(
         WineVO,
