@@ -1,11 +1,15 @@
 import React from 'react';
-import { Nav, NavigationBarContainer } from './elements';
+import { Nav, NavigationBarContainer, MobileIcon } from './elements';
+import { FaBars } from 'react-icons/fa';
 
 
 const NavigationBar = () => {
     return (
         <Nav>
             <NavigationBarContainer>
+                <MobileIcon>
+                    <FaBars />
+                </MobileIcon>
             </NavigationBarContainer>
         </Nav>
     );
