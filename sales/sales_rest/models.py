@@ -1,9 +1,6 @@
 from django.db import models
 # Create your models here.
 
-<<<<<<< HEAD
-
-=======
 
 class WineryVO(models.Model):
     name = models.CharField(max_length=254)
@@ -54,5 +51,4 @@ class ShoppingItem(models.Model):
     quantity = models.SmallIntegerField()
     price = models.FloatField()
     active = models.BooleanField(default=True)
->>>>>>> main
     
