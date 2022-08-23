@@ -1,5 +1,15 @@
 import React from 'react';
-import { Nav, NavigationBarContainer, NavigationLogo, MobileIcon, NavigationMenu, NavigationItem, NavigationLinks } from './elements';
+import { 
+    Nav, 
+    NavigationBarContainer, 
+    NavigationLogo, 
+    MobileIcon, 
+    NavigationMenu, 
+    NavigationItem, 
+    NavigationLinks,
+    NavigationButton,
+    NavigationButtonLink,
+} from './elements';
 import { FaBars } from 'react-icons/fa';
 
 
@@ -27,6 +37,9 @@ const NavigationBar = () => {
                         <NavigationLinks to='signup'>Sign Up</NavigationLinks>
                     </NavigationItem>
                 </NavigationMenu>
+                <NavigationButton>
+                    <NavigationButtonLink to='/signin'>Sign In</NavigationButtonLink>
+                </NavigationButton>
             </NavigationBarContainer>
         </Nav>
     );
