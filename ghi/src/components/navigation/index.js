@@ -9,10 +9,8 @@ import {
     NavigationLinks,
     NavigationButton,
     NavigationButtonLink,
-} from './elements';
+} from './navigationElements';
 import { FaBars } from 'react-icons/fa';
-import { IoMdWine } from 'react-icons/io';
-import { AiOutlineShoppingCart } from "react-icons/ai";
 
 
 const NavigationBar = () => {
