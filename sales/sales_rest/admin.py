@@ -1,7 +1,4 @@
 from django.contrib import admin
-<<<<<<< HEAD
-
-=======
 from .models import Order, ShoppingItem, WineryVO, WineVO
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
@@ -20,5 +17,4 @@ admin.site.register(Order, OrderAdmin)
 admin.site.register(ShoppingItem, ShoppingItemAdmin)
 admin.site.register(WineryVO, WineryVOAdmin)
 admin.site.register(WineVO, WineVOAdmin)
->>>>>>> main
 
