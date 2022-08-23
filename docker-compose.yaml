@@ -5,6 +5,8 @@ volumes:
         external: true
     sales:
         external: true
+    ghi:
+        external: true
 
 services:
     postgres:
