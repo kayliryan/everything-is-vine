@@ -11,6 +11,8 @@ import {
     NavigationButtonLink,
 } from './elements';
 import { FaBars } from 'react-icons/fa';
+import { IoMdWine } from 'react-icons/io';
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 
 const NavigationBar = () => {
@@ -25,13 +27,19 @@ const NavigationBar = () => {
                 </MobileIcon>
                 <NavigationMenu>
                     <NavigationItem>
-                        <NavigationLinks to='wines'>Our Wines</NavigationLinks>
+                        <NavigationLinks to='wines'>
+                            Wines
+                        </NavigationLinks>
                     </NavigationItem>
                     <NavigationItem>
-                        <NavigationLinks to='contact'>Contact</NavigationLinks>
+                        <NavigationLinks to='contact'>
+                            Contact
+                        </NavigationLinks>
                     </NavigationItem>
                     <NavigationItem>
-                        <NavigationLinks to='shopping'>Shopping Cart</NavigationLinks>
+                        <NavigationLinks to='shopping'>
+                            Cart
+                        </NavigationLinks>
                     </NavigationItem>
                     <NavigationItem>
                         <NavigationLinks to='signup'>Sign Up</NavigationLinks>

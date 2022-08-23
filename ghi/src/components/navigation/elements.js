@@ -34,11 +34,11 @@ export const NavigationLogo = styled(LinkRouter)`
     color: #fff;
     justify-self: flex-start;
     cursor: pointer;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     margin-left: 16px;
-    font-weight: bold;
+    // font-weight: bold;
     text-decoration: none;
 `;
 
@@ -63,7 +63,8 @@ export const NavigationMenu = styled.ul`
     list-style: none;
     text-align: center;
     margin-right: -22px;
-    margin-left: -78px;
+    margin-left: -58px;
+
 
     @media screen and (max-width: 768px) {
         display: none;
@@ -78,6 +79,8 @@ export const NavigationLinks = styled(LinkScroll)`
     color: #fff;
     display: flex;
     align-items: center;
+    margin-left: 28px;
+    font-size: 1.3rem;
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
