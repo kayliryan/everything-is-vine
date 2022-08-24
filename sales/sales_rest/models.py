@@ -1,4 +1,7 @@
 from django.db import models
+from django.conf import settings
+
+USER_MODEL = settings.AUTH_USER_MODEL
 # Create your models here.
 
 
@@ -11,7 +14,7 @@ class WineVO(models.Model):
     winery_id = models.ForeignKey(
     WineryVO,
     related_name="wines",
-    on_delete=models.PROTECT
+    on_delete=models.CASCADE
     ) 
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
@@ -28,20 +31,21 @@ class WineVO(models.Model):
 
 
 class Order(models.Model):
-    confirmation_number = models.IntegerField()
+    confirmation_number = models.CharField(max_length=17, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     
 
 class ShoppingItem(models.Model):
-    # user_id = models.ForeignKey(
-    #     User,
-    #     related_name="shopping_items",
-    #     on_delete=models.PROTECT
-    # )
+    user = models.ForeignKey(
+        USER_MODEL,
+        related_name="shopping_items",
+        on_delete=models.CASCADE,
+        null=True,
+    )
     order_id = models.ForeignKey(
         Order,
         related_name="shopping_items",
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
     item = models.ForeignKey(
         WineVO,
@@ -50,5 +54,5 @@ class ShoppingItem(models.Model):
     )
     quantity = models.SmallIntegerField()
     price = models.FloatField()
-    active = models.BooleanField(default=True)
+
     

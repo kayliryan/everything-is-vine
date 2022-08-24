@@ -8,11 +8,15 @@ class Winery(models.Model):
     description = models.TextField()
     owner = models.CharField(max_length=110, null=True)
 
+    def __str__(self):
+        return self.name + "," + self.owner
+
 class Wine(models.Model):
-    winery_id = models.ForeignKey(
+    winery = models.ForeignKey(
         Winery,
         related_name="wines",
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE,
+        null=True
     ) 
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
@@ -25,4 +29,6 @@ class Wine(models.Model):
     price = models.FloatField()
     picture_url = models.URLField(max_length=220, null=True)
     quantity = models.SmallIntegerField()
-
+    
+    def __str__(self):
+        return self.brand + ", " + str(self.year) + " " + self.varietal
