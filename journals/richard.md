@@ -1,5 +1,17 @@
 
 
-August 22, 2022
+## August 19, 2022
+
+Today we spent the majority of our time working on the DDD, building our design model in excalidraw. 
+
+## August 22, 2022
 
 Today we wen't over the models as a group and then I made the mistake of merging to the main branch without making sure my docker containers were up and running. So we sorted that out, troubleshooted with daniel and fixed the main branch. We also had some ghi issues and we had to delete package-lock and node modules, then rebuild. 
+
+## August 23, 2022
+
+Today I was finally able to sort out my merge and got my react up and running. Boden created a list view for the winery that looks pretty awesome. Boden, Shadan and I have been pair programming sorting out the user authentication while Jennifer and Kayli are working on our other microservice, sales. Shadan also put together a nice react UI.
+
+note: we were having problems with migrations in our winery container. Andrew showed us how we could add the make migrations command to the dockerfile.dev as a CMD before the migrate command. We rebuilt the container and it fixed the problem. Andrew told us then to remove the make migrations command to make out lives easier. 
+
+Configuration drift: when your dockerfile/project code doesn't represent whats actually running.
