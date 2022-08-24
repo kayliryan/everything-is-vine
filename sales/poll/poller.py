@@ -15,7 +15,6 @@ def get_wines():
     response = requests.get("http://winery:8000/api/wines/")
     content = json.loads(response.content)
     for wine in content["wines"]:
-        print(wine)
         WineVO.objects.update_or_create(
             id = wine["id"],
             # import_href=wine["href"],
