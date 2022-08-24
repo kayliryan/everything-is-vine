@@ -1,3 +1,14 @@
+## August 23, 2022
+
+Today, I worked on:
+
+* Initializing our microservice and getting our poller for WineVO's running
+
+Today Jennifer and I pair programmed and got our microservice in good shape. We dealt with a lot of circular import issues due to lack of thoughtful naming of our projects and apps. That took some time to get sorted out but it should be all behind us now and it won't be a mistake we make moving forward. We also got our poller successfully working and verified WineVO's were being created through validation in our admin.
+
+Today I learned that string concatenations are possible when defining a value in a dictionary. I used it to create a href in our poller through brute force. Not ideal, but the lack of href comes from the other microservice so we had to make it work temporarily on our end to be able to proceed. It should be worked out soon.
+
+
 ## August 20, 2022
 
 Today, I worked on:

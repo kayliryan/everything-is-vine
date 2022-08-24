@@ -5,17 +5,13 @@ USER_MODEL = settings.AUTH_USER_MODEL
 # Create your models here.
 
 
-class WineryVO(models.Model):
-    name = models.CharField(max_length=254)
-    import_href = models.CharField(max_length=200, unique=True)
+# class WineryVO(models.Model):
+#     name = models.CharField(max_length=254)
+#     import_href = models.CharField(max_length=200, unique=True)
 
 
 class WineVO(models.Model):
-    winery_id = models.ForeignKey(
-    WineryVO,
-    related_name="wines",
-    on_delete=models.CASCADE
-    ) 
+    winery_id = models.SmallIntegerField()
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
     varietal = models.CharField(max_length=110)
@@ -28,6 +24,11 @@ class WineVO(models.Model):
     picture_url = models.URLField(max_length=220, null=True)
     quantity = models.SmallIntegerField()
     import_href = models.CharField(max_length=200, unique=True)
+    # winery_id = models.ForeignKey(
+    # WineryVO,
+    # related_name="wines",
+    # on_delete=models.CASCADE
+    # ) 
 
 
 class Order(models.Model):
