@@ -12,10 +12,12 @@ django.setup()
 from sales_rest.models import WineVO
 
 def get_wines():
+    # response = requests.get(f'http://winery:8000/api/wineries/{self.winery_id}wines/')
     response = requests.get("http://winery:8000/api/wines/")
     content = json.loads(response.content)
+    # print("*********CONTENT:", content)
     for wine in content["wines"]:
-        print("******************WINE:", wine)
+        # print("******************WINE:", wine)
         WineVO.objects.update_or_create(
             id = wine["id"],
             # import_href=wine["href"],

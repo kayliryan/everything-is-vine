@@ -30,6 +30,9 @@ class WineVO(models.Model):
     # on_delete=models.CASCADE
     # ) 
 
+    def __str__(self):
+        return f'Winery {self.winery_id} / Wine {self.id}'
+
 
 class Order(models.Model):
     confirmation_number = models.CharField(max_length=17, unique=True)
