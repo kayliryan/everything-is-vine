@@ -36,8 +36,9 @@ class Wine(models.Model):
     quantity = models.SmallIntegerField()
 
     def get_api_url(self):
-        return reverse("api_list_wines", kwargs={"pk": self.id})
+        return f'wineries/{self.winery.id}/wines/{self.id}/'
 
     def __str__(self):
         return self.brand + ", " + str(self.year) + " " + self.varietal
     
+

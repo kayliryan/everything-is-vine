@@ -30,6 +30,7 @@ class WineVOEncoder(ModelEncoder):
 
 
 
+
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = ["confirmation_number", "created"]
@@ -93,4 +94,22 @@ def api_show_wine(request, pk1, pk2):
 
 
 
+
+
+
+
+
+class OrderEncoder(ModelEncoder):
+    model = Order
+    properties = ["confirmation_number", "created"]
+
+
+class ShoppingItemEncoder(ModelEncoder):
+    model = ShoppingItem
+    properties = [
+        "order_id", 
+        "item",
+        "quantity",
+        "price",
+    ]
 
