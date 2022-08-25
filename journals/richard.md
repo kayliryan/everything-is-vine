@@ -15,3 +15,7 @@ Today I was finally able to sort out my merge and got my react up and running. B
 note: we were having problems with migrations in our winery container. Andrew showed us how we could add the make migrations command to the dockerfile.dev as a CMD before the migrate command. We rebuilt the container and it fixed the problem. Andrew told us then to remove the make migrations command to make out lives easier. 
 
 Configuration drift: when your dockerfile/project code doesn't represent whats actually running.
+
+## August 24, 2022
+
+Today 
