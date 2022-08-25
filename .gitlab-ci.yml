@@ -1,5 +1,12 @@
-stages:
-  - test # Run tests
+lint-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 service-sales service-winery
+
+# stages:
+#   - test # Run tests
   # - build # Build assets
 
 # services:
@@ -19,13 +26,13 @@ stages:
 #   - pip install -r requirements.txt
 #   - python -m pytest
 
-django-api-unit-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - cd ghi
-    - pip install -r requirements.txt
-    - python -m pytest
+# django-api-unit-test-job:
+#   image: python:3-bullseye
+#   stage: test
+#   script:
+#     - cd winery
+#     - pip install -r requirements.txt
+#     - python -m pytest
 
 # lint-python-projects-job:
 #   image: python:3-bullseye
