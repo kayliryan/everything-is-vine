@@ -11,7 +11,7 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 
 
-## Tuesday, August 23, 2022
+## Wednesday, August 24, 2022
 Today, I worked on:
 
 * Creating url routes in sales microservice and GET view of specific wine detail
