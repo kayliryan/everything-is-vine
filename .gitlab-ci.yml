@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
 
 variables:
   DATABASE_URL: postgresql://winery:password@postgres/winery
