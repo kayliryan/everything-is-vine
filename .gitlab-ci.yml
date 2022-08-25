@@ -2,8 +2,8 @@ stages:
   - test
 
 variables:
-  - POSTGRES_MULTIPLE_DATABASES=winery, sales
-  - POSTGRES_PASSWORD=test-databases
+  - DATABASE_URL: postgresql://winery:password@postgres/winery
+  - WAIT_HOSTS: postgres:5432
 
 lint-job:
   image: python:3-bullseye
