@@ -36,7 +36,6 @@ class WineListEncoder(ModelEncoder):
         "winery" : WineryEncoder(),
     }
 
-<<<<<<< HEAD
 @require_http_methods(["GET"])
 def api_list_winery(request):
     if request.method == "GET":
@@ -96,11 +95,6 @@ def api_list_wines(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def api_list_all_wines(request):
-=======
-
-@require_http_methods(["GET", "POST"])
-def api_list_wines(request):
->>>>>>> main
     if request.method == "GET":
         wines = Wine.objects.all()
 
@@ -126,7 +120,6 @@ def api_list_wines(request):
             wine,
             encoder=WineListEncoder,
             safe=False,
-<<<<<<< HEAD
         )
 
 
@@ -139,6 +132,3 @@ def api_list_wines(request):
 #             {"appointments": appointments},
 #             encoder=ServiceAppointmentListEncoder,
 #         )
-=======
-        )
->>>>>>> main
