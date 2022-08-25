@@ -40,7 +40,4 @@ class Wine(models.Model):
 
     def __str__(self):
         return self.brand + ", " + str(self.year) + " " + self.varietal
-<<<<<<< HEAD
-=======
     
->>>>>>> main

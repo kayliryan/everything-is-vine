@@ -4,3 +4,9 @@ from .models import Wine, Winery
 class WineAdmin(admin.ModelAdmin):
     pass
 
+class WineryAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Wine, WineAdmin)
+admin.site.register(Winery, WineryAdmin)

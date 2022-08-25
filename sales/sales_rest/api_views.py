@@ -43,3 +43,22 @@ class ShoppingItemEncoder(ModelEncoder):
         "quantity",
         "price",
     ]
+    
+    
+@require_http_methods(["GET"])
+def api_show_wine(request, pk):
+    if request.method == "GET":
+        try:
+            wine = WineVO.objects.get(id=pk)
+            return JsonResponse(
+                WineVO,
+                {"Wine": wine},
+                encoder=WineVOEncoder,
+                safe=False,
+            )
+        except WineVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Wine does not exist"},
+                status=404,
+            )
+    
