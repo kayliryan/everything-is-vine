@@ -36,11 +36,36 @@ class WineListEncoder(ModelEncoder):
         "winery" : WineryEncoder(),
     }
 
+@require_http_methods(["GET"])
+def api_list_winery(request):
+    if request.method == "GET":
+        wineries = Winery.objects.all()
+
+        return JsonResponse(
+            {"wineries": wineries},
+            encoder=WineryEncoder,
+        )
+
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_winery(request, pk):
+    if request.method == "GET":
+        try:
+            winery = Winery.objects.get(id=pk)
+            return JsonResponse(
+                winery,
+                encoder=WineryEncoder,
+                safe=False
+            )
+        except Winery.DoesNotExist:
+            response = JsonResponse({"message": "Winery does not exist"})
+            response.status_code = 404
+            return response
 
 @require_http_methods(["GET", "POST"])
-def api_list_wines(request):
+def api_list_wines(request, pk):
     if request.method == "GET":
-        wines = Wine.objects.all()
+        wines = Wine.objects.filter(winery_id=pk)
+        # wines = Wine.objects.filter(id=pk)
 
         return JsonResponse(
             {"wines": wines},
@@ -51,7 +76,8 @@ def api_list_wines(request):
 
         try:
             if "winery" in content:
-                winery = Winery.objects.get(name=content["winery"])
+                winery = Winery.objects.get(id=pk)
+                # winery = Winery.objects.get(name=content["winery"])
                 content["winery"] = winery
         except Winery.DoesNotExist:
             return JsonResponse(
@@ -65,3 +91,13 @@ def api_list_wines(request):
             encoder=WineListEncoder,
             safe=False,
         )
+
+# @require_http_methods(["GET"])
+# def api_list_wines_by_winery(request, winery_id):
+#     if request.method == "GET":
+#         appointments = Wine.objects.filter(vin=vin)
+#         print(appointments)
+#         return JsonResponse(
+#             {"appointments": appointments},
+#             encoder=ServiceAppointmentListEncoder,
+#         )
