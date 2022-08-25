@@ -16,11 +16,7 @@ class WineVOEncoder(ModelEncoder):
         "id",
         "brand",
         "year",
-<<<<<<< HEAD
         "varietal",
-=======
-        "varietal"
->>>>>>> main
         "description",
         "region",
         "abv",
@@ -31,7 +27,6 @@ class WineVOEncoder(ModelEncoder):
         "quantity",
         "import_href",
     ]
-<<<<<<< HEAD
 
 
 
@@ -99,21 +94,3 @@ def api_show_wine(request, pk1, pk2):
 
 
 
-=======
-
-
-
-class OrderEncoder(ModelEncoder):
-    model = Order
-    properties = ["confirmation_number", "created"]
-
-
-class ShoppingItemEncoder(ModelEncoder):
-    model = ShoppingItem
-    properties = [
-        "order_id", 
-        "item",
-        "quantity",
-        "price",
-    ]
->>>>>>> main
