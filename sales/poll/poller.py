@@ -28,6 +28,7 @@ def get_wines():
                 "region": wine["region"],
                 "abv": wine["abv"],
                 "volume": wine["volume"],
+                "city_state": wine["city_state"],
                 "price": wine["price"],
                 "picture_url": wine["picture_url"],
                 "quantity": wine["quantity"],
