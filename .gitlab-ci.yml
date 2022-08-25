@@ -8,6 +8,8 @@ variables:
   POSTGRES_PASSWORD: test-databases
   WAIT_HOSTS: postgres:5432
 
+
+# TEST 
 lint-job:
   image: python:3-bullseye
   stage: test
@@ -15,7 +17,7 @@ lint-job:
     - pip install flake8
     - flake8 service-sales service-winery
 
-
+# BUILD
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
@@ -23,50 +25,10 @@ build-front-end-job:
     - cd ghi
     - npm install
     - npm run build
-
-
-ghi-build-job:
-  stage: build
-  image: node:lts-bullseye
-  script:
-    - cd ghi
-    - npm install
-    - npm run build
-    - echo ${REACT_APP_DJANGO_API}
+    # - echo ${REACT_APP_DJANGO_API}
 
 
 
 
 
-# stages:
-#   - test # Run tests
-  # - build # Build assets
-
-# services:
-#   - postgres:14.2-bullseye
-
-# variables:
-#   POSTGRES_PASSWORD: test
-#   DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
-#   REACT_APP_DJANGO_API: https://${HEROKU_DJANGO_API_APP}.herokuapp.com
-
-## TESTING
-# fast-api-unit-test-job:
-# image: python:3-bullseye
-# stage: test
-# script:
-#   - cd winery
-#   - pip install -r requirements.txt
-#   - python -m pytest
-
-# django-api-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd winery
-#     - pip install -r requirements.txt
-#     - python -m pytest
-
-
-## BUILD
 
