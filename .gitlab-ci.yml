@@ -25,12 +25,7 @@ build-front-end-job:
     - npm run build
 
 
-lint-python-projects-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 winery sales
+
 
 
 
