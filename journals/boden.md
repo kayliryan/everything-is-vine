@@ -16,3 +16,8 @@ Discussed more domain driven design as a group and refined models and relationsh
 08/23/22:
 Refined winery models, created list view and working react list page with bootstrap cards to display wines.  Started working on user model and auth integration across the services. 
 
+08/24/22:
+Created dashboard page to show all wineries listed in card format along with the needed api view function/url mapping.  Completed user authentication login page that works to grab token from django and log a user in.  Will be working on signup and logout functionality tomorrow.  
+
+
+

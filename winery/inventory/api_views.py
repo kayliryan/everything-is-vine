@@ -64,7 +64,7 @@ def api_winery(request, pk):
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
     if request.method == "GET":
-        wines = Wine.objects.filter()
+        wines = Wine.objects.filter(winery_id=pk)
 
         return JsonResponse(
             {"wines": wines},

@@ -17,7 +17,7 @@ function App(props) {
         <div className="container">
           <Routes>
             <Route path="/" element={<WineryList />} />
-            <Route path="wineries/wines/" element={<WineList />} />
+            <Route path="wineries/:id/wines/" element={<WineList />} />
             {/* <Route path="wineries/:id/" element={<WineList />} /> */}
             <Route path="wineries/:id/login/" element={<Login />} />
             {/* <Route path="wineries/:id/signup/" element={<SignUp />} /> */}
