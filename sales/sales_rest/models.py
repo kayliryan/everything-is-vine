@@ -29,6 +29,12 @@ class WineVO(models.Model):
     # related_name="wines",
     # on_delete=models.CASCADE
     # ) 
+<<<<<<< HEAD
+
+    def __str__(self):
+        return f'Winery {self.winery_id} / Wine {self.id}'
+=======
+>>>>>>> main
 
 
 class Order(models.Model):

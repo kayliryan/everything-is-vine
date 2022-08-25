@@ -69,4 +69,8 @@ services:
         environment:
             DATABASE_URL: postgres://sales:password@postgres:5432/sales
             WAIT_HOSTS: postgres:5432,sales:8000
+<<<<<<< HEAD
             WAIT_TIMEOUT: 240
+=======
+            WAIT_TIMEOUT: 240
+>>>>>>> main
