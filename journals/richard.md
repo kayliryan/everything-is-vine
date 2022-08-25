@@ -18,4 +18,4 @@ Configuration drift: when your dockerfile/project code doesn't represent whats a
 
 ## August 24, 2022
 
-Today 
+Today we sorted through our git issues and we ended up adding node_modules and package-lock.json to our ghi/gitignore file to avoid further issues with merge conflicts. Jennifer and I worked on creating a wine detail view in the sales microservice. 
