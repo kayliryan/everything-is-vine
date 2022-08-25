@@ -1,9 +1,25 @@
+stages:
+  - test
+
+variables:
+  - POSTGRES_MULTIPLE_DATABASES=winery, sales
+  - POSTGRES_PASSWORD=test-databases
+
 lint-job:
   image: python:3-bullseye
   stage: test
   script:
     - pip install flake8
     - flake8 service-sales service-winery
+
+
+  build-front-end-job:
+    stage: build
+    image: node:lts-bullseye
+    script:
+      - cd ghi
+      - npm install
+      -npm run build
 
 # stages:
 #   - test # Run tests
@@ -22,7 +38,7 @@ lint-job:
 # image: python:3-bullseye
 # stage: test
 # script:
-#   - cd fastapi
+#   - cd winery
 #   - pip install -r requirements.txt
 #   - python -m pytest
 
@@ -39,7 +55,7 @@ lint-job:
 #   stage: test
 #   script:
 #     - pip install flake8
-#     - flake8 fastapi django
+#     - flake8 winery sales
 
 ## BUILD
 # ghi-build-job:
