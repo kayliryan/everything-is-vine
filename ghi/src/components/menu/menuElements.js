@@ -40,7 +40,7 @@ export const MenuLink = styled(LinkScroll)`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-decoration: none;
     list-style: none;
     transition: 0.2s ease-in-out;
@@ -61,7 +61,7 @@ export const MenuButtonWrap = styled.div`
 
 export const MenuRoute = styled(LinkRouter)`
     border-radius: 50px;
-    background: #01bf71;
+    background: #EAEEEC;
     white-space: nowrap;
     padding: 16px 64px;
     color: #010606;
