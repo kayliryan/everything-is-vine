@@ -1,0 +1,46 @@
+stages:
+  - test # Run tests
+  - build # Build assets
+
+services:
+  - postgres:14.2-bullseye
+
+variables:
+  POSTGRES_PASSWORD: test
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  REACT_APP_DJANGO_API: https://${HEROKU_DJANGO_API_APP}.herokuapp.com
+
+## TESTING
+# fast-api-unit-test-job:
+# image: python:3-bullseye
+# stage: test
+# script:
+#   - cd fastapi
+#   - pip install -r requirements.txt
+#   - python -m pytest
+
+django-api-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd django
+    - pip install -r requirements.txt
+    - python manage.py test
+
+lint-python-projects-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 fastapi django
+
+## BUILD
+ghi-build-job:
+  stage: build
+  image: node:lts-bullseye
+  script:
+    - cd ghi
+    - npm install
+    - npm run build
+    - echo ${REACT_APP_DJANGO_API}
+
