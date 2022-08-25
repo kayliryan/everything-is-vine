@@ -43,3 +43,4 @@ class ShoppingItemEncoder(ModelEncoder):
         "quantity",
         "price",
     ]
+
