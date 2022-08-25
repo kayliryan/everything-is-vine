@@ -20,7 +20,7 @@ Configuration drift: when your dockerfile/project code doesn't represent whats a
 
 Today we sorted through our git issues and we ended up adding node_modules and package-lock.json to our ghi/gitignore file to avoid further issues with merge conflicts. Jennifer and I worked on creating a wine detail view in the sales microservice. 
 
-## August 24, 2022
+## August 25, 2022
 
 Today I set up pipelines in git by creating 2 files in the parent directory:
 - .gitlab-ci.yml
