@@ -25,6 +25,15 @@ build-front-end-job:
     - npm run build
 
 
+ghi-build-job:
+  stage: build
+  image: node:lts-bullseye
+  script:
+    - cd ghi
+    - npm install
+    - npm run build
+    - echo ${REACT_APP_DJANGO_API}
+
 
 
 
@@ -60,12 +69,4 @@ build-front-end-job:
 
 
 ## BUILD
-# ghi-build-job:
-#   stage: build
-#   image: node:lts-bullseye
-#   script:
-#     - cd ghi
-#     - npm install
-#     - npm run build
-#     - echo ${REACT_APP_DJANGO_API}
 
