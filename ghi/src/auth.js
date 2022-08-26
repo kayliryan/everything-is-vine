@@ -96,7 +96,7 @@ export function useToken() {
         if (response.ok) {
         const token = await getTokenInternal();
         setToken(token);
-        navigate(`/wineries/${id}/`)
+        // navigate(`/wineries/${id}/`)
         return;
         }
         let error = await response.json();
@@ -105,7 +105,6 @@ export function useToken() {
 
     async function signup(username, password, full_name,address,phone,email,winery) {
         const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/users/`;
-        console.log(`attempting to connect to url , ${url}`)
         const response = await fetch(url, {
         method: "post",
         body: JSON.stringify({

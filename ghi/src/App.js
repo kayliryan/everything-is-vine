@@ -1,5 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './pages';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import WineList from './wines';
 import Login from './login';
@@ -9,8 +10,8 @@ import { AuthProvider } from './auth';
 
 function App(props) {
 
-
   return (
+
     <AuthProvider>
       <BrowserRouter>
         {/* <Nav /> */}
@@ -26,6 +27,11 @@ function App(props) {
         </div>
       </BrowserRouter>
     </AuthProvider>
+
+    // <Router>
+    //   <Home />
+    // </Router>
+
   );
 }
 
