@@ -1,7 +1,7 @@
 import './App.css';
 import React,{useState} from 'react';
 import { useToken } from './auth';
-
+import { useParams } from 'react-router-dom';
 
 
 function Login() {
@@ -11,6 +11,7 @@ password:""
 })
 
 const {username,password} = data;
+const {id} = useParams()
 
 const [token,login] = useToken();
 
@@ -21,7 +22,7 @@ console.log(data)
 
 const submitHandler = e => {
 e.preventDefault();
-login(data.username, data.password)
+login(data.username[0], data.password[0],{id}.id)
 console.log(data);
 }
 return (

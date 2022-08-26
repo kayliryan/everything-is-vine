@@ -7,7 +7,7 @@ return internalToken;
 }
 
 export async function getTokenInternal() {
-const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/me/token/`;
+const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/me/token/`;
 try {
     const response = await fetch(url, {
     credentials: "include",
@@ -60,90 +60,93 @@ return (
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
-const { token, setToken } = useAuthContext();
-const navigate = useNavigate();
+    const { token, setToken } = useAuthContext();
+    const navigate = useNavigate();
 
-useEffect(() => {
-    async function fetchToken() {
-    const token = await getTokenInternal();
-    setToken(token);
-    }
-    if (!token) {
-    fetchToken();
-    }
-}, [setToken, token]);
+    useEffect(() => {
+        async function fetchToken() {
+            const token = await getTokenInternal();
+            setToken(token);
+        }
+        if (!token) {
+        fetchToken();
+        }
+    }, [setToken, token]);
 
-async function logout() {
-    if (token) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/token/refresh/logout/`;
-    await fetch(url, { method: "delete", credentials: "include" });
-    internalToken = null;
-    setToken(null);
-    navigate("/");
+    async function logout() {
+        if (token) {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/logout/`;
+        await fetch(url, { method: "delete", credentials: "include" });
+        internalToken = null;
+        setToken(null);
+        navigate("/");
+        }
     }
-}
 
-async function login(username, password) {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/login/`;
-    const form = new FormData();
-    form.append("username", username);
-    form.append("password", password);
-    const response = await fetch(url, {
-    method: "post",
-    credentials: "include",
-    body: form,
-    });
-    if (response.ok) {
-    const token = await getTokenInternal();
-    setToken(token);
-    navigate("/")
-    return;
+    async function login(username, password, id) {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/login/`;
+        const form = new FormData();
+        form.append("username", username);
+        form.append("password", password);
+        const response = await fetch(url, {
+        method: "post",
+        credentials: "include",
+        body: form,
+        });
+        if (response.ok) {
+        const token = await getTokenInternal();
+        setToken(token);
+        navigate(`/wineries/${id}/`)
+        return;
+        }
+        let error = await response.json();
+        return handleErrorMessage(error);
     }
-    let error = await response.json();
-    return handleErrorMessage(error);
-}
 
-async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
-    const response = await fetch(url, {
-    method: "post",
-    body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-    }),
-    headers: {
-        "Content-Type": "application/json",
-    },
-    });
-    if (response.ok) {
-    await login(username, password);
+    async function signup(username, password, full_name,address,phone,email,winery) {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/users/`;
+        console.log(`attempting to connect to url , ${url}`)
+        const response = await fetch(url, {
+        method: "post",
+        body: JSON.stringify({
+            username,
+            password,
+            full_name,
+            address,
+            phone,
+            email,
+            winery,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        });
+        if (response.ok) {
+        await login(username, password, winery);
+        }
+        return false;
     }
-    return false;
-}
 
-async function update(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
-    const response = await fetch(url, {
-    method: "post",
-    body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-    }),
-    headers: {
-        "Content-Type": "application/json",
-    },
-    });
-    if (response.ok) {
-    await login(username, password);
+    async function update(username, password, email, firstName, lastName) {
+        const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
+        const response = await fetch(url, {
+        method: "post",
+        body: JSON.stringify({
+            username,
+            password,
+            email,
+            first_name: firstName,
+            last_name: lastName,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        });
+        if (response.ok) {
+        await login(username, password);
+        }
+        return false;
     }
-    return false;
-}
 
-return [token, login, logout, signup, update];
+    return [token, login, logout, signup, update];
 }

@@ -20,7 +20,7 @@ function App(props) {
             <Route path="wineries/:id/wines/" element={<WineList />} />
             {/* <Route path="wineries/:id/" element={<WineList />} /> */}
             <Route path="wineries/:id/login/" element={<Login />} />
-            {/* <Route path="wineries/:id/signup/" element={<SignUp />} /> */}
+            <Route path="wineries/:id/signup/" element={<SignUp />} />
 
           </Routes>
         </div>

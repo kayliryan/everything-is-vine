@@ -2,8 +2,27 @@ from django.shortcuts import render
 import json 
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from .models import User
+from inventory.models import Winery
+from common.json import ModelEncoder
 
-# Create your views here.
+class UserListEncoder(ModelEncoder):
+    model = User
+    properties = [
+        "id",
+        "name",
+        "username",
+        "password",
+        "address",
+        "phone",
+        "email",
+        "employee",
+        "winery",
+        ]
+    def get_extra_data(self, o):
+        return {"winery": o.winery.id}
+
+
 @require_http_methods(["GET"])
 def api_user_token(request):
     if "jwt_access_token" in request.COOKIES:
@@ -13,47 +32,60 @@ def api_user_token(request):
     response = JsonResponse({"token": None})
     return response
 
-@require_http_methods(["POST"])
-def create_user(json_content):
-    try:
-        content = json.loads(json_content)
-    except json.JSONDecodeError:
-        return 400, {"message": "Bad JSON"}, None
+@require_http_methods(["GET", "POST"])
+def api_list_users(request):
+    if request.method == "GET":
+        users = User.objects.all()
 
-    required_properties = [
-        "username",
-        "email",
-        "password",
-        "first_name",
-        "last_name",
-    ]
-    missing_properties = []
-    for required_property in required_properties:
-        if (
-            required_property not in content
-            or len(content[required_property]) == 0
-        ):
-            missing_properties.append(required_property)
-    if missing_properties:
-        response_content = {
-            "message": "missing properties",
-            "properties": missing_properties,
-        }
-        return 400, response_content, None
+        # users["winery"] = Winery.objects.filter(id=users.winery)
 
-    try:
-        account = User.objects.create_user(
-            username=content["username"],
-            email=content["email"],
-            password=content["password"],
-            first_name=content["first_name"],
-            last_name=content["last_name"],
+        return JsonResponse(
+            {"users": users},
+            encoder=UserListEncoder,
         )
-        return 200, account, account
-    except IntegrityError as e:
-        return 409, {"message": str(e)}, None
-    except ValueError as e:
-        return 400, {"message": str(e)}, None
+    else:
+        try:
+            content = json.loads(request.body)
+        except json.JSONDecodeError:
+            return 400, {"message": "Bad JSON"}, None
+
+        winery = Winery.objects.get(id=content["winery"])
+        content["winery"]=winery
+        print("trying to print content",content)
+        users = User.objects.create_user(
+                username=content["username"],
+                email=content["email"],
+                password=content["password"],
+                name=content["full_name"],
+                address=content["address"],
+                phone=content["phone"],
+                winery=content["winery"],
+            )
+        return JsonResponse(
+                {"users": users},
+                encoder=UserListEncoder,
+            )
+
+# @require_http_methods(["POST"])
+# def create_user(json_content):
+#     try:
+#         content = json.loads(json_content)
+#     except json.JSONDecodeError:
+#         return 400, {"message": "Bad JSON"}, None
+
+#     winery = Winery.objects.filter(id=content["winery"])
+#     content["winery"]=winery
+#     users = User.objects.create_user(content
+#             # username=content["username"],
+#             # email=content["email"],
+#             # password=content["password"],
+#             # name=content["full_name"],
+#             # address=content["address"],
+#         )
+#     return JsonResponse(
+#             {"users": users},
+#             encoder=UserListEncoder,
+#         )
 
 # def register_form(request):
 #     if request.method =='POST':
