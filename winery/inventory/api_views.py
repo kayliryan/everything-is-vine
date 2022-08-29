@@ -65,7 +65,6 @@ def api_winery(request, pk):
 def api_list_wines(request, pk):
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
-        # wines = Wine.objects.filter(id=pk)
 
         return JsonResponse(
             {"wines": wines},
@@ -123,12 +122,3 @@ def api_list_all_wines(request):
         )
 
 
-# @require_http_methods(["GET"])
-# def api_list_wines_by_winery(request, winery_id):
-#     if request.method == "GET":
-#         appointments = Wine.objects.filter(vin=vin)
-#         print(appointments)
-#         return JsonResponse(
-#             {"appointments": appointments},
-#             encoder=ServiceAppointmentListEncoder,
-#         )

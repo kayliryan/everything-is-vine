@@ -16,7 +16,7 @@ Today, I worked on:
 
 The original plan was for me to start on the React front-end for our sales microservice (the detail view of the wines). However, I ended up attempting to help Boden with resolving an issue for our front-end React for the list of wines from a winery because I thought I had done something similar in a previous project.  Since a lot of our individual codes had not been pushed to main, I spent a lot of time getting my code to be the same as Boden's.  While checking the views for the wines in Insomnia, I realized the code was not filtering for all of the wines in a specific winery (worked for one wine, but not for multiple wines).  This was a simple fix to the views code.  In that time, Boden was able to resolve his issue.  
 
-Our team spent a lot of the late afternoon pulling from main and resolving merge conflicts.  Our goal was to be on the same page with our code for Monday next week.  While we have been communicating frequently, I have found that it has been difficult to coordinate tasks, especially when certain code relies on another. 
+Our team spent a lot of the late afternoon pulling from main and resolving merge conflicts.  Our goal was to be on the same page with our code for Monday next week.  VSCode was   While we have been communicating frequently, I have found that it has been difficult to coordinate tasks, especially when certain code relies on another. 
 
 
 ## Wednesday, August 24, 2022
