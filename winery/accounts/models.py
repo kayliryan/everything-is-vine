@@ -1,16 +1,16 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from inventory.models import Winery
 
-# Create your models here.
-class User(models.Model):
+class User(AbstractUser):
     name = models.CharField(max_length=110)
     address = models.CharField(max_length=254)
     phone = models.CharField(max_length=9)
-    email =models.CharField(max_length=110)
-    winery_id = models.ForeignKey(
+    email = models.EmailField(null=True)
+    winery = models.ForeignKey(
         Winery,
-        related_name="users",
-        on_delete=models.PROTECT
+        related_name="+",
+        on_delete=models.CASCADE,
+        null=True
     )
-    membership_level = models.SmallIntegerField()
-    employee = models.BooleanField()
+    employee = models.BooleanField(default=False)

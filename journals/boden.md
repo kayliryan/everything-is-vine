@@ -1,0 +1,24 @@
+Boden Bradley Journal
+
+08/16/22:
+Created GHI mockups today for UI and started on domain design
+
+08/18/22:
+Worked further on developing domain design with creation of excalidraw bounded context,models, microservices, and their relationships.  
+
+08/19/22:
+Created project with 2 django microservices, created docker integration and react app.  All services were up and running before commiting to main branch. 
+
+08/22/22:
+Discussed more domain driven design as a group and refined models and relationships.  Divided up microservice work into pairs. 
+
+08/23/22:
+Refined winery models, created list view and working react list page with bootstrap cards to display wines.  Started working on user model and auth integration across the services. 
+
+08/24/22:
+Created dashboard page to show all wineries listed in card format along with the needed api view function/url mapping.  Completed user authentication login page that works to grab token from django and log a user in.  Will be working on signup and logout functionality tomorrow.  
+
+08/25/22:
+Today I pulled and merged with main and dealt with merge conflicts.  Jennifer and I worked on fixing the view function that gives a list of wines related to a specific winery and we were able to figure it out.  I then continued to work on the user authentication process and was able to get the signup form to work correctly.  The login function continues to have issues and is issuing tokens regardless of username/password.  
+
+
