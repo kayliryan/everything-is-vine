@@ -91,6 +91,42 @@ def api_show_wine(request, pk1, pk2):
 
 
 
+# Show list of orders
+# @require_http_methods(["GET"])
+# def api_list_orders(request):
+#     if request.method == "GET":
+#         orders = Order.objects.all()
+#         return JsonResponse(
+#             {"orders": orders},
+#             encoder=OrderEncoder,
+#             )
+#     else:
+#         return JsonResponse(
+#             {"message": "ERROR"},
+#             status = 400,
+#         )
+    
 
 
 
+# Show detail of specific order
+# @require_http_methods(["GET"])
+# def api_show_order(request, pk):
+#     if request.method == "GET":
+#         try:
+#             order = Order.objects.get(id=pk)
+#             return JsonResponse(
+#                 order,
+#                 encoder=OrderEncoder,
+#                 safe=False,
+#             )
+#         except Order.DoesNotExist:
+#             return JsonResponse(
+#                 {"message": "Order does not exist"},
+#                 status=404,
+#             )
+#     else:
+#         return JsonResponse(
+#             {"message": "ERROR"},
+#             status=400,
+#         )
