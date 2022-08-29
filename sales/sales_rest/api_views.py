@@ -30,7 +30,6 @@ class WineVOEncoder(ModelEncoder):
 
 
 
-
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = ["confirmation_number", "created"]

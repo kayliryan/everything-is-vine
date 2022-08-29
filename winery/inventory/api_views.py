@@ -65,7 +65,6 @@ def api_winery(request, pk):
 def api_list_wines(request, pk):
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
-        # wines = Wine.objects.filter(id=pk)
 
         return JsonResponse(
             {"wines": wines},
