@@ -30,17 +30,11 @@ return (
         <div id="formContent">
             <div className="fadeIn first">
             </div>
-
             <form>
                 <input type="text" id="username" className="fadeIn second" name="login" placeholder="Enter Username" />
                 <input type="text" id="password" className="fadeIn third" name="login" placeholder="Enter Password" />
                 <input type="submit" className="fadeIn fourth" value="Sign In" />
             </form>
-
-            <div id="formFooter">
-            <a className="underlineHover" href="#">Forgot Password?</a>
-            </div>
-
         </div>
     </div>
 );
