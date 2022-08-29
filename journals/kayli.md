@@ -3,7 +3,7 @@ Today I worked on:
 
 * Bridging the gaps between our microservices
 
-I started my day by beginning building the wine detail page on React. We explored how we would be able to grab the everchanging winery_id and winevo_id from the URL which we solved with UseParams. We reached a standstill in React when it became apparent that we still had to implement CORS across our platform. While beginning to work on that we ran into several issues and realized that we needed to get every team member to the same working code. We then spent the next several hours merging, battling abnormal issues with VS Code glitching and mixing up Incoming and Current Changes.
+I started my day by beginning building the wine detail page on React. We explored how we would be able to grab the ever-changing winery_id and winevo_id from the URL which we solved with UseParams. We reached a standstill in React when it became apparent that we still had to implement CORS across our platform. While beginning to work on that we ran into several issues and realized that we needed to get every team member to the same working code. We then spent the next several hours merging, battling abnormal issues with VS Code glitching and mixing up Incoming and Current Changes.
 
 Today I learned about UseParams() on React and how it's used to parse queries found in your URL.
 
