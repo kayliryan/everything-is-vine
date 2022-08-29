@@ -44,7 +44,3 @@ class ModelEncoder(DateEncoder, QuerySetEncoder, JSONEncoder):
 
     def get_extra_data(self, o):
         return {}
-<<<<<<< HEAD
-=======
-
->>>>>>> main

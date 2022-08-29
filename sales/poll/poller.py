@@ -12,18 +12,9 @@ django.setup()
 from sales_rest.models import WineVO
 
 def get_wines():
-<<<<<<< HEAD
-    # response = requests.get(f'http://winery:8000/api/wineries/{self.winery_id}wines/')
-    response = requests.get("http://winery:8000/api/wines/")
-    content = json.loads(response.content)
-    # print("*********CONTENT:", content)
-    for wine in content["wines"]:
-        # print("******************WINE:", wine)
-=======
     response = requests.get("http://winery:8000/api/wines/")
     content = json.loads(response.content)
     for wine in content["wines"]:
->>>>>>> main
         WineVO.objects.update_or_create(
             id = wine["id"],
             # import_href=wine["href"],
@@ -37,10 +28,6 @@ def get_wines():
                 "region": wine["region"],
                 "abv": wine["abv"],
                 "volume": wine["volume"],
-<<<<<<< HEAD
-                "city_state": wine["city_state"],
-=======
->>>>>>> main
                 "price": wine["price"],
                 "picture_url": wine["picture_url"],
                 "quantity": wine["quantity"],
@@ -57,8 +44,4 @@ def poll():
             print(e, file=sys.stderr)
         time.sleep(3)
 if __name__ == "__main__":
-<<<<<<< HEAD
     poll() 
-=======
-    poll() 
->>>>>>> main
