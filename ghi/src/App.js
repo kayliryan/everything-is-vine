@@ -1,6 +1,7 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import GetWine from './WineDetails';
 import WineList from './wines';
 import Login from './login';
 import SignUp from './signup';
@@ -17,8 +18,9 @@ function App(props) {
         <div className="container">
           <Routes>
             <Route path="/" element={<WineryList />} />
-            {/* <Route path="wineries/:id/wines/" element={<WineList />} /> */}
-            <Route path="wineries/:id/" element={<WineList />} />
+            <Route path="wineries/:id/wines/" element={<WineList />} />
+            <Route path="/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
+            {/* <Route path="wineries/:id/" element={<WineList />} /> */}
             <Route path="wineries/:id/login/" element={<Login />} />
             <Route path="wineries/:id/signup/" element={<SignUp />} />
           </Routes>
