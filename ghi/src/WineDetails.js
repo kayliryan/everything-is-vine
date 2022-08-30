@@ -37,11 +37,13 @@ async function addToShoppingItems(){
               />
               <div className="card-body text-center mx-auto">
                   <div className="cvp">
+                    <div className="col-sm">
                       <h3 className="card-title font-weight-bold">{data.brand}</h3>
+                    </div>
                       <h3>{data.year}</h3>
                       <h3>{data.varietal}</h3>
                       <h3>Region: {data.region}</h3>
-                      <h3>{data.abv}%</h3>
+                      <h3>Alcohol: {data.abv}%</h3>
                       <h3>Volume: {data.volume} mL</h3>
                       <p className="card-text">Price</p>
                       <p>{data.description}</p>
