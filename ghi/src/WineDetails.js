@@ -2,40 +2,27 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {useGetWineDetailsQuery} from './store/salesApi';
+// import ErrorNotification from './ErrorNotification'
 
-// export const WineDetails = ()  => {
-//     let { winery_id, winevo_id } = useParams();
-//     return <div>Now showing winery_id {winery_id} and winevo_id {winevo_id} </div>;
-// };
 
 function GetWine() {
-  const {data, error, isLoading} = useGetWineDetailsQuery;
-  const [wineDetails, setWineDetails] = useState(null);
-  // const [error, setError] = useState(null);
-  // const [wine_id, setWineId] = useState('')
-  // const [winery_id, setWineryId] = useState('')
-  // const [brand, setBrand] = useState('')
-  // const [year, setYear] = useState('')
-  useEffect(() => {
-    async function useGetData() {
-        let { winery_id, winevo_id } = useParams();
-        const url = `${process.env.REACT_SALES_API}/api/wineries/${winery_id}/wines/${winevo_id}/`;
-        const response = await fetch(url);
-        let data = await response.json();
-        // console.log(data)
-          if (response.ok) {
-              setWineDetails(data.wine);
-          } else {
-            setError(data.message);
-            setWineDetails([]);
-          }
-    };
-  useGetData();
-}, []);
+  let { winery_id, winevo_id } = useParams();
+  const {data, error, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
+  const [shoppingItems, updateShoppingItems] = useState([data]);
+
+  if (isLoading) {
+    return (
+      <progress className="progress is-primary" max="100"></progress>
+    );
+  }
 
 // const WineDetails = () => {
   return (
-    GetWine()
+    <>
+    <p>{data.brand}</p>
+    </>
+    
+    // <p>{data.winevo.brand}</p>
     // <div className="container-fluid">
     //     <div className="card mx-auto col-md-3 col-10 mt-5">
     //         <img
@@ -61,4 +48,4 @@ function GetWine() {
     // </div>
   );
 };
-// export default WineDetails;
+export default GetWine;

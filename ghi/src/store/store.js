@@ -1,7 +1,6 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { salesApi } from './salesApi'
-import { Store } from '@reduxjs/toolkit'
 
 
 export const store = configureStore({
@@ -10,6 +9,6 @@ export const store = configureStore({
     },
     middleware: getDefaultMiddleware => 
         getDefaultMiddleware().concat(salesApi.middleware),
-})
+});
 
 setupListeners(store.dispatch);

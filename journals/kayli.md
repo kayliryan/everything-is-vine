@@ -1,3 +1,12 @@
+## August 29, 2022
+Today I worked on:
+
+* Setting up Redux for our Wines Details Page
+
+Today I spent all day getting Redux set up for our Wine Details page and replacing the existing way to fetch data. Updates were made to our docker-compose.yaml file to be able to have a baseUrl while creating our Api for Redux. By the end of day data is being displayed for our specific wine attached to our specific winery as given in the URL. Next up is states.
+
+Today I learned how to pass in multiple query parameters in Redux
+
 ## August 25, 2022
 Today I worked on:
 
