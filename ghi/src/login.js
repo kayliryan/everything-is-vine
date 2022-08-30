@@ -13,18 +13,27 @@ password:""
 const {username,password} = data;
 const {id} = useParams()
 
-const [token,login] = useToken();
+const [token,login,logout] = useToken();
 
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
+
 console.log(data)
 
 const submitHandler = e => {
 e.preventDefault();
-login(data.username[0], data.password[0],{id}.id)
-console.log(data);
+login(
+    data.username[0], 
+    data.password[0],
+    id)
 }
+
+const submitLogoutHandler = e => {
+    e.preventDefault();
+    logout()
+    }
+
 return (
     <div className="container">
         <form onSubmit={submitHandler} className="form-signin">
@@ -49,6 +58,7 @@ return (
             </div>
         </div>
         </form>
+        <button type="submit" onClick={submitLogoutHandler}>Logout</button>
     </div>
 );
 }
