@@ -9,21 +9,35 @@ function GetWine() {
   let { winery_id, winevo_id } = useParams();
   const {data, error, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
   const [shoppingItems, updateShoppingItems] = useState([]);
+  const [quantity, setQuantity] = useState(1)
 
+  
   if (isLoading) {
     return (
       <progress className="progress is-primary" max="100"></progress>
-    );
+      );
+    }
+    
+    // if (data.quantity === 0) {
+    //   redirect to Wine List Page
+    // }
+
+  async function checkAndSetQuantity(e){
+      if(parseInt(e.target.value) < parseInt(e.target.min) || isNaN(parseInt(e.target.value))){
+        e.target.value = e.target.min;
+      }
+      if(parseInt(e.target.value) > parseInt(e.target.max)){
+        e.target.value = e.target.max;
+      }
+    setQuantity(parseInt(e.target.value))
   }
 
 
-async function addToShoppingItems(){
-  updateShoppingItems(data)
-  }
+  async function addToShoppingItems(){
+    updateShoppingItems(data)
+    }
 
-  
 
-// const WineDetails = () => {
   return (
     // <>
     // <p>{data.brand}</p>
@@ -45,6 +59,7 @@ async function addToShoppingItems(){
                     <h6>Volume, ABV</h6>
                     <p className="card-text">Price</p>
                     <p>Description</p>
+                    <input onChange = {checkAndSetQuantity} type="text" id="quantity" name="quantity" className="form-control input-number" value={quantity} min="1" max={data.quantity} />
                     <button onClick = {addToShoppingItems} href="#" className="btn btn-info btn-lg">
                       <span className="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                     </button>
