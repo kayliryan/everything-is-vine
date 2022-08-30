@@ -23,8 +23,8 @@ function GetWine() {
     // }
 
   async function checkAndSetQuantity(e){
-      if(parseInt(e.target.value) < parseInt(e.target.min) || isNaN(parseInt(e.target.value))){
-        e.target.value = e.target.min;
+      if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+        e.target.value = 1;
       }
       if(parseInt(e.target.value) > parseInt(e.target.max)){
         e.target.value = e.target.max;
