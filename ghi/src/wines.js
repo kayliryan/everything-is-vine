@@ -38,13 +38,13 @@ function WineList() {
     
     const { token } = useAuthContext();
         console.log("printing token", token)
+        
     async function fetchWines(token){
         const url = `http://localhost:8000/api/wineries/${id}/wines/`;
 
         try {
-        const response = await fetch(url, 
-            { headers: { Authorization: `Bearer ${token}` }}
-            );
+        const response = await fetch(url,
+            { credentials: "include",});
 
         if (response.ok) {
             const data = await response.json();

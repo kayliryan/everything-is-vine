@@ -62,6 +62,7 @@ def api_winery(request, pk):
             response.status_code = 404
             return response
 
+# @auth.jwt_perm_required
 @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
