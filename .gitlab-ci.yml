@@ -10,7 +10,7 @@ services:
 
 variables:
   DATABASE_URL: postgresql://winery:password@postgres/winery
-  POSTGRES_MULTIPLE_DATABASES: winery
+  POSTGRES_MULTIPLE_DATABASES: winery, sales
   POSTGRES_PASSWORD: test-databases
   WAIT_HOSTS: postgres:5432
 
