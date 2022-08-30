@@ -1,5 +1,5 @@
 import './App.css';
-import Home from './pages';
+// import Home from './pages';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import WineList from './wines';
