@@ -33,7 +33,7 @@ class WineVOEncoder(ModelEncoder):
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = ["confirmation_number", "created"]
-
+    # need to include "id" in properties for ShoppingItemEncoder
 
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
@@ -43,6 +43,10 @@ class ShoppingItemEncoder(ModelEncoder):
         "quantity",
         "price",
     ]
+    # encoders = {
+    #     "order_id": OrderEncoder(),
+    #     "item": WineVOEncoder(),
+    # }
 
 
 # # Show list of wines from a specific winery
@@ -91,7 +95,7 @@ def api_show_wine(request, pk1, pk2):
 
 
 
-# Show list of orders
+# # Show list of orders
 # @require_http_methods(["GET"])
 # def api_list_orders(request):
 #     if request.method == "GET":
@@ -109,7 +113,7 @@ def api_show_wine(request, pk1, pk2):
 
 
 
-# Show detail of specific order
+# # Show detail of specific order
 # @require_http_methods(["GET"])
 # def api_show_order(request, pk):
 #     if request.method == "GET":
@@ -129,4 +133,20 @@ def api_show_wine(request, pk1, pk2):
 #         return JsonResponse(
 #             {"message": "ERROR"},
 #             status=400,
+#         )
+
+
+# # Show list of shopping items from specific order
+# @require_http_methods(["GET"])
+# def api_list_shopping_items(request):
+#     if request.method == "GET":
+#         shopping_items = ShoppingItem.objects.all()
+#         return JsonResponse(
+#             {"shopping_items": shopping_items},
+#             encoder=ShoppingItemEncoder,
+#         )
+#     else:
+#         return JsonResponse(
+#             {"message": "ERROR"},
+#             status = 400,
 #         )
