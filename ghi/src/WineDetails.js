@@ -42,9 +42,9 @@ async function addToShoppingItems(){
                       <h3>{data.varietal}</h3>
                       <h3>Region: {data.region}</h3>
                       <h3>{data.abv}%</h3>
-                      <h3>Volume</h3>
+                      <h3>Volume: {data.volume} mL</h3>
                       <p className="card-text">Price</p>
-                      <p>Description</p>
+                      <p>{data.description}</p>
                       <p>Quantity</p>
                       <button onClick = {addToShoppingItems} href="#" className="btn btn-success btn-lg">
                         <span className="align-items-center">Shopping Cart <AiOutlineShoppingCart/></span> 
