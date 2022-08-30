@@ -38,10 +38,12 @@ class OrderEncoder(ModelEncoder):
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
     properties = [
-        "order_id", 
+        # use get extra data to get order_id.id
+        # "order_id", 
         "item",
-        "quantity",
-        "price",
+        # remove quantity and price
+        # "quantity",
+        # "price",
     ]
     # encoders = {
     #     "order_id": OrderEncoder(),
