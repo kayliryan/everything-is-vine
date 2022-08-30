@@ -31,3 +31,4 @@ urlpatterns = [
     # api_list_shopping_items , name="api_list_shopping_items"),
     
 ]
+
