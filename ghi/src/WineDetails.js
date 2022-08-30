@@ -2,6 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {useGetWineDetailsQuery} from './store/salesApi';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 // import ErrorNotification from './ErrorNotification'
 
 
@@ -31,7 +33,7 @@ async function addToShoppingItems(){
     
     // <p>{data.winevo.brand}</p>
     <div className="container-fluid">
-        <div className="card mx-auto col-md-3 col-10 mt-5">
+        <div className="card mx-auto my-auto col-md-3 col-10 mt-5">
             <img
             className="mx-auto img-thumbnail"
             src="https://i.imgur.com/pjITBzX.jpg"
@@ -48,7 +50,6 @@ async function addToShoppingItems(){
                     <button onClick = {addToShoppingItems} href="#" className="btn btn-info btn-lg">
                       <span className="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
                     </button>
-
                 </div>
             </div>
         </div>
