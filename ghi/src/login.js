@@ -26,29 +26,16 @@ login(data.username[0], data.password[0],{id}.id)
 console.log(data);
 }
 return (
-    <div className="container">
-        <form onSubmit={submitHandler} className="form-signin">
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <div className="row">
-            <div className="col">
-            <input
-                type="text"
-                value={username}
-                name="username"
-                onChange={changeHandler}
-                placeholder="Enter Username"
-            />
-            <input
-                type="password"
-                value={password}
-                name="password"
-                onChange={changeHandler}
-                placeholder="Enter Password"
-            />
-            <input type="submit" value="Login" />
+    <div className="wrapper fadeInDown">
+        <div id="formContent">
+            <div className="fadeIn first">
             </div>
+            <form>
+                <input type="text" id="username" className="fadeIn second" name="login" placeholder="Enter Username" />
+                <input type="text" id="password" className="fadeIn third" name="login" placeholder="Enter Password" />
+                <input type="submit" className="fadeIn fourth" value="Sign In" />
+            </form>
         </div>
-        </form>
     </div>
 );
 }

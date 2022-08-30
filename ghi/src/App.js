@@ -1,5 +1,4 @@
 import './App.css';
-import Home from './pages';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GetWine from './WineDetails';
@@ -29,11 +28,6 @@ function App(props) {
         </div>
       </BrowserRouter>
     </AuthProvider>
-
-    // <Router>
-    //   <Home />
-    // </Router>
-
   );
 }
 
