@@ -9,6 +9,19 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 ## JOURNAL ENTRIES
 
 
+## Monday, August 29, 2022
+Today, I worked on:
+
+* learning about Redux and working on the React front-end
+for our Wines Details, as well as setting up a url/views
+for our Order model
+
+The group started to work on our Wine Details page.  However, while trying to program with Kayli, we realized that we needed to learn more about Redux.  Most of the 
+day was spent on reading up on Redux on LEARN and watching the videos provided.  While waiting for Kayli 
+to finish watching the videos, I worked on creating url
+paths and views for our Order list and details.  This will be necessary for later when we test that our Shopping Items are created when an order is confirmed/placed. When we reconvened with Kayli, she had already set up the store and be able to retrieve the data for a specific wine from a specific winery.  In the process, I learned how to use the useParams() in order to pass multiple query paramaters using Redux.  For the next part, we will be using and managing states to build a "shopping cart" to store our shopping items in.  
+
+
 ## Thursday, August 25, 2022
 Today, I worked on:
 
