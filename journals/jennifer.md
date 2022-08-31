@@ -15,10 +15,9 @@ Today, I continued working on:
 
 * the React front-end for our Wines Details using Redux toolkit to help manage state
 
-Kayli and I pair-programmed and continued working on getting Redux working to manage state for our Shopping Cart.  We were able to get configure the state for our quantity input so that the user can input an amount, but the minimum could not be less than one and the maximum could not be greater than the quantity in stock for that wine.  A bug with our code that we will have to circle round to is that, how we have our code set
-up, the user is unable to use the delete key on their keyboard to change the input and must change it by highlighting with their cursor first.  We are still trying to understand Redux,
-given that the exaples in Learn are different from the documentation examples in Redux.  Tonight, I will be reading
-more about Redux and watching some videos about it.   
+Kayli and I pair-programmed and continued working on getting Redux working to manage state for our Shopping Cart.  We were able to configure the state for our quantity input so that the user can input an amount, where the minimum could not be less than one and the maximum could not be greater than the quantity in stock for that wine.  A bug with our code that we will have to circle back to is that, how we have our code set
+up, the user is unable to use the delete key on their keyboard to change the input and must change it by highlighting with their cursor first.  We are still trying to understand Redux
+better, given that the examples in Learn are different from the documentation examples in Redux.  Tonight, I will be reading more about Redux and watching some videos about it.   
 
 
 ## Monday, August 29, 2022
