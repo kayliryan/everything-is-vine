@@ -47,12 +47,12 @@ token: null,
 setToken: () => null,
 });
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ( props ) => {
 const [token, setToken] = useState(null);
 
 return (
     <AuthContext.Provider value={{ token, setToken }}>
-    {children}
+    {props.children}
     </AuthContext.Provider>
 );
 };
@@ -64,10 +64,13 @@ export function useToken() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("use token effect called")
         async function fetchToken() {
+            console.log('fetch token called')
             const token = await getTokenInternal();
             setToken(token);
-        }
+        } 
+        console.log(token)
         if (!token) {
         fetchToken();
         }
@@ -75,7 +78,7 @@ export function useToken() {
 
     async function logout() {
         if (token) {
-        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/logout/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/token/refresh/logout/`;
         await fetch(url, { method: "delete", credentials: "include" });
         internalToken = null;
         setToken(null);
@@ -96,7 +99,7 @@ export function useToken() {
         if (response.ok) {
         const token = await getTokenInternal();
         setToken(token);
-        // navigate(`/wineries/${id}/`)
+        navigate(`/wineries/${id}/wines`)
         return;
         }
         let error = await response.json();

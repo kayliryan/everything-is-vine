@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from './auth'
 
 function WineColumn(props) {
 return (
@@ -34,12 +35,17 @@ function WineList() {
         [[], [], []]
     )
     const {id} = useParams()
-
-    async function fetchWines(){
+    
+    const { token } = useAuthContext();
+        console.log("printing token", token)
+        
+    async function fetchWines(token){
         const url = `http://localhost:8000/api/wineries/${id}/wines/`;
 
         try {
-        const response = await fetch(url);
+        const response = await fetch(url,
+            { credentials: "include",});
+
         if (response.ok) {
             const data = await response.json();
 
@@ -71,7 +77,7 @@ function WineList() {
         }
     }
 
-    useEffect( () => {fetchWines()},[])
+    useEffect( () => {fetchWines(token)},[])
 
 
     return (
