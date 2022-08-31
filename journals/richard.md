@@ -32,3 +32,7 @@ I also talked to the group about doing more work together as a group and we disc
 ## August 29, 2022
 
 Today Kayli & Jennifer and I worked on wine detail with redux! We had some trouble building the baseUrl dynamically and we realized that we had the winery_id and winvo_id variables incorrect in winedetails.js. I also started on deployment with heroku. 
+
+## August 30, 2022
+
+Today I worked on deployment with heroku. 
