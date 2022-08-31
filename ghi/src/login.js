@@ -36,31 +36,6 @@ const submitLogoutHandler = e => {
     }
 
 return (
-    // <div className="container">
-    //     <form onSubmit={submitHandler} className="form-signin">
-    //     <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-    //     <div className="row">
-    //         <div className="col">
-    //         <input
-    //             type="text"
-    //             value={username}
-    //             name="username"
-    //             onChange={changeHandler}
-    //             placeholder="Enter Username"
-    //         />
-    //         <input
-    //             type="password"
-    //             value={password}
-    //             name="password"
-    //             onChange={changeHandler}
-    //             placeholder="Enter Password"
-    //         />
-    //         <input type="submit" value="Login" />
-    //         </div>
-    //     </div>
-    //     </form>
-    //     <button type="submit" onClick={submitLogoutHandler}>Logout</button>
-    //</div>
         <div className="wrapper fadeInDown">
             <div id="formContent">
                 <div className="fadeIn first">
@@ -72,6 +47,9 @@ return (
                     value={password} onChange={changeHandler}/>
                     <input type="submit" className="fadeIn fourth" value="Sign In" />
                 </form>
+                <p className="forgot-password text-right">
+                            Need to create an account? <a href={`/wineries/${id}/signup/`}>Register</a>
+                </p>
             </div>
             <button type="submit" onClick={submitLogoutHandler}>Logout</button>
             </div>

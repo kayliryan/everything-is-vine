@@ -46,7 +46,7 @@ console.log(data);
         <div className="wrapper fadeInDown">
             <div id="formContent" className='fadeIn first'>
                 <form onSubmit={submitHandler}>
-                    <h3>Register</h3>
+                    <h3 className= 'mt-4'>Register</h3>
                     <div className="fadeIn second">
                         <input className="form-control" 
                             type="text" 
@@ -103,10 +103,10 @@ console.log(data);
                             placeholder="Enter Email"
                             required />
                     </div>
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
+                    <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
                     
                     <p className="forgot-password text-right">
-                        Already registered <a href={`wineries/${id}/login/`}>log in?</a>
+                        Already registered? <a href={`/wineries/${id}/login/`}>Login</a>
                     </p>
                 </form>
             </div>
