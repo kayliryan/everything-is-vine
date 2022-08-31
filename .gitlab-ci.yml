@@ -15,7 +15,7 @@ lint-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 service-sales service-winery
+    - flake8 sales winery
 
 # BUILD
 build-front-end-job:
