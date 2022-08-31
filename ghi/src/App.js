@@ -7,6 +7,7 @@ import Login from './login';
 import SignUp from './signup';
 import WineryList from './dashboard';
 import { AuthProvider } from './auth';
+import NavbarLayout from './navLayout';
 
 function App(props) {
 
@@ -14,17 +15,21 @@ function App(props) {
 
     <AuthProvider>
       <BrowserRouter>
-        {/* <Nav /> */}
         <div className="container">
           <Routes>
             <Route path="/" element={<WineryList />} />
-            <Route path="wineries/:id/wines/" element={<WineList />} />
-            <Route path="/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
-            {/* <Route path="wineries/:id/" element={<WineList />} /> */}
-            <Route path="wineries/:id/login/" element={<Login />} />
-            <Route path="wineries/:id/signup/" element={<SignUp />} />
-
           </Routes>
+          <Routes>
+            <Route element={<NavbarLayout />}>
+              <Route path="wineries/:id/wines/" element={<WineList />} />
+              <Route path="/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
+              {/* <Route path="wineries/:id/" element={<WineList />} /> */}
+              <Route path="wineries/:id/login/" element={<Login />} />
+              <Route path="wineries/:id/signup/" element={<SignUp />} />
+            </Route>
+          </Routes>
+            
+
         </div>
       </BrowserRouter>
     </AuthProvider>
