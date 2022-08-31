@@ -12,16 +12,16 @@ return (
         <div key={wine.id} className="card mb-3 shadow">
             <img src={wine.picture_url} className="card-img-top" />
             <div className="card-body">
-            <h5 className="card-title">{wine.year}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">
+            <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
+            <h6 className="d-flex justify-content-center card-subtitle mb-2 text-muted">
                 {wine.varietal}
             </h6>
-            <p className="card-text">
+            <p className="d-flex justify-content-center card-text">
                 {wine.description}
             </p>
             </div>
-            <div className="card-footer">
-            ALC/VOL {wine.abv}%
+            <div className="d-flex justify-content-center card-footer">
+            Alcohol By Volume: {wine.abv}%
             </div>
         </div>
         );
@@ -82,7 +82,7 @@ function WineList() {
 
     return (
         <>
-            <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
+            <div className="px-4 py-5 my-5 mt-0 text-center bg-success">
             <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
             <h1 className="display-5 fw-bold">Our Wines</h1>
             <div className="col-lg-6 mx-auto">
