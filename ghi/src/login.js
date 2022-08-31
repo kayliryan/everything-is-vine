@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { useToken } from './auth';
 import { useParams } from 'react-router-dom';
-import './login.css';
+import './Login.css';
 
 
 function Login() {
@@ -42,16 +42,15 @@ return (
                 <form onSubmit={submitHandler}>
                     <input type="text" id="username" className="fadeIn second" name="username" placeholder="Enter Username" 
                     value={username} onChange={changeHandler}/>
-                    <input type="password" id="password" className="fadeIn third" name="password" placeholder="Enter Password" 
+                    <input type="text" id="password" className="fadeIn third" name="password" placeholder="Enter Password" 
                     value={password} onChange={changeHandler}/>
                     <input type="submit" className="fadeIn fourth" value="Sign In" />
                 </form>
                 <p className="forgot-password text-right">
-                            Need to create an account? <a href={`/wineries/${id}/signup/`}>Register</a>
+                            <a href={`/wineries/${id}/signup/`}>Register Here</a>
                 </p>
             </div>
-            <button type="submit" onClick={submitLogoutHandler}>Logout</button>
-            </div>
+        </div>
     
 );
 }
