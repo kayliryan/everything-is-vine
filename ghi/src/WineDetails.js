@@ -2,6 +2,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {useGetWineDetailsQuery} from './store/salesApi';
+// import { useDispatch, useSelector } from "react-redux";
+// import { addCartItem } from './store/actions';
+// import cartReducer from './store/cartReducer';
+// import { store } from './store/store';
+
 // import ErrorNotification from './ErrorNotification'
 
 
@@ -10,6 +15,8 @@ function GetWine() {
   const {data, error, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
   const [shoppingItems, updateShoppingItems] = useState([]);
   const [quantity, setQuantity] = useState(1)
+  // const { count } = useSelector((state) => state.cart);
+  // const dispatch = useDispatch();
 
   
   if (isLoading) {
@@ -34,7 +41,14 @@ function GetWine() {
 
 
   async function addToShoppingItems(){
-    updateShoppingItems(data)
+    const dataCopy = {...data};
+    dataCopy.quantity = quantity;
+    updateShoppingItems(dataCopy)
+    // cartReducer.addCartItem(dataCopy)
+    // console.log(store.getState())
+    // dispatch(addCartItem(dataCopy))
+    // addCartItem(dataCopy)
+    // dispatch({ type: 'cartItemAdded' })
     }
 
 

@@ -1,3 +1,11 @@
+## August 30, 2022
+
+* Setting up Redux for our Wines Details Page
+
+Today Jennifer and I continued on getting Redux set up to manage the state of our Shopping Cart. We have the logic setup to be able to handle adding, deleting, and editing the quantity of an item in the Shopping Cart, but have not yet been able to correctly configure the reducers and pass through the payload. We successfully managed to get the quantity input working so that the user is not able to input anything but a number, a quantity less than 1, or a quantity greater the quantity in stock.
+
+Today I learned the importance of creating constraints on your user so they are not able to pass through bad data.
+
 ## August 29, 2022
 Today I worked on:
 
