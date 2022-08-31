@@ -24,7 +24,7 @@ const Card = props => {
     return (
         <div className="card text-center shadow">
             <div className="overflow">
-                <img src={winedetail} alt="Wine Detail" className='card-img-top'/>
+                <img src={data.picture_url} alt="Wine Detail" className='card-img-top'/>
             </div>
             <div className="card-body text-dark">
                 <h4 className="card-title">{data.brand}</h4>
@@ -35,7 +35,7 @@ const Card = props => {
                 <p className="card-text text-dark">Volume: {data.volume}mL</p>
                 <p className="card-text text-dark">Price: {data.price}$</p>
                 <p className="card-text text-dark">Quantity Available: {data.quantity}</p>
-                <button onClick = {addToShoppingItems} href="#" className="btn btn-outline-success btn-md">
+                <button onClick = {addToShoppingItems} href="#" className="btn btn-success btn-md">
                     <span className="align-items-center">Shopping Cart</span> 
                 </button>
             </div>
