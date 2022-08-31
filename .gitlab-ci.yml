@@ -29,7 +29,7 @@ lint-job:
 build-front-end-job:
   stage: build
   rules: 
-    - if: $CI_COMMIT_BRANCH == "main"
+    # - if: $CI_COMMIT_BRANCH == "main"
   image: node:lts-bullseye
   variables:
     PUBLIC_URL: https://beach-bums.gitlab.io/everything-is-vine
