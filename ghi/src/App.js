@@ -7,6 +7,7 @@ import Login from './login';
 import SignUp from './signup';
 import WineryList from './dashboard';
 import { AuthProvider } from './auth';
+// import ShoppingCartTest from './ShoppingCartTest'
 
 function App(props) {
 
@@ -23,6 +24,10 @@ function App(props) {
             {/* <Route path="wineries/:id/" element={<WineList />} /> */}
             <Route path="wineries/:id/login/" element={<Login />} />
             <Route path="wineries/:id/signup/" element={<SignUp />} />
+
+
+            {/* <Route path="wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} /> */}
+
 
           </Routes>
         </div>
