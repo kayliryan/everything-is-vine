@@ -16,7 +16,7 @@ variables:
   POSTGRES_PASSWORD: test-databases
   WAIT_HOSTS: postgres:5432
 
-
+#adding line to test git
 # # TEST ###############
 lint-job:
   image: python:3-bullseye
