@@ -1,8 +1,5 @@
-from django.http import JsonResponse
 from common.json import ModelEncoder
-from django.views.decorators.http import require_http_methods
 from sales_rest.models import WineVO, Order, ShoppingItem
-import json
 
 
 # class WineryVOEncoder(ModelEncoder):

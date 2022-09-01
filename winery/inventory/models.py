@@ -1,7 +1,8 @@
 from django.db import models
-from django.urls import reverse
 
 # Create your models here.
+
+
 class Winery(models.Model):
     name = models.CharField(max_length=254)
     url = models.URLField(max_length=220, null=True)

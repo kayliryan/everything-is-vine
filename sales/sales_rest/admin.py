@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import Order, ShoppingItem, WineVO
 
 # Register your models here.
+
+
 class OrderAdmin(admin.ModelAdmin):
     pass
 
