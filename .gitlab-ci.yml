@@ -3,7 +3,7 @@
 stages:
   - test
   - build
-  # - deploy
+  - deploy
   
 variables:
   REACT_APP_INVENTORY_API: https://${HEROKU_INVENTORY_API_APP}.herokuapp.com
@@ -34,12 +34,12 @@ build-front-end-job:
   image: node:lts-bullseye
   variables:
     PUBLIC_URL: https://beach-bums.gitlab.io/everything-is-vine
-    # REACT_APP_API_HOST: https://everything-is-vine.herokuapp.com/
+    REACT_APP_API_HOST: https://everything-is-vine.herokuapp.com/
   script:
     - cd ghi
     - npm install
     - npm run build # build the react app
-    - cp build/index.html build/404.html 
+    # - cp build/index.html build/404.html 
 #     # - echo ${REACT_APP_DJANGO_API}
     sllow_failure: true
   artifacts:
