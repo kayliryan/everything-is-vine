@@ -146,10 +146,10 @@ deploy-sales-poller:
     - docker pull ${CI_REGISTRY_IMAGE}/poller:latest
 
   # adds the name of the heroku app to the image
-    - docker tag ${CI_REGISTRY_IMAGE}/poller:latest registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/poller:latest registry.heroku.com/$SALES_POLLER/worker:latest
 
   # pushes the image to the heroku image registry
-    - docker push registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
+    - docker push registry.heroku.com/$SALES_POLLER/worker:latest
 
 release-sales-poller:
   stage: deploy
@@ -163,5 +163,5 @@ release-sales-poller:
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
   # changed web to worker because it's a poller
-    - heroku container:release worker --app $HEROKU_SALES_POLLER
+    - heroku container:release worker --app $SALES_POLLER
 
