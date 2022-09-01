@@ -4,6 +4,7 @@ import json
 from common.json import ModelEncoder
 from .models import Winery, Wine
 
+
 class WineryEncoder(ModelEncoder):
     model = Winery
     properties = [
@@ -14,6 +15,7 @@ class WineryEncoder(ModelEncoder):
         "description",
         "owner",
     ]
+
 
 class WineListEncoder(ModelEncoder):
     model = Wine
@@ -31,10 +33,11 @@ class WineListEncoder(ModelEncoder):
         "picture_url",
         "quantity",
         "winery",
-        ]
+    ]
     encoders = {
-        "winery" : WineryEncoder(),
+        "winery": WineryEncoder(),
     }
+
 
 @require_http_methods(["GET"])
 def api_list_winery(request):
@@ -46,20 +49,18 @@ def api_list_winery(request):
             encoder=WineryEncoder,
         )
 
+
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_winery(request, pk):
     if request.method == "GET":
         try:
             winery = Winery.objects.get(id=pk)
-            return JsonResponse(
-                winery,
-                encoder=WineryEncoder,
-                safe=False
-            )
+            return JsonResponse(winery, encoder=WineryEncoder, safe=False)
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
             response.status_code = 404
             return response
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
@@ -71,7 +72,7 @@ def api_list_wines(request, pk):
             encoder=WineListEncoder,
         )
     else:
-        content = json.loads(request.body)  
+        content = json.loads(request.body)
 
         try:
             if "winery" in content:
@@ -90,7 +91,7 @@ def api_list_wines(request, pk):
             encoder=WineListEncoder,
             safe=False,
         )
-        
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_all_wines(request):
@@ -102,7 +103,7 @@ def api_list_all_wines(request):
             encoder=WineListEncoder,
         )
     else:
-        content = json.loads(request.body)  
+        content = json.loads(request.body)
 
         try:
             if "winery" in content:

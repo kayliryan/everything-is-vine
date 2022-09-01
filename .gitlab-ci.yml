@@ -89,7 +89,7 @@ heroku-transfer:
   services:
     - docker:20.10.16-dind
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "branch-rich"
     - if: $CI_COMMIT_BRANCH == "end-cd"
   needs:
     - service-build-job

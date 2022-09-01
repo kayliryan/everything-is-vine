@@ -16,8 +16,7 @@ class WineVOEncoder(ModelEncoder):
         "id",
         "brand",
         "year",
-        "varietal"
-        "description",
+        "varietal" "description",
         "region",
         "abv",
         "volume",
@@ -29,7 +28,6 @@ class WineVOEncoder(ModelEncoder):
     ]
 
 
-
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = ["confirmation_number", "created"]
@@ -38,7 +36,7 @@ class OrderEncoder(ModelEncoder):
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
     properties = [
-        "order_id", 
+        "order_id",
         "item",
         "quantity",
         "price",

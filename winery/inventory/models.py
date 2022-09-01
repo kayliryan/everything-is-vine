@@ -16,13 +16,11 @@ class Winery(models.Model):
     def __str__(self):
         return self.name + "," + self.owner
 
+
 class Wine(models.Model):
     winery = models.ForeignKey(
-        Winery,
-        related_name="wines",
-        on_delete=models.CASCADE,
-        null=True
-    ) 
+        Winery, related_name="wines", on_delete=models.CASCADE, null=True
+    )
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
     varietal = models.CharField(max_length=110)
@@ -36,8 +34,7 @@ class Wine(models.Model):
     quantity = models.SmallIntegerField()
 
     def get_api_url(self):
-        return f'wineries/{self.winery.id}/wines/{self.id}/'
+        return f"wineries/{self.winery.id}/wines/{self.id}/"
 
     def __str__(self):
         return self.brand + ", " + str(self.year) + " " + self.varietal
-    

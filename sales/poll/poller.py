@@ -11,12 +11,13 @@ django.setup()
 
 from sales_rest.models import WineVO
 
+
 def get_wines():
     response = requests.get("http://winery:8000/api/wines/")
     content = json.loads(response.content)
     for wine in content["wines"]:
         WineVO.objects.update_or_create(
-            id = wine["id"],
+            id=wine["id"],
             # import_href=wine["href"],
             defaults={
                 # "id": wine["id"],
@@ -32,9 +33,10 @@ def get_wines():
                 "price": wine["price"],
                 "picture_url": wine["picture_url"],
                 "quantity": wine["quantity"],
-                "import_href": '/wines/' + str(wine["id"]) + '/'
-                },
+                "import_href": "/wines/" + str(wine["id"]) + "/",
+            },
         )
+
 
 def poll():
     while True:
@@ -44,5 +46,7 @@ def poll():
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(3)
+
+
 if __name__ == "__main__":
-    poll() 
+    poll()
