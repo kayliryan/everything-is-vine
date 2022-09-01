@@ -24,9 +24,9 @@ data even when we deleted the volumes and rebuilt our docker images and containe
 helped us in understanding persisting data and gave us a suggestion about and using local
 storage.  While Kayli continued to work on our issue with Redux Persist, I did some more
 research on Redux Persist and MDN web docs on localStorage for the possibility of pivoting 
-plans.  Even after Kayli blacklisted the Sales reducer, the data was still persisting.  
-Andrew helped us to solve our issue of the blacklist and clear what was in our local storage.  
-We checked to see that it was not persisting cached url data for our wine details. Success!
+plans.  Even after Kayli blacklisted the Sales reducer, the data was still persisting. Andrew 
+helped us to solve our issue of the blacklist and clear what was in our local storage. We 
+checked to see that it was not persisting cached url data for our wine details. Success!
 
 Tonight I set up a bare bones Shopping Cart Test page, so that we might be able to test
 some of our code for our shopping cart tomorrow.  
