@@ -1,6 +1,6 @@
 ## September 1, 2022
 
-* Setting up Redux for our Wines Details Page
+* Setting up Redux Persist
 
 Today I got Redux Persist up and running to address the problem of items in our Shopping Cart being deleted on refresh. Implementation solved this problem but a new one arose because of how Redux Persist heavily relies on caching. The new problem was that once a GET call had been made to a URL through our SalesAPI, it cached the data from that URL and never bothered to make the GET call again to see if the data from our microservice had been changed. I fixed this problem by blacklisting the salesAPI reducer from Redux Persist, forcing Redux to make a call to our microservice each time the page is rendered. 
 
