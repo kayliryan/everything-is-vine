@@ -84,4 +84,3 @@ def api_show_wine(request, pk1, pk2):
             {"message": "ERROR"},
             status=400,
         )
-        
