@@ -32,7 +32,7 @@ return (
 );
 }
 
-function WineList() {
+function WineAuthList() {
     const [wineColumns,setWineColumns] = useState(
         [[], [], []]
     )
@@ -43,12 +43,14 @@ function WineList() {
     const {id} = useParams()
     
     const { token } = useAuthContext();
+        console.log("printing token", token)
         
-    async function fetchWines(){
+    async function fetchWines(token){
         const url = `http://localhost:8000/api/wineries/${id}/wines/`;
 
         try {
-        const response = await fetch(url);
+        const response = await fetch(url,
+            { credentials: "include",});
 
         if (response.ok) {
             const data = await response.json();
@@ -113,4 +115,4 @@ function WineList() {
 
 }
 
-export default WineList;
+export default WineAuthList;

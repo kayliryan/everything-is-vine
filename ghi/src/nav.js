@@ -5,11 +5,35 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useParams, Link } from 'react-router-dom';
+import { useToken } from './auth';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useAuthContext } from './auth'
+import React, { useEffect, useState } from 'react';
 
 function Navigation() {
 
+    const [logged,setLogged]=useState(
+        false
+    )
+
     const {id} = useParams()
+
+    const [tokencall,login,logout] = useToken();
+
+    const { token } = useAuthContext();
+
+    function loggedIn(token){
+        if (token){
+            setLogged(true)
+        }
+    }
+    const submitLogoutHandler = e => {
+        e.preventDefault();
+        logout(id)
+        setLogged(false)
+        }
+
+    useEffect( ()=>{loggedIn(token)},[token])
 
     return (
         <Navbar variant='dark' expand="lg" className="rounded" style={{backgroundColor:"mediumorchid"}}>
@@ -39,6 +63,18 @@ function Navigation() {
                 <div className='px-3'>
                 <Link to={`wineries/${id}/contact`} className='btn btn-light p-2 mb-1 mt-1'>Contact Us</Link>
                 </div>
+                </Nav>
+                <Nav className="ms auto">
+                    <div className='px-3 me-auto justify-content-end'>
+                        <Link to={`wineries/${id}/login`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Login</Link>
+                    </div>
+                    <div className='px-3'>
+                        <Link to={`wineries/${id}/signup`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Signup</Link>
+                    </div>
+                    <div className='px-3'>
+                        <button type="submit" className={"btn btn-light p-2 mb-1 mt-1" + (logged ? "":" d-none")} onClick={submitLogoutHandler}>Logout</button>
+                    </div>
+                </Nav>
                 {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
@@ -52,7 +88,7 @@ function Navigation() {
                 <Nav.Link href="#" disabled>
                 Link
                 </Nav.Link> */}
-            </Nav>
+            {/* </Nav> */}
             </Navbar.Collapse>
         </Container>
         </Navbar>
