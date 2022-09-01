@@ -98,11 +98,9 @@ Today, I worked on:
 
 Today the team tried to resolve our issue involving the package-lock.json and
 node modules so it wouldn't be an issue with future pulls/push.  We added them 
-to our ghi directory's gitignore file.
-
-After fixing the issue, Richard and I attempted to pair program the view for wine
-details.  One of the issues we stumbled upon was getting our code for the view to
-work in our Insomnia.
+to our ghi directory's gitignore file. After fixing the issue, Richard and I attempted 
+to pair program the view for wine details.  One of the issues we stumbled upon was 
+getting our code for the view to work in our Insomnia.
 
 After discussing with Boden and Kayli to clarify how we want our url routes to 
 work, I had an issue with writing code for the wine details url/view for 2 different
