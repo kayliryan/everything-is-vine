@@ -127,6 +127,7 @@ function ShoppingCartTest(){
                         <td></td>
                         <td></td>
                         <td>
+                            <p>TOTAL: $ PRICE</p>
                             <button placeholder="onChange = {someOtherEventName}" href="#" className="btn btn-info btn-lg">
                             <span className="glyphicon glyphicon-shopping-cart"></span> Checkout
                             </button>
