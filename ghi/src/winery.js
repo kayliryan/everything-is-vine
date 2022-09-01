@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from './auth'
-import Nav from './nav';
 
 function Winery () {
 
@@ -27,14 +26,22 @@ function Winery () {
 
     return (
         <>
-            <header>
-            {/* <Nav /> */}
-            </header>
-            <div className="container-fluid">
-                <div>{winery.name}</div>
-
+        <div className='px-4 py-5 mt-0 my-5 text-center bg-transparent rounded opacity-100'>
+            <h2 className='display-4'>Welcome to {winery.name}</h2>
+            <div className="rounded mt-4" style={{ 
+                backgroundImage: `url(${winery.url})`,
+                backgroundRepeat: 'no-repeat',
+                opacity: "100",
+                backgroundSize: "cover",
+                height: '500px',
+                display: "block",
+                boxShadow: "5px 5px 10px lightgrey"
+                }}>
             </div>
-        </>
+            <h2 className='display-6'>About us</h2>
+            <p className='px-4 py-5 bg-light mt-4 rounded'>{winery.description}</p>
+        </div>
+    </>    
     )
 }
 

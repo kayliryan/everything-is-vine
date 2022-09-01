@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
+import Winery from './winery';
 
 function WineColumn(props) {
+    const {id} = useParams()
 return (
     <div className="col">
     {props.list.map(data => {
@@ -10,14 +12,14 @@ return (
         const wine = data;
         return (
         <div key={wine.id} className="card mb-3 shadow">
-            <img src={wine.picture_url} className="card-img-top" />
+            <img src={wine.picture_url} className="card-img-top mt-3" />
             <div className="card-body">
             <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
             <h6 className="d-flex justify-content-center card-subtitle mb-2 text-muted">
                 {wine.varietal}
             </h6>
             <p className="d-flex justify-content-center card-text">
-                {wine.description}
+            <Link to={`/wineries/${id}/wines/${wine.id}`} className='btn p-2 mb-1 mt-1' style={{backgroundColor:"orchid"}}>Learn More & Order Here</Link>
             </p>
             </div>
             <div className="d-flex justify-content-center card-footer">
@@ -34,6 +36,10 @@ function WineList() {
     const [wineColumns,setWineColumns] = useState(
         [[], [], []]
     )
+    const [wineryName,setWineryName] = useState(
+        ''
+    )
+
     const {id} = useParams()
     
     const { token } = useAuthContext();
@@ -48,6 +54,8 @@ function WineList() {
 
         if (response.ok) {
             const data = await response.json();
+
+            const wineryName=data.wines[0].winery.name;
 
             const wineColumns = [[], [], []];
             let list = []
@@ -69,6 +77,8 @@ function WineList() {
             }
             }
 
+            setWineryName(wineryName)
+
             console.log(wineColumns)
             setWineColumns(wineColumns);
         }
@@ -82,23 +92,23 @@ function WineList() {
 
     return (
         <>
-            <div className="px-4 py-5 my-5 mt-0 text-center bg-success">
+            <div className="px-4 py-5 my-5 mt-4 text-center bg-light">
             <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
             <h1 className="display-5 fw-bold">Our Wines</h1>
-            <div className="col-lg-6 mx-auto">
-                <p className="lead mb-4">
-                Please enjoy a selection of our finest wines. 
-                </p>
-            </div>
-            </div>
-            <div className="container">
-            <div className="row">
-                {wineColumns.map((wineList, index) => {
-                return (
-                    <WineColumn id={id} key={index} list={wineList} />
-                );
-                })}
-            </div>
+                <div className="col-lg-6 mx-auto">
+                        <p className="lead mb-4">
+                        Please enjoy a selection of our finest wines from {wineryName}.
+                        </p>
+                </div>
+                </div>
+                    <div className="container">
+                    <div className="row">
+                        {wineColumns.map((wineList, index) => {
+                        return (
+                            <WineColumn id={id} key={index} list={wineList} />
+                        );
+                        })}
+                </div>
             </div>
         </>
     );
