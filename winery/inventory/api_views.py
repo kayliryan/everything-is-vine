@@ -3,6 +3,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
 from .models import Winery, Wine
+from .acls import get_geo
 # import djwto.authentication as auth
 
 class WineryEncoder(ModelEncoder):
@@ -52,8 +53,11 @@ def api_winery(request, pk):
     if request.method == "GET":
         try:
             winery = Winery.objects.get(id=pk)
+
+            geo = get_geo(winery.address)
+
             return JsonResponse(
-                winery,
+                {"winery":winery, "geo":geo},
                 encoder=WineryEncoder,
                 safe=False
             )

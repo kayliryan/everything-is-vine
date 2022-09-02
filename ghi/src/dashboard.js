@@ -9,7 +9,7 @@ return (
         console.log(data)
         const winery = data;
         return (
-        <div key={winery.id} className="card mb-3 shadow">
+        <div key={winery.id} className="card mb-3 mt-5 shadow">
             <img src={WineryLogo} className="card-img-top" />
             <div className="card-body">
             <h5 className="card-title">

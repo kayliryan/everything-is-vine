@@ -11,7 +11,7 @@ return (
         console.log(data)
         const wine = data;
         return (
-        <div key={wine.id} className="card mb-3 shadow">
+        <div key={wine.id} className="card mb-3 shadow mt-4">
             <img src={wine.picture_url} className="card-img-top mt-3" />
             <div className="card-body">
             <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
@@ -100,7 +100,7 @@ function WineList() {
                 </div>
                 </div>
                     <div className="container">
-                    <div className="row">
+                    <div className="row mt-2">
                         {wineColumns.map((wineList, index) => {
                         return (
                             <WineColumn id={id} key={index} list={wineList} />

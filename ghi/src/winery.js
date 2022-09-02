@@ -7,10 +7,12 @@ function Winery () {
     const [winery,setWinery] = useState(
         {}
     )
+    const [geo,setGeo] = useState(
+        {}
+    )
     const {id} = useParams()
     
     const { token } = useAuthContext();
-        console.log("printing token", token)
 
     async function fetchWinery(){
         const url = `http://localhost:8000/api/wineries/${id}/`;
@@ -19,7 +21,10 @@ function Winery () {
 
         if (response.ok) {
             const data = await response.json();
-            setWinery(data)}
+            console.log(data)
+            setWinery(data.winery)
+            setGeo(data.geo)}
+
         }
 
     useEffect( () => {fetchWinery(token)},[])

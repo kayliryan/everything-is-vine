@@ -31,6 +31,6 @@ Today was a continuation authentication.  We figured out that the token was not 
 Today was a long day working on react front end.  I was able to successfully style the dashboard, winery pages, and add dynamic links and create a navbar.  I was able to make the nav bar only seen on the winery pages and not on the dashboard as planned.  I needed to keep state and write dynamic jsx to populate things correctly no matter which winery is displayed.  
 
 09/01/22:
-
+Today was productive.  I was able to add the login,logout,signup buttons to the nav.  I verified that they all worked correctly and then added the functionality to grab the jwt, set logged in state as true or false, and display/hide those nav buttons appropriately depending on logged in state. 
 
 
