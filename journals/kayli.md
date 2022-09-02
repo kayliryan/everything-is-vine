@@ -1,10 +1,19 @@
 ## September 1, 2022
 
+* Expanding Reducer Functionality
+
+Today I added a Reducer case that allows for a customer to update the quantity of the wine in their cart in real time. The new value automatically gets updated in the appropriate cartItem state and the UI displays new total prices based on the new quantities.
+
+Today I learned more about useEffect and how to ensure the code you have inside of it won't execute on first render
+
+
+## August 31, 2022
+
 * Setting up Redux Persist
 
 Today I got Redux Persist up and running to address the problem of items in our Shopping Cart being deleted on refresh. Implementation solved this problem but a new one arose because of how Redux Persist heavily relies on caching. The new problem was that once a GET call had been made to a URL through our SalesAPI, it cached the data from that URL and never bothered to make the GET call again to see if the data from our microservice had been changed. I fixed this problem by blacklisting the salesAPI reducer from Redux Persist, forcing Redux to make a call to our microservice each time the page is rendered. 
 
-Today I learned how complex Redux is and why it's generally only used for medium to large sized applications
+Today I learned how complex Redux is and why it's generally only used for medium to large sized applications.
 
 
 ## August 30, 2022
@@ -15,6 +24,7 @@ Today Jennifer and I continued on getting Redux set up to manage the state of ou
 
 Today I learned the importance of creating constraints on your user so they are not able to pass through bad data.
 
+
 ## August 29, 2022
 Today I worked on:
 
@@ -22,7 +32,8 @@ Today I worked on:
 
 Today I spent all day getting Redux set up for our Wine Details page and replacing the existing way to fetch data. Updates were made to our docker-compose.yaml file to be able to have a baseUrl while creating our Api for Redux. By the end of day data is being displayed for our specific wine attached to our specific winery as given in the URL. Next up is states.
 
-Today I learned how to pass in multiple query parameters in Redux
+Today I learned how to pass in multiple query parameters in Redux.
+
 
 ## August 25, 2022
 Today I worked on:
@@ -32,6 +43,7 @@ Today I worked on:
 I started my day by beginning building the wine detail page on React. We explored how we would be able to grab the ever-changing winery_id and winevo_id from the URL which we solved with UseParams. We reached a standstill in React when it became apparent that we still had to implement CORS across our platform. While beginning to work on that we ran into several issues and realized that we needed to get every team member to the same working code. We then spent the next several hours merging, battling abnormal issues with VS Code glitching and mixing up Incoming and Current Changes.
 
 Today I learned about UseParams() on React and how it's used to parse queries found in your URL.
+
 
 ## August 23, 2022
 

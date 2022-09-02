@@ -17,24 +17,9 @@ export const cartSlice = createSlice({
                 state.cartItems = []
         },
         updateQuantity: (state, payload) => {
-                // Return a new object
-                // console.log("state", state)
-                // console.log(payload.payload)
-                // const index = state.cartItems.findIndex(cartItem => cartItem.id !== action.payload);
                 const newArray = JSON.parse(JSON.stringify(state))
-                console.log(payload.payload)
-                console.log("***", newArray.cartItems[payload.payload.index].cust_quantity)
-                // console.log(newArray.cartItems[index])
-                newArray.cartItems[payload.payload.index].cust_quantity = payload.payload.cust_quantity
-                console.log(newArray)
-                // return {
-                //     ...state,
-                //     cartItems: newArray
-                // }
-                // return {
-                //   ...state,  // copy the existing item
-                //   cartItems: [...state.cartItems[index].cust_quantity = payload.payload]  // replace the email addr
-                // }
+                newArray.cartItems[payload.payload.index]["cust_quantity"] = payload.payload.cust_quantity
+                return newArray
             
               // Leave every other item unchanged
             // return state;

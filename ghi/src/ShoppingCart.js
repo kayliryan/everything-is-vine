@@ -1,17 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { updateQuantity } from './store/cartReducer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
 function ShoppingCartTest(){
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [cust_quantity, setCustQuantity] = useState(1)
-  let data = null
+  const [cust_quantity, setCustQuantity] = useState(-1)
+  const [index_state, setIndex] = useState(-1)
+  const [firstRender, hasRendered] = useState(true)
 
-  async function checkAndSetQuantity(e, index){
+
+  
+  async function checkAndSetQuantity(e, index=index){
+
       // bug to fix: unable to change quantity input in front end without highlighting number
       if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
         e.target.value = 1;
@@ -19,12 +23,20 @@ function ShoppingCartTest(){
       if(parseInt(e.target.value) > parseInt(e.target.max)){
         e.target.value = e.target.max;
       }
-      await setCustQuantity(parseInt(e.target.value))
-      console.log(cust_quantity, index=index)
-      data = {"cust_quantity": cust_quantity, "index": index}
-      dispatch(updateQuantity(data))
-      // dispatch(updateQuantity(cust_quantity, index = index))
+      setCustQuantity(parseInt(e.target.value))
+      setIndex(index)
+      
     }
+
+
+  useEffect(() => {
+    if (firstRender === true) {
+      hasRendered(false)
+    } else {
+      console.log("***", index_state)
+    let data = {"cust_quantity": cust_quantity, "index": index_state}
+    dispatch(updateQuantity(data)) }
+  }, [cust_quantity, index_state]);
     
   
 
@@ -33,6 +45,7 @@ function ShoppingCartTest(){
 
   return(
       <>
+      
           <table className="table table-hover">
               <thead>
                   <tr>
@@ -53,7 +66,7 @@ function ShoppingCartTest(){
                             <td><img
                           className="mx-auto img-thumbnail"
                           src={ cartItem.picture_url }/></td>
-                            <td>Cart Id {index}</td>
+                            <td>Index {index}</td>
                             <td>{cartItem.year} {cartItem.brand} {cartItem.varietal}</td>
                             <td> ************* {cartItem.cust_quantity}</td>
                             <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id="quantity" name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /></td>
