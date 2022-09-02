@@ -1,166 +1,162 @@
-<div className="container px-4 py-5 mx-auto">
-  <div className="row d-flex justify-content-center">
-    <div className="col-5">
-      <h4 className="heading">Shopping Bag</h4>
-    </div>
-    <div className="col-7">
-      <div className="row text-right">
-        <div className="col-4">
-          <h6 className="mt-2">Format</h6>
-        </div>
-        <div className="col-4">
-          <h6 className="mt-2">Quantity</h6>
-        </div>
-        <div className="col-4">
-          <h6 className="mt-2">Price</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row d-flex justify-content-center border-top">
-    <div className="col-5">
-      <div className="row d-flex">
-        <div className="book">
-          <img src="https://i.imgur.com/2DsA49b.jpg" className="book-img" />
-        </div>
-        <div className="my-auto flex-column d-flex pad-left">
-          <h6 className="mob-text">Thinking, Fast and Slow</h6>
-          <p className="mob-text">Daniel Kahneman</p>
-        </div>
-      </div>
-    </div>
-    <div className="my-auto col-7">
-      <div className="row text-right">
-        <div className="col-4">
-          <p className="mob-text">Digital</p>
-        </div>
-        <div className="col-4">
-          <div className="row d-flex justify-content-end px-3">
-            <p className="mb-0" id="cnt1">
-              1
-            </p>
-            <div className="d-flex flex-column plus-minus">
-              <span className="vsm-text plus">+</span>
-              <span className="vsm-text minus">-</span>
-            </div>
-          </div>
-        </div>
-        <div className="col-4">
-          <h6 className="mob-text">$9.99</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row d-flex justify-content-center border-top">
-    <div className="col-5">
-      <div className="row d-flex">
-        <div className="book">
-          <img src="https://i.imgur.com/Oj1iQUX.jpg" className="book-img" />
-        </div>
-        <div className="my-auto flex-column d-flex pad-left">
-          <h6 className="mob-text">
-            Homo Deus: A Brief
-            <br />
-            History of Tomorrow
-          </h6>
-          <p className="mob-text">Yuval Noah Harari</p>
-        </div>
-      </div>
-    </div>
-    <div className="my-auto col-7">
-      <div className="row text-right">
-        <div className="col-4">
-          <p className="mob-text">Paperback</p>
-        </div>
-        <div className="col-4">
-          <div className="row d-flex justify-content-end px-3">
-            <p className="mb-0" id="cnt2">
-              1
-            </p>
-            <div className="d-flex flex-column plus-minus">
-              <span className="vsm-text plus">+</span>
-              <span className="vsm-text minus">-</span>
-            </div>
-          </div>
-        </div>
-        <div className="col-4">
-          <h6 className="mob-text">$13.50</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-lg-12">
-      <div className="card">
-        <div className="row">
-          <div className="col-lg-3 radio-group">
-            <div className="row d-flex px-3 radio">
-              <img className="pay" src="https://i.imgur.com/WIAP9Ku.jpg" />
-              <p className="my-auto">Credit Card</p>
-            </div>
-            <div className="row d-flex px-3 radio gray">
-              <img className="pay" src="https://i.imgur.com/OdxcctP.jpg" />
-              <p className="my-auto">Debit Card</p>
-            </div>
-            <div className="row d-flex px-3 radio gray mb-3">
-              <img className="pay" src="https://i.imgur.com/cMk1MtK.jpg" />
-              <p className="my-auto">PayPal</p>
-            </div>
-          </div>
-          <div className="col-lg-5">
-            <div className="row px-2">
-              <div className="form-group col-md-6">
-                <label className="form-control-label">Name on Card</label>
-                <input
-                  type="text"
-                  id="cname"
-                  name="cname"
-                  placeholder="Johnny Doe"
-                />
-              </div>
-              <div className="form-group col-md-6">
-                <label className="form-control-label">Card Number</label>
-                <input
-                  type="text"
-                  id="cnum"
-                  name="cnum"
-                  placeholder="1111 2222 3333 4444"
-                />
-              </div>
-            </div>
-            <div className="row px-2">
-              <div className="form-group col-md-6">
-                <label className="form-control-label">Expiration Date</label>
-                <input type="text" id="exp" name="exp" placeholder="MM/YYYY" />
-              </div>
-              <div className="form-group col-md-6">
-                <label className="form-control-label">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="***" />
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 mt-2">
-            <div className="row d-flex justify-content-between px-4">
-              <p className="mb-1 text-left">Subtotal</p>
-              <h6 className="mb-1 text-right">$23.49</h6>
-            </div>
-            <div className="row d-flex justify-content-between px-4">
-              <p className="mb-1 text-left">Shipping</p>
-              <h6 className="mb-1 text-right">$2.99</h6>
-            </div>
-            <div className="row d-flex justify-content-between px-4" id="tax">
-              <p className="mb-1 text-left">Total (tax included)</p>
-              <h6 className="mb-1 text-right">$26.48</h6>
-            </div>
-            <button className="btn-block btn-blue">
-              <span>
-                <span id="checkout">Checkout</span>
-                <span id="check-amt">$26.48</span>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+import React from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { updateQuantity } from './store/cartReducer';
+import { useState } from 'react';
+
+
+
+function ShoppingCartTest(){
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const [cust_quantity, setCustQuantity] = useState(1)
+  let data = null
+
+  async function checkAndSetQuantity(e, index){
+      // bug to fix: unable to change quantity input in front end without highlighting number
+      if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+        e.target.value = 1;
+      }
+      if(parseInt(e.target.value) > parseInt(e.target.max)){
+        e.target.value = e.target.max;
+      }
+      await setCustQuantity(parseInt(e.target.value))
+      console.log(cust_quantity, index=index)
+      data = {"cust_quantity": cust_quantity, "index": index}
+      dispatch(updateQuantity(data))
+      // dispatch(updateQuantity(cust_quantity, index = index))
+    }
+    
+  
+
+
+
+
+  return(
+      <>
+          <table className="table table-hover">
+              <thead>
+                  <tr>
+                  <th>Shopping Cart</th>
+                  <th>Wine</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  </tr>
+              </thead>
+              <tbody className="table-group-divider">
+
+                  
+
+                  {/* FOR-LOOP OVER SHOPPINGCART ARRAY AND DISPLAY EACH SHOPPING ITEM OBJ : [ {}, {}, {}, {}, {}, etc... ] */}
+                      {cartItems.map((cartItem, index) => {
+                      return (
+                          <tr key={ cartItem.id }>
+                            <td><img
+                          className="mx-auto img-thumbnail"
+                          src={ cartItem.picture_url }/></td>
+                            <td>Cart Id {index}</td>
+                            <td>{cartItem.year} {cartItem.brand} {cartItem.varietal}</td>
+                            <td> ************* {cartItem.cust_quantity}</td>
+                            <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id="quantity" name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /></td>
+                              {/* <td> { currentDataObj.item.year/brand/varietal } </td>
+                              <td> { currentDataObj.item.cust_quantity } </td>
+                              // input element?: put cust_quantity as the placeholder?
+                              // buttons to increment up and down? left and right?
+                              <td> { dataObj.item.price } </td> */}
+                          </tr>
+                      );
+                  })}
+
+
+                  <tr>
+                      <td>
+                          <img
+                          className="mx-auto img-thumbnail"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3liyH9npeP69X4F7DphTeHf3iDpLV82b6U7nspVFASgL5_CNFXhTy-YOVjCawCIJUZs4&usqp=CAU"
+                          />
+                      </td>
+
+                      <td> Year/Brand/Varietal </td>
+
+                      <td> 
+                          {/* <input onChange = {someEventName}  */}
+                          {/* // value={quantity} max={data.quantity} */}
+                          {/* type="text" id="quantity" name="quantity" className="form-control input-number" /> */}
+                      </td>
+
+                      <td>
+                          $ Price
+                      </td>                                                
+                  </tr>
+
+
+
+
+                  <tr>
+                      <td>
+                      <img
+                          className="mx-auto img-thumbnail"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3liyH9npeP69X4F7DphTeHf3iDpLV82b6U7nspVFASgL5_CNFXhTy-YOVjCawCIJUZs4&usqp=CAU"
+                          />
+                      </td>
+
+                      <td> Year/Brand/Varietal </td>
+
+                      <td> 
+                          Button 
+                      </td>
+
+                      <td>
+                          $ Price
+                      </td>                                                
+                  </tr>
+
+
+
+
+
+
+                  <tr>
+                      <td>
+                          <img
+                          className="rounded mx-auto img-thumbnail"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3liyH9npeP69X4F7DphTeHf3iDpLV82b6U7nspVFASgL5_CNFXhTy-YOVjCawCIJUZs4&usqp=CAU"
+                          />
+                      </td>
+
+                      <td> Year/Brand/Varietal </td>
+
+                      <td> 
+                          Button 
+                      </td>
+
+                      <td>
+                          $ Price
+                      </td>                                                
+                  </tr>
+
+
+
+
+
+
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+                          {/* Calculate the total for shopping cart */}
+                          <p>TOTAL: $ PRICE</p>
+                          <button placeholder="onChange = {someOtherEventName}" href="#" className="btn btn-info btn-lg">
+                          <span className="glyphicon glyphicon-shopping-cart"></span> Checkout
+                          </button>
+                      </td>                                                
+                  </tr>
+
+
+
+              </tbody>
+          </table>            
+      </>
+  )
+  };
+  export default ShoppingCartTest;
