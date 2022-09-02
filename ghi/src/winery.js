@@ -7,9 +7,7 @@ function Winery () {
     const [winery,setWinery] = useState(
         {}
     )
-    const [geo,setGeo] = useState(
-        {}
-    )
+
     const {id} = useParams()
     
     const { token } = useAuthContext();
@@ -23,7 +21,7 @@ function Winery () {
             const data = await response.json();
             console.log(data)
             setWinery(data.winery)
-            setGeo(data.geo)}
+        }
 
         }
 
