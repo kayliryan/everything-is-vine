@@ -10,7 +10,7 @@ return (
         const winery = data;
         return (
         <div key={winery.id} className="card mb-3 shadow">
-            <img src={WineryLogo} className="card-img-top" />
+            <img src={WineryLogo} className="card-img-top" alt="" />
             <div className="card-body">
             <h5 className="card-title">
                 <Link to={`wineries/${winery.id}`} className="d-flex justify-content-center btn btn-success btn-lg px-4 gap-3">{winery.name}</Link>

@@ -8,4 +8,4 @@ COPY common common
 COPY inventory inventory
 
 RUN python -m pip install -r requirements.txt
-CMD python manage.py migrate && gunicorn winery_project.wsgi --bind 0.0.0.0:$PORT
+CMD python manage.py migrate && gunicorn winery_project.wsgi --bind 0.0.0.0:$PORT --log-file -

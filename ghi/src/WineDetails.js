@@ -1,14 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import {useGetWineDetailsQuery} from './store/salesApi';
 // import ErrorNotification from './ErrorNotification'
 
 
 function GetWine() {
   let { winery_id, winevo_id } = useParams();
-  const {data, error, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
-  const [shoppingItems, updateShoppingItems] = useState([]);
+  const {data, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
+  const [updateShoppingItems] = useState([]);
 
   if (isLoading) {
     return (
@@ -34,6 +34,7 @@ async function addToShoppingItems(){
         <div className="card mx-auto col-md-3 col-10 mt-5">
             <img
             className="mx-auto img-thumbnail"
+            alt=""
             src="https://i.imgur.com/pjITBzX.jpg"
             width="auto"
             height="auto"
