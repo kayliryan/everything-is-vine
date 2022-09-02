@@ -2,7 +2,7 @@ import './App.css';
 import React,{useState} from 'react';
 import { useToken } from './auth';
 import { useParams } from 'react-router-dom';
-import './login.css';
+import './Login.css';
 
 
 function Signup() {
@@ -46,7 +46,7 @@ console.log(data);
         <div className="wrapper fadeInDown">
             <div id="formContent" className='fadeIn first'>
                 <form onSubmit={submitHandler}>
-                    <h3 className= 'mt-4'>Register</h3>
+                    <h3 className= 'mt-2'></h3>
                     <div className="fadeIn second">
                         <input className="form-control" 
                             type="text" 
@@ -58,7 +58,7 @@ console.log(data);
                     </div>
                     <div className="fadeIn second">
                         <input className="form-control" 
-                            type="password"
+                            type="text"
                             value={password}
                             name="password"
                             onChange={changeHandler}
@@ -94,19 +94,18 @@ console.log(data);
                             required />
                     </div>
 
-                    <div className="fadeIn fourth">
+                    <div className="fadeIn fourth mb-2">
                         <input className="form-control" 
-                            type="email" 
+                            type="text" 
                             name="email"
                             value={email}
                             onChange={changeHandler}
                             placeholder="Enter Email"
                             required />
                     </div>
-                    <button type="submit" className="btn btn-dark btn-lg btn-block">Submit</button>
-                    
-                    <p className="forgot-password text-right">
-                        Already registered? <a href={`/wineries/${id}/login/`}>Login</a>
+                    <input type="submit" className="fadeIn fourth" value="Sign Up" />                    
+                    <p className="forgot-password text-right mt-0">
+                        <a href={`/wineries/${id}/login/`}>Login Here</a>
                     </p>
                 </form>
             </div>

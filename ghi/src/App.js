@@ -25,8 +25,11 @@ function App(props) {
             {/* <Route path="wineries/:id/" element={<WineList />} /> */}
             <Route path="wineries/:id/login/" element={<Login />} />
             <Route path="wineries/:id/signup/" element={<SignUp />} />
+<<<<<<< HEAD
             <Route path="wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} />
 
+=======
+>>>>>>> main
           </Routes>
         </div>
       </BrowserRouter>
