@@ -1,22 +1,22 @@
-# from django.test import TestCase, Client
-# from django.urls import reverse
-# from .models import WineVO
+from django.test import TestCase, Client
+from django.urls import reverse
+from .models import WineVO
 
 
-# class TestWineVOViews(TestCase):
-#     def setUp(self):
-#         WineVO.objects.create(
-#             winery_id=1,
-#             brand="test_brand",
-#             year=2010,
-#             varietal='test_varietal',
-#             abv=8.0,
-#             volume=750,
-#             price=40.0,
-#             quantity=3,
-#         )
+class TestWineVOViews(TestCase):
+    def setUp(self):
+        WineVO.objects.create(
+            winery_id=1,
+            brand="test_brand",
+            year=2010,
+            varietal='test_varietal',
+            abv=8.0,
+            volume=750,
+            price=40.0,
+            quantity=3,
+        )
 
-#     def test_list_accounts_GET(self):
-#         client = Client()
-#         response = client.get("api_show_wine")
-#         self.assertEquals(response.status_code, 200)
+    def test_list_accounts_GET(self):
+        client = Client()
+        response = client.get("api_show_wine")
+        self.assertEquals(response.status_code, 200)
