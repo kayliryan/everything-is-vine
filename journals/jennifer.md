@@ -9,6 +9,22 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 ## JOURNAL ENTRIES
 
 
+## Thursday, September 1, 2022
+Today, Kayli and I continued working on:
+
+* the React front-end for our Wines Details using Redux/Redux toolkit to help manage 
+state and researching Redux persist & possible localeStorage to persist local data
+
+We were able to plug in some data and test the states for our shopping item quantity,
+as well as our shopping cart.  Neil helped us with understanding useEffect and how it
+is similar to componentDidMount.  According to the react documentation, the useEffect
+hook can be thought of as componentDidMount, componentDidUpdate, and componentWillMount
+combined.  He helped us with figuring out the logic so the code would would not execute
+on the first render.  With this, we were able to have the new quantity value update the
+correct cartItem's state.  Redux and Redux toolkit has been difficult to navigate and
+much more complex than I had originally thought it would be.
+
+
 ## Wednesday, August 31, 2022
 Today, I continued working on:
 
