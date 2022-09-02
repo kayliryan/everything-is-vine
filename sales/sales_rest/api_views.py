@@ -38,37 +38,36 @@ class OrderEncoder(ModelEncoder):
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
     properties = [
-        # use get extra data to get order_id.id
-        # "order_id", 
+        "order_id", 
         "item",
-        # remove quantity and price
-        # "quantity",
-        # "price",
     ]
-    # encoders = {
-    #     "order_id": OrderEncoder(),
-    #     "item": WineVOEncoder(),
-    # }
+
+    def get_extra_data(self, o):
+        return {"order_id": o.order_id.id }
+
+    encoders = {
+        "item": WineVOEncoder(),
+    }
 
 
-# # Show list of wines from a specific winery
-# # note: because there is no WineryVO, API endpoint
-# # does not know if winery doesn't exist or if
-# # if winery exists and has no wines to list
-# @require_http_methods(["GET"])
-# def api_list_wines(request, pk1):
-#     if request.method == "GET":
-#         wines = WineVO.objects.filter(winery_id=pk1)
-#         if len(wines) > 0:
-#             return JsonResponse(
-#                 {"wines": wines},
-#                 encoder=WineVOEncoder,
-#                 )
-#         # usually would check if WineryVO.DoesNotExist:
-#         else:
-#             return JsonResponse(
-#                 {"message": "Winery does not exist or has no list of wines"}
-#             )       
+# Show list of wines from a specific winery
+# note: because there is no WineryVO, API endpoint
+# does not know if winery doesn't exist or if
+# if winery exists and has no wines to list
+@require_http_methods(["GET"])
+def api_list_wines(request, pk1):
+    if request.method == "GET":
+        wines = WineVO.objects.filter(winery_id=pk1)
+        if len(wines) > 0:
+            return JsonResponse(
+                {"wines": wines},
+                encoder=WineVOEncoder,
+                )
+        # usually would check if WineryVO.DoesNotExist:
+        else:
+            return JsonResponse(
+                {"message": "Winery does not exist or has no list of wines"}
+            )       
 
         
 
@@ -97,67 +96,59 @@ def api_show_wine(request, pk1, pk2):
 
 
 
-# # Show list of orders
-# @require_http_methods(["GET"])
-# def api_list_orders(request):
-#     if request.method == "GET":
-#         orders = Order.objects.all()
-#         return JsonResponse(
-#             {"orders": orders},
-#             encoder=OrderEncoder,
-#             )
-#     else:
-#         return JsonResponse(
-#             {"message": "ERROR"},
-#             status = 400,
-#         )
+# Show list of orders
+@require_http_methods(["GET"])
+def api_list_orders(request):
+    if request.method == "GET":
+        orders = Order.objects.all()
+        return JsonResponse(
+            {"orders": orders},
+            encoder=OrderEncoder,
+            )
+    else:
+        return JsonResponse(
+            {"message": "ERROR"},
+            status = 400,
+        )
     
 
 
 
 
-# # Show detail of specific order
-# @require_http_methods(["GET"])
-# def api_show_order(request, pk):
-#     if request.method == "GET":
-#         try:
-#             order = Order.objects.get(id=pk)
-#             return JsonResponse(
-#                 order,
-#                 encoder=OrderEncoder,
-#                 safe=False,
-#             )
-#         except Order.DoesNotExist:
-#             return JsonResponse(
-#                 {"message": "Order does not exist"},
-#                 status=404,
-#             )
-#     else:
-#         return JsonResponse(
-#             {"message": "ERROR"},
-#             status=400,
-#         )
+# Show detail of specific order
+@require_http_methods(["GET"])
+def api_show_order(request, pk):
+    if request.method == "GET":
+        try:
+            order = Order.objects.get(id=pk)
+            return JsonResponse(
+                order,
+                encoder=OrderEncoder,
+                safe=False,
+            )
+        except Order.DoesNotExist:
+            return JsonResponse(
+                {"message": "Order does not exist"},
+                status=404,
+            )
+    else:
+        return JsonResponse(
+            {"message": "ERROR"},
+            status=400,
+        )
 
 
-# # Show list of shopping items from specific order
-# @require_http_methods(["GET"])
-# def api_list_shopping_items(request):
-#     if request.method == "GET":
-#         shopping_items = ShoppingItem.objects.all()
-#         return JsonResponse(
-#             {"shopping_items": shopping_items},
-#             encoder=ShoppingItemEncoder,
-#         )
-#     else:
-#         return JsonResponse(
-#             {"message": "ERROR"},
-#             status = 400,
-#         )
-class ShoppingItemEncoder(ModelEncoder):
-    model = ShoppingItem
-    properties = [
-        "order_id", 
-        "item",
-        "quantity",
-        "price",
-    ]
+# Show list of shopping items from specific order
+@require_http_methods(["GET"])
+def api_list_shopping_items(request):
+    if request.method == "GET":
+        shopping_items = ShoppingItem.objects.all()
+        return JsonResponse(
+            {"shopping_items": shopping_items},
+            encoder=ShoppingItemEncoder,
+        )
+    else:
+        return JsonResponse(
+            {"message": "ERROR"},
+            status = 400,
+        )
