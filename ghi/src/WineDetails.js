@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import {useGetWineDetailsQuery} from './store/salesApi';
+import { useState } from 'react';
+import { useGetWineDetailsQuery } from './store/salesApi';
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from './store/cartReducer';
 // import ErrorNotification from './ErrorNotification'

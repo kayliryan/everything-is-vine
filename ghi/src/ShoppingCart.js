@@ -1,21 +1,25 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { updateQuantity } from './store/cartReducer';
+import { deleteCartItem, updateQuantity } from './store/cartReducer';
 import { useState, useEffect } from 'react';
 
 
 
 function ShoppingCartTest(){
   const { cartItems } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
   const [cust_quantity, setCustQuantity] = useState(-1)
   const [index_state, setIndex] = useState(-1)
   const [firstRender, hasRendered] = useState(true)
+  const dispatch = useDispatch();
 
 
-  
+  async function deleteItem(e, index=index) {
+    console.log("delete_item", index)
+    dispatch(deleteCartItem({"index": index}))
+    }
+
+
   async function checkAndSetQuantity(e, index=index){
-
       // bug to fix: unable to change quantity input in front end without highlighting number
       if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
         e.target.value = 1;
@@ -25,20 +29,18 @@ function ShoppingCartTest(){
       }
       setCustQuantity(parseInt(e.target.value))
       setIndex(index)
-      
     }
 
 
   useEffect(() => {
     if (firstRender === true) {
       hasRendered(false)
-    } else {
-      console.log("***", index_state)
+    } 
+    else {
     let data = {"cust_quantity": cust_quantity, "index": index_state}
-    dispatch(updateQuantity(data)) }
+    dispatch(updateQuantity(data)) 
+    }
   }, [cust_quantity, index_state]);
-    
-  
 
 
 
@@ -53,124 +55,36 @@ function ShoppingCartTest(){
                   <th>Wine</th>
                   <th>Quantity</th>
                   <th>Price</th>
+                  <th>Total Price</th>
+                  <th>Delete</th>
                   </tr>
               </thead>
               <tbody className="table-group-divider">
-
-                  
-
-                  {/* FOR-LOOP OVER SHOPPINGCART ARRAY AND DISPLAY EACH SHOPPING ITEM OBJ : [ {}, {}, {}, {}, {}, etc... ] */}
                       {cartItems.map((cartItem, index) => {
                       return (
-                          <tr key={ cartItem.id }>
+                          <tr key={ cartItem.index }>
                             <td><img
                           className="mx-auto img-thumbnail"
                           src={ cartItem.picture_url }/></td>
                             <td>Index {index}</td>
                             <td>{cartItem.year} {cartItem.brand} {cartItem.varietal}</td>
-                            <td> ************* {cartItem.cust_quantity}</td>
-                            <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id="quantity" name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /></td>
+                            <td>${cartItem.price} </td>
+                            <td> ${cartItem.cust_quantity * cartItem.price}</td>
+                            <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id={index} name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /> </td>
+                            <td> <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Delete</button> </td>
                               {/* <td> { currentDataObj.item.year/brand/varietal } </td>
                               <td> { currentDataObj.item.cust_quantity } </td>
                               // input element?: put cust_quantity as the placeholder?
                               // buttons to increment up and down? left and right?
                               <td> { dataObj.item.price } </td> */}
-                          </tr>
+                            </tr>
                       );
                   })}
-
-
-                  <tr>
-                      <td>
-                          <img
-                          className="mx-auto img-thumbnail"
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3liyH9npeP69X4F7DphTeHf3iDpLV82b6U7nspVFASgL5_CNFXhTy-YOVjCawCIJUZs4&usqp=CAU"
-                          />
-                      </td>
-
-                      <td> Year/Brand/Varietal </td>
-
-                      <td> 
-                          {/* <input onChange = {someEventName}  */}
-                          {/* // value={quantity} max={data.quantity} */}
-                          {/* type="text" id="quantity" name="quantity" className="form-control input-number" /> */}
-                      </td>
-
-                      <td>
-                          $ Price
-                      </td>                                                
-                  </tr>
-
-
-
-
-                  <tr>
-                      <td>
-                      <img
-                          className="mx-auto img-thumbnail"
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3liyH9npeP69X4F7DphTeHf3iDpLV82b6U7nspVFASgL5_CNFXhTy-YOVjCawCIJUZs4&usqp=CAU"
-                          />
-                      </td>
-
-                      <td> Year/Brand/Varietal </td>
-
-                      <td> 
-                          Button 
-                      </td>
-
-                      <td>
-                          $ Price
-                      </td>                                                
-                  </tr>
-
-
-
-
-
-
-                  <tr>
-                      <td>
-                          <img
-                          className="rounded mx-auto img-thumbnail"
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3liyH9npeP69X4F7DphTeHf3iDpLV82b6U7nspVFASgL5_CNFXhTy-YOVjCawCIJUZs4&usqp=CAU"
-                          />
-                      </td>
-
-                      <td> Year/Brand/Varietal </td>
-
-                      <td> 
-                          Button 
-                      </td>
-
-                      <td>
-                          $ Price
-                      </td>                                                
-                  </tr>
-
-
-
-
-
-
-                  <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>
-                          {/* Calculate the total for shopping cart */}
-                          <p>TOTAL: $ PRICE</p>
-                          <button placeholder="onChange = {someOtherEventName}" href="#" className="btn btn-info btn-lg">
-                          <span className="glyphicon glyphicon-shopping-cart"></span> Checkout
-                          </button>
-                      </td>                                                
-                  </tr>
-
-
-
               </tbody>
           </table>            
       </>
   )
   };
-  export default ShoppingCartTest;
+
+export default ShoppingCartTest;
 
