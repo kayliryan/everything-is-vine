@@ -32,8 +32,8 @@ class WineVOEncoder(ModelEncoder):
 
 class OrderEncoder(ModelEncoder):
     model = Order
-    properties = ["confirmation_number", "created"]
-    # need to include "id" in properties for ShoppingItemEncoder
+    properties = ["id", "confirmation_number", "created"]
+
 
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
