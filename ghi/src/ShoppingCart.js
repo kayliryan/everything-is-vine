@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, updateQuantity } from './store/cartReducer';
+import { deleteCartItem, updateQuantity, clearCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
 
 
@@ -30,6 +30,10 @@ function ShoppingCartTest(){
       setCustQuantity(parseInt(e.target.value))
       setIndex(index)
     }
+
+  async function orderPlaced(e) {
+    dispatch(clearCart())
+  }
 
 
   useEffect(() => {
@@ -72,6 +76,7 @@ function ShoppingCartTest(){
                             <td> ${cartItem.cust_quantity * cartItem.price}</td>
                             <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id={index} name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /> </td>
                             <td> <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Delete</button> </td>
+                            <td> <button onClick = {orderPlaced} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Clear Cart</button> </td>
                               {/* <td> { currentDataObj.item.year/brand/varietal } </td>
                               <td> { currentDataObj.item.cust_quantity } </td>
                               // input element?: put cust_quantity as the placeholder?

@@ -1,11 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {cartItems: []}
 export const cartSlice = createSlice({
     name: "cart",
-    initialState: {
-        cartItems: []
-    },
+    initialState: initialState,
     reducers: {
+        addCartItem: (state, payload) => {
+            console.log("added item to cart")
+            // Need to add logic to check if item with same id exists in the cart
+            // if so, make a call to a future function updateQuantity
+            return {
+                ...state,
+                cartItems: [...state.cartItems, payload.payload]
+            }},
+        updateQuantity: (state, payload) => {
+            console.log("updating quantity")
+            const newArray = JSON.parse(JSON.stringify(state))
+            newArray.cartItems[payload.payload.index]["cust_quantity"] = payload.payload.cust_quantity
+            return newArray
+        },
         deleteCartItem: (state, payload) => {
             console.log("deleting cart item")
             let index = payload.payload.index
@@ -13,26 +26,7 @@ export const cartSlice = createSlice({
             newArray.cartItems.splice(index, 1);
             return newArray
         },
-        addCartItem: (state, payload) => {
-            console.log("added item to cart")
-            // Need to add logic to check if item with same id exists in the cart
-            // if so, make a call to a future function updateQuantity
-            return {
-            ...state,
-            cartItems: [...state.cartItems, payload.payload]
-        }},
-        clearCart: (state) => {
-                state.cartItems = []
-        },
-        updateQuantity: (state, payload) => {
-                const newArray = JSON.parse(JSON.stringify(state))
-                newArray.cartItems[payload.payload.index]["cust_quantity"] = payload.payload.cust_quantity
-                console.log(newArray)
-                return newArray
-            
-              // Leave every other item unchanged
-            // return state;
-        },
+        clearCart: () => initialState,
         // default: () => {
         //     return {
         //         ...state,
