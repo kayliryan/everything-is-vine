@@ -2,13 +2,14 @@ import './App.css';
 import React,{useState} from 'react';
 import { useToken } from './auth';
 import { useParams } from 'react-router-dom';
+import './Login.css';
 
 
 function Signup() {
 const [data,setData] = useState({
 username:"",
 password:"",
-name:"",
+full_name:"",
 address:"",
 phone:"",
 email:"",
@@ -42,79 +43,73 @@ signup(
 
 console.log(data);
     return (
-            <div className="container">
-            <form onSubmit={submitHandler}>
-                <h3>Register</h3>
+        <div className="wrapper fadeInDown">
+            <div id="formContent" className='fadeIn first'>
+                <form onSubmit={submitHandler}>
+                    <h3 className= 'mt-2'></h3>
+                    <div className="fadeIn second">
+                        <input className="form-control" 
+                            type="text" 
+                            value={username}
+                            name="username"
+                            onChange={changeHandler}
+                            placeholder="Enter Username"
+                            required />
+                    </div>
+                    <div className="fadeIn second">
+                        <input className="form-control" 
+                            type="text"
+                            value={password}
+                            name="password"
+                            onChange={changeHandler}
+                            placeholder="Enter Password"
+                            required
+                        />
+                    </div>
+                    <div className="fadeIn third">
+                        <input className="form-control" 
+                            type="text"
+                            name="full_name" 
+                            value={full_name}
+                            onChange={changeHandler}
+                            placeholder="Enter Full Name"
+                            required />
+                    </div>
+                    <div className="fadeIn third">
+                        <input className="form-control" 
+                            type="text" 
+                            name="address"
+                            value={address}
+                            onChange={changeHandler}
+                            placeholder="Enter Address"
+                            required />
+                    </div>
+                    <div className="fadeIn fourth">
+                        <input className="form-control" 
+                            type="text" 
+                            name="phone"
+                            value={phone}
+                            onChange={changeHandler}
+                            placeholder="Enter Phone Number"
+                            required />
+                    </div>
 
-                <div className="form-group">
-                    <label>Username</label>
-                    <input className="form-control" 
-                        type="text" 
-                        value={username}
-                        name="username"
-                        onChange={changeHandler}
-                        placeholder="Enter Username"
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input className="form-control" 
-                        type="password"
-                        value={password}
-                        name="password"
-                        onChange={changeHandler}
-                        placeholder="Enter Password"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Name</label>
-                    <input className="form-control" 
-                        type="text"
-                        name="full_name" 
-                        value={full_name}
-                        onChange={changeHandler}
-                        placeholder="Enter Full Name"
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>Address</label>
-                    <input className="form-control" 
-                        type="text" 
-                        name="address"
-                        value={address}
-                        onChange={changeHandler}
-                        placeholder="Enter Address"
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>Phone Number</label>
-                    <input className="form-control" 
-                        type="text" 
-                        name="phone"
-                        value={phone}
-                        onChange={changeHandler}
-                        placeholder="Enter Phone Number"
-                        required />
-                </div>
-
-                <div className="form-group">
-                    <label>Email</label>
-                    <input className="form-control" 
-                        type="email" 
-                        name="email"
-                        value={email}
-                        onChange={changeHandler}
-                        placeholder="Enter Email"
-                        required />
-                </div>
-
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Register</button>
-                <p className="forgot-password text-right">
-                    Already registered <a href={`wineries/${id}/login/`}>log in?</a>
-                </p>
-            </form>
+                    <div className="fadeIn fourth mb-2">
+                        <input className="form-control" 
+                            type="text" 
+                            name="email"
+                            value={email}
+                            onChange={changeHandler}
+                            placeholder="Enter Email"
+                            required />
+                    </div>
+                    <input type="submit" className="fadeIn fourth" value="Sign Up" />                    
+                    <p className="forgot-password text-right mt-0">
+                        <a href={`/wineries/${id}/login/`}>Login Here</a>
+                    </p>
+                </form>
             </div>
+        </div>
         );
 }
 

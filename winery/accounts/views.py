@@ -4,6 +4,7 @@ from django.views.decorators.http import require_http_methods
 from .models import User
 from inventory.models import Winery
 from common.json import ModelEncoder
+import djwto.authentication as auth
 
 
 class UserListEncoder(ModelEncoder):
@@ -21,7 +22,7 @@ class UserListEncoder(ModelEncoder):
     ]
 
     def get_extra_data(self, o):
-        return {"winery": o.winery.id}
+        return {"winery": o.winery_id}
 
 
 @require_http_methods(["GET"])
@@ -67,6 +68,20 @@ def api_list_users(request):
             {"users": users},
             encoder=UserListEncoder,
         )
+
+
+# @require_http_methods(["GET"])
+# @auth.jwt_login_required
+# def api_current_user(request):
+#     user_id = request.payload["user"]["id"]
+#     user = User.objects.get(id=user_id)
+#     return JsonResponse(
+#         {
+#             "id": user.id,
+#             "username": user.username,
+#             "email": user.email,
+#         }
+#     )
 
 
 # @require_http_methods(["POST"])

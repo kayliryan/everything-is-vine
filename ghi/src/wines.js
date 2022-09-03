@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuthContext } from './auth'
 
 function WineColumn(props) {
     const [wineColumns,setWineColumns] = useState(
@@ -70,8 +71,54 @@ return (
 );
 }
 
+function WineList() {
+    const [wineColumns,setWineColumns] = useState(
+        [[], [], []]
+    )
+    const {id} = useParams()
+    
+    const { token } = useAuthContext();
+        console.log("printing token", token)
+        
+    async function fetchWines(token){
+        const url = `http://localhost:8000/api/wineries/${id}/wines/`;
 
-    // useEffect( () => {fetchWines()},[]) #unnecessary replaced it on line 32
+        try {
+        const response = await fetch(url,
+            { credentials: "include",});
+
+        if (response.ok) {
+            const data = await response.json();
+
+            const wineColumns = [[], [], []];
+            let list = []
+            for (let wine of data.wines){
+                list.push(wine)
+            }
+            console.log(list)
+
+            let i = 0;
+            for (const wine of list) {
+            if (wine) {
+                wineColumns[i].push(wine);
+                i = i + 1;
+                if (i > 2) {
+                i = 0;
+                }
+            } else {
+                console.error(wine);
+            }
+            }
+
+            console.log(wineColumns)
+            setWineColumns(wineColumns);
+        }
+        } catch (e) {
+        console.error(e);
+        }
+    }
+
+    useEffect( () => {fetchWines(token)},[])
 
 
 

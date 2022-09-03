@@ -1,5 +1,5 @@
 import React from 'react';
-import WineryLogo from './/images/Winery.png'
+import WineryLogo from './/images/Wine.jpg'
 import { Link } from 'react-router-dom';
 
 function WineColumn(props) {
