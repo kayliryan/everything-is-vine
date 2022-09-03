@@ -48,9 +48,7 @@ function GetWine() {
           index = i
       } 
     }
-
     if (item_exists) {
-      console.log("item found, need to update quantity")
       dispatch(updateQuantityFromDetailsPage({"index": index, "add_cust_quantity": quantity}))
     } else {
       dispatch(addCartItem(dataCopy))

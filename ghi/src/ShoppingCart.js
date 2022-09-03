@@ -14,7 +14,6 @@ function ShoppingCartTest(){
 
 
   async function deleteItem(e, index=index) {
-    console.log("delete_item", index)
     dispatch(deleteCartItem({"index": index}))
     }
 
