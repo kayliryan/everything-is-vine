@@ -34,7 +34,7 @@ build-front-end-job:
   image: node:lts-bullseye
   variables:
     PUBLIC_URL: https://beach-bums.gitlab.io/everything-is-vine
-    # REACT_APP_API_HOST: https://everything-is-vine.herokuapp.com/
+    
   script:
     - cd ghi
     - npm install
@@ -53,14 +53,14 @@ build-front-end-job:
 pages:
   stage: deploy
   variables:
-    GIT_STRATEGY: none
+    # GIT_STRATEGY: none
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
     # - if: $CI_COMMIT_BRANCH == "end-cd"
   dependencies:
     - build-front-end-job
   script:
-    - mv ghi/build public
+    - mv ghi/build/ public
   artifacts:
     paths:
       - public

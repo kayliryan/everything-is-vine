@@ -9,7 +9,7 @@ return (
         const wine = data;
         return (
         <div key={wine.id} className="card mb-3 shadow">
-            <img src={wine.picture_url} className="card-img-top" />
+            <img src={wine.picture_url} alt="" className="card-img-top" />
             <div className="card-body">
             <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
             <h6 className="d-flex justify-content-center card-subtitle mb-2 text-muted">
@@ -29,7 +29,7 @@ return (
 );
 }
 
-function WineList() {
+useEffect(() => {
     const [wineColumns,setWineColumns] = useState(
         [[], [], []]
     )
@@ -69,9 +69,11 @@ function WineList() {
         } catch (e) {
         console.error(e);
         }
-    }
+    }}, [])
 
-    useEffect( () => {fetchWines()},[])
+    // useEffect( () => {fetchWines()},[]) #unnecessary replaced it on line 32
+
+
 
 
     return (
