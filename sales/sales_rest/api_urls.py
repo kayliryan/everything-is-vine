@@ -6,6 +6,7 @@ from .api_views import (
     api_list_orders,
     api_show_order,
     api_list_shopping_items,
+    api_list_shopping_items_order,
 )
 
 
@@ -29,6 +30,10 @@ urlpatterns = [
     # list of shopping items from orders of specific winery
     path("wineries/<int:pk1>/shoppingitems/", 
     api_list_shopping_items , name="api_list_shopping_items"),
+
+    # list of shopping items from specific order 
+    path("wineries/<int:pk1>/shoppingitems/<int:pk2>/", 
+    api_list_shopping_items_order , name="api_list_shopping_items_order"),
     
 ]
 
