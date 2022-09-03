@@ -26,8 +26,8 @@ urlpatterns = [
     path("orders/<int:pk>/", 
     api_show_order , name="api_show_order"),
 
-    # list of shopping items
-    path("shoppingitems/", 
+    # list of shopping items from orders of specific winery
+    path("wineries/<int:pk1>/shoppingitems/", 
     api_list_shopping_items , name="api_list_shopping_items"),
     
 ]
