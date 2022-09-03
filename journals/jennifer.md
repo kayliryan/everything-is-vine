@@ -8,6 +8,19 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 ## JOURNAL ENTRIES
 
+## Friday, September 2, 2022
+Today, I worked on:
+
+* creating urls/views in the sales microservice to create orders once payment is completed
+and creating shopping items (cart items)
+
+Today Kayli and I split up work for our shopping cart.  While she continued to work
+on the front-end of React and the shopping cart, I worked on the back-end to be able
+to POST an order once payment is completed and POST the shopping item(s) once an order is
+made.  I realized that the view I made for GET listed all the shopping items.  I fixed the
+code to list all the shopping items from completed orders for a specific winery instead.
+Now that I have that fixed, I will work on the rest of the views.
+
 
 ## Thursday, September 1, 2022
 Today, Kayli and I continued working on:
