@@ -63,10 +63,12 @@ def api_winery(request, pk):
             return response
 
 # @auth.jwt_perm_required
+
+
 @auth.jwt_login_required
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
-    token_data = request.payload
+    # token_data = request.payload
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
 
