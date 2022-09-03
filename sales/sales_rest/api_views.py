@@ -1,4 +1,3 @@
-from re import S
 from django.http import JsonResponse
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
@@ -116,7 +115,6 @@ def api_list_orders(request):
 
 
 
-
 # Show detail of specific order
 @require_http_methods(["GET"])
 def api_show_order(request, pk):
@@ -140,6 +138,7 @@ def api_show_order(request, pk):
         )
 
 
+
 # Show list of shopping items from orders of specific winery
 @require_http_methods(["GET", "POST"])
 def api_list_shopping_items(request, pk1):
@@ -149,74 +148,27 @@ def api_list_shopping_items(request, pk1):
             {"shopping_items": shopping_items},
             encoder=ShoppingItemEncoder,
         )
-    # else:
-    #     # try:
+    else:
+        content = json.loads(request.body)
+        # print("*******CONTENT:", content)
 
+ 
+        order_id = content["order_id"]
+        # print("*******ORDER_ID:", order_id)
+        order = Order.objects.get(id=order_id)
+        # print("*******ORDER:", order)
+        content["order_id"] = order   
 
-    #     content = json.loads(request.body)
-    #     shopping_cart_items = content["shopping_items"]
-    #     print("*******CONTENT:", content)
-    #     print("*******SHOPPING_CART_ITEMS:", shopping_cart_items)
+        winery = content["item"]["winery_id"]
+        # print("*******WINERY:", winery)
+        winery_id = WineVO.objects.get(winery_id=winery)
+        # print("*******WINERY_ID:", winery)
+        content["item"] = winery_id     
 
-    #     # shopping_items = ShoppingItem.objects.create(**content)
+        shopping_items = ShoppingItem.objects.create(**content)
+        return JsonResponse(
+            shopping_items,
+            encoder=ShoppingItemEncoder,
+            safe=False,
+        )
 
-
-
-    #     # for index in range(len(shopping_cart_items)):
-    #     #     winery_id = shopping_cart_items[index]["item"]["winery_id"]
-    #     #     print("*******WINERY_ID:", winery_id)
-    #     #     winery = WineVO.objects.get(id=winery_id)
-    #     #     print("*******WINERY:", winery)
-    #     #     shopping_cart_items[index]["winery_id"] = winery
-
-    #     #     order_id = shopping_cart_items[index]["order_id"]
-    #     #     print("*******ORDER_ID:", order_id)
-    #     #     order = Order.objects.get(id=order_id)
-    #     #     print("*******ORDER:", order)
-
-    #     #     item_id = shopping_cart_items[index]["item"]["id"]
-    #     #     print("*******ITEM_ID:", item_id)
-    #     #     item = ShoppingItem.objects.get(id=item_id)
-    #     #     print("*******ITEM:", item)
-
-    #     #     shopping_items = ShoppingItem.objects.create(**shopping_cart_items[index]["item"])
-
-    #     #     return JsonResponse(
-    #     #         shopping_items,
-    #     #         encoder=ShoppingItemEncoder,
-    #     #         safe=False,
-    #     #     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # try:
-        #     content = json.loads(request.body)
-
-        #     sales_persons = SalesPerson.objects.create(**content)           
-        #     return JsonResponse(
-        #         sales_persons,
-        #         encoder=SalesPersonEncoder,
-        #         safe=False,
-        #     )
-        # except:
-        #     return JsonResponse(
-        #         {"message": "Could not create sales person"},
-        #         status=400,
-        #     )
