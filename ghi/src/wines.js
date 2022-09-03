@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 function WineColumn(props) {
+    const [wineColumns,setWineColumns] = useState(
+        [[], [], []]
+    )
+    const {id} = useParams()
     useEffect(() => {
-        const [wineColumns,setWineColumns] = useState(
-            [[], [], []]
-        )
-        const {id} = useParams()
     
         async function fetchWines(){
             const url = `http://localhost:8000/api/wineries/${id}/wines/`;
