@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {cartItems: []}
 export const cartSlice = createSlice({
@@ -6,19 +6,28 @@ export const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         addCartItem: (state, payload) => {
-            console.log("added item to cart")
-            // Need to add logic to check if item with same id exists in the cart
-            // if so, make a call to a future function updateQuantity
-            return {
-                ...state,
-                cartItems: [...state.cartItems, payload.payload]
+                return {
+                    ...state,
+                    cartItems: [...state.cartItems, payload.payload]
             }},
-        updateQuantity: (state, payload) => {
-            console.log("updating quantity")
+
+        updateQuantityFromDetailsPage: (state, payload) => {
+            console.log("updating quantity from details page")
+            let index = payload.payload.index
+            let add_cust_quantity = payload.payload.add_cust_quantity
             const newArray = JSON.parse(JSON.stringify(state))
-            newArray.cartItems[payload.payload.index]["cust_quantity"] = payload.payload.cust_quantity
+            newArray.cartItems[index]["cust_quantity"] += add_cust_quantity
+            console.log("quantity updated")
             return newArray
         },
+
+        updateQuantityFromShoppingCart: (state, payload) => {
+            const newArray = JSON.parse(JSON.stringify(state))
+            newArray.cartItems[payload.payload.index]["cust_quantity"] = payload.payload.cust_quantity
+            console.log("quantity updated")
+            return newArray
+        },
+
         deleteCartItem: (state, payload) => {
             console.log("deleting cart item")
             let index = payload.payload.index
@@ -26,39 +35,14 @@ export const cartSlice = createSlice({
             newArray.cartItems.splice(index, 1);
             return newArray
         },
+
         clearCart: () => initialState,
-        // default: () => {
-        //     return {
-        //         ...state,
-        //         // cartItems
-        //     }
-        // }
     }
 });
 
 // Action creators are generated for each case reducer function
-export const { addCartItem , deleteCartItem, clearCart, updateQuantity } = cartSlice.actions;
+export const { addCartItem , deleteCartItem, clearCart, updateQuantityFromDetailsPage, updateQuantityFromShoppingCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
-//         case 'cartItemDeleted': {
-//             const filteredCartItems = 
-//             state.cartItems.filter(cartItem => cartItem.id !== action.payload) 
-//                     return {
-//                         ...state,
-//                         cartItems: filteredCartItems
-//                     }
-//                 }
-                
-            
-//         case 'updateQuantity': {
-//             const index = state.cartItems.findIndex(cartItem => cartItem.id !== action.payload);
-//             const newArray = [...state.cartItems];
-//             //need to add but change below
-//             // newArray[quantity] = NEED TO GRAB THIS NUMBER
-//             return {
-//                 ...state, cartItems: newArray
-//             }
-//         }
-//         default:
-//             return state
+//To access state use current(state)

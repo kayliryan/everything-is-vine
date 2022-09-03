@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { salesApi } from './salesApi'
 import cartReducer from './cartReducer';
 import { combineReducers } from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistStore, persistReducer, REGISTER, REHYDRATE, PERSIST } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 const reducers = combineReducers({
@@ -22,7 +22,11 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat(salesApi.middleware),
-        serializableCheck: false,
+        serializableCheck: {
+            ignoredActions: [REGISTER, REHYDRATE, PERSIST],
+            ignoredActionPaths: [REGISTER, REHYDRATE, PERSIST],
+            ignoredPaths: [REGISTER, REHYDRATE, PERSIST],
+        },
 });
 
 export const persistor = persistStore(store)

@@ -1,3 +1,12 @@
+## September 2, 2022
+
+* Finishing Core Redux Functionality
+
+Today I worked on building out the rest of the reducers in Redux. I completed functionality for deleting a specific item from the shopping cart, clearing the cart when an order goes through, and updating the quantity of a wine that already exists in the shopping cart from its detail page (i.e. If one wine is already in the cart with a quantity of 5 and the user goes to the detail page again and adds one more bottle to the shopping cart it updates the cart quantity to 6)
+
+Today I learned that I feel much more comfortable with Redux Persist than I ever thought possible. I was able to handle more complex issues in a fraction of the time and I would feel confident implementing it in future work.
+
+
 ## September 1, 2022
 
 * Expanding Reducer Functionality

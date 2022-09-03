@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, updateQuantity, clearCart } from './store/cartReducer';
+import { deleteCartItem, clearCart, updateQuantityFromShoppingCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
 
 
@@ -42,7 +42,7 @@ function ShoppingCartTest(){
     } 
     else {
     let data = {"cust_quantity": cust_quantity, "index": index_state}
-    dispatch(updateQuantity(data)) 
+    dispatch(updateQuantityFromShoppingCart(data)) 
     }
   }, [cust_quantity, index_state]);
 
@@ -66,7 +66,7 @@ function ShoppingCartTest(){
               <tbody className="table-group-divider">
                       {cartItems.map((cartItem, index) => {
                       return (
-                          <tr key={ cartItem.index }>
+                          <tr key={ cartItem.id }>
                             <td><img
                           className="mx-auto img-thumbnail"
                           src={ cartItem.picture_url }/></td>
