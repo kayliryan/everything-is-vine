@@ -21,6 +21,11 @@ made.  I realized that the view I made for GET listed all the shopping items.  I
 code to list all the shopping items from completed orders for a specific winery instead.
 Now that I have that fixed, I will work on the rest of the views.
 
+* UPDATE
+
+I was able to create the view to POST shopping items from an order for a specific winery.
+I will continue with the back end in the morning.
+
 
 ## Thursday, September 1, 2022
 Today, Kayli and I continued working on:
