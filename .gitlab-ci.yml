@@ -96,10 +96,8 @@ heroku-transfer:
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-
-    - docker pull $CI_REGISTRY_IMAGE/api:latest
-    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker tag $CI_REGISTRY_IMAGE/api:latest registry.heroku.com/$HEROKU_EIV/web:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/api:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_EIV/web:latest
     - docker push registry.heroku.com/$HEROKU_EIV/web:latest
 
 ## RELEASE ##
