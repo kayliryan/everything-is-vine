@@ -6,6 +6,8 @@ COPY manage.py manage.py
 
 COPY common common
 COPY inventory inventory
+COPY accounts accounts
+COPY winery_project winery_project
 
 RUN python -m pip install -r requirements.txt
 CMD python manage.py migrate && gunicorn winery_project.wsgi --bind 0.0.0.0:$PORT --log-file -

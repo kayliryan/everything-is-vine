@@ -5,7 +5,10 @@ COPY requirements.txt requirements.txt
 COPY manage.py manage.py
 
 COPY common common
-COPY sales sales
+COPY poll poll
+COPY sales_rest sales_rest
+COPY sales_project sales_project
+
 
 RUN python -m pip install -r requirements.txt
 CMD python manage.py migrate && gunicorn winery_project.wsgi --bind 0.0.0.0:$PORT --log-file -

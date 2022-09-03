@@ -73,7 +73,7 @@ service-build-job:
   services:
     - docker:20.10.16-dind
   script:
-    - cd winery_project
+    - cd winery
     - docker build -t ${CI_REGISTRY_IMAGE}/api:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/api:latest ${CI_REGISTRY_IMAGE}/app:$CI_PIPELINE_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
@@ -98,7 +98,7 @@ heroku-transfer:
     - docker pull $CI_REGISTRY_IMAGE/api:latest
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker tag $CI_REGISTRY_IMAGE/api:latest registry.heroku.com/$HEROKU_STAGING_APP/web:latest
-    - docker push registry.heroku.com/$HEROKU_STAGING_APP/web:latest
+    - docker push registry.heroku.com/$SALES_POLLER/web:latest
 
 ## RELEASE ##
 heroku-release:
@@ -117,7 +117,7 @@ heroku-release:
 
 build-sales-poller:
   rules:
-  # only runs if pushing to the main branch
+ 
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: build
   image: docker:20.10.16
@@ -125,7 +125,7 @@ build-sales-poller:
     - docker:20.10.16-dind
   script:
     - cd sales
-    - docker build -f Dockerfile.poller -t ${CI_REGISTRY_IMAGE}/poller:latest .
+    - docker build Dockerfile.poller -t ${CI_REGISTRY_IMAGE}/poller:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/poller:latest ${CI_REGISTRY_IMAGE}/poller:$CI_JOB_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/poller:$CI_JOB_ID
