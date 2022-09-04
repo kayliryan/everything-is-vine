@@ -98,7 +98,7 @@ def api_show_wine(request, pk1, pk2):
 
 
 # Show list of orders
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def api_list_orders(request):
     if request.method == "GET":
         orders = Order.objects.all()
@@ -107,10 +107,21 @@ def api_list_orders(request):
             encoder=OrderEncoder,
             )
     else:
-        return JsonResponse(
-            {"message": "ERROR"},
-            status = 400,
-        )
+        try:
+            content = json.loads(request.body)
+
+            orders = Order.objects.create(**content)
+            return JsonResponse(
+                orders,
+                encoder=OrderEncoder,
+                safe=False,
+            )
+        except:
+            return JsonResponse(
+                {"message": "Order unsuccessful"},
+                status=400, 
+            )
+
     
 
 
