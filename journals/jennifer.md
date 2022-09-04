@@ -8,6 +8,20 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 ## JOURNAL ENTRIES
 
+
+## Saturday, September 3, 2022
+Today, I continued working on:
+
+* creating urls/views in the sales microservice to create orders once payment is completed 
+and creating shopping items (cart items)
+
+This morning I updated the url/views to be able to retrieve all shopping items from specific 
+order and winery to display the details.  Tonight I added a POST in the order view to create
+an order.  I still need to create a function that checks if payment is confirmed before the
+order is placed, as well as code to generate a unique confirmation number when the order is
+placed.
+
+
 ## Friday, September 2, 2022
 Today, I worked on:
 
