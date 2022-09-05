@@ -16,7 +16,14 @@ variables:
   POSTGRES_PASSWORD: test-databases
   WAIT_HOSTS: postgres:5432
 
-#adding line to test git
+unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd api
+    - pip install -r requirements.txt
+    - python -m pytest  # Run unit tests
+
 # # TEST ###############
 lint-job:
   image: python:3-bullseye
