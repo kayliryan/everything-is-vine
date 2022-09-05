@@ -16,13 +16,21 @@ variables:
   POSTGRES_PASSWORD: test-databases
   WAIT_HOSTS: postgres:5432
 
-unit-test-job:
+sales-unit-test-job:
   image: python:3-bullseye
   stage: test
   script:
-    - cd api
+    - cd sales
     - pip install -r requirements.txt
     - python -m pytest  # Run unit tests
+
+inventory-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd inventory
+    - pip install -r requirements.txt
+    - python -m pytest
 
 # # TEST ###############
 lint-job:
