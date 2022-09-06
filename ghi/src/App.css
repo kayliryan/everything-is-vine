@@ -6,7 +6,7 @@
 }
 
 html {
-  background-color: #247955;
+  background-color: white;
 }
 
 body {
@@ -131,7 +131,7 @@ input[type=text] {
   font-size: 16px;
   margin: 5px;
   margin-top: 25px;
-  width: 85%;
+  width: 100%;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;

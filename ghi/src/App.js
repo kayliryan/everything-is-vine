@@ -8,6 +8,7 @@ import SignUp from './signup';
 import WineryList from './dashboard';
 import { AuthProvider } from './auth';
 import ShoppingCartTest from './ShoppingCart';
+import Checkout from './Checkout';
 
 
 function App(props) {
@@ -26,6 +27,7 @@ function App(props) {
             <Route path="wineries/:id/login/" element={<Login />} />
             <Route path="wineries/:id/signup/" element={<SignUp />} />
             <Route path="wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} />
+            <Route path="wineries/:id/shoppingcarttest/checkout" element={<Checkout />} />
 
           </Routes>
         </div>
