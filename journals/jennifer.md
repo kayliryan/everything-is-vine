@@ -9,6 +9,15 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 ## JOURNAL ENTRIES
 
 
+## Monday, September 5, 2022
+Today, I continued working on:
+
+* creating urls/views in the sales microservice to create orders once payment is completed 
+and creating shopping items (cart items)
+
+Need to fix POST for Shopping Items view, not working.
+
+
 ## Saturday, September 3, 2022
 Today, I continued working on:
 
