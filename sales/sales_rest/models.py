@@ -15,13 +15,13 @@ class WineVO(models.Model):
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
     varietal = models.CharField(max_length=110)
-    description = models.TextField(null=True)
-    region = models.CharField(max_length=110, null=True)
+    description = models.TextField(null=True, blank=True)
+    region = models.CharField(max_length=110, null=True, blank=True)
     abv = models.FloatField()
     volume = models.SmallIntegerField()
-    city_state = models.CharField(max_length=110, null=True)
+    city_state = models.CharField(max_length=110, null=True, blank=True)
     price = models.FloatField()
-    picture_url = models.URLField(max_length=220, null=True)
+    picture_url = models.URLField(max_length=220, null=True, blank=True)
     quantity = models.SmallIntegerField()
     import_href = models.CharField(max_length=200, unique=True)
     # winery_id = models.ForeignKey(
@@ -56,7 +56,7 @@ class ShoppingItem(models.Model):
         related_name="shopping_items",
         on_delete=models.PROTECT
     )
-    quantity = models.SmallIntegerField()
-    price = models.FloatField()
+    # quantity = models.SmallIntegerField()
+    # price = models.FloatField()
 
     
