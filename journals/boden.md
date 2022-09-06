@@ -33,4 +33,7 @@ Today was a long day working on react front end.  I was able to successfully sty
 09/01/22:
 Today was productive.  I was able to add the login,logout,signup buttons to the nav.  I verified that they all worked correctly and then added the functionality to grab the jwt, set logged in state as true or false, and display/hide those nav buttons appropriately depending on logged in state. 
 
+09/02/22:
+Today I created the contact page.  I started by using a free map API to grab coordinates depending on an input address and used that to populate a map in react.  I also setup the functionality for sending an email to the winery.  There was an issue where the map api was taking too long and react was loading without it but i found a way to update the map state once the api call came in.  The rest of the time was spent using CSS, CSS grid, and styling the page.  
+
 
