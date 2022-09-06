@@ -159,6 +159,47 @@ def api_list_shopping_items(request, pk1):
             {"shopping_items": shopping_items},
             encoder=ShoppingItemEncoder,
         )
+    else:
+        content = json.loads(request.body)
+        # print("*******CONTENT:", content)
+
+ 
+        order_id = content["order_id"]
+        # print("*******ORDER_ID:", order_id)
+        order = Order.objects.get(id=order_id)
+        # print("*******ORDER:", order)
+        content["order_id"] = order   
+
+        winery = content["item"]["winery_id"]
+        # print("*******WINERY:", winery)
+        wine = content["item"]["id"]
+        wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
+        # print("*******WINERY_ID:", winery)
+        content["item"] = wine_id     
+
+        shopping_items = ShoppingItem.objects.create(**content)
+        return JsonResponse(
+            shopping_items,
+            encoder=ShoppingItemEncoder,
+            safe=False,
+        )
+
+
+# POST format:
+# {
+#     "order_id": 2,
+#     "item": {
+#         "id": 1,
+#         "winery_id": 1
+#     }
+# }
+
+
+
+
+
+
+
     # else:
 
     #     content = json.loads(request.body)
@@ -193,38 +234,8 @@ def api_list_shopping_items(request, pk1):
     #         shopping_items,
     #         encoder=ShoppingItemEncoder,
     #         safe=False,
-        )
-
-
-
-
-
-
-
-
-    # else:
-    #     content = json.loads(request.body)
-    #     # print("*******CONTENT:", content)
-
- 
-    #     order_id = content["order_id"]
-    #     # print("*******ORDER_ID:", order_id)
-    #     order = Order.objects.get(id=order_id)
-    #     # print("*******ORDER:", order)
-    #     content["order_id"] = order   
-
-    #     winery = content["item"]["winery_id"]
-    #     # print("*******WINERY:", winery)
-    #     winery_id = WineVO.objects.get(winery_id=winery)
-    #     # print("*******WINERY_ID:", winery)
-    #     content["item"] = winery_id     
-
-    #     shopping_items = ShoppingItem.objects.create(**content)
-    #     return JsonResponse(
-    #         shopping_items,
-    #         encoder=ShoppingItemEncoder,
-    #         safe=False,
     #     )
+
 
 
 
