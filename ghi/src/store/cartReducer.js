@@ -1,80 +1,45 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
+
+const initialState = {cartItems: []}
 
 export const cartSlice = createSlice({
     name: "cart",
-    initialState: {
-        cartItems: []
-    },
+    initialState: initialState,
     reducers: {
         addCartItem: (state, payload) => {
-            // Need to add logic to check if item with same id exists in the cart
-            // if so, make a call to a future function updateQuantity
-            return {
-            ...state,
-            cartItems: [...state.cartItems, payload.payload]
-        }},
-        clearCart: (state) => {
-                state.cartItems = []
+                return {
+                    ...state,
+                    cartItems: [...state.cartItems, payload.payload]
+            }},
+
+        updateQuantityFromDetailsPage: (state, payload) => {
+            let index = payload.payload.index
+            let add_cust_quantity = payload.payload.add_cust_quantity
+            const newArray = JSON.parse(JSON.stringify(state))
+            newArray.cartItems[index]["cust_quantity"] += add_cust_quantity
+            return newArray
         },
-        updateQuantity: (state, payload) => {
-                // Return a new object
-                // console.log("state", state)
-                // console.log(payload.payload)
-                // const index = state.cartItems.findIndex(cartItem => cartItem.id !== action.payload);
-                const newArray = JSON.parse(JSON.stringify(state))
-                console.log(payload.payload)
-                console.log("***", newArray.cartItems[payload.payload.index].cust_quantity)
-                // console.log(newArray.cartItems[index])
-                newArray.cartItems[payload.payload.index].cust_quantity = payload.payload.cust_quantity
-                console.log(newArray)
-                // return {
-                //     ...state,
-                //     cartItems: newArray
-                // }
-                // return {
-                //   ...state,  // copy the existing item
-                //   cartItems: [...state.cartItems[index].cust_quantity = payload.payload]  // replace the email addr
-                // }
-            
-              // Leave every other item unchanged
-            // return state;
+
+        updateQuantityFromShoppingCart: (state, payload) => {
+            const newArray = JSON.parse(JSON.stringify(state))
+            newArray.cartItems[payload.payload.index]["cust_quantity"] = payload.payload.cust_quantity
+            return newArray
         },
-        
-        // deleteCartItem: (state) => {
-        //     const filteredCartItems = 
-        //     state.cartItems.filter(cartItem => cartItem.id !== action.payload) 
-        //     return {
-        //         ...state,
-        //         cartItems: filteredCartItems
-        //     }
-        // }
+
+        deleteCartItem: (state, payload) => {
+            let index = payload.payload.index
+            const newArray = JSON.parse(JSON.stringify(state))
+            newArray.cartItems.splice(index, 1);
+            return newArray
+        },
+
+        clearCart: () => initialState,
     }
 });
 
 // Action creators are generated for each case reducer function
-export const { addCartItem , deleteCartItem, clearCart, updateQuantity } = cartSlice.actions;
+export const { addCartItem , deleteCartItem, clearCart, updateQuantityFromDetailsPage, updateQuantityFromShoppingCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
 
-//         case 'cartItemDeleted': {
-//             const filteredCartItems = 
-//             state.cartItems.filter(cartItem => cartItem.id !== action.payload) 
-//                     return {
-//                         ...state,
-//                         cartItems: filteredCartItems
-//                     }
-//                 }
-                
-            
-//         case 'updateQuantity': {
-//             const index = state.cartItems.findIndex(cartItem => cartItem.id !== action.payload);
-//             const newArray = [...state.cartItems];
-//             //need to add but change below
-//             // newArray[quantity] = NEED TO GRAB THIS NUMBER
-//             return {
-//                 ...state, cartItems: newArray
-//             }
-//         }
-//         default:
-//             return state
-
+//To access state use current(state)
