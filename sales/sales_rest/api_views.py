@@ -159,30 +159,32 @@ def api_list_shopping_items(request, pk1):
             {"shopping_items": shopping_items},
             encoder=ShoppingItemEncoder,
         )
-    else:
-        content = json.loads(request.body)
-        # print("*******CONTENT:", content)
+    # else:
+    #     content = json.loads(request.body)
+    #     # print("*******CONTENT:", content)
 
  
-        order_id = content["order_id"]
-        # print("*******ORDER_ID:", order_id)
-        order = Order.objects.get(id=order_id)
-        # print("*******ORDER:", order)
-        content["order_id"] = order   
+    #     order_id = content["order_id"]
+    #     # print("*******ORDER_ID:", order_id)
+    #     order = Order.objects.get(id=order_id)
+    #     # print("*******ORDER:", order)
+    #     content["order_id"] = order   
 
-        winery = content["item"]["winery_id"]
-        # print("*******WINERY:", winery)
-        wine = content["item"]["id"]
-        wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
-        # print("*******WINERY_ID:", winery)
-        content["item"] = wine_id     
+    #     winery = content["item"]["winery_id"]
+    #     # print("*******WINERY:", winery)
+    #     wine = content["item"]["id"]
+    #     wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
+    #     # print("*******WINERY_ID:", winery)
+    #     content["item"] = wine_id     
 
-        shopping_items = ShoppingItem.objects.create(**content)
-        return JsonResponse(
-            shopping_items,
-            encoder=ShoppingItemEncoder,
-            safe=False,
-        )
+    #     shopping_items = ShoppingItem.objects.create(**content)
+    #     return JsonResponse(
+    #         shopping_items,
+    #         encoder=ShoppingItemEncoder,
+    #         safe=False,
+    #     )
+
+
 
 
 # POST format:
@@ -200,41 +202,81 @@ def api_list_shopping_items(request, pk1):
 
 
 
-    # else:
+    else:
 
-    #     content = json.loads(request.body)
-    #     shopping_cart_items = content["shopping_items"]
-    #     print("*******CONTENT:", content)
-    #     print("*******SHOPPING_CART_ITEMS:", shopping_cart_items)
+        content = json.loads(request.body)
+        shopping_cart_items = content["shopping_items"]
+        print("*******CONTENT:", content)
+        print("*******SHOPPING_CART_ITEMS:", shopping_cart_items)
 
-    #     # shopping_items = ShoppingItem.objects.create(**content)
+        # shopping_items = ShoppingItem.objects.create(**content)
 
 
 
-    #     for index in range(len(shopping_cart_items)):
-    #         order_id = shopping_cart_items[int(index)]["order_id"]
-    #         print("*******ORDER_ID:", order_id)
-    #         order = Order.objects.get(id=order_id)
-    #         print("*******ORDER:", order)
+        for index in range(len(shopping_cart_items)):
+            order_id = shopping_cart_items[int(index)]["order_id"]
+            print("*******ORDER_ID:", order_id)
+            order = Order.objects.get(id=order_id)
+            print("*******ORDER:", order)
+            shopping_cart_items[index]["order_id"] = order
 
-    #         winery_id = shopping_cart_items[int(index)]["item"]["winery_id"]
-    #         print("*******WINERY_ID:", winery_id)
-    #         winery = WineVO.objects.get(id=winery_id)
-    #         print("*******WINERY:", winery)
-    #         shopping_cart_items[index]["winery_id"] = winery
+            winery = shopping_cart_items[int(index)]["item"]["winery_id"]
+            print("*******WINERY_ID:", winery)
+            wine = shopping_cart_items[int(index)]["item"]["id"]
+            print("*******WINERY:", wine)
+            wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
+            shopping_cart_items[int(index)]["item"] = wine_id
 
-    #         item_id = shopping_cart_items[int(index)]["item"]["id"]
-    #         print("*******ITEM_ID:", item_id)
-    #         item = ShoppingItem.objects.get(id=item_id)
-    #         print("*******ITEM:", item)
 
-    #         shopping_items = ShoppingItem.objects.create(**shopping_cart_items[int(index)]["item"])
+            shopping_items = ShoppingItem.objects.create(**shopping_cart_items[int(index)])
 
-    #     return JsonResponse(
-    #         shopping_items,
-    #         encoder=ShoppingItemEncoder,
-    #         safe=False,
-    #     )
+        return JsonResponse(
+            shopping_items,
+            encoder=ShoppingItemEncoder,
+            safe=False,
+        )   
+
+
+# POST FORMAT
+# {
+# 	"shopping_items": [
+# 		{
+# 			"order_id": 1,
+# 			"item": {
+# 				"id": 1,
+# 				"winery_id": 1,
+# 				"brand": "BRAND 1",
+# 				"year": 1999,
+# 				"varietal": "VARIETAL 1",
+# 				"description": "DESCRIPTION 1",
+# 				"region": "REGION 1",
+# 				"abv": 8.0,
+# 				"volume": 748,
+# 				"city_state": "CITY STATE 1",
+# 				"price": 98.0,
+# 				"quantity": 198
+# 			}
+# 		},
+# 		{
+# 			"order_id": 1,
+# 			"item": {
+# 				"id": 2,
+# 				"winery_id": 1,
+# 				"brand": "BRAND 2",
+# 				"year": 2000,
+# 				"varietal": "VARIETAL 2",
+# 				"description": "DESCRIPTION 2",
+# 				"region": "REGION 2",
+# 				"abv": 12.0,
+# 				"volume": 750,
+# 				"city_state": "CITY STATE 2",
+# 				"price": 80.0,
+# 				"quantity": 400
+# 			}
+# 		}
+# 	]
+# }
+
 
 
 
