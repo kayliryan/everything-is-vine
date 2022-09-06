@@ -1,8 +1,10 @@
+from venv import create
 from django.http import JsonResponse
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
 from sales_rest.models import WineVO, Order, ShoppingItem
 import json
+import random
 
 
 # class WineryVOEncoder(ModelEncoder):
@@ -97,6 +99,14 @@ def api_show_wine(request, pk1, pk2):
 
 
 
+
+def create_confirmation_number():
+  a = 10000000000000000
+  b = 99999999999999999
+  num = str(round(random.uniform(a, b)))
+  return num
+
+
 # Show list of orders
 @require_http_methods(["GET", "POST"])
 def api_list_orders(request):
@@ -109,6 +119,7 @@ def api_list_orders(request):
     else:
         try:
             content = json.loads(request.body)
+            content["confirmation_number"] = create_confirmation_number()
 
             orders = Order.objects.create(**content)
             return JsonResponse(
@@ -159,58 +170,12 @@ def api_list_shopping_items(request, pk1):
             {"shopping_items": shopping_items},
             encoder=ShoppingItemEncoder,
         )
-    # else:
-    #     content = json.loads(request.body)
-    #     # print("*******CONTENT:", content)
-
- 
-    #     order_id = content["order_id"]
-    #     # print("*******ORDER_ID:", order_id)
-    #     order = Order.objects.get(id=order_id)
-    #     # print("*******ORDER:", order)
-    #     content["order_id"] = order   
-
-    #     winery = content["item"]["winery_id"]
-    #     # print("*******WINERY:", winery)
-    #     wine = content["item"]["id"]
-    #     wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
-    #     # print("*******WINERY_ID:", winery)
-    #     content["item"] = wine_id     
-
-    #     shopping_items = ShoppingItem.objects.create(**content)
-    #     return JsonResponse(
-    #         shopping_items,
-    #         encoder=ShoppingItemEncoder,
-    #         safe=False,
-    #     )
-
-
-
-
-# POST format:
-# {
-#     "order_id": 2,
-#     "item": {
-#         "id": 1,
-#         "winery_id": 1
-#     }
-# }
-
-
-
-
-
-
-
     else:
 
         content = json.loads(request.body)
         shopping_cart_items = content["shopping_items"]
         print("*******CONTENT:", content)
         print("*******SHOPPING_CART_ITEMS:", shopping_cart_items)
-
-        # shopping_items = ShoppingItem.objects.create(**content)
-
 
 
         for index in range(len(shopping_cart_items)):
@@ -237,41 +202,21 @@ def api_list_shopping_items(request, pk1):
         )   
 
 
-# POST FORMAT
+# POST FORMAT:
 # {
 # 	"shopping_items": [
 # 		{
-# 			"order_id": 1,
+# 			"order_id": 2,
 # 			"item": {
 # 				"id": 1,
-# 				"winery_id": 1,
-# 				"brand": "BRAND 1",
-# 				"year": 1999,
-# 				"varietal": "VARIETAL 1",
-# 				"description": "DESCRIPTION 1",
-# 				"region": "REGION 1",
-# 				"abv": 8.0,
-# 				"volume": 748,
-# 				"city_state": "CITY STATE 1",
-# 				"price": 98.0,
-# 				"quantity": 198
+# 				"winery_id": 1
 # 			}
 # 		},
 # 		{
-# 			"order_id": 1,
+# 			"order_id": 2,
 # 			"item": {
 # 				"id": 2,
-# 				"winery_id": 1,
-# 				"brand": "BRAND 2",
-# 				"year": 2000,
-# 				"varietal": "VARIETAL 2",
-# 				"description": "DESCRIPTION 2",
-# 				"region": "REGION 2",
-# 				"abv": 12.0,
-# 				"volume": 750,
-# 				"city_state": "CITY STATE 2",
-# 				"price": 80.0,
-# 				"quantity": 400
+# 				"winery_id": 1
 # 			}
 # 		}
 # 	]
