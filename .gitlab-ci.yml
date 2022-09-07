@@ -103,7 +103,7 @@ build-sales-api-image-job:  # RENAME THIS
 
 
 
-deploy-accounts-api-image-job:  # RENAME THIS
+deploy-winery-api-image-job:  # RENAME THIS
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: deploy
