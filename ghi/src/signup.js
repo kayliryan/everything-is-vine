@@ -2,7 +2,7 @@ import './App.css';
 import React,{useState} from 'react';
 import { useToken } from './auth';
 import { useParams } from 'react-router-dom';
-import './Login.css';
+import './auth.css';
 
 
 function Signup() {
