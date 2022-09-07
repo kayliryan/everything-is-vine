@@ -151,11 +151,13 @@ function ShoppingCartTest(){
                         <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id={index} name="quantity" className="form-control" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /> </td>
                         <td>
                           <div className="price-wrap">
+                            <br />
                             <var className="price">${cartItem.cust_quantity * cartItem.price}</var>
                             <small className="text-muted"> ${cartItem.price} each </small>
                           </div>
                         </td>
                         <td className="text-right">
+                          <br />
                           <a onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Remove</a>
                         </td>
                       </tr>
@@ -206,17 +208,20 @@ function ShoppingCartTest(){
               </div>
 
 
-            {cartItems.map((cartItem, index) => { return(
               <div className="card">
                 <div className="card-body">
                   <dl className="dlist-align">
                     <dt>Subtotal:</dt>
-                    <dd className="text-right">USD $ {cartItem.cust_quantity * cartItem.price}</dd>
+                      {cartItems.map((cartItem) => { return(
+                      <dd className="text-right">USD $ {cartItem.cust_quantity * cartItem.price}</dd>
+                      )})}
                   </dl>
                   <dl className="dlist-align">
                     <dt>Discount:</dt>
                     {/* use turnary operator to display discount if member */}
+                    {cartItems.map((cartItem) => { return(
                     <dd className="text-right">USD ${cartItem.cust_quantity * cartItem.price * .10}</dd>
+                    )})}
                   </dl>
                   <dl className="dlist-align">
                     <dt>Total:</dt>
@@ -230,7 +235,6 @@ function ShoppingCartTest(){
                   </p>
                 </div>
               </div>
-            )})}
 
 
 
