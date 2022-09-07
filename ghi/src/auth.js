@@ -76,13 +76,13 @@ export function useToken() {
         }
     }, [setToken, token]);
 
-    async function logout() {
+    async function logout(id) {
         if (token) {
         const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/token/refresh/logout/`;
         await fetch(url, { method: "delete", credentials: "include" });
         internalToken = null;
         setToken(null);
-        navigate("/");
+        navigate(`/wineries/${id}/`);
         }
     }
 
@@ -99,7 +99,7 @@ export function useToken() {
         if (response.ok) {
         const token = await getTokenInternal();
         setToken(token);
-        navigate(`/wineries/${id}/wines`)
+        navigate(`/wineries/${id}/`)
         return;
         }
         let error = await response.json();
