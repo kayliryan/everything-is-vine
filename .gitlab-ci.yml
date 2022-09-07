@@ -9,7 +9,7 @@ winery-unit-test-job:
   script: 
     - cd winery
     - pip install -r requirements.txt
-    - python -m pytest
+    - python -manage.py pytest
   allow_failure: true
 
 sales-unit-test-job:
@@ -18,7 +18,7 @@ sales-unit-test-job:
   script: 
     - cd sales
     - pip install -r requirements.txt
-    - python -m pytest
+    - python -manage.py pytest
   allow_failure: true
   
 
