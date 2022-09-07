@@ -9,7 +9,7 @@ winery-unit-test-job:
   script: 
     - cd winery
     - pip install -r requirements.txt
-    - python -manage.py pytest
+    - python -m pytest
   
 
 sales-unit-test-job:
@@ -18,7 +18,7 @@ sales-unit-test-job:
   script: 
     - cd sales
     - pip install -r requirements.txt
-    - python -manage.py pytest
+    - python -m pytest
   
   
 
