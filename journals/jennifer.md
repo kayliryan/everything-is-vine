@@ -9,6 +9,25 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 ## JOURNAL ENTRIES
 
 
+## Tuesday, September 6, 2022
+Today, I continued working on:
+
+* creating urls/views in the sales microservice to create orders once payment is completed 
+and creating shopping items (cart items) & working on the Shopping Cart CSS for React
+
+Today I was able to finish the api view to POST for Shopping Items in a cart.  I clarified
+with Kayli regarding the POST and PUT functions for Shopping Items and Order.  We decided to
+handle payment validation on the front-end.  On the back-end, I updated the POST for Order to
+add a function that would create a confirmation number when a valid/payed order is submitted.
+
+After I finished that, I worked on some CSS for the Shopping Cart front end.  This was nice
+because I haven't really had a chance to use too much CSS and need more practice.  I found out
+today I could override Bootstraps settings for button color by using !important after the 
+chosen color.  Using the inspect elements, made it a little easier to seart for the necessary
+element/tag selectors to modify.  Tomorrow, I will implement some more dynamic rendering to the
+page.
+
+
 ## Monday, September 5, 2022
 Today, I continued working on:
 
