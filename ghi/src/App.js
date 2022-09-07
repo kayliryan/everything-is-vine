@@ -9,10 +9,12 @@ import WineryList from './dashboard';
 import { AuthProvider } from './auth';
 import ShoppingCartTest from './ShoppingCart';
 import Checkout from './Checkout';
+import { MainContext } from './mainContext';
 
 
 function App(props) {
 
+  
   return (
 
     <AuthProvider>
