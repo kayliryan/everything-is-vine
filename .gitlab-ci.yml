@@ -3,7 +3,7 @@ stages:
   - build
   - deploy
 
-accounts-unit-test-job:
+winery-unit-test-job:
   image: python:3-bullseye
   stage: test
   script: 
@@ -12,7 +12,7 @@ accounts-unit-test-job:
     - python -m pytest
   allow_failure: true
 
-payments-unit-test-job:
+sales-unit-test-job:
   image: python:3-bullseye
   stage: test
   script: 
