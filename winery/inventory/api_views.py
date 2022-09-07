@@ -3,7 +3,8 @@ from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
 from .models import Winery, Wine
-import djwto.authentication as auth
+from .acls import get_geo
+# import djwto.authentication as auth
 
 class WineryEncoder(ModelEncoder):
     model = Winery
@@ -41,6 +42,7 @@ class WineListEncoder(ModelEncoder):
 def api_list_winery(request):
     if request.method == "GET":
         wineries = Winery.objects.all()
+        wineries = list(wineries)
 
         return JsonResponse(
             {"wineries": wineries},
@@ -52,8 +54,11 @@ def api_winery(request, pk):
     if request.method == "GET":
         try:
             winery = Winery.objects.get(id=pk)
+
+            geo = get_geo(winery.address)
+
             return JsonResponse(
-                winery,
+                {"winery":winery, "geo":geo},
                 encoder=WineryEncoder,
                 safe=False
             )
@@ -62,13 +67,15 @@ def api_winery(request, pk):
             response.status_code = 404
             return response
 
-# @auth.jwt_perm_required
-@auth.jwt_login_required
+
+# @auth.jwt_login_required 
+# #removed so that jwt status no longer matters.
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
-    token_data = request.payload
+    # token_data = request.payload
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
+        wines = list(wines)
 
         return JsonResponse(
             {"wines": wines},
@@ -124,14 +131,3 @@ def api_list_all_wines(request):
             encoder=WineListEncoder,
             safe=False,
         )
-
-
-# @require_http_methods(["GET"])
-# def api_list_wines_by_winery(request, winery_id):
-#     if request.method == "GET":
-#         appointments = Wine.objects.filter(vin=vin)
-#         print(appointments)
-#         return JsonResponse(
-#             {"appointments": appointments},
-#             encoder=ServiceAppointmentListEncoder,
-#         )
