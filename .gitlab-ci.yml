@@ -10,7 +10,7 @@ winery-unit-test-job:
     - cd winery
     - pip install -r requirements.txt
     - python -manage.py pytest
-  allow_failure: true
+  
 
 sales-unit-test-job:
   image: python:3-bullseye
@@ -19,7 +19,7 @@ sales-unit-test-job:
     - cd sales
     - pip install -r requirements.txt
     - python -manage.py pytest
-  allow_failure: true
+  
   
 
 
@@ -29,7 +29,7 @@ lint-job:
   script:
     - pip install flake8
     - flake8 winery sales
-  allow_failure: true
+  
 
 build-front-end-job:
   stage: build
