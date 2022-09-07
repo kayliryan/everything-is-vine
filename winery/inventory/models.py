@@ -18,7 +18,8 @@ class Winery(models.Model):
         return self.name + "," + self.owner
 
     class Meta:
-        ordering = ("name",) 
+        ordering = ("name",)
+
 
 class Wine(models.Model):
     winery = models.ForeignKey(
@@ -43,4 +44,4 @@ class Wine(models.Model):
         return self.brand + ", " + str(self.year) + " " + self.varietal
     
     class Meta:
-        ordering = ("year",) 
+        ordering = ("year",)

@@ -14,13 +14,13 @@ class TestWinesViews(TestCase):
             price=40,
             quantity=3,
         )
-        
+
     def test_list_wines(self):
         client = Client()
         response = client.get(reverse("api_list_all_wines"))
         self.assertEquals(response.status_code, 200)
-        
-        
+
+
 class TestWineriesViews(TestCase):
     def setUp(self):
         Winery.objects.create(
@@ -28,7 +28,7 @@ class TestWineriesViews(TestCase):
             address="test_address",
             description="test_description",
         )
-        
+
     def test_list_wineries(self):
         client = Client()
         response = client.get(reverse("api_list_wineries"))

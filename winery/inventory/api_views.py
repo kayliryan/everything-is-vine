@@ -62,7 +62,7 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery":winery, "geo":geo},
+                {"winery": winery, "geo": geo},
                 encoder=WineryEncoder,
                 safe=False
             )
@@ -72,7 +72,7 @@ def api_winery(request, pk):
             return response
 
 
-# @auth.jwt_login_required 
+# @auth.jwt_login_required
 # #removed so that jwt status no longer matters.
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
