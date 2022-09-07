@@ -60,8 +60,8 @@ pages:  # THIS STEP MUST BE NAME PAGES
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   dependencies:
     - build-front-end-job
-  # needs:
-  #   - build-front-end-job
+  needs:
+    - build-front-end-job
   script:
      # THE FIRST PART OF THIS COMMAND MUST BE THE DIRECTORY
      # THAT YOU cd INTO TO BUILD IT PLUS THE build/ AT THE
@@ -76,6 +76,8 @@ build-winery-api-image-job:  # RENAME THIS
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: build
   image: docker:20.10.16
+  needs:
+    - build-front-end-image-job 
   services:
     - docker:20.10.16-dind
   script:
