@@ -34,7 +34,7 @@ class TestWineriesViews(TestCase):
         self.assertEquals(response.status_code, 200)
 
 class TestWineSlug(TestCase):
-    def test_wine_slug_on_save(self):
+    def test_wine_title_on_save(self):
         wine = Wine()
         wine.brand = "test brand"
         wine.year = 2014
