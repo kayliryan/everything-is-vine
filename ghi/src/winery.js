@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 
 function Winery () {
 
-    const [winery,setWinery] = useState(
+    const [winery,] = useState(
         {}
     )
 
-    const {id} = useParams()
+    // const {id} = useParams()
     
     // const { token } = useAuthContext();
 
