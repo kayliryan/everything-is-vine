@@ -58,10 +58,10 @@ pages:  # THIS STEP MUST BE NAME PAGES
   stage: deploy
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-  dependencies:
-    - build-front-end-job
-  needs:
-    - build-front-end-job
+  # dependencies:
+  #   - build-front-end-job
+  # needs:
+  #   - build-front-end-job
   script:
      # THE FIRST PART OF THIS COMMAND MUST BE THE DIRECTORY
      # THAT YOU cd INTO TO BUILD IT PLUS THE build/ AT THE
@@ -76,8 +76,8 @@ build-winery-api-image-job:  # RENAME THIS
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: build
   image: docker:20.10.16
-  needs:
-    - build-front-end-job 
+  # needs:
+  #   - build-front-end-job 
   services:
     - docker:20.10.16-dind
   script:
@@ -118,9 +118,9 @@ deploy-winery-api-image-job:  # RENAME THIS
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: deploy
   image: docker:20.10.16
-  needs:
-    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
-    - build-winery-api-image-job
+  # needs:
+  #   # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+  #   - build-winery-api-image-job
   services:
     - docker:20.10.16-dind
   script:
@@ -145,9 +145,9 @@ deploy-sales-api-image-job:  # RENAME THIS
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: deploy
   image: docker:20.10.16
-  needs:
-    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
-    - build-sales-api-image-job
+  # needs:
+  #   # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+  #   - build-sales-api-image-job
   services:
     - docker:20.10.16-dind
   script:
@@ -192,9 +192,9 @@ release-winery-api-image-job:  # RENAME THIS
 release-sales-api-image-job:  # RENAME THIS
   stage: deploy
   image: node:10.17-alpine
-  needs:
-    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
-    - deploy-sales-api-image-job
+  # needs:
+  #   # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+  #   - deploy-sales-api-image-job
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   before_script:
