@@ -1,12 +1,9 @@
 import Navlogo from './/images/Navlogo.png'
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useParams, Link } from 'react-router-dom';
 import { useToken } from './auth';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useAuthContext } from './auth'
 import React, { useEffect, useState } from 'react';
 
@@ -69,7 +66,7 @@ function Navigation() {
                         <Link to={`wineries/${id}/login`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Login</Link>
                     </div>
                     <div className='px-3'>
-                        <Link to={`wineries/${id}/signup`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Signup</Link>
+                        <Link to={`wineries/${id}/signup`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Sign Up</Link>
                     </div>
                     <div className='px-3'>
                         <button type="submit" className={"btn btn-light p-2 mb-1 mt-1" + (logged ? "":" d-none")} onClick={submitLogoutHandler}>Logout</button>
@@ -98,12 +95,3 @@ function Navigation() {
 export default Navigation;
 
 
-/* <img
-                src={Navlogo}
-                width="75px"
-                style={{
-                marginTop: "5px",
-                marginBottom: "5px",
-                marginRight: "5px"
-                }}
-            /> */

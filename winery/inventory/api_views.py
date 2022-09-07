@@ -42,6 +42,7 @@ class WineListEncoder(ModelEncoder):
 def api_list_winery(request):
     if request.method == "GET":
         wineries = Winery.objects.all()
+        wineries = list(wineries)
 
         return JsonResponse(
             {"wineries": wineries},
@@ -74,6 +75,7 @@ def api_list_wines(request, pk):
     # token_data = request.payload
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
+        wines = list(wines)
 
         return JsonResponse(
             {"wines": wines},

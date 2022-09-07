@@ -21,7 +21,7 @@ class UserListEncoder(ModelEncoder):
         "winery",
         ]
     def get_extra_data(self, o):
-        return {"winery": o.winery.id}
+        return {"winery": o.winery_id}
 
 
 @require_http_methods(["GET"])

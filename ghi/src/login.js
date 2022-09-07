@@ -2,7 +2,7 @@ import './App.css';
 import React,{useState} from 'react';
 import { useToken } from './auth';
 import { useParams } from 'react-router-dom';
-import './login.css';
+import './Login.css';
 
 
 function Login() {
@@ -14,7 +14,7 @@ password:""
 const {username,password} = data;
 const {id} = useParams()
 
-const [token,login,logout] = useToken();
+const [token,login] = useToken();
 
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
@@ -30,11 +30,6 @@ login(
     id)
 }
 
-const submitLogoutHandler = e => {
-    e.preventDefault();
-    logout()
-    }
-
 return (
         <div className="wrapper fadeInDown">
             <div id="formContent">
@@ -48,11 +43,10 @@ return (
                     <input type="submit" className="fadeIn fourth" value="Sign In" />
                 </form>
                 <p className="forgot-password text-right">
-                            Need to create an account? <a href={`/wineries/${id}/signup/`}>Register</a>
+                            Need to create an account? <a href={`/wineries/${id}/signup/`}>Sign Up</a>
                 </p>
             </div>
-            <button type="submit" onClick={submitLogoutHandler}>Logout</button>
-            </div>
+        </div>
     
 );
 }

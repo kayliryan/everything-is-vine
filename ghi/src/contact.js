@@ -1,4 +1,3 @@
-// import AnimatedLetters from '../AnimatedLetters'
 import './map.css'
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';

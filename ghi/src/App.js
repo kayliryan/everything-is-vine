@@ -1,5 +1,4 @@
 import './App.css';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GetWine from './WineDetails';
 import WineList from './wines';
@@ -10,7 +9,6 @@ import WineryList from './dashboard';
 import { AuthProvider } from './auth';
 import NavbarLayout from './navLayout';
 import Contact from './contact';
-import Map from './map';
 
 function App(props) {
 
@@ -18,13 +16,6 @@ function App(props) {
 
     <AuthProvider>
       <BrowserRouter>
-      <div 
-        // style={{ 
-        //   backgroundImage: `url("https://img.freepik.com/premium-vector/abstract-smooth-blur-purple-gradient-background-website-banner-paper-card-decorative-design_120819-485.jpg?w=996")`,
-        //   backgroundRepeat: 'no-repeat',
-        //   backgroundSize: 'cover'
-        //   }}
-      >
           <div className="container">
             <Routes>
               <Route path="/" element={<WineryList />} />
@@ -37,11 +28,9 @@ function App(props) {
                 <Route path="wineries/:id/" element={<Winery />} /> 
                 <Route path="/wineries/:id/login/" element={<Login />} />
                 <Route path="/wineries/:id/signup/" element={<SignUp />} />
-                <Route path="/wineries/:id/map/" element={<Map />} />
               </Route>
             </Routes>
           </div>
-        </div>
       </BrowserRouter>
     </AuthProvider>
   );

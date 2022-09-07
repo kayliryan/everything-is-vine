@@ -15,9 +15,6 @@ return (
             <h5 className="card-title">
                 <Link to={`wineries/${winery.id}`} className="d-flex justify-content-center btn btn-lg px-4 gap-3 text-light" style={{backgroundColor:"orchid"}}>{winery.name}</Link>
             </h5>
-            {/* <h6 className="card-subtitle mb-2 text-muted">
-                {winery.Name}
-            </h6> */}
             <p className="d-flex justify-content-center card-text">
                 {winery.address}
             </p>
