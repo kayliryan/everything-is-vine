@@ -50,8 +50,7 @@ function GetWine() {
             <img
             className="mx-auto img-thumbnail"
             src={data.picture_url}
-            width="auto"
-            height="auto"
+            height={200}
             />
             <div className="card-body text-center mx-auto">
                 <div className="cvp">

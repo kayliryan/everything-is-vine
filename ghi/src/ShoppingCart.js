@@ -47,6 +47,8 @@ function ShoppingCartTest(){
   }, [cust_quantity, index_state]);
 
 
+
+
   return (
     <div className="App">
       <header className="section-header">
@@ -101,7 +103,7 @@ function ShoppingCartTest(){
       </header>
       <section className="section-pagetop bg">
         <div className="container">
-          <h2 className="title-page">Shopping cart</h2>
+          <h2 className="title-page">Shopping Cart</h2>
         </div>
       </section>
       <section className="section-content padding-y">
@@ -113,10 +115,10 @@ function ShoppingCartTest(){
                   <thead className="text-muted">
                     <tr className="small text-uppercase">
                       <th scope="col">Product</th>
-                      <th scope="col" width={120}>
+                      <th scope="col" width={140}>
                         Quantity
                       </th>
-                      <th scope="col" width={120}>
+                      <th scope="col" width={140}>
                         Price
                       </th>
                       <th scope="col" className="text-right" width={200}>
@@ -154,7 +156,7 @@ function ShoppingCartTest(){
                           </div>
                         </td>
                         <td className="text-right">
-                          <a onClick = {e => deleteItem(e,index)} type="button" className="btn btn-light"><span className="bi bi-trash"></span> Remove</a>
+                          <a onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Remove</a>
                         </td>
                       </tr>
                       );
@@ -169,16 +171,15 @@ function ShoppingCartTest(){
                     {" "}
                     Make Purchase <i className="fa fa-chevron-right" />{" "}
                   </a>
-                  <a href="#" className="btn btn-light">
+                  <a href="#" className="btn btn-primary">
                     {" "}
                     <i className="fa fa-chevron-left" /> Continue shopping{" "}
                   </a>
                 </div>
               </div>
-              <div className="alert alert-success mt-3">
+              <div className="alert alert-primary mt-3">
                 <p className="icontext">
-                  <i className="icon text-success fa fa-truck" /> Free Delivery
-                  within 1-2 weeks
+                  <i className="fa-regular fa-user-plus" />   Sign-up and become a member to get 10% off! 
                 </p>
               </div>
             </main>
@@ -187,7 +188,7 @@ function ShoppingCartTest(){
                 <div className="card-body">
                   <form>
                     <div className="form-group">
-                      <label>Have coupon?</label>
+                      <label>Have a coupon?</label>
                       <div className="input-group">
                         <input
                           type="text"
@@ -203,20 +204,24 @@ function ShoppingCartTest(){
                   </form>
                 </div>
               </div>
+
+
+            {cartItems.map((cartItem, index) => { return(
               <div className="card">
                 <div className="card-body">
                   <dl className="dlist-align">
-                    <dt>Total price:</dt>
-                    <dd className="text-right">USD 568</dd>
+                    <dt>Subtotal:</dt>
+                    <dd className="text-right">USD $ {cartItem.cust_quantity * cartItem.price}</dd>
                   </dl>
                   <dl className="dlist-align">
                     <dt>Discount:</dt>
-                    <dd className="text-right">USD 658</dd>
+                    {/* use turnary operator to display discount if member */}
+                    <dd className="text-right">USD ${cartItem.cust_quantity * cartItem.price * .10}</dd>
                   </dl>
                   <dl className="dlist-align">
                     <dt>Total:</dt>
                     <dd className="text-right  h5">
-                      <strong>$1,650</strong>
+                      <strong>TOTAL</strong>
                     </dd>
                   </dl>
                   <hr />
@@ -225,6 +230,10 @@ function ShoppingCartTest(){
                   </p>
                 </div>
               </div>
+            )})}
+
+
+
             </aside>
           </div>
         </div>

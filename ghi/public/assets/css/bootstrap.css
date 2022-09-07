@@ -227,6 +227,7 @@ th {
 }
 
 label {
+  color: #9932cc;
   display: inline-block;
   margin-bottom: 0.3rem;
 }
@@ -1513,21 +1514,25 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #343a40;
+  color: #ba55d3;
   background-color: transparent;
+
 }
 .table th,
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #ba55d3 !important;
+
+  
 }
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 1px solid #ba55d3 !important;
 }
+
 .table tbody + tbody {
-  border-top: 2px solid #dee2e6;
+  border-top: 2px solid #ba55d3 !important;
 }
 
 .table-sm th,
@@ -1536,11 +1541,11 @@ pre code {
 }
 
 .table-bordered {
-  border: 1px solid #dee2e6;
+  border: 1px solid #ba55d3 !important;
 }
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #dee2e6;
+  border: 1px solid #ba55d3 !important;
 }
 .table-bordered thead th,
 .table-bordered thead td {
@@ -1559,7 +1564,7 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #343a40;
+  color: #ba55d3 !important;
   background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -1572,7 +1577,7 @@ pre code {
 .table-primary td,
 .table-primary thead th,
 .table-primary tbody + tbody {
-  border-color: #94b0f5;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-primary:hover {
@@ -1592,7 +1597,7 @@ pre code {
 .table-secondary td,
 .table-secondary thead th,
 .table-secondary tbody + tbody {
-  border-color: #a6a6a6;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-secondary:hover {
@@ -1612,7 +1617,7 @@ pre code {
 .table-success td,
 .table-success thead th,
 .table-success tbody + tbody {
-  border-color: #7ad986;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-success:hover {
@@ -1632,7 +1637,7 @@ pre code {
 .table-info td,
 .table-info thead th,
 .table-info tbody + tbody {
-  border-color: #86cfda;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-info:hover {
@@ -1652,7 +1657,7 @@ pre code {
 .table-warning td,
 .table-warning thead th,
 .table-warning tbody + tbody {
-  border-color: #ffc586;
+  border-color: #ba55d3 !important ;
 }
 
 .table-hover .table-warning:hover {
@@ -1712,7 +1717,7 @@ pre code {
 .table-dark td,
 .table-dark thead th,
 .table-dark tbody + tbody {
-  border-color: #8c8e90;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-dark:hover {
@@ -1732,7 +1737,7 @@ pre code {
 .table-primary-light td,
 .table-primary-light thead th,
 .table-primary-light tbody + tbody {
-  border-color: #acc2f7;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-primary-light:hover {
@@ -1752,7 +1757,7 @@ pre code {
 .table-gray td,
 .table-gray thead th,
 .table-gray tbody + tbody {
-  border-color: #a6a6a6;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-gray:hover {
@@ -1772,7 +1777,7 @@ pre code {
 .table-gray-light td,
 .table-gray-light thead th,
 .table-gray-light tbody + tbody {
-  border-color: #c8c8c8;
+  border-color: #ba55d3 !important;
 }
 
 .table-hover .table-gray-light:hover {
@@ -1800,12 +1805,12 @@ pre code {
 .table .thead-dark th {
   color: #fff;
   background-color: #212529;
-  border-color: #32383e;
+  border-color: #ba55d3 !important;
 }
 .table .thead-light th {
   color: #495057;
   background-color: #e4e4e4;
-  border-color: #dee2e6;
+  border-color: #ba55d3 ;
 }
 
 .table-dark {
@@ -1815,7 +1820,7 @@ pre code {
 .table-dark th,
 .table-dark td,
 .table-dark thead th {
-  border-color: #32383e;
+  border-color: #ba55d3 !important;
 }
 .table-dark.table-bordered {
   border: 0;
@@ -2385,9 +2390,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #3167eb;
-  border-color: #3167eb;
+  color: #9932cc !important;
+  background-color: #fff  !important;
+  border-color: #ba55d3  !important;
 }
 .btn-primary:hover {
   color: #fff;
@@ -2602,8 +2607,8 @@ fieldset:disabled a.btn {
 
 .btn-primary-light {
   color: #fff;
-  background-color: #5f89f0;
-  border-color: #5f89f0;
+  background-color: #ba55d3 !important;
+  border-color: #ba55d3 !important;
 }
 .btn-primary-light:hover {
   color: #fff;
@@ -4894,15 +4899,15 @@ a.badge-gray-light:focus, a.badge-gray-light.focus {
 }
 
 .alert-primary {
-  color: #19367a;
-  background-color: #d6e1fb;
-  border-color: #c5d4f9;
+  color: #FFFFFF !important;
+  background-color: #D09EE1 !important;
+  border-color: #D09EE1 !important;
 }
 .alert-primary hr {
-  border-top-color: #aec3f7;
+  border-top-color: #9932cc !important;
 }
 .alert-primary .alert-link {
-  color: #102350;
+  color: #ffffff !important;
 }
 
 .alert-secondary {
@@ -9940,19 +9945,19 @@ a.text-secondary:hover, a.text-secondary:focus {
 }
 
 .text-success {
-  color: #00b517 !important;
+  color: #9932cc !important;
 }
 
 a.text-success:hover, a.text-success:focus {
-  color: #00690d !important;
+  color: #9932cc !important;
 }
 
 .text-info {
-  color: #17a2b8 !important;
+  color: #9932cc !important;
 }
 
 a.text-info:hover, a.text-info:focus {
-  color: #0f6674 !important;
+  color: #9932cc !important;
 }
 
 .text-warning {

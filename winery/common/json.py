@@ -16,7 +16,7 @@ class DateEncoder(JSONEncoder):
 class QuerySetEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, QuerySet):
-            return {"query": list(o)}
+            return list(o)
         else:
             return super().default(o)
 

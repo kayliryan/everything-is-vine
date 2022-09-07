@@ -8,7 +8,7 @@ html {
   }
   
   a {
-    color: #247955;
+    color: #9932CC;
     display:inline-block;
     text-decoration: none;
     font-weight: 400;
@@ -21,7 +21,7 @@ html {
     text-transform: uppercase;
     display:inline-block;
     margin: 40px 8px 10px 8px; 
-    color: #cccccc;
+    color: #ba55d3 ;
   }
   
   
@@ -67,12 +67,12 @@ html {
   /* TABS */
   
   h2.inactive {
-    color: #247955;
+    color: #9932CC;
   }
   
   h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #247955;
+    border-bottom: 2px solid #9932CC;
   }
   
   
@@ -80,7 +80,7 @@ html {
   /* FORM TYPOGRAPHY*/
   
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #247955;
+    background-color: #9932CC;
     border: none;
     color: white;
     padding: 10px 80px;
@@ -102,7 +102,7 @@ html {
   }
   
   input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #247955;
+    background-color: #9932CC;
   }
   
   input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -137,7 +137,7 @@ html {
   
   input[type=text]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #247955;
+    border-bottom: 2px solid #9932CC;
   }
   
   input[type=text]:placeholder {
@@ -235,7 +235,7 @@ html {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #247955;
+    background-color: #9932CC;
     content: "";
     transition: width 0.2s;
   }
