@@ -20,12 +20,13 @@ with Kayli regarding the POST and PUT functions for Shopping Items and Order.  W
 handle payment validation on the front-end.  On the back-end, I updated the POST for Order to
 add a function that would create a confirmation number when a valid/payed order is submitted.
 
-After I finished that, I worked on some CSS for the Shopping Cart front end.  This was nice
-because I haven't really had a chance to use too much CSS and need more practice.  I found out
+After I finished that, I worked on some CSS for the Shopping Cart front end.  This was nice 
+because I haven't really had a chance to use too much CSS and need more practice.  I found out 
 today I could override Bootstraps settings for button color by using !important after the 
-chosen color.  Using the inspect elements, made it a little easier to seart for the necessary
-element/tag selectors to modify.  Tomorrow, I will implement some more dynamic rendering to the
-page.
+chosen color.  I also learned you can adjust the width and height with {size that you want} or 
+"size that you want" for React.  Using the inspect elements, made it a little easier to search 
+for the necessary element/tag selectors to modify.  Tomorrow, I will implement some more dynamic 
+rendering to the page.
 
 
 ## Monday, September 5, 2022
