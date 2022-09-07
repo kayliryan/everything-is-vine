@@ -1,90 +1,69 @@
-# CI START #
-
 stages:
-  - test
+  - test 
   - build
   - deploy
-  
-variables:
-  REACT_APP_INVENTORY_API: https://${HEROKU_INVENTORY_API_APP}.herokuapp.com
-services:
-  - postgres:14.2-bullseye
 
-variables:
-  DATABASE_URL: postgresql://winery:password@postgres/winery
-  POSTGRES_MULTIPLE_DATABASES: winery,sales
-  POSTGRES_PASSWORD: test-databases
-  WAIT_HOSTS: postgres:5432
-
-sales-unit-test-job:
+accounts-unit-test-job:
   image: python:3-bullseye
   stage: test
-  script:
-    - cd sales
-    - pip install -r requirements.txt
-    - python -m pytest  # Run unit tests
-
-inventory-unit-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - cd inventory
+  script: 
+    - cd winery
     - pip install -r requirements.txt
     - python -m pytest
+  allow_failure: true
 
-# # TEST ###############
+payments-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script: 
+    - cd sales
+    - pip install -r requirements.txt
+    - python -m pytest
+  allow_failure: true
+  
+
+
 lint-job:
   image: python:3-bullseye
   stage: test
   script:
     - pip install flake8
-    - flake8 sales winery 
+    - flake8 winery sales
   allow_failure: true
 
-# BUILD
 build-front-end-job:
   stage: build
-  # rules: 
-  #   - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   image: node:lts-bullseye
   variables:
     PUBLIC_URL: https://beach-bums.gitlab.io/everything-is-vine
-    
   script:
-    - cd ghi
+    - cd ghi  # CHANGE THIS TO THE DIRECTORY THAT HAS package.json
     - npm install
-    - npm run build # build the react app
-    - cp build/index.html build/404.html 
-#     # - echo ${REACT_APP_DJANGO_API}
+    - npm run build
+    - cp build/index.html build/404.html  # Make this a SPA
   allow_failure: true
   artifacts:
     paths:
-      - ghi/build/
-    
-
-    # CI END ######################
-
-## 1 DEPLOY THE UI TO GITLAB PAGES ## 
-pages:
+      - ghi/build/  # Save all of the files in the build path
+  
+pages:  # THIS STEP MUST BE NAME PAGES
   stage: deploy
-  variables:
-    # GIT_STRATEGY: none
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-    # - if: $CI_COMMIT_BRANCH == "end-cd"
   dependencies:
     - build-front-end-job
   needs:
-   - build-front-end-job
+    - build-front-end-job
   script:
+     # THE FIRST PART OF THIS COMMAND MUST BE THE DIRECTORY
+     # THAT YOU cd INTO TO BUILD IT PLUS THE build/ AT THE
+     # END
     - mv ghi/build/ public
   artifacts:
     paths:
       - public
 
-## BUILD ##
-
-build-winery-api-image-job:
+build-winery-api-image-job:  # RENAME THIS
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: build
@@ -92,14 +71,18 @@ build-winery-api-image-job:
   services:
     - docker:20.10.16-dind
   script:
+    # CHANGE THIS TO THE DIRECTORY THAT HAS YOUR Dockerfile
     - cd winery
-    - docker build -t ${CI_REGISTRY_IMAGE}/api:latest .
-    - docker tag ${CI_REGISTRY_IMAGE}/api:latest ${CI_REGISTRY_IMAGE}/app:$CI_PIPELINE_ID
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push ${CI_REGISTRY_IMAGE}/app:$CI_JOB_ID
-    - docker push ${CI_REGISTRY_IMAGE}/api:latest
 
-build-sales-api-image-job:
+    # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
+    # TO A MORE MEANINGFUL SERVICE NAME (5 PLACES)
+    - docker build -t ${CI_REGISTRY_IMAGE}/winery:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/winery:latest ${CI_REGISTRY_IMAGE}/winery:$CI_JOB_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/winery:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/winery:latest
+
+build-sales-api-image-job:  # RENAME THIS
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: build
@@ -107,130 +90,113 @@ build-sales-api-image-job:
   services:
     - docker:20.10.16-dind
   script:
+    # CHANGE THIS TO THE DIRECTORY THAT HAS YOUR Dockerfile
     - cd sales
+
+    # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
+    # TO A MORE MEANINGFUL SERVICE NAME (5 PLACES)
     - docker build -t ${CI_REGISTRY_IMAGE}/sales:latest .
-    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest ${CI_REGISTRY_IMAGE}/sales:$CI_JOB_ID
+    - docker tag ${CI_REGISTRY_IMAGE}/payments_api:latest ${CI_REGISTRY_IMAGE}/sales:$CI_JOB_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/sales:$CI_JOB_ID
     - docker push ${CI_REGISTRY_IMAGE}/sales:latest
 
 
 
-
-## TRANSFER ##
-transfer-winery-api-image-job:
-  stage: deploy
-  image: docker:20.10.16
-  services:
-    - docker:20.10.16-dind
+deploy-accounts-api-image-job:  # RENAME THIS
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  stage: deploy
+  image: docker:20.10.16
   needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
     - build-winery-api-image-job
+  services:
+    - docker:20.10.16-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/api:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_EIV/web:latest
+
+    # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
+    # TO THE NAME YOU CHOSE FOR THE BUILD STEP (2 PLACES)
+
+    # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
+    # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
+    # SETTINGS (2 PLACES)
+
+    # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
+    # CHANGE /web TO /worker (2 PLACES)
+    - docker pull ${CI_REGISTRY_IMAGE}/winery:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/winery:latest registry.heroku.com/$HEROKU_EIV/web:latest
     - docker push registry.heroku.com/$HEROKU_EIV/web:latest
 
-
-transfer-sales-api-image-job:
-  stage: deploy
-  image: docker:20.10.16
-  services:
-    - docker:20.10.16-dind
+deploy-sales-api-image-job:  # RENAME THIS
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  stage: deploy
+  image: docker:20.10.16
   needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
     - build-sales-api-image-job
+  services:
+    - docker:20.10.16-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/api:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_SALES_EIV/web:latest
+
+    # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
+    # TO THE NAME YOU CHOSE FOR THE BUILD STEP (2 PLACES)
+
+    # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
+    # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
+    # SETTINGS (2 PLACES)
+
+    # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
+    # CHANGE /web TO /worker (2 PLACES)
+    - docker pull ${CI_REGISTRY_IMAGE}/sales:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES_EIV/web:latest
     - docker push registry.heroku.com/$HEROKU_SALES_EIV/worker:latest
 
-## RELEASE ##
-release-winery-api-build-job:
+
+
+release-winery-api-image-job:  # RENAME THIS
   stage: deploy
   image: node:10.17-alpine
+  needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+    - deploy-winery-api-image-job
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-    # - if: $CI_COMMIT_BRANCH == "end-cd"
-  needs:
-    - transfer-winery-api-image-job
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
+    # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
+    # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
+    # SETTINGS (1 PLACE)
+
+    # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
+    # CHANGE web TO worker (1 PLACE)
     - heroku container:release web --app $HEROKU_EIV
 
-
-release-sales-api-build-job:
+release-sales-api-image-job:  # RENAME THIS
   stage: deploy
   image: node:10.17-alpine
+  needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+    - deploy-sales-api-image-job
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-    # - if: $CI_COMMIT_BRANCH == "end-cd"
-  needs:
-    - transfer-sales-api-image-job
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
   script:
-    - heroku container:release web --app $HEROKU_SALES_EIV
+    # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
+    # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
+    # SETTINGS (1 PLACE)
 
-# build-sales-poller:
-#   rules:
- 
-#     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-#   stage: build
-#   image: docker:20.10.16
-#   services:
-#     - docker:20.10.16-dind
-#   script:
-#     - cd sales
-#     - docker build Dockerfile.poller -t ${CI_REGISTRY_IMAGE}/poller:latest .
-#     - docker tag ${CI_REGISTRY_IMAGE}/poller:latest ${CI_REGISTRY_IMAGE}/poller:$CI_JOB_ID
-#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-#     - docker push ${CI_REGISTRY_IMAGE}/poller:$CI_JOB_ID
-#     - docker push ${CI_REGISTRY_IMAGE}/poller:latest
+    # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
+    # CHANGE web TO worker (1 PLACE)
+    - heroku container:release worker --app $HEROKU_SALES_EIV
 
-# deploy-sales-poller:
-#   rules:
-#     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-#   stage: deploy
-#   image: docker:20.10.16
-#   needs:
-#     - build-sales-poller
-#   services:
-#     - docker:20.10.16-dind
-#   script:
-#   # logs in and pulls the image from the gitlab repo 
-#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-#     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-#     - docker pull ${CI_REGISTRY_IMAGE}/poller:latest
-
-#   # adds the name of the heroku app to the image
-#     - docker tag ${CI_REGISTRY_IMAGE}/poller:latest registry.heroku.com/$SALES_POLLER/worker:latest
-
-#   # pushes the image to the heroku image registry
-#     - docker push registry.heroku.com/$SALES_POLLER/worker:latest
-
-# release-sales-poller:
-#   stage: deploy
-#   image: node:10.17-alpine
-#   needs:
-#     - deploy-sales-poller
-#   rules:
-#     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
-#   before_script:
-#     - apk add curl bash
-#     - curl https://cli-assets.heroku.com/install.sh | sh
-#   script:
-#   # changed web to worker because it's a poller
-#     - heroku container:release worker --app $SALES_POLLER
 
