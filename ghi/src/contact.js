@@ -1,6 +1,6 @@
 import './map.css'
 import { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 // import { useAuthContext } from './auth'

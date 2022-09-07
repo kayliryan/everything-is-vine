@@ -33,10 +33,10 @@ return (
 }
 
 function WineList() {
-    const [wineColumns,setWineColumns] = useState(
+    const [wineColumns] = useState(
         [[], [], []]
     )
-    const [wineryName,setWineryName] = useState(
+    const [wineryName] = useState(
         ''
     )
 
