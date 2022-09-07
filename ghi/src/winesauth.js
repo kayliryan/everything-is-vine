@@ -11,7 +11,7 @@ return (
         console.log(data)
         const wine = data;
         return (
-        <div key={wine.id} className="card mb-3 shadow mt-4">
+        <div key={wine.id} className="card mb-3 shadow">
             <img src={wine.picture_url} className="card-img-top mt-3" />
             <div className="card-body">
             <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
@@ -32,7 +32,7 @@ return (
 );
 }
 
-function WineList() {
+function WineAuthList() {
     const [wineColumns,setWineColumns] = useState(
         [[], [], []]
     )
@@ -43,12 +43,14 @@ function WineList() {
     const {id} = useParams()
     
     const { token } = useAuthContext();
+        console.log("printing token", token)
         
-    async function fetchWines(){
+    async function fetchWines(token){
         const url = `http://localhost:8000/api/wineries/${id}/wines/`;
 
         try {
-        const response = await fetch(url);
+        const response = await fetch(url,
+            { credentials: "include",});
 
         if (response.ok) {
             const data = await response.json();
@@ -100,7 +102,7 @@ function WineList() {
                 </div>
                 </div>
                     <div className="container">
-                    <div className="row mt-2">
+                    <div className="row">
                         {wineColumns.map((wineList, index) => {
                         return (
                             <WineColumn id={id} key={index} list={wineList} />
@@ -113,4 +115,4 @@ function WineList() {
 
 }
 
-export default WineList;
+export default WineAuthList;
