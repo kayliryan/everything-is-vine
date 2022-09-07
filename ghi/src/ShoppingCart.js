@@ -58,6 +58,7 @@ function ShoppingCartTest(){
               <div className="col-lg-2 col-4">
                 <a href="#">Company Name</a>
               </div>
+
               {/* <div className="col-lg-6 col-sm-12">
                 <form action="#" className="search">
                   <div className="input-group w-100">
@@ -74,6 +75,7 @@ function ShoppingCartTest(){
                   </div>
                 </form>
               </div> */}
+              
               <div className="col-lg-4 col-sm-6 col-12">
                 <div className="widgets-wrap float-md-right">
                   <div className="widget-header  mr-3">
@@ -101,11 +103,7 @@ function ShoppingCartTest(){
           </div>
         </section>
       </header>
-      <section className="section-pagetop bg">
-        <div className="container">
-          <h2 className="title-page">Shopping Cart</h2>
-        </div>
-      </section>
+
       <section className="section-content padding-y">
         <div className="container">
           <div className="row">
@@ -240,11 +238,6 @@ function ShoppingCartTest(){
 
             </aside>
           </div>
-        </div>
-      </section>
-      <section className="section-name bg padding-y">
-        <div className="container">
-          <h6>Payment and refund policy</h6>
         </div>
       </section>
       <footer className="section-footer border-top padding-y">
