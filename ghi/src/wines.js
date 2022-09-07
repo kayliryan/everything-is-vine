@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
-import Winery from './winery';
+// import Winery from './winery';
 
 function WineColumn(props) {
     const {id} = useParams()
@@ -12,7 +12,7 @@ return (
         const wine = data;
         return (
         <div key={wine.id} className="card mb-3 shadow mt-4">
-            <img src={wine.picture_url} className="card-img-top mt-3" />
+            <img src={wine.picture_url} alt="" className="card-img-top mt-3" />
             <div className="card-body">
             <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
             <h6 className="d-flex justify-content-center card-subtitle mb-2 text-muted">
