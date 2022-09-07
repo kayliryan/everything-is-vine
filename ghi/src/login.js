@@ -6,12 +6,12 @@ import './auth.css';
 
 
 function Login() {
-const [data, setData] = useState({
+const [data,setData] = useState({
 username:"",
 password:""
 })
 
-// const {username,password} = data;
+const {username,password} = data;
 const {id} = useParams()
 
 const [token,login] = useToken();
