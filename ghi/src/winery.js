@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuthContext } from './auth'
+// import { useAuthContext } from './auth'
 
 function Winery () {
 
@@ -10,20 +10,20 @@ function Winery () {
 
     const {id} = useParams()
     
-    const { token } = useAuthContext();
+    // const { token } = useAuthContext();
 
-    async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+    // async function fetchWinery(){
+    //     const url = `http://localhost:8000/api/wineries/${id}/`;
 
-        const response = await fetch(url)
+    //     const response = await fetch(url)
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            setWinery(data.winery)
-        }
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         console.log(data)
+    //         setWinery(data.winery)
+    //     }
 
-        }
+    //     }
 
     // useEffect( () => {fetchWinery(token)},[])
 

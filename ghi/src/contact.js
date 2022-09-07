@@ -1,5 +1,5 @@
 import './map.css'
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
@@ -48,19 +48,19 @@ const Contact = () => {
 
     const {id} = useParams()
     
-    const { token } = useAuthContext();
+    // const { token } = useAuthContext();
 
-    async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+    // async function fetchWinery(){
+    //     const url = `http://localhost:8000/api/wineries/${id}/`;
 
-        const response = await fetch(url)
+    //     const response = await fetch(url)
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            setWinery(data.winery)
-            setGeo(data.geo)}
-        }
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         console.log(data)
+    //         setWinery(data.winery)
+    //         setGeo(data.geo)}
+    //     }
     
     // useEffect( () => {fetchWinery(token)},[])
         

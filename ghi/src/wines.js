@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
 // import Winery from './winery';
@@ -85,7 +85,7 @@ function WineList() {
         }
     }
 
-    useEffect( () => {fetchWines(token)},[])
+    // useEffect( () => {fetchWines(token)},[])
 
 
     return (

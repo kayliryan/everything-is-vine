@@ -8,8 +8,8 @@ import Card from './cards/Cards';
 
 function GetWine() {
   let { winery_id, winevo_id } = useParams();
-  const {data, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
-  const [updateShoppingItems] = useState([]);
+  const {isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
+  const [] = useState([]);
 
   if (isLoading) {
     return (
