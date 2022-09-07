@@ -7,6 +7,10 @@ import SignUp from './signup';
 import Winery from './winery';
 import WineryList from './dashboard';
 import { AuthProvider } from './auth';
+import NavbarLayout from './navLayout';
+import Contact from './contact';
+
+
 import ShoppingCartTest from './ShoppingCart';
 
 
