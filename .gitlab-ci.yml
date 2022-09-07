@@ -77,7 +77,7 @@ build-winery-api-image-job:  # RENAME THIS
   stage: build
   image: docker:20.10.16
   needs:
-    - build-front-end-image-job 
+    - build-front-end-job 
   services:
     - docker:20.10.16-dind
   script:
