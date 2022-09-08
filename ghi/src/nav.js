@@ -15,7 +15,7 @@ function Navigation() {
 
     const {id} = useParams()
 
-    const [tokencall,login,logout] = useToken();
+    const [,,logout] = useToken();
 
     const { token } = useAuthContext();
 

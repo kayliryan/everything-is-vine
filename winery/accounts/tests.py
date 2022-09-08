@@ -1,5 +1,7 @@
-from platform import python_implementation
-from urllib.request import AbstractBasicAuthHandler
+# from platform import python_implementation
+# from urllib.request import AbstractBasicAuthHandler
+
+
 from django.test import TestCase, Client
 from django.urls import reverse
 from .models import User

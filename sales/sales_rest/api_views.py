@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
 from sales_rest.models import WineVO, Order, ShoppingItem
-import json
 
 
 # class WineryVOEncoder(ModelEncoder):
@@ -29,7 +28,6 @@ class WineVOEncoder(ModelEncoder):
     ]
 
 
-
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = ["confirmation_number", "created"]
@@ -38,7 +36,7 @@ class OrderEncoder(ModelEncoder):
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
     properties = [
-        "order_id", 
+        "order_id",
         "item",
         "quantity",
         "price",
@@ -62,9 +60,7 @@ class ShoppingItemEncoder(ModelEncoder):
 #         else:
 #             return JsonResponse(
 #                 {"message": "Winery does not exist or has no list of wines"}
-#             )       
-
-        
+#             )
 
 
 # Show detail of specific wine from a specific winery
@@ -88,20 +84,3 @@ def api_show_wine(request, pk1, pk2):
             {"message": "ERROR"},
             status=400,
         )
-
-
-
-
-class OrderEncoder(ModelEncoder):
-    model = Order
-    properties = ["confirmation_number", "created"]
-
-
-class ShoppingItemEncoder(ModelEncoder):
-    model = ShoppingItem
-    properties = [
-        "order_id", 
-        "item",
-        "quantity",
-        "price",
-    ]
