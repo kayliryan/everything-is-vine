@@ -163,9 +163,9 @@ deploy-sales-api-image-job:  # RENAME THIS
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   image: docker:20.10.16
-  # needs:
-  #   # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
-  #   - build-sales-api-image-job
+  needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+    - build-sales-api-image-job
   services:
     - docker:20.10.16-dind
   script:
@@ -188,9 +188,9 @@ deploy-sales-api-image-job:  # RENAME THIS
 release-sales-api-image-job:  # RENAME THIS
   stage: deploy
   image: node:10.17-alpine
-  # needs:
-  #   # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
-  #   - deploy-sales-api-image-job
+  needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+    - deploy-sales-api-image-job
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
