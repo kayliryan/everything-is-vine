@@ -64,12 +64,12 @@ h2 {
 /* TABS */
 
 h2.inactive {
-    color: #247955;
+    color: #ba55d3;
 }
 
 h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #247955;
+    border-bottom: 2px solid #ba55d3;
 }
 
 
@@ -178,7 +178,7 @@ input[type=password] {
 
 input[type=text]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #247955;
+    border-bottom: 2px solid #ba55d3;
 }
 
 input[type=text]:placeholder {
@@ -276,7 +276,7 @@ input[type=text]:placeholder {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #247955;
+    background-color: #ba55d3;
     content: "";
     transition: width 0.2s;
 }
