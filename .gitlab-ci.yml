@@ -170,7 +170,10 @@ deploy-sales-api-image-job:  # RENAME THIS
     - docker:20.10.16-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull ${CI_REGISTRY_IMAGE}/sales:latest
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES_POLLER/web:latest
+    - docker push registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
 
     # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
     # TO THE NAME YOU CHOSE FOR THE BUILD STEP (2 PLACES)
@@ -181,9 +184,6 @@ deploy-sales-api-image-job:  # RENAME THIS
 
     # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
     # CHANGE /web TO /worker (2 PLACES)
-    - docker pull ${CI_REGISTRY_IMAGE}/sales:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES_POLLER/web:latest
-    - docker push registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
 
 release-sales-api-image-job:  # RENAME THIS
   stage: deploy
