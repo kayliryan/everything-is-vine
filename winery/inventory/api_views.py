@@ -6,6 +6,7 @@ from .models import Winery, Wine
 from .acls import get_geo
 # import djwto.authentication as auth
 
+
 class WineryEncoder(ModelEncoder):
     model = Winery
     properties = [
@@ -16,6 +17,7 @@ class WineryEncoder(ModelEncoder):
         "description",
         "owner",
     ]
+
 
 class WineListEncoder(ModelEncoder):
     model = Wine
@@ -33,10 +35,11 @@ class WineListEncoder(ModelEncoder):
         "picture_url",
         "quantity",
         "winery",
-        ]
+    ]
     encoders = {
-        "winery" : WineryEncoder(),
+        "winery": WineryEncoder(),
     }
+
 
 @require_http_methods(["GET"])
 def api_list_winery(request):
@@ -49,6 +52,7 @@ def api_list_winery(request):
             encoder=WineryEncoder,
         )
 
+
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_winery(request, pk):
     if request.method == "GET":
@@ -58,7 +62,7 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery":winery, "geo":geo},
+                {"winery": winery, "geo": geo},
                 encoder=WineryEncoder,
                 safe=False
             )
@@ -68,7 +72,7 @@ def api_winery(request, pk):
             return response
 
 
-# @auth.jwt_login_required 
+# @auth.jwt_login_required
 # #removed so that jwt status no longer matters.
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
@@ -82,7 +86,7 @@ def api_list_wines(request, pk):
             encoder=WineListEncoder,
         )
     else:
-        content = json.loads(request.body)  
+        content = json.loads(request.body)
 
         try:
             if "winery" in content:
@@ -101,7 +105,7 @@ def api_list_wines(request, pk):
             encoder=WineListEncoder,
             safe=False,
         )
-        
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_all_wines(request):
@@ -113,7 +117,7 @@ def api_list_all_wines(request):
             encoder=WineListEncoder,
         )
     else:
-        content = json.loads(request.body)  
+        content = json.loads(request.body)
 
         try:
             if "winery" in content:

@@ -1,15 +1,15 @@
 import React from 'react';
-import winedetail from '../images/winedetail.jpg';
+// import winedetail from '../images/winedetail.jpg';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, } from 'react';
 import {useGetWineDetailsQuery} from '../store/salesApi';
 
 import './card.css';
 
 const Card = props => {
     let { winery_id, winevo_id } = useParams();
-    const {data, error, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
-    const [shoppingItems, updateShoppingItems] = useState([]);
+    const {data, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
+    const [updateShoppingItems] = useState([]);
   
     if (isLoading) {
       return (

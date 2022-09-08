@@ -14,7 +14,7 @@ password:""
 const {username,password} = data;
 const {id} = useParams()
 
-const [token,login] = useToken();
+const [,,login] = useToken();
 
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});

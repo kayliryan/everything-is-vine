@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useAuthContext } from './auth'
-import Winery from './winery';
+// import { useAuthContext } from './auth'
+// import Winery from './winery';
 
 function WineColumn(props) {
     const {id} = useParams()
@@ -12,7 +12,7 @@ return (
         const wine = data;
         return (
         <div key={wine.id} className="card mb-3 shadow mt-4">
-            <img src={wine.picture_url} className="card-img-top mt-3" />
+            <img src={wine.picture_url} alt="" className="card-img-top mt-3" />
             <div className="card-body">
             <h5 className="d-flex justify-content-center card-title">{wine.year}</h5>
             <h6 className="d-flex justify-content-center card-subtitle mb-2 text-muted">
@@ -33,59 +33,59 @@ return (
 }
 
 function WineList() {
-    const [wineColumns,setWineColumns] = useState(
+    const [wineColumns] = useState(
         [[], [], []]
     )
-    const [wineryName,setWineryName] = useState(
+    const [wineryName] = useState(
         ''
     )
 
     const {id} = useParams()
     
-    const { token } = useAuthContext();
+    // const { token } = useAuthContext();
         
-    async function fetchWines(){
-        const url = `http://localhost:8000/api/wineries/${id}/wines/`;
+    // async function fetchWines(){
+    //     const url = `http://localhost:8000/api/wineries/${id}/wines/`;
 
-        try {
-        const response = await fetch(url);
+    //     try {
+    //     const response = await fetch(url);
 
-        if (response.ok) {
-            const data = await response.json();
+    //     if (response.ok) {
+    //         const data = await response.json();
 
-            const wineryName=data.wines[0].winery.name;
+    //         const wineryName=data.wines[0].winery.name;
 
-            const wineColumns = [[], [], []];
-            let list = []
-            for (let wine of data.wines){
-                list.push(wine)
-            }
-            console.log(list)
+    //         const wineColumns = [[], [], []];
+    //         let list = []
+    //         for (let wine of data.wines){
+    //             list.push(wine)
+    //         }
+    //         console.log(list)
 
-            let i = 0;
-            for (const wine of list) {
-            if (wine) {
-                wineColumns[i].push(wine);
-                i = i + 1;
-                if (i > 2) {
-                i = 0;
-                }
-            } else {
-                console.error(wine);
-            }
-            }
+    //         let i = 0;
+    //         for (const wine of list) {
+    //         if (wine) {
+    //             wineColumns[i].push(wine);
+    //             i = i + 1;
+    //             if (i > 2) {
+    //             i = 0;
+    //             }
+    //         } else {
+    //             console.error(wine);
+    //         }
+    //         }
 
-            setWineryName(wineryName)
+    //         setWineryName(wineryName)
 
-            console.log(wineColumns)
-            setWineColumns(wineColumns);
-        }
-        } catch (e) {
-        console.error(e);
-        }
-    }
+    //         console.log(wineColumns)
+    //         setWineColumns(wineColumns);
+    //     }
+    //     } catch (e) {
+    //     console.error(e);
+    //     }
+    // }
 
-    useEffect( () => {fetchWines(token)},[])
+    // useEffect( () => {fetchWines(token)},[])
 
 
     return (
@@ -112,5 +112,4 @@ function WineList() {
     );
 
 }
-
 export default WineList;

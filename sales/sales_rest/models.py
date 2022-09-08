@@ -28,16 +28,16 @@ class WineVO(models.Model):
     # WineryVO,
     # related_name="wines",
     # on_delete=models.CASCADE
-    # ) 
+    # )
 
     def __str__(self):
-        return f'Winery {self.winery_id} / Wine {self.id}'
+        return f"Winery {self.winery_id} / Wine {self.id}"
 
 
 class Order(models.Model):
     confirmation_number = models.CharField(max_length=17, unique=True)
     created = models.DateTimeField(auto_now_add=True)
-    
+
 
 class ShoppingItem(models.Model):
     user = models.ForeignKey(
@@ -47,16 +47,10 @@ class ShoppingItem(models.Model):
         null=True,
     )
     order_id = models.ForeignKey(
-        Order,
-        related_name="shopping_items",
-        on_delete=models.CASCADE
+        Order, related_name="shopping_items", on_delete=models.CASCADE
     )
     item = models.ForeignKey(
-        WineVO,
-        related_name="shopping_items",
-        on_delete=models.PROTECT
+        WineVO, related_name="shopping_items", on_delete=models.PROTECT
     )
     quantity = models.SmallIntegerField()
     price = models.FloatField()
-
-    
