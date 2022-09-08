@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, clearCart, updateQuantityFromShoppingCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
+// import bootstrap from './public/assets/css/bootstrap.module.css'
 
 
 
@@ -12,6 +13,13 @@ function ShoppingCartTest(){
   const [index_state, setIndex] = useState(-1)
   const [firstRender, hasRendered] = useState(true)
   const dispatch = useDispatch();
+  
+  const subTotalSum = cartItems.reduce(
+    (total, currentItem) => total = total + (currentItem.price * currentItem.cust_quantity), 0
+    );
+  const discountRate = .10;
+  const discount = subTotalSum * discountRate;
+  const total = subTotalSum - discount;
 
 
   async function deleteItem(e, index=index) {
@@ -46,18 +54,23 @@ function ShoppingCartTest(){
     }
   }, [cust_quantity, index_state]);
 
-
+  
 
 
   return (
+
     <div className="App">
       <header className="section-header">
         <section className="header-main border-bottom">
           <div className="container">
             <div className="row align-items-center">
+
+
               <div className="col-lg-2 col-4">
                 <a href="#">Company Name</a>
               </div>
+
+
 
               {/* <div className="col-lg-6 col-sm-12">
                 <form action="#" className="search">
@@ -76,6 +89,9 @@ function ShoppingCartTest(){
                 </form>
               </div> */}
               
+
+
+
               <div className="col-lg-4 col-sm-6 col-12">
                 <div className="widgets-wrap float-md-right">
                   <div className="widget-header  mr-3">
@@ -99,6 +115,8 @@ function ShoppingCartTest(){
                   </div>
                 </div>
               </div>
+
+
             </div>
           </div>
         </section>
@@ -210,21 +228,20 @@ function ShoppingCartTest(){
                 <div className="card-body">
                   <dl className="dlist-align">
                     <dt>Subtotal:</dt>
-                      {cartItems.map((cartItem) => { return(
-                      <dd className="text-right">USD $ {cartItem.cust_quantity * cartItem.price}</dd>
-                      )})}
+                      <dd className="text-right">USD $ { subTotalSum }</dd>
+
                   </dl>
                   <dl className="dlist-align">
                     <dt>Discount:</dt>
                     {/* use turnary operator to display discount if member */}
-                    {cartItems.map((cartItem) => { return(
-                    <dd className="text-right">USD ${cartItem.cust_quantity * cartItem.price * .10}</dd>
-                    )})}
+
+                    <dd className="text-right">USD $ { discount }</dd>
+
                   </dl>
                   <dl className="dlist-align">
                     <dt>Total:</dt>
                     <dd className="text-right  h5">
-                      <strong>TOTAL</strong>
+                      <strong>USD $ { total }</strong>
                     </dd>
                   </dl>
                   <hr />
@@ -243,7 +260,8 @@ function ShoppingCartTest(){
       <footer className="section-footer border-top padding-y">
       </footer>
     </div>
-    );
+
+      );
 
 
 
