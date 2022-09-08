@@ -27,6 +27,7 @@ lint-job:
   script:
     - pip install flake8
     - flake8 winery sales
+  sllow_failure: true
   
 
 build-front-end-job:
