@@ -1,27 +1,21 @@
 import * as React from 'react';
-import { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import { useContext } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { addBillingInfo, clearBillingInfo } from './store/billingInfoReducer';
-import PaymentForm from './PaymentForm';
-import { Button } from '@mui/material';
+import { MainContext } from './mainContext';
 
 export default function AddressForm() {
-    let { billingInfo } = useSelector((state) => state.cart);
-    let [firstName, setFirstName] = useState("")
-    let [lastName, setLastName] = useState("")
-    let [addressOne, setAddressOne] = useState("")
-    let [addressTwo, setAddressTwo] = useState("")
-    let [city, setCity] = useState("")
-    let [state, setState] = useState("")
-    let [zipCode, setZipCode] = useState("")
-    let [country, setCountry] = useState("")
-    const dispatch = useDispatch();
+
+    const { 
+      firstName, setFirstName, 
+      lastName, setLastName, 
+      addressOne, setAddressOne,
+      // addressTwo, setAddressTwo,
+      city, setCity,
+      state, setState,
+      zipCode ,setZipCode,
+      country, setCountry } = useContext(MainContext);
 
 
     function handleFirstNameChange(e) {
@@ -36,9 +30,9 @@ export default function AddressForm() {
         setAddressOne(e.target.value)
     }
 
-    function handleAddressTwoChange(e) {
-        setAddressTwo(e.target.value)
-    }
+    // function handleAddressTwoChange(e) {
+    //     setAddressTwo(e.target.value)
+    // }
 
     function handleCityChange(e) {
         setCity(e.target.value)
@@ -55,26 +49,6 @@ export default function AddressForm() {
     function handleCountryChange(e) {
         setCountry(e.target.value)
     }
-
-    function handleSubmit() {
-        billingInfo = {
-            "first_name": firstName,
-            "last_name": lastName,
-            "address_one": addressOne,
-            "address_two": addressTwo,
-            "city": city,
-            "state": state,
-            "zip_code": zipCode,
-            "country": country,
-        }
-        if (billingInfo.length > 1) {
-            dispatch(clearBillingInfo())
-        }
-        dispatch(addBillingInfo(billingInfo))
-        return <PaymentForm />;
-    }
-
-
 
 
   return (
@@ -122,7 +96,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <TextField
             id="address2"
             name="address2"
@@ -133,7 +107,7 @@ export default function AddressForm() {
             autoComplete="shipping address-line2"
             variant="standard"
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -184,19 +158,6 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        <Button
-            variant="contained"
-            onClick={handleSubmit}
-            sx={{ mt: 3, ml: 1 }}
-            >
-            Next
-        </Button>
-        {/* <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid> */}
       </Grid>
     </React.Fragment>
   );

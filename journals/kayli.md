@@ -1,3 +1,11 @@
+## September 7, 2022
+
+* Setting up Context to house Payment Info
+
+Today I set up Context so that all of the info passed in by the user while preparing for Checkout can be saved from form to form. I verified that the state remained, and began working on displaying that information in my Review.js. 
+
+Today I learned about useContext, and how much easier it is than Redux Persist!
+
 ## September 2, 2022
 
 * Finishing Core Redux Functionality

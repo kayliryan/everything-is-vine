@@ -4,6 +4,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
+import { useContext } from 'react';
+import { MainContext } from './mainContext';
+import { useSelector } from 'react-redux';
 
 const products = [
   {
@@ -26,28 +29,48 @@ const products = [
     desc: 'Best thing of all',
     price: '$14.11',
   },
-  { name: 'Shipping', desc: '', price: 'Free' },
+  { name: 'Pickup', desc: 'Ready in 24 hours', price: 'Free' },
 ];
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
+
 
 export default function Review() {
+
+    const { cartItems } = useSelector((state) => state.cart);
+
+    const { 
+        firstName, setFirstName, 
+        lastName, setLastName, 
+        addressOne, setAddressOne,
+        // addressTwo, setAddressTwo,
+        city, setCity,
+        state, setState,
+        zipCode ,setZipCode,
+        country, setCountry,
+        cardName, setCardName, 
+        cardNumber, setCardNumber, 
+        expDate, setExpDate,
+        cvv, setCVV  } = useContext(MainContext);
+
+    let addresses = [addressOne, city, state, zipCode, country];
+
+    const payments = [
+        { name: 'Card holder', detail: {cardName} },
+        { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
+        { name: 'Expiry date', detail: {expDate} },
+      ];
+
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {cartItems.map((cartItem) => (
+          <ListItem key={cartItem.brand} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={`${cartItem.year} ${cartItem.brand}`} secondary={cartItem.varietal} />
+            <Typography variant="body2">{`${cartItem.cust_quantity} @ $${cartItem.price} each`}</Typography>
           </ListItem>
         ))}
 
@@ -61,9 +84,9 @@ export default function Review() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Shipping
+            Billing
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>{`${firstName} ${lastName}`}</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

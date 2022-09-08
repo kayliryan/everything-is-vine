@@ -1,7 +1,6 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { salesApi } from './salesApi'
 import cartReducer from './cartReducer';
-import billingReducer from './billingInfoReducer';
 import { combineReducers } from 'redux'
 import {
     persistStore,
@@ -18,7 +17,6 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
 const reducers = combineReducers({
     [salesApi.reducerPath]: salesApi.reducer,
     cart:cartReducer,
-    billing:billingReducer,
 });
 
 const persistConfig = {
