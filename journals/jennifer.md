@@ -8,6 +8,19 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 ## JOURNAL ENTRIES
 
+## Wednesday, September 7, 2022
+Today, I continued working on:
+
+* the Shopping Cart page for React and fixing merge issues
+
+This morning I was working on the Shopping Cart CSS and making the page dynamic.  After
+Boden had pushed to main and I pulled, there were some issues with CSS for the Shopping
+Cart page when I tried merging main with my branch.  I spent most of today trying to fix
+the merge issues, primarily the CSS part.  The issue, I believe, has to do with conflicting
+CSS selectors.  After struggling for a while, Kayli suggested possibly finding a way to be
+able to import the particular CSS file I want to utilize for that page so it wouldn't affect
+the rest of the CSS for our other pages.  I will look into that tomorrow.
+
 
 ## Tuesday, September 6, 2022
 Today, I continued working on:
