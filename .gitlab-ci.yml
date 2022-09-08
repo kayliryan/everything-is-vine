@@ -48,7 +48,7 @@ build-front-end-job:
 pages:  # THIS STEP MUST BE NAME PAGES
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   # dependencies:
   #   - build-front-end-job
   # needs:
@@ -64,7 +64,7 @@ pages:  # THIS STEP MUST BE NAME PAGES
 
 build-winery-api-image-job:  # RENAME THIS
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
   stage: build
   image: docker:20.10.16
   # needs:
@@ -86,7 +86,7 @@ build-winery-api-image-job:  # RENAME THIS
 
 deploy-winery-api-image-job:  # RENAME THIS
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
     - if: $CI_COMMIT_BRANCH == "end-cd"
   stage: deploy
   image: docker:20.10.16
@@ -119,7 +119,7 @@ release-winery-api-image-job:  # RENAME THIS
     # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
     - deploy-winery-api-image-job
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
     - if: $CI_COMMIT_BRANCH == "end-cd"
 
   before_script:
