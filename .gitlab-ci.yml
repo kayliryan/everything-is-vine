@@ -137,8 +137,8 @@ deploy-winery-api-image-job:  # RENAME THIS
     # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
     # CHANGE /web TO /worker (2 PLACES)
     - docker pull ${CI_REGISTRY_IMAGE}/winery:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/winery:latest registry.heroku.com/$HEROKU_EIV/web:latest
-    - docker push registry.heroku.com/$HEROKU_EIV/web:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/winery:latest registry.heroku.com/$HEROKU_INVENTORY_API_APP/web:latest
+    - docker push registry.heroku.com/$HEROKU_INVENTORY_API_APP/web:latest
 
 deploy-sales-api-image-job:  # RENAME THIS
   rules:
@@ -187,7 +187,7 @@ release-winery-api-image-job:  # RENAME THIS
 
     # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
     # CHANGE web TO worker (1 PLACE)
-    - heroku container:release web --app $HEROKU_EIV
+    - heroku container:release web --app $HEROKU_INVENTORY_API_APP
 
 release-sales-api-image-job:  # RENAME THIS
   stage: deploy
