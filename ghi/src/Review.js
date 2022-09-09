@@ -46,9 +46,9 @@ export default function Review() {
     subTotalSum = parseFloat(formatter.format(subTotalSum));
     const discountRate = .10;
     let discount = formatter.format(subTotalSum * discountRate);
-    let tax = parseFloat(formatter.format(.0725 * parseFloat(subTotalSum)));
+    let tax = parseFloat(formatter.format(.0725 * (parseFloat(subTotalSum)-discount)));
     // tax = formatter.format(tax);
-    let total = subTotalSum + tax - discount
+    let total = formatter.format(subTotalSum + tax - discount);
 
     const subCosts = [
         { name: 'SubTotal', detail: subTotalSum},
@@ -70,7 +70,7 @@ return (
             </ListItem>
             ))}
             {subCosts.map((subCost) => (
-                <ListItem sx={{ py: 0, px: 0 }}>
+                <ListItem key={subCost.name} sx={{ py: 0, px: 0 }}>
                 <ListItemText primary={subCost.name} /> {subCost.name === "Discount" ? 
                     <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
                         -${subCost.detail}
