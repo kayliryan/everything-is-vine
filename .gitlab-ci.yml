@@ -49,10 +49,10 @@ pages:  # THIS STEP MUST BE NAME PAGES
   stage: deploy
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  # dependencies:
-  #   - build-front-end-job
-  # needs:
-  #   - build-front-end-job
+  dependencies:
+    - build-front-end-job
+  needs:
+    - build-front-end-job
   script:
      # THE FIRST PART OF THIS COMMAND MUST BE THE DIRECTORY
      # THAT YOU cd INTO TO BUILD IT PLUS THE build/ AT THE
@@ -67,8 +67,8 @@ build-winery-api-image-job:  # RENAME THIS
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
   image: docker:20.10.16
-  # needs:
-  #   - build-front-end-job 
+  needs:
+    - build-front-end-job 
   services:
     - docker:20.10.16-dind
   script:
@@ -172,8 +172,8 @@ deploy-sales-api-image-job:  # RENAME THIS
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker pull ${CI_REGISTRY_IMAGE}/sales:latest
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES_POLLER/web:latest
-    - docker push registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES_EIV/web:latest
+    - docker push registry.heroku.com/$HEROKU_SALES_EIV/worker:latest
 
     # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
     # TO THE NAME YOU CHOSE FOR THE BUILD STEP (2 PLACES)
@@ -203,4 +203,4 @@ release-sales-api-image-job:  # RENAME THIS
 
     # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
     # CHANGE web TO worker (1 PLACE)
-    - heroku container:release worker --app $HEROKU_SALES_POLLER
+    - heroku container:release worker --app $HEROKU_SALES_EIV
