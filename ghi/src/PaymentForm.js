@@ -20,14 +20,32 @@ export default function PaymentForm() {
     }
 
     function handleCardNumberChange(e) {
+        if (e.target.value.length > 19) {
+            return;
+        }
+        if (e.target.value.length === 4 && cardNumber.length === 3 ||
+            e.target.value.length === 9 && cardNumber.length === 8 ||
+            e.target.value.length === 14 && cardNumber.length === 13) {
+            e.target.value += ' '
+        }
         setCardNumber(e.target.value)
-    }
+        }
 
     function handleExpDateChange(e) {
+        if (e.target.value.length > 5) {
+            return;
+        }
+        if (e.target.value.length === 2 && expDate.length === 1) {
+            e.target.value += '/'
+        }
         setExpDate(e.target.value)
-    }
+        }
+
 
     function handleCVVChange(e) {
+        if (e.target.value.length > 3) {
+            return;
+        }
         setCVV(e.target.value)
     }
 
@@ -57,6 +75,11 @@ export default function PaymentForm() {
             label="Card number"
             value = {cardNumber}
             onChange={handleCardNumberChange}
+            onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault();
+                }
+            }}
             fullWidth
             autoComplete="cc-number"
             variant="standard"
@@ -66,9 +89,15 @@ export default function PaymentForm() {
           <TextField
             required
             id="expDate"
+            placeholder='MM/YY'
             label="Expiry date"
             value = {expDate}
             onChange={handleExpDateChange}
+            onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
@@ -81,16 +110,15 @@ export default function PaymentForm() {
             label="CVV"
             value = {cvv}
             onChange={handleCVVChange}
+            onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault();
+                }
+              }}
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
-            label="Remember credit card details for next time"
           />
         </Grid>
       </Grid>
