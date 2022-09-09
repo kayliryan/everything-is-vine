@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, clearCart, updateQuantityFromShoppingCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
-// import bootstrap from './public/assets/css/bootstrap.module.css'
 
 
 
@@ -13,6 +12,41 @@ function ShoppingCartTest(){
   const [index_state, setIndex] = useState(-1)
   const [firstRender, hasRendered] = useState(true)
   const dispatch = useDispatch();
+
+  
+  
+  async function deleteItem(e, index=index) {
+    dispatch(deleteCartItem({"index": index}))
+  }
+  
+  
+  async function checkAndSetQuantity(e, index=index){
+    // bug to fix: unable to change quantity input in front end without highlighting number
+    if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+      e.target.value = 1;
+    }
+    if(parseInt(e.target.value) > parseInt(e.target.max)){
+      e.target.value = e.target.max;
+    }
+    setCustQuantity(parseInt(e.target.value))
+    setIndex(index)
+  }
+  
+  async function orderPlaced(e) {
+    dispatch(clearCart())
+  }
+  
+  
+  useEffect(() => {
+    if (firstRender === true) {
+      hasRendered(false)
+    } 
+    else {
+      let data = {"cust_quantity": cust_quantity, "index": index_state}
+      dispatch(updateQuantityFromShoppingCart(data)) 
+    }
+  }, [cust_quantity, index_state]);
+  
   
   const subTotalSum = cartItems.reduce(
     (total, currentItem) => total = total + (currentItem.price * currentItem.cust_quantity), 0
@@ -20,60 +54,30 @@ function ShoppingCartTest(){
   const discountRate = .10;
   const discount = subTotalSum * discountRate;
   const total = subTotalSum - discount;
-
-
-  async function deleteItem(e, index=index) {
-    dispatch(deleteCartItem({"index": index}))
-    }
-
-
-  async function checkAndSetQuantity(e, index=index){
-      // bug to fix: unable to change quantity input in front end without highlighting number
-      if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
-        e.target.value = 1;
-      }
-      if(parseInt(e.target.value) > parseInt(e.target.max)){
-        e.target.value = e.target.max;
-      }
-      setCustQuantity(parseInt(e.target.value))
-      setIndex(index)
-    }
-
-  async function orderPlaced(e) {
-    dispatch(clearCart())
-  }
-
-
-  useEffect(() => {
-    if (firstRender === true) {
-      hasRendered(false)
-    } 
-    else {
-    let data = {"cust_quantity": cust_quantity, "index": index_state}
-    dispatch(updateQuantityFromShoppingCart(data)) 
-    }
-  }, [cust_quantity, index_state]);
-
+  
   
 
 
+
+
+  
   return (
-
-    <div className="App">
-      <header className="section-header">
-        <section className="header-main border-bottom">
-          <div className="container">
-            <div className="row align-items-center">
-
-
-              <div className="col-lg-2 col-4">
-                <a href="#">Company Name</a>
-              </div>
-
-
-
-              {/* <div className="col-lg-6 col-sm-12">
-                <form action="#" className="search">
+    
+      <div className="App">
+        <header className="section-header">
+          <section className="header-main border-bottom">
+            <div className="container">
+              <div className="row align-items-center">
+    
+    
+                {/* <div className="col-lg-2 col-4">
+                  <a href="#">Company Name</a>
+                </div> */}
+    
+    
+    
+                {/* <div className="col-lg-6 col-sm-12">
+                  <form action="#" className="search">
                   <div className="input-group w-100">
                     <input
                       type="text"
@@ -123,11 +127,19 @@ function ShoppingCartTest(){
       </header>
 
       <section className="section-content padding-y">
+
+
+      
         <div className="container">
           <div className="row">
-            <main className="col-md-9">
+            <div className="col-md-12">
               <div className="card">
+
+
                 <table className="table table-borderless table-shopping-cart">
+
+
+
                   <thead className="text-muted">
                     <tr className="small text-uppercase">
                       <th scope="col">Product</th>
@@ -142,6 +154,9 @@ function ShoppingCartTest(){
                       </th>
                     </tr>
                   </thead>
+
+
+
                   <tbody>
                     {cartItems.map((cartItem, index) => {
                     return (
@@ -184,25 +199,46 @@ function ShoppingCartTest(){
 
 
                 </table>
+
+
+
+
                 <div className="card-body border-top">
+
                   <a href="#" className="btn btn-primary float-md-right">
                     {" "}
                     Make Purchase <i className="fa fa-chevron-right" />{" "}
                   </a>
+
                   <a href="#" className="btn btn-primary">
                     {" "}
                     <i className="fa fa-chevron-left" /> Continue shopping{" "}
                   </a>
+                  
                 </div>
+
+
+
               </div>
+
+
               <div className="alert alert-primary mt-3">
                 <p className="icontext">
                   <i className="fa-regular fa-user-plus" />   Sign-up and become a member to get 10% off! 
                 </p>
+
+
               </div>
-            </main>
-            <aside className="col-md-3">
-              <div className="card mb-3">
+
+
+            </div>
+
+
+
+
+
+            <aside className="col-md-5">
+              <div className="card mb-5">
                 <div className="card-body">
                   <form>
                     <div className="form-group">
@@ -212,7 +248,7 @@ function ShoppingCartTest(){
                           type="text"
                           className="form-control"
                           name=""
-                          placeholder="Coupon code"
+                          placeholder="CODE"
                         />
                         <span className="input-group-append">
                           <button className="btn btn-primary">Apply</button>
@@ -228,20 +264,20 @@ function ShoppingCartTest(){
                 <div className="card-body">
                   <dl className="dlist-align">
                     <dt>Subtotal:</dt>
-                      <dd className="text-right">USD $ { subTotalSum }</dd>
+                      <dd className="text-right">$ { subTotalSum }</dd>
 
                   </dl>
                   <dl className="dlist-align">
                     <dt>Discount:</dt>
                     {/* use turnary operator to display discount if member */}
 
-                    <dd className="text-right">USD $ { discount }</dd>
+                    <dd className="text-right">$ { discount }</dd>
 
                   </dl>
                   <dl className="dlist-align">
                     <dt>Total:</dt>
                     <dd className="text-right  h5">
-                      <strong>USD $ { total }</strong>
+                      <strong>$ { total }</strong>
                     </dd>
                   </dl>
                   <hr />
@@ -256,57 +292,104 @@ function ShoppingCartTest(){
             </aside>
           </div>
         </div>
+
+
+
+
       </section>
       <footer className="section-footer border-top padding-y">
       </footer>
     </div>
 
-      );
+  );
 
-
-
-  // return(
-  //     <>
-      
-  //         <table className="table table-hover">
-  //             <thead>
-  //                 <tr>
-  //                 <th>Shopping Cart</th>
-  //                 <th>Wine</th>
-  //                 <th>Quantity</th>
-  //                 <th>Price</th>
-  //                 <th>Total Price</th>
-  //                 <th>Delete</th>
-  //                 </tr>
-  //             </thead>
-  //             <tbody className="table-group-divider">
-  //                     {cartItems.map((cartItem, index) => {
-  //                     return (
-  //                         <tr key={ cartItem.id }>
-  //                           <td><img
-  //                         className="mx-auto img-thumbnail"
-  //                         src={ cartItem.picture_url }/></td>
-  //                           <td>Index {index}</td>
-  //                           <td>{cartItem.year} {cartItem.brand} {cartItem.varietal}</td>
-  //                           <td>${cartItem.price} </td>
-  //                           <td> ${cartItem.cust_quantity * cartItem.price}</td>
-  //                           <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id={index} name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /> </td>
-  //                           <td> <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Delete</button> </td>
-  //                           <td> <button onClick = {orderPlaced} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Clear Cart</button> </td>
-  //                             {/* <td> { currentDataObj.item.year/brand/varietal } </td>
-  //                             <td> { currentDataObj.item.cust_quantity } </td>
-  //                             // input element?: put cust_quantity as the placeholder?
-  //                             // buttons to increment up and down? left and right?
-  //                             <td> { dataObj.item.price } </td> */}
-  //                           </tr>
-  //                     );
-  //                 })}
-  //             </tbody>
-  //         </table>            
-  //     </>
-  // )
-  // };
 }
 
 export default ShoppingCartTest;
+
+
+
+      
+
+
+
+
+
+//   return(
+//       <>
+//         <div className="container">
+//           <header className="section-header">
+//             <section className="header-main border-bottom">
+//               <div className="container">
+
+
+
+
+//                 <table className="table table-borderless table-shopping-cart">
+
+
+
+
+//                     <thead className="text-muted">
+//                         <tr className="small text-uppercase">
+//                           <th scope="col">Shopping Cart</th>
+//                           <th scope="col">Wine</th>
+//                           <th scope="col">Price / Bottle</th>
+//                           <th scope="col">Quantity</th>
+//                           <th scope="col">Price</th>
+//                           <th scope="col"></th>
+//                           <th scope="col"></th>
+//                         </tr>
+//                     </thead>
+
+
+
+
+
+
+//                     <tbody className="table-group-divider text">
+//                       {cartItems.map((cartItem, index) => {
+//                         return (
+//                           <tr key={ cartItem.id }>
+//                             <td> 
+//                               <img className="mx-auto img-thumbnail" src={ cartItem.picture_url }/> 
+//                             </td>
+//                             <td> 
+//                               { cartItem.year } { cartItem.brand } { cartItem.varietal } 
+//                             </td>
+//                             <td> 
+//                               $ { cartItem.price } </td>
+//                             <td> 
+//                               <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id={index} name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /> 
+//                             </td>
+//                             <td> 
+//                               $ { cartItem.cust_quantity * cartItem.price }
+//                             </td>
+//                             <td>
+//                               <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary">
+//                               <span className="bi bi-trash"></span> Delete</button> 
+//                             </td>
+//                             <td> 
+//                               <button onClick = {orderPlaced} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Clear Cart</button> 
+//                             </td>
+//                           </tr>
+//                         );
+//                       })}
+//                     </tbody>
+//                 </table>
+
+
+
+        
+//               </div>
+//             </section>            
+//           </header>
+//         </div>                
+//       </>
+//   )
+//   };
+
+
+
+// export default ShoppingCartTest;
 
