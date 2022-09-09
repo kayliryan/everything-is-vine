@@ -1,3 +1,11 @@
+## September 8, 2022
+
+* Setting up Review Portion or React
+
+Today I continued to get my Checkout set up, focusing on the dynamic Review Page. Good progress was made, it's just a tedious process with many edge cases to consider.
+
+Today I learned how to round any number (integers included) to a specified number of decimal places. It was surprisingly complicated to find an answer that satisfied edge cases with Javascript.
+
 ## September 7, 2022
 
 * Setting up Context to house Payment Info

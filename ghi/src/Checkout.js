@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { useContext } from 'react';
+import { MainContext } from './mainContext';
 
 function Copyright() {
   return (
@@ -47,6 +49,7 @@ function getStepContent(step) {
 const theme = createTheme();
 
 export default function Checkout() {
+  
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
