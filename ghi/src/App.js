@@ -18,7 +18,7 @@ function App(props) {
       <BrowserRouter>
           <div className="container">
             <Routes>
-              <Route path="/" element={<WineryList />} />
+              <Route path="/everything-is-vine" element={<WineryList />} />
             </Routes>
             <Routes>
               <Route element={<NavbarLayout />}>
