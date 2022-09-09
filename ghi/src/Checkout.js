@@ -11,6 +11,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { Alert } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
@@ -51,12 +52,52 @@ const theme = createTheme();
 export default function Checkout() {
   
   const [activeStep, setActiveStep] = React.useState(0);
+  let [missingFieldsError, setMissingFieldsError] = React.useState(false);
+
+  const {       
+    firstName, setFirstName, 
+    lastName, setLastName, 
+    addressOne, setAddressOne,
+    // addressTwo, setAddressTwo,
+    city, setCity,
+    state, setState,
+    zipCode ,setZipCode,
+    country, setCountry,
+    cardName, setCardName, 
+    cardNumber, setCardNumber, 
+    expDate, setExpDate,
+    cvv, setCVV } = useContext(MainContext);
+
+  function validateForms(){
+    if (activeStep == 0) {
+      if (firstName === '' || lastName === '' || 
+          addressOne === '' || city === '' ||
+          state === '' || zipCode === '' || country === '') {
+        return setMissingFieldsError(true);
+      } else {
+        return handleNext();
+      }
+    }
+    if (activeStep == 1) {
+      if (cardName === '' || cardNumber === '' || 
+          expDate === '' || cvv === '' ){
+        return setMissingFieldsError(true);
+      } else {
+        return handleNext();
+      }
+    }
+    if (activeStep == 2) {
+      return handleNext()
+    }
+  }
 
   const handleNext = () => {
+    setMissingFieldsError(false);
     setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => {
+    setMissingFieldsError(false);
     setActiveStep(activeStep - 1);
   };
 
@@ -110,10 +151,10 @@ export default function Checkout() {
                       Back
                     </Button>
                   )}
-
+                  {missingFieldsError && <Alert severity="error">Please fill out all fields!</Alert>}
                   <Button
                     variant="contained"
-                    onClick={handleNext}
+                    onClick={validateForms}
                     sx={{ mt: 3, ml: 1 }}
                   >
                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
