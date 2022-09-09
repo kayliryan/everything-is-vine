@@ -33,3 +33,4 @@ class TestWineriesViews(TestCase):
         client = Client()
         response = client.get(reverse("api_list_wineries"))
         self.assertEquals(response.status_code, 200)
+
