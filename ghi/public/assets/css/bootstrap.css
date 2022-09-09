@@ -1524,23 +1524,23 @@ pre code {
   padding: 0.75rem;
   vertical-align: top;
   /* border-top: 2px solid #ba55d3 !important; */
-  background-color: #D09EE1 !important;
+  background-color: #ba55d3 !important;
 
 }
 
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #D09EE1  !important;
+  border-top: 1px solid #ba55d3  !important;
 }
 
 .table thead th {
   vertical-align: bottom;
-  border-bottom: 1px solid #D09EE1 !important;
+  border-bottom: 1px solid #ba55d3 !important;
 }
 
 .table tbody + tbody {
-  border-top: 1px solid #D09EE1 !important;
+  border-top: 1px solid #ba55d3 !important;
 }
 
 .table-sm th,
@@ -1922,7 +1922,7 @@ pre code {
 .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #D09EE1;
+  border-color: #ba55d3;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(49, 103, 235, 0.25);
 }
@@ -4362,7 +4362,7 @@ input[type=button].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid #D09EE1 !important;
+  border: 1px solid #ba55d3 !important;
   border-radius: 0.37rem;
 }
 .card > hr {
@@ -4908,8 +4908,8 @@ a.badge-gray-light:focus, a.badge-gray-light.focus {
 
 .alert-primary {
   color: #FFFFFF !important;
-  background-color: #D09EE1 !important;
-  border-color: #D09EE1 !important;
+  background-color: #ba55d3 !important;
+  border-color: #ba55d3 !important;
 }
 .alert-primary hr {
   border-top-color: #9932cc !important;
