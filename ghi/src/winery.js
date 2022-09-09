@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
 
 function Winery () {
 
     const [winery,setWinery] = useState(
         {}
+    )
+    const [staff, setStaff]=useState(
+        false
     )
 
     const {id} = useParams()
@@ -23,13 +26,32 @@ function Winery () {
             setWinery(data.winery)
         }
 
+    }
+    async function getCurrentUser() {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+        const response = await fetch(url, {
+        credentials: 'include',
+        });
+        if (response.ok) {
+        const user = await response.json();
+
+        if (user.user.employee === true && user.user.winery === parseInt(id)){
+            setStaff(true)
         }
+        }
+    }
+    if (token) {
+        getCurrentUser();
+    }  
 
     useEffect( () => {fetchWinery(token)},[])
 
     return (
         <>
         <div className='px-4 py-5 mt-0 my-5 text-center bg-transparent rounded opacity-100'>
+            <div className='px-3'>
+                <Link to={`/wineries/${id}/edit`} className={"btn btn-warning p-2 mb-1 mt-1" + (staff ? "": " d-none")}>Edit Winery Details</Link>
+            </div>
             <h2 className='display-4'>Welcome to {winery.name}</h2>
             <div className="rounded mt-4" style={{ 
                 backgroundImage: `url(${winery.url})`,

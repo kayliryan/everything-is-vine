@@ -7,6 +7,7 @@ function WineColumn(props) {
     const {id} = useParams()
 return (
     <div className="col">
+    {console.log(props)}
     {props.list.map(data => {
         console.log(data)
         const wine = data;
@@ -23,7 +24,15 @@ return (
             </p>
             </div>
             <div className="d-flex justify-content-center card-footer">
-            Alcohol By Volume: {wine.abv}%
+                <div>Alcohol By Volume: {wine.abv}%</div>
+                <div className='px-1'>
+                    <span>
+                    <Link to={`/wines/${wine.id}/edit`} className={"btn btn-warning p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Edit</Link>
+                    </span>
+                    <span className='px-1'>
+                    <Link to={`/wines/${wine.id}/delete`} className={"btn btn-danger p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Delete</Link>  
+                    </span>
+                </div>
             </div>
         </div>
         );
@@ -38,6 +47,9 @@ function WineList() {
     )
     const [wineryName,setWineryName] = useState(
         ''
+    )
+    const [staff, setStaff]=useState(
+        false
     )
 
     const {id} = useParams()
@@ -84,6 +96,23 @@ function WineList() {
         console.error(e);
         }
     }
+    async function getCurrentUser() {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+        const response = await fetch(url, {
+        credentials: 'include',
+        });
+        if (response.ok) {
+        const user = await response.json();
+        console.log(user.user.employee)
+
+        if (user.user.employee === true && user.user.winery === parseInt(id)){
+            setStaff(true)
+        }
+        }
+    }
+    if (token) {
+        getCurrentUser();
+    }  
 
     useEffect( () => {fetchWines(token)},[])
 
@@ -97,13 +126,16 @@ function WineList() {
                         <p className="lead mb-4">
                         Please enjoy a selection of our finest wines from {wineryName}.
                         </p>
+                        <p>
+                        <Link to={`wineries/${id}/wines/`} className={"btn btn-success p-2 mb-1 mt-1" + (staff ? "": " d-none")}>Add A New Wine</Link>
+                        </p>
                 </div>
                 </div>
                     <div className="container">
                     <div className="row mt-2">
                         {wineColumns.map((wineList, index) => {
                         return (
-                            <WineColumn id={id} key={index} list={wineList} />
+                            <WineColumn id={id} key={index} list={wineList} staff={staff}/>
                         );
                         })}
                 </div>

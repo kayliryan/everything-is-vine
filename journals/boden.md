@@ -34,6 +34,13 @@ Today was a long day working on react front end.  I was able to successfully sty
 Today was productive.  I was able to add the login,logout,signup buttons to the nav.  I verified that they all worked correctly and then added the functionality to grab the jwt, set logged in state as true or false, and display/hide those nav buttons appropriately depending on logged in state. 
 
 09/02/22:
-Today I created the contact page.  I started by using a free map API to grab coordinates depending on an input address and used that to populate a map in react.  I also setup the functionality for sending an email to the winery.  There was an issue where the map api was taking too long and react was loading without it but i found a way to update the map state once the api call came in.  The rest of the time was spent using CSS, CSS grid, and styling the page.  
+Today I created the contact page.  I started by using a free map API to grab coordinates depending on an input address and used that to populate a map in react.  I also setup the functionality for sending an email to the winery.  There was an issue where the map api was taking too long and react was loading without it but I found a way to update the map state once the api call came in.  The rest of the time was spent using CSS, CSS grid, and styling the page.  
+
+09/06/22-09/07/22:
+These two days were spent on resolving the merge conflicts with main.  We had a lot of competing CSS that needed to be cleaned up and it took some time to figure out why all of the front end api calls stopped working.  It ended up being that some of the encoders were changed so that the values were put into a separate dictionary.  Adding a function to list the encoded response fixed this issue.  After many hours of working through these conflicts I was able to successfully merge.
+
+09/08/22:
+Today I worked on user functionality, specifically the ability to grab information about the current logged in user from the user model.  I was able to successfully get this to work and also tested the ability to show and hide content on the webpage depending on if a user is designated as an "employee" for a specific winery.  This will give "staff" the ability to edit winery information, and create/update/delete specific wines for each winery as soon as those forms are created. 
+
 
 

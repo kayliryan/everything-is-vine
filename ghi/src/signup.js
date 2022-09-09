@@ -24,21 +24,22 @@ const [token, login, logout, signup] = useToken();
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
-console.log(data)
+    console.log(data)
 
-const submitHandler = e => {
-e.preventDefault();
-let winery = {id}.id
+    const submitHandler = e => {
+    e.preventDefault();
+    let winery = {id}.id
 
-signup(
-    data.username[0], 
-    data.password[0],
-    data.full_name[0],
-    data.address[0],
-    data.phone[0],
-    data.email[0],
-    winery
-    )
+
+    signup(
+        data.username[0], 
+        data.password[0],
+        data.full_name[0],
+        data.address[0],
+        data.phone[0],
+        data.email[0],
+        winery
+        )
 }
 
 console.log(data);

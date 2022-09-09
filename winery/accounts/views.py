@@ -23,6 +23,21 @@ class UserListEncoder(ModelEncoder):
     def get_extra_data(self, o):
         return {"winery": o.winery_id}
 
+class UserEncoder(ModelEncoder):
+    model = User
+    properties = [
+        "id",
+        "name",
+        "address",
+        "phone",
+        "email",
+        "employee",
+        "winery",
+        ]
+    def get_extra_data(self, o):
+        return {"winery": o.winery_id}
+
+
 
 @require_http_methods(["GET"])
 def api_user_token(request):
@@ -39,6 +54,7 @@ def api_user_token(request):
 def api_list_users(request):
     if request.method == "GET":
         users = User.objects.all()
+        users = list(users)
 
         # users["winery"] = Winery.objects.filter(id=users.winery)
 
@@ -69,18 +85,15 @@ def api_list_users(request):
                 encoder=UserListEncoder,
             )
 
-# @require_http_methods(["GET"])
-# @auth.jwt_login_required
-# def api_current_user(request):
-#     user_id = request.payload["user"]["id"]
-#     user = User.objects.get(id=user_id)
-#     return JsonResponse(
-#         {
-#             "id": user.id,
-#             "username": user.username,
-#             "email": user.email,
-#         }
-#     )
+@require_http_methods(["GET"])
+@auth.jwt_login_required
+def api_current_user(request):
+    user_id = request.payload["user"]["id"]
+    user = User.objects.get(id=user_id)
+    return JsonResponse(
+        {"user": user},
+        encoder=UserEncoder,
+    )
 
 
 # @require_http_methods(["POST"])
