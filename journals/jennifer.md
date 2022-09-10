@@ -17,8 +17,15 @@ Today, I continued working on:
 
 I was able to solve my CSS problem.  Moving the folder containing the
 css files for the Shopping Cart page into /src and renaming the bootstrap
-file allowed me to import it into the ShoppingCartJS file.  This fixed our
-issue so that I could finish completing the CSS.
+file allowed me to import it into the ShoppingCart.js file.  This fixed our
+issue so that I could finish completing the CSS.  Kayli and I discussed going
+over with Boden some of the CSS to make sure there would not be any issues
+with other pages.
+
+* Update
+While looking at the other pages of our React, I realize that the bootstrap.css
+file might be overriding some of the other pages, such as the contact page and
+wine details.  I will discuss with the team on Monday as planned.
 
 
 ## Thursday, September 8, 2022
