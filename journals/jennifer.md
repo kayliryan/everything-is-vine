@@ -25,7 +25,8 @@ with other pages.
 * Update
 While looking at the other pages of our React, I realize that the bootstrap.css
 file might be overriding some of the other pages, such as the contact page and
-wine details.  I will discuss with the team on Monday as planned.
+wine details.  I will wait to push to my branch and discuss this with the team 
+on Monday, as planned.  
 
 
 ## Thursday, September 8, 2022
