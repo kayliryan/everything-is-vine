@@ -8,6 +8,29 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 ## JOURNAL ENTRIES
 
+
+
+## Friday, September 9, 2022
+Today, I continued working on:
+
+* the Shopping Cart page CSS and how to apply it to just that page
+
+I was able to solve my CSS problem.  Moving the folder containing the
+css files for the Shopping Cart page into /src and renaming the bootstrap
+file allowed me to import it into the ShoppingCartJS file.  This fixed our
+issue so that I could finish completing the CSS.
+
+
+## Thursday, September 8, 2022
+Today, I continued working on:
+
+* the Shopping Cart page CSS and how to apply it to just that page
+
+After talking to Ryan about the bootstrap.css issue, he suggested a few solutions
+to my problem.  I spent most of today reading about React styled-components, CSS 
+modules, and React Scope CSS.  
+
+
 ## Wednesday, September 7, 2022
 Today, I continued working on:
 
