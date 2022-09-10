@@ -12,25 +12,29 @@ import { useSelector } from 'react-redux';
 
 export default function Review() {
     const { cartItems } = useSelector((state) => state.cart);
-    const { 
-        firstName, setFirstName, 
-        lastName, setLastName, 
-        addressOne, setAddressOne,
-        // addressTwo, setAddressTwo,
-        city, setCity,
-        state, setState,
-        zipCode ,setZipCode,
-        country, setCountry,
-        cardName, setCardName, 
-        cardNumber, setCardNumber, 
-        expDate, setExpDate,
-        cvv, setCVV  } = useContext(MainContext);
+    let { 
+        firstName,
+        lastName,
+        addressOne,
+        addressTwo,
+        city,
+        state,
+        zipCode,
+        country,
+        cardName, 
+        cardNumber,
+        expDate,
+        lastFour, setLastFour } = useContext(MainContext);
 
     let addresses = [addressOne, city, state, zipCode, country];
+    let addressesTwoStreets = [addressOne, addressTwo, city, state, zipCode, country]
+    setLastFour((cardNumber.split("")).slice(15,20).join(""));
+    let hiddenCardNumber = `xxxx-xxxx-xxxx-${lastFour}`;
+
 
     const payments = [
         { name: 'Card holder', detail: cardName },
-        { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
+        { name: 'Card number', detail: hiddenCardNumber },
         { name: 'Expiry date', detail: expDate },
     ];
 
@@ -47,7 +51,6 @@ export default function Review() {
     const discountRate = .10;
     let discount = formatter.format(subTotalSum * discountRate);
     let tax = parseFloat(formatter.format(.0725 * (parseFloat(subTotalSum)-discount)));
-    // tax = formatter.format(tax);
     let total = formatter.format(subTotalSum + tax - discount);
 
     const subCosts = [
@@ -66,7 +69,7 @@ return (
             {cartItems.map((cartItem) => (
             <ListItem key={cartItem.brand} sx={{ py: 1, px: 0 }}>
                 <ListItemText primary={`${cartItem.year} ${cartItem.brand}`} secondary={cartItem.varietal} />
-                <Typography variant="body2">{`${cartItem.cust_quantity} @ $${cartItem.price} each`}</Typography>
+                <Typography variant="body2">{`${cartItem.cust_quantity} @ $${cartItem.price} = $${cartItem.cust_quantity*cartItem.price}`}</Typography>
             </ListItem>
             ))}
             {subCosts.map((subCost) => (
@@ -82,17 +85,18 @@ return (
                 </ListItem>
             ))}
         </List>
-        <Grid container spacing={2}>
+        <Grid container spacing={-5}>
             <Grid item xs={12} sm={6}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                Billing
+                Billing Details
             </Typography>
             <Typography gutterBottom>{`${firstName} ${lastName}`}</Typography>
-            <Typography gutterBottom>{addresses.join(', ')}</Typography>
+            {(addressTwo === "") && <Typography gutterBottom>{addresses.join(', ')}</Typography> }
+            {(addressTwo !== "") && <Typography gutterBottom>{addressesTwoStreets.join(', ')}</Typography> }
             </Grid>
             <Grid item container direction="column" xs={12} sm={6}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                Payment details
+                Payment Details
             </Typography>
             <Grid container>
             {payments.map((payment) => (

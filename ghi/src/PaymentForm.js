@@ -15,9 +15,11 @@ export default function PaymentForm() {
         expDate, setExpDate,
         cvv, setCVV } = useContext(MainContext);
 
+
     function handleCardNameChange(e) {
         setCardName(e.target.value)
     }
+
 
     function handleCardNumberChange(e) {
         if (e.target.value.length > 19) {
@@ -31,6 +33,7 @@ export default function PaymentForm() {
         setCardNumber(e.target.value)
         }
 
+        
     function handleExpDateChange(e) {
         if (e.target.value.length > 5) {
             return;

@@ -23,7 +23,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://beach-bums.gitlab.io/everything-is-vine/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -79,14 +79,16 @@ export default function Checkout() {
       }
     }
     if (activeStep == 1) {
-      if (cardName === '' || cardNumber === '' || 
-          expDate === '' || cvv === '' ){
+      if (cardName === '' || cardNumber.length !== 19 ||
+          expDate.length !== 5 || cvv.length !== 3) {
         return setMissingFieldsError(true);
       } else {
         return handleNext();
       }
     }
     if (activeStep == 2) {
+      //Complete logic to check against the credit card function and post an order to the database
+      //if it clears then return handleNext
       return handleNext()
     }
   }
@@ -146,12 +148,12 @@ export default function Checkout() {
               <React.Fragment>
                 {getStepContent(activeStep)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  {missingFieldsError && <Alert severity="error">Please fill out all required fields!</Alert>}
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                       Back
                     </Button>
                   )}
-                  {missingFieldsError && <Alert severity="error">Please fill out all fields!</Alert>}
                   <Button
                     variant="contained"
                     onClick={validateForms}

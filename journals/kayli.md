@@ -1,5 +1,10 @@
 ## September 9, 2022
 
+* Completed Front End Checkout Functionality 
+
+Today I finished functionality for the front end portion of Checkout which includes AddressForm.js, PaymentForm.js, and Review.js. I built out practical restraints for the text fields to guarantee that a card number could not have more than 16 digits, can not input anything but a digit, and will automatically include spacing for an optimized user experience. I extended these restraints to Expiry Date, CVV and other text fields that could benefit from it. I built out logic that would stop a user from going to the next page if they did not fill out all of the required fields. Every aspect of the front end is complete for Checkout and has all of the needed data to be able to create Orders and Shopping Items in the database once the user clicks "Place Order"
+
+Today I learned how complicated the tiniest of features can be to implement. I have a newfound respect for all of the functionality we have come to expect from websites we visit every day.
 
 
 ## September 8, 2022
@@ -10,6 +15,7 @@ Today I continued to get my Checkout set up, focusing on the dynamic Review Page
 
 Today I learned how to round any number (integers included) to a specified number of decimal places. It was surprisingly complicated to find an answer that satisfied edge cases with Javascript.
 
+
 ## September 7, 2022
 
 * Setting up Context to house Payment Info
@@ -17,6 +23,7 @@ Today I learned how to round any number (integers included) to a specified numbe
 Today I set up Context so that all of the info passed in by the user while preparing for Checkout can be saved from form to form. I verified that the state remained, and began working on displaying that information in my Review.js. 
 
 Today I learned about useContext, and how much easier it is than Redux Persist!
+
 
 ## September 2, 2022
 

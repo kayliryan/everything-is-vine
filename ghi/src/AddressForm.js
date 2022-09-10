@@ -11,7 +11,7 @@ export default function AddressForm() {
       firstName, setFirstName, 
       lastName, setLastName, 
       addressOne, setAddressOne,
-      // addressTwo, setAddressTwo,
+      addressTwo, setAddressTwo,
       city, setCity,
       state, setState,
       zipCode ,setZipCode,
@@ -30,9 +30,14 @@ export default function AddressForm() {
         setAddressOne(e.target.value)
     }
 
-    // function handleAddressTwoChange(e) {
-    //     setAddressTwo(e.target.value)
-    // }
+    function handleAddressTwoChange(e) {
+      // if (e.target.value === "") {
+      //   setAddressTwo(undefined);
+      //   console.log('hello')
+      // } else {
+        setAddressTwo(e.target.value)
+      // }
+    }
 
     function handleCityChange(e) {
         setCity(e.target.value)
@@ -96,7 +101,7 @@ export default function AddressForm() {
             variant="standard"
           />
         </Grid>
-        {/* <Grid item xs={12}>
+        <Grid item xs={12}>
           <TextField
             id="address2"
             name="address2"
@@ -107,7 +112,7 @@ export default function AddressForm() {
             autoComplete="shipping address-line2"
             variant="standard"
           />
-        </Grid> */}
+        </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required

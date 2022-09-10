@@ -16,7 +16,7 @@ function App(props) {
   let [firstName, setFirstName] = useState("")
   let [lastName, setLastName] = useState("")
   let [addressOne, setAddressOne] = useState("")
-  // let [addressTwo, setAddressTwo] = useState(null)
+  let [addressTwo, setAddressTwo] = useState("")
   let [city, setCity] = useState("")
   let [state, setState] = useState("")
   let [zipCode, setZipCode] = useState("")
@@ -25,6 +25,8 @@ function App(props) {
   let [cardNumber, setCardNumber] = useState("")
   let [expDate, setExpDate] = useState("")
   let [cvv, setCVV] = useState("")
+  let [lastFour, setLastFour] = useState("")
+
 
 
   return (
@@ -32,7 +34,7 @@ function App(props) {
       firstName, setFirstName,
       lastName, setLastName,
       addressOne, setAddressOne,
-      // addressTwo, setAddressTwo,
+      addressTwo, setAddressTwo,
       city, setCity,
       state, setState,
       zipCode, setZipCode,
@@ -41,6 +43,7 @@ function App(props) {
       cardNumber, setCardNumber,
       expDate, setExpDate,
       cvv, setCVV,
+      lastFour, setLastFour,
     }}>
       <AuthProvider>
         <BrowserRouter>
