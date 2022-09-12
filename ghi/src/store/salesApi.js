@@ -6,10 +6,14 @@ export const salesApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_SALES_API,
     }),
+    refetchOnReconnect: true,
+    keepUnusedDataFor: 10,
     endpoints: builder => ({
         getWineDetails: builder.query({
-            query: ({winery_id, winevo_id}) => `/api/wineries/${winery_id}/wines/${winevo_id}/`
+            query: ({winery_id, winevo_id}) => `/api/wineries/${winery_id}/wines/${winevo_id}/`,
+
         }),
     }),
 });
+
 export const { useGetWineDetailsQuery } = salesApi;

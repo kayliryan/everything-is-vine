@@ -13,6 +13,7 @@ class WineVOEncoder(ModelEncoder):
     model = WineVO
     properties = [
         "id",
+        "winery_id",
         "brand",
         "year",
         "varietal",
