@@ -10,5 +10,6 @@ urlpatterns = [
     # # list of wines from a specific winery
     # path("wineries/<int:pk1>/wines/", api_list_wines, name="api_list_wines"),
     # detail of specific wine from a specific winery
-    path("wineries/<int:pk1>/wines/<int:pk2>/", api_show_wine, name="api_show_wine"),
+    path("wineries/<int:pk1>/wines/<int:pk2>/", 
+         api_show_wine, name="api_show_wine"),
 ]
