@@ -4,6 +4,7 @@ import json
 from common.json import ModelEncoder
 from .models import Winery, Wine
 from .acls import get_geo
+
 # import djwto.authentication as auth
 
 
@@ -62,9 +63,7 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery": winery, "geo": geo},
-                encoder=WineryEncoder,
-                safe=False
+                {"winery": winery, "geo": geo}, encoder=WineryEncoder, safe=False
             )
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
