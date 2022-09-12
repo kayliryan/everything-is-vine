@@ -63,7 +63,8 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery": winery, "geo": geo}, encoder=WineryEncoder, safe=False
+                {"winery": winery, "geo": geo}, 
+                encoder=WineryEncoder, safe=False
             )
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
