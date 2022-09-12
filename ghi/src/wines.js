@@ -5,12 +5,20 @@ import Winery from './winery';
 
 function WineColumn(props) {
     const {id} = useParams()
+
+    async function delete_wine(wine_id){
+
+        const url = `http://localhost:8000/api/wines/${wine_id}/delete/`;
+
+        const response = await fetch(url, {method: "DELETE"});
+
+        if (response.ok) {
+            window.location.reload()
+    }}
 return (
     <div className="col">
-    {console.log(props)}
-    {props.list.map(data => {
-        console.log(data)
-        const wine = data;
+    {props.list.map(wine => {
+
         return (
         <div key={wine.id} className="card mb-3 shadow mt-4">
             <img src={wine.picture_url} className="card-img-top mt-3" />
@@ -30,7 +38,7 @@ return (
                     <Link to={`/wines/${wine.id}/edit`} className={"btn btn-warning p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Edit</Link>
                     </span>
                     <span className='px-1'>
-                    <Link to={`/wines/${wine.id}/delete`} className={"btn btn-danger p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Delete</Link>  
+                    <button onClick={()=> {delete_wine(wine.id)}} className={"btn btn-danger p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Delete</button>  
                     </span>
                 </div>
             </div>

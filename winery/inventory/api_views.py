@@ -4,7 +4,7 @@ import json
 from common.json import ModelEncoder
 from .models import Winery, Wine
 from .acls import get_geo
-# import djwto.authentication as auth
+import djwto.authentication as auth
 
 class WineryEncoder(ModelEncoder):
     model = Winery
@@ -49,7 +49,7 @@ def api_list_winery(request):
             encoder=WineryEncoder,
         )
 
-@require_http_methods(["DELETE", "GET", "PUT"])
+@require_http_methods(["GET", "PUT", "DELETE"])
 def api_winery(request, pk):
     if request.method == "GET":
         try:
@@ -117,7 +117,8 @@ def api_list_all_wines(request):
 
         try:
             if "winery" in content:
-                winery = Winery.objects.get(name=content["winery"])
+                winery = Winery.objects.get(id=pk)
+                # winery = Winery.objects.get(name=content["winery"])
                 content["winery"] = winery
         except Winery.DoesNotExist:
             return JsonResponse(
@@ -131,3 +132,88 @@ def api_list_all_wines(request):
             encoder=WineListEncoder,
             safe=False,
         )
+
+#staff login req - update winery details 
+@auth.jwt_login_required 
+@require_http_methods(["PUT"])
+def api_staff_winery(request, pk):
+    if request.method == "PUT":
+        content = json.loads(request.body)
+
+        Winery.objects.filter(id=pk).update(**content)
+        winery = Winery.objects.get(id=pk)
+        return JsonResponse(
+            winery,
+            encoder=WineryEncoder,
+            safe=False,
+        )
+
+#staff login req - update and delete individual wines
+@auth.jwt_login_required 
+@require_http_methods(["GET", "PUT"])
+def api_staff_wine(request, pk):
+    if request.method == "GET":
+        try:
+            wine = Wine.objects.filter(id=pk)
+            wine = list(wine)
+            return JsonResponse(
+                {"wine":wine},
+                encoder=WineListEncoder,
+                safe=False
+            )
+        except Wine.DoesNotExist:
+            response = JsonResponse({"message": "Wine does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "PUT":
+        content = json.loads(request.body)
+
+        try:
+            if "winery" in content:
+                winery = Winery.objects.get(id=content["winery"])
+                content["winery"]=winery
+        except Winery.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid winery name"},
+                status=400,
+            )
+
+        Wine.objects.filter(id=pk).update(**content)
+        wine = Wine.objects.get(id=pk)
+
+
+        return JsonResponse(
+            wine,
+            encoder=WineListEncoder,
+            safe=False,
+        )
+
+#staff login req - create new wine
+# @auth.jwt_login_required 
+@require_http_methods(["POST"])
+def api_staff_new_wine(request):
+    if request.method == "POST":
+        content = json.loads(request.body)
+
+        try:
+            if "winery" in content:
+                winery = Winery.objects.get(id=content["winery"])
+                content["winery"]=winery
+        except Winery.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid winery name"},
+                status=400,
+            )
+
+        wine = Wine.objects.create(**content)
+        return JsonResponse(
+            {"wine": wine},
+            encoder=WineListEncoder,
+            safe=False,
+        )
+
+@require_http_methods(["DELETE"])
+def api_staff_delete_wine(request, pk):
+    if request.method == "DELETE":
+        count, _ = Wine.objects.filter(id=pk).delete()
+        return JsonResponse({"deleted": count > 0})
