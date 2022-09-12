@@ -22,12 +22,12 @@ function App(props) {
             </Routes>
             <Routes>
               <Route element={<NavbarLayout />}>
-                <Route path="/wineries/:id/wines/" element={<WineList />} />
-                <Route path="/wineries/:id/contact/" element={<Contact />} />
-                <Route path="/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
-                <Route path="wineries/:id/" element={<Winery />} /> 
-                <Route path="/wineries/:id/login/" element={<Login />} />
-                <Route path="/wineries/:id/signup/" element={<SignUp />} />
+                <Route path="/everything-is-vine/wineries/:id/wines/" element={<WineList />} />
+                <Route path="/everything-is-vine/wineries/:id/contact/" element={<Contact />} />
+                <Route path="/everything-is-vine/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
+                <Route path="/everything-is-vine/wineries/:id/" element={<Winery />} /> 
+                <Route path="/everything-is-vine/wineries/:id/login/" element={<Login />} />
+                <Route path="/everything-is-vine/wineries/:id/signup/" element={<SignUp />} />
               </Route>
             </Routes>
           </div>
