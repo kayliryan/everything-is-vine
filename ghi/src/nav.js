@@ -52,21 +52,21 @@ function Navigation() {
                 navbarScroll
             >
                 <div className='px-3'>
-                    <Link to={`wineries/${id}`} className='btn btn-light p-2 mb-1 mt-1'>Home</Link>
+                    <Link to={`everything-is-vine/wineries/${id}`} className='btn btn-light p-2 mb-1 mt-1'>Home</Link>
                 </div>
                 <div className='px-3'>
-                    <Link to={`wineries/${id}/wines`} className='btn btn-light p-2 mb-1 mt-1'>Our Wines</Link>
+                    <Link to={`everything-is-vine/wineries/${id}/wines`} className='btn btn-light p-2 mb-1 mt-1'>Our Wines</Link>
                 </div>
                 <div className='px-3'>
-                <Link to={`wineries/${id}/contact`} className='btn btn-light p-2 mb-1 mt-1'>Contact Us</Link>
+                <Link to={`everything-is-vine/wineries/${id}/contact`} className='btn btn-light p-2 mb-1 mt-1'>Contact Us</Link>
                 </div>
                 </Nav>
                 <Nav className="ms auto">
                     <div className='px-3 me-auto justify-content-end'>
-                        <Link to={`wineries/${id}/login`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Login</Link>
+                        <Link to={`everything-is-vine/wineries/${id}/login`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Login</Link>
                     </div>
                     <div className='px-3'>
-                        <Link to={`wineries/${id}/signup`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Sign Up</Link>
+                        <Link to={`everything-is-vine/wineries/${id}/signup`} className={"btn btn-light p-2 mb-1 mt-1" + (logged ? " d-none":"")}>Sign Up</Link>
                     </div>
                     <div className='px-3'>
                         <button type="submit" className={"btn btn-light p-2 mb-1 mt-1" + (logged ? "":" d-none")} onClick={submitLogoutHandler}>Logout</button>
