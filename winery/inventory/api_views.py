@@ -63,7 +63,7 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery": winery, "geo": geo}, 
+                {"winery": winery, "geo": geo},
                 encoder=WineryEncoder, safe=False
             )
         except Winery.DoesNotExist:
