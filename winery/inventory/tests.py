@@ -34,6 +34,7 @@ class TestWineriesViews(TestCase):
         response = client.get(reverse("api_list_wineries"))
         self.assertEquals(response.status_code, 200)
 
+
 class TestWineSlug(TestCase):
     def test_wine_title_on_save(self):
         wine = Wine()

@@ -36,3 +36,7 @@ Today Kayli & Jennifer and I worked on wine detail with redux! We had some troub
 ## August 30, 2022
 
 Today I worked on deployment with heroku. 
+
+## September 8, 2022
+
+Today I finally got our site to deploy to heroku. You can't see the page yet, but the link is working! From the best that I can tell, I was able to manipulate the CI jobs, push to my branch and gitlab was reading it, but even though I had changed the protection settings on my branch in gitlab and set it to deploy when pushed to my branch the deployment was still unsuccessful. I even tried editing the pipeline directly on the main branch in gitlab and it didn't seem to do the trick. I changed the COMMIT_BRANCH in the CI file back to default branch, merged with main and was able to see the changes that I made. Seeing all of those green check marks were incredibly satisfying. 
