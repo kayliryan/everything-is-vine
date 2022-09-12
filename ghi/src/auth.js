@@ -47,12 +47,12 @@ token: null,
 setToken: () => null,
 });
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ( props ) => {
 const [token, setToken] = useState(null);
 
 return (
     <AuthContext.Provider value={{ token, setToken }}>
-    {children}
+    {props.children}
     </AuthContext.Provider>
 );
 };
@@ -64,22 +64,25 @@ export function useToken() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("use token effect called")
         async function fetchToken() {
+            console.log('fetch token called')
             const token = await getTokenInternal();
             setToken(token);
-        }
+        } 
+        console.log(token)
         if (!token) {
         fetchToken();
         }
     }, [setToken, token]);
 
-    async function logout() {
+    async function logout(id) {
         if (token) {
-        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/logout/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/token/refresh/logout/`;
         await fetch(url, { method: "delete", credentials: "include" });
         internalToken = null;
         setToken(null);
-        navigate("/");
+        navigate(`/wineries/${id}/`);
         }
     }
 
@@ -96,7 +99,7 @@ export function useToken() {
         if (response.ok) {
         const token = await getTokenInternal();
         setToken(token);
-        // navigate(`/wineries/${id}/`)
+        navigate(`/wineries/${id}/`)
         return;
         }
         let error = await response.json();

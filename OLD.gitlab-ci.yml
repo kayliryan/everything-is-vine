@@ -1,0 +1,236 @@
+# CI START #
+
+stages:
+  - test
+  - build
+  - deploy
+  
+variables:
+  REACT_APP_INVENTORY_API: https://${HEROKU_INVENTORY_API_APP}.herokuapp.com
+services:
+  - postgres:14.2-bullseye
+
+variables:
+  DATABASE_URL: postgresql://winery:password@postgres/winery
+  POSTGRES_MULTIPLE_DATABASES: winery,sales
+  POSTGRES_PASSWORD: test-databases
+  WAIT_HOSTS: postgres:5432
+
+sales-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd sales
+    - pip install -r requirements.txt
+    - python -m pytest  # Run unit tests
+
+inventory-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd inventory
+    - pip install -r requirements.txt
+    - python -m pytest
+
+# # TEST ###############
+lint-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 sales winery 
+  allow_failure: true
+
+# BUILD
+build-front-end-job:
+  stage: build
+  # rules: 
+  #   - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+  image: node:lts-bullseye
+  variables:
+    PUBLIC_URL: https://beach-bums.gitlab.io/everything-is-vine
+    
+  script:
+    - cd ghi
+    - npm install
+    - npm run build # build the react app
+    - cp build/index.html build/404.html 
+#     # - echo ${REACT_APP_DJANGO_API}
+  allow_failure: true
+  artifacts:
+    paths:
+      - ghi/build/
+    
+
+    # CI END ######################
+
+## 1 DEPLOY THE UI TO GITLAB PAGES ## 
+pages:
+  stage: deploy
+  variables:
+    # GIT_STRATEGY: none
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  dependencies:
+    - build-front-end-job
+  needs:
+   - build-front-end-job
+  script:
+    - mv ghi/build/ public
+  artifacts:
+    paths:
+      - public
+
+## BUILD ##
+
+build-winery-api-image-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd winery
+    - docker build -t ${CI_REGISTRY_IMAGE}/api:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/api:latest ${CI_REGISTRY_IMAGE}/app:$CI_PIPELINE_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/app:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/api:latest
+
+build-sales-api-image-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd sales
+    - docker build -t ${CI_REGISTRY_IMAGE}/sales:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest ${CI_REGISTRY_IMAGE}/sales:$CI_JOB_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/sales:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/sales:latest
+
+
+
+
+## TRANSFER ##
+transfer-winery-api-image-job:
+  stage: deploy
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  needs:
+    - build-winery-api-image-job
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker pull ${CI_REGISTRY_IMAGE}/api:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_EIV/web:latest
+    - docker push registry.heroku.com/$HEROKU_EIV/web:latest
+
+
+transfer-sales-api-image-job:
+  stage: deploy
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  needs:
+    - build-sales-api-image-job
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker pull ${CI_REGISTRY_IMAGE}/api:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_SALES_EIV/web:latest
+    - docker push registry.heroku.com/$HEROKU_SALES_EIV/worker:latest
+
+## RELEASE ##
+release-winery-api-build-job:
+  stage: deploy
+  image: node:10.17-alpine
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  needs:
+    - transfer-winery-api-image-job
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - heroku container:release web --app $HEROKU_EIV
+
+
+release-sales-api-build-job:
+  stage: deploy
+  image: node:10.17-alpine
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+    # - if: $CI_COMMIT_BRANCH == "end-cd"
+  needs:
+    - transfer-sales-api-image-job
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    - heroku container:release web --app $HEROKU_SALES_EIV
+
+# build-sales-poller:
+#   rules:
+ 
+#     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+#   stage: build
+#   image: docker:20.10.16
+#   services:
+#     - docker:20.10.16-dind
+#   script:
+#     - cd sales
+#     - docker build Dockerfile.poller -t ${CI_REGISTRY_IMAGE}/poller:latest .
+#     - docker tag ${CI_REGISTRY_IMAGE}/poller:latest ${CI_REGISTRY_IMAGE}/poller:$CI_JOB_ID
+#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+#     - docker push ${CI_REGISTRY_IMAGE}/poller:$CI_JOB_ID
+#     - docker push ${CI_REGISTRY_IMAGE}/poller:latest
+
+# deploy-sales-poller:
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+#   stage: deploy
+#   image: docker:20.10.16
+#   needs:
+#     - build-sales-poller
+#   services:
+#     - docker:20.10.16-dind
+#   script:
+#   # logs in and pulls the image from the gitlab repo 
+#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+#     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+#     - docker pull ${CI_REGISTRY_IMAGE}/poller:latest
+
+#   # adds the name of the heroku app to the image
+#     - docker tag ${CI_REGISTRY_IMAGE}/poller:latest registry.heroku.com/$SALES_POLLER/worker:latest
+
+#   # pushes the image to the heroku image registry
+#     - docker push registry.heroku.com/$SALES_POLLER/worker:latest
+
+# release-sales-poller:
+#   stage: deploy
+#   image: node:10.17-alpine
+#   needs:
+#     - deploy-sales-poller
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEV_BRANCH
+#   before_script:
+#     - apk add curl bash
+#     - curl https://cli-assets.heroku.com/install.sh | sh
+#   script:
+#   # changed web to worker because it's a poller
+#     - heroku container:release worker --app $SALES_POLLER
+

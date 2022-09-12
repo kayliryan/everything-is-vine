@@ -1,10 +1,11 @@
-from django.shortcuts import render
-import json 
+import json
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from .models import User
 from inventory.models import Winery
 from common.json import ModelEncoder
+# import djwto.authentication as auth
+
 
 class UserListEncoder(ModelEncoder):
     model = User
@@ -18,9 +19,10 @@ class UserListEncoder(ModelEncoder):
         "email",
         "employee",
         "winery",
-        ]
+    ]
+
     def get_extra_data(self, o):
-        return {"winery": o.winery.id}
+        return {"winery": o.winery_id}
 
 
 @require_http_methods(["GET"])
@@ -31,6 +33,7 @@ def api_user_token(request):
             return JsonResponse({"token": token})
     response = JsonResponse({"token": None})
     return response
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_users(request):
@@ -50,21 +53,36 @@ def api_list_users(request):
             return 400, {"message": "Bad JSON"}, None
 
         winery = Winery.objects.get(id=content["winery"])
-        content["winery"]=winery
-        print("trying to print content",content)
+        content["winery"] = winery
+        print("trying to print content", content)
         users = User.objects.create_user(
-                username=content["username"],
-                email=content["email"],
-                password=content["password"],
-                name=content["full_name"],
-                address=content["address"],
-                phone=content["phone"],
-                winery=content["winery"],
-            )
+            username=content["username"],
+            email=content["email"],
+            password=content["password"],
+            name=content["full_name"],
+            address=content["address"],
+            phone=content["phone"],
+            winery=content["winery"],
+        )
         return JsonResponse(
-                {"users": users},
-                encoder=UserListEncoder,
-            )
+            {"users": users},
+            encoder=UserListEncoder,
+        )
+
+
+# @require_http_methods(["GET"])
+# @auth.jwt_login_required
+# def api_current_user(request):
+#     user_id = request.payload["user"]["id"]
+#     user = User.objects.get(id=user_id)
+#     return JsonResponse(
+#         {
+#             "id": user.id,
+#             "username": user.username,
+#             "email": user.email,
+#         }
+#     )
+
 
 # @require_http_methods(["POST"])
 # def create_user(json_content):

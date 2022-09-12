@@ -1,7 +1,8 @@
 from django.db import models
-from django.urls import reverse
 
 # Create your models here.
+
+
 class Winery(models.Model):
     name = models.CharField(max_length=254)
     url = models.URLField(max_length=220, null=True)
@@ -16,13 +17,14 @@ class Winery(models.Model):
     def __str__(self):
         return self.name + "," + self.owner
 
+    class Meta:
+        ordering = ("name",)
+
+
 class Wine(models.Model):
     winery = models.ForeignKey(
-        Winery,
-        related_name="wines",
-        on_delete=models.CASCADE,
-        null=True
-    ) 
+        Winery, related_name="wines", on_delete=models.CASCADE, null=True
+    )
     brand = models.CharField(max_length=110)
     year = models.SmallIntegerField()
     varietal = models.CharField(max_length=110)
@@ -40,4 +42,6 @@ class Wine(models.Model):
 
     def __str__(self):
         return self.brand + ", " + str(self.year) + " " + self.varietal
-    
+
+    class Meta:
+        ordering = ("year",)

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { useDispatch } from "react-redux";
+
 
 export const salesApi = createApi({
     reducerPath: 'sales',

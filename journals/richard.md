@@ -28,3 +28,15 @@ Today I set up pipelines in git by creating 2 files in the parent directory:
 In the gitlab-ci file I set it up for the database, created a list test job and a front-end build job. I validated and set up shared git-runners for our group. I commented out all of the code in the ci file so that the pipeline doesn't run everytime we push, to avoid rolling through our free minutes. :-)
 
 I also talked to the group about doing more work together as a group and we discussed pushing to git more often when we make smaller changes. Everybody is doing an awesome job but the way we have been working often puts us at a stand still while waiting for commits. Also, while i've done some pair programming I am worried about not having commits since Daniel specifically mentioned it. Working more together will also give me a chance to learn more in areas that I am not feeling very confident. 
+
+## August 29, 2022
+
+Today Kayli & Jennifer and I worked on wine detail with redux! We had some trouble building the baseUrl dynamically and we realized that we had the winery_id and winvo_id variables incorrect in winedetails.js. I also started on deployment with heroku. 
+
+## August 30, 2022
+
+Today I worked on deployment with heroku. 
+
+## September 8, 2022
+
+Today I finally got our site to deploy to heroku. You can't see the page yet, but the link is working! From the best that I can tell, I was able to manipulate the CI jobs, push to my branch and gitlab was reading it, but even though I had changed the protection settings on my branch in gitlab and set it to deploy when pushed to my branch the deployment was still unsuccessful. I even tried editing the pipeline directly on the main branch in gitlab and it didn't seem to do the trick. I changed the COMMIT_BRANCH in the CI file back to default branch, merged with main and was able to see the changes that I made. Seeing all of those green check marks were incredibly satisfying. 
