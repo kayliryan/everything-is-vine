@@ -1,7 +1,7 @@
 from django.urls import path
-from .api_views import (api_list_wines, 
-                        api_list_winery, 
-                        api_winery, 
+from .api_views import (api_list_wines,
+                        api_list_winery,
+                        api_winery,
                         api_list_all_wines)
 
 
