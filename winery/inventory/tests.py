@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from .models import Wine
 
+
 class TestWinesViews(TestCase):
     def setUp(self):
         Wine.objects.create(
@@ -13,7 +14,7 @@ class TestWinesViews(TestCase):
             price=40,
             quantity=3,
         )
-        
+
     def test_list_wines(self):
         client = Client()
         response = client.get(reverse("api_list_all_wines"))

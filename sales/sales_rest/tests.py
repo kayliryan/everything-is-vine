@@ -9,7 +9,7 @@ class TestWineVOViews(TestCase):
             winery_id=1,
             brand="test_brand",
             year=2010,
-            varietal='test_varietal',
+            varietal="test_varietal",
             abv=8.0,
             volume=750,
             price=40.0,
@@ -18,7 +18,5 @@ class TestWineVOViews(TestCase):
 
     def test_list_accounts_GET(self):
         client = Client()
-        response = client.get(reverse("api_show_wine", 
-                                      kwargs={'pk1': 1, 
-                                              'pk2': 1}))
+        response = client.get(reverse("api_show_wine", kwargs={"pk1": 1, "pk2": 1}))
         self.assertEquals(response.status_code, 200)
