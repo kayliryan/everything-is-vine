@@ -85,7 +85,7 @@ const Contact = () => {
                         <p className="lead mb-2">
                         We thank you for your patronage and hope to see you soon at...
                         </p>
-                        <h5 className='display-4'>{winery.name}</h5>
+                        <h1 className='display-5'>{winery.name}</h1>
                         <p className="mt-2">Owner: {winery.owner}</p>
                 </div>
             </div>
