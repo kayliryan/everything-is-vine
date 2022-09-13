@@ -45,7 +45,7 @@ function ShoppingCartTest(){
       dispatch(updateQuantityFromShoppingCart(data)) 
       }
    
-    }, [cust_quantity, index_state]);
+    }, [cust_quantity, index_state, dispatch, firstRender]);
 
 
 
