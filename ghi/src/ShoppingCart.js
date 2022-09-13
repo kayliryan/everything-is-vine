@@ -221,7 +221,7 @@ function ShoppingCartTest(){
                   </dl>
                   <hr />
                   <p className="text-center mb-3">
-                    <img src="/assets/images/misc/payments.png" height={26} />
+                    <img src="/assets/images/misc/payments.png" alt="" height={26} />
                   </p>
                 </div>
               </div>
