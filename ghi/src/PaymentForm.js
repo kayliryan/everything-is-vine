@@ -2,8 +2,8 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import { MainContext } from './mainContext';
 import { useContext } from 'react';
 
@@ -25,9 +25,9 @@ export default function PaymentForm() {
         if (e.target.value.length > 19) {
             return;
         }
-        if (e.target.value.length === 4 && cardNumber.length === 3 ||
-            e.target.value.length === 9 && cardNumber.length === 8 ||
-            e.target.value.length === 14 && cardNumber.length === 13) {
+        if ((e.target.value.length === 4 && cardNumber.length === 3) ||
+            (e.target.value.length === 9 && cardNumber.length === 8) ||
+            (e.target.value.length === 14 && cardNumber.length === 13)) {
             e.target.value += ' '
         }
         setCardNumber(e.target.value)

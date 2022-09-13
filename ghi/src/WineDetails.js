@@ -62,6 +62,7 @@ function GetWine() {
         <div className="card mx-auto col-md-3 col-10 mt-5">
             <img
             className="mx-auto img-thumbnail"
+            alt=""
             src={data.picture_url}
             width="auto"
             height="auto"

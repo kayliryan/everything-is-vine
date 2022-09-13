@@ -55,18 +55,18 @@ export default function Checkout() {
   let [missingFieldsError, setMissingFieldsError] = React.useState(false);
 
   const {       
-    firstName, setFirstName, 
-    lastName, setLastName, 
-    addressOne, setAddressOne,
+    firstName, 
+    lastName, 
+    addressOne,
     // addressTwo, setAddressTwo,
-    city, setCity,
-    state, setState,
-    zipCode ,setZipCode,
-    country, setCountry,
-    cardName, setCardName, 
-    cardNumber, setCardNumber, 
-    expDate, setExpDate,
-    cvv, setCVV } = useContext(MainContext);
+    city,
+    state,
+    zipCode,
+    country,
+    cardName,
+    cardNumber,
+    expDate,
+    cvv,} = useContext(MainContext);
 
   function validateForms(){
     if (activeStep == 0) {
