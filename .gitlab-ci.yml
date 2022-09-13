@@ -51,6 +51,8 @@ build-front-end-job:
     - npm install
     - npm run build
     - cp build/index.html build/404.html  # Make this a SPA
+  variables:
+    - PUBLIC_URL: "https://beach-bums.gitlab.io/everything-is-vine/"
   
   artifacts:
     paths:
