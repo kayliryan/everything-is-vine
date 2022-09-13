@@ -10,6 +10,24 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 
 
+## Monday, September 12, 2022
+Today, I continued working on:
+
+* the Shopping Cart page CSS
+
+The Shopping Cart CSS pages continue to be an issue.  If I change the CSS in one page,
+it affects the CSS on another page and vice versa. 
+
+I was able to get the .row selector in map.css to display in a grid and not affect
+the shopping cart page .row selector.  In order to do this, I had to make the .row 
+selector in the shopping cart CSS pages more specific.  In this case, I renamed the 
+selector to .shopping-cart-row and changed it on the ShoppingCart.js page.  I renamed 
+some other selectors so that they were more specific to the component that they were 
+being utilized on.  This seemed to fix the issue for both ends.  While there are some 
+minor overlapping CSS, the majority of CSS issues seems to be fixed.  As a stretch goal, 
+I would want to go back and fix the CSS and sort the file structures by components.   
+
+
 ## Friday, September 9, 2022
 Today, I continued working on:
 
