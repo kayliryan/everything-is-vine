@@ -14,6 +14,40 @@ function ShoppingCartTest(){
     const dispatch = useDispatch();
   
 
+    async function deleteItem(e, index) {
+      dispatch(deleteCartItem({"index": index}))
+      }
+  
+  
+    async function checkAndSetQuantity(e, index){
+        // bug to fix: unable to change quantity input in front end without highlighting number
+        if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+          e.target.value = 1;
+        }
+        if(parseInt(e.target.value) > parseInt(e.target.max)){
+          e.target.value = e.target.max;
+        }
+        setCustQuantity(parseInt(e.target.value))
+        setIndex(index)
+      }
+  
+    // async function orderPlaced(e) {
+    //   dispatch(clearCart())
+    // }
+  
+  
+    useEffect(() => {
+      if (firstRender === true) {
+        hasRendered(false)
+      } 
+      else {
+      let data = {"cust_quantity": cust_quantity, "index": index_state}
+      dispatch(updateQuantityFromShoppingCart(data)) 
+      }
+   
+    }, [cust_quantity, index_state]);
+
+
 
   return (
     <div className="App">
@@ -123,7 +157,7 @@ function ShoppingCartTest(){
                           </div>
                         </td>
                         <td className="text-right">
-                          <a onClick = {e => deleteItem(e,index)} type="button" className="btn btn-light"><span className="bi bi-trash"></span> Remove</a>
+                          <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-light"><span className="bi bi-trash"></span> Remove</button>
                         </td>
                       </tr>
                       );
@@ -211,39 +245,7 @@ function ShoppingCartTest(){
     
   
   
-    async function deleteItem(e, index) {
-      dispatch(deleteCartItem({"index": index}))
-      }
-  
-  
-    async function checkAndSetQuantity(e, index){
-        // bug to fix: unable to change quantity input in front end without highlighting number
-        if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
-          e.target.value = 1;
-        }
-        if(parseInt(e.target.value) > parseInt(e.target.max)){
-          e.target.value = e.target.max;
-        }
-        setCustQuantity(parseInt(e.target.value))
-        setIndex(index)
-      }
-  
-    // async function orderPlaced(e) {
-    //   dispatch(clearCart())
-    // }
-  
-  
-    useEffect(() => {
-      if (firstRender === true) {
-        hasRendered(false)
-      } 
-      else {
-      let data = {"cust_quantity": cust_quantity, "index": index_state}
-      dispatch(updateQuantityFromShoppingCart(data)) 
-      }
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cust_quantity, index_state]);
-
+    
   // return(
   //     <>
       
