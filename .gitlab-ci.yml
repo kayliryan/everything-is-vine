@@ -9,6 +9,7 @@ services:
 variables:
   POSTGRESS_PASSWORD: test
   DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  PUBLIC_URL: everything-is-vine
   # DATABASE_URL: postgres://rkicmfokzbtwzd:57a2191e583382ebeecca27f2448f8de500ef5b75d08bf8f08a265f1061cd9bf@ec2-52-205-61-230.compute-1.amazonaws.com:5432/defnpn8u6v5m5e
 
 winery-unit-test-job:

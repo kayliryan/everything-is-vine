@@ -15,6 +15,9 @@ import NavbarLayout from './navLayout';
 import Contact from './contact';
 
 function App(props) {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
+
   let [firstName, setFirstName] = useState("")
   let [lastName, setLastName] = useState("")
   let [addressOne, setAddressOne] = useState("")
@@ -31,6 +34,7 @@ function App(props) {
 
 
   return (
+    
     <MainContext.Provider value = {{
       firstName, setFirstName,
       lastName, setLastName,
@@ -47,6 +51,7 @@ function App(props) {
       lastFour, setLastFour,
     }}>
       <AuthProvider>
+      <BrowserRouter basename={basename}></BrowserRouter>
         <BrowserRouter>
             <div className="container">
               <Routes>
