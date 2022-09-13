@@ -23,8 +23,8 @@ function Winery () {
             setWinery(data.winery)
         }
         }
-
-    useEffect( () => {fetchWinery(token)},[])
+ 
+    useEffect( () => {fetchWinery(token)})
 
     return (
         <>

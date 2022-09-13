@@ -69,7 +69,7 @@ export default function Checkout() {
     cvv,} = useContext(MainContext);
 
   function validateForms(){
-    if (activeStep == 0) {
+    if (activeStep === 0) {
       if (firstName === '' || lastName === '' || 
           addressOne === '' || city === '' ||
           state === '' || zipCode === '' || country === '') {
@@ -78,7 +78,7 @@ export default function Checkout() {
         return handleNext();
       }
     }
-    if (activeStep == 1) {
+    if (activeStep === 1) {
       if (cardName === '' || cardNumber.length !== 19 ||
           expDate.length !== 5 || cvv.length !== 3) {
         return setMissingFieldsError(true);
@@ -86,7 +86,7 @@ export default function Checkout() {
         return handleNext();
       }
     }
-    if (activeStep == 2) {
+    if (activeStep === 2) {
       //Complete logic to check against the credit card function and post an order to the database
       //if it clears then return handleNext
       return handleNext()

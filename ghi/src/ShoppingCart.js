@@ -7,44 +7,7 @@ import { useState, useEffect } from 'react';
 
 
 function ShoppingCartTest(){
-  const { cartItems } = useSelector((state) => state.cart);
-  const [cust_quantity, setCustQuantity] = useState(-1)
-  const [index_state, setIndex] = useState(-1)
-  const [firstRender, hasRendered] = useState(true)
-  const dispatch = useDispatch();
-
-
-  async function deleteItem(e, index=index) {
-    dispatch(deleteCartItem({"index": index}))
-    }
-
-
-  async function checkAndSetQuantity(e, index=index){
-      // bug to fix: unable to change quantity input in front end without highlighting number
-      if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
-        e.target.value = 1;
-      }
-      if(parseInt(e.target.value) > parseInt(e.target.max)){
-        e.target.value = e.target.max;
-      }
-      setCustQuantity(parseInt(e.target.value))
-      setIndex(index)
-    }
-
-  async function orderPlaced(e) {
-    dispatch(clearCart())
-  }
-
-
-  useEffect(() => {
-    if (firstRender === true) {
-      hasRendered(false)
-    } 
-    else {
-    let data = {"cust_quantity": cust_quantity, "index": index_state}
-    dispatch(updateQuantityFromShoppingCart(data)) 
-    }
-  }, [cust_quantity, index_state]);
+  
 
 
   return (
@@ -54,7 +17,7 @@ function ShoppingCartTest(){
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-2 col-4">
-                <a href="#">Company Name</a>
+                <a href="https://www.duckduckgo.com/">Company Name</a>
               </div>
               {/* <div className="col-lg-6 col-sm-12">
                 <form action="#" className="search">
@@ -75,7 +38,7 @@ function ShoppingCartTest(){
               <div className="col-lg-4 col-sm-6 col-12">
                 <div className="widgets-wrap float-md-right">
                   <div className="widget-header  mr-3">
-                    <a href="#" className="icon icon-sm rounded-circle border">
+                    <a href="https://www.duckduckgo.com/" className="icon icon-sm rounded-circle border">
                       <i className="fa fa-shopping-cart" />
                     </a>
                     <span className="badge badge-pill badge-danger notify">
@@ -239,7 +202,45 @@ function ShoppingCartTest(){
     </div>
     );
 
-
+    const { cartItems } = useSelector((state) => state.cart);
+    const [cust_quantity, setCustQuantity] = useState(-1)
+    const [index_state, setIndex] = useState(-1)
+    const [firstRender, hasRendered] = useState(true)
+    const dispatch = useDispatch();
+  
+  
+    async function deleteItem(e, index=index) {
+      dispatch(deleteCartItem({"index": index}))
+      }
+  
+  
+    async function checkAndSetQuantity(e, index=index){
+        // bug to fix: unable to change quantity input in front end without highlighting number
+        if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+          e.target.value = 1;
+        }
+        if(parseInt(e.target.value) > parseInt(e.target.max)){
+          e.target.value = e.target.max;
+        }
+        setCustQuantity(parseInt(e.target.value))
+        setIndex(index)
+      }
+  
+    // async function orderPlaced(e) {
+    //   dispatch(clearCart())
+    // }
+  
+  
+    useEffect(() => {
+      if (firstRender === true) {
+        hasRendered(false)
+      } 
+      else {
+      let data = {"cust_quantity": cust_quantity, "index": index_state}
+      dispatch(updateQuantityFromShoppingCart(data)) 
+      }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cust_quantity, index_state]);
 
   // return(
   //     <>
