@@ -60,6 +60,9 @@ function Navigation() {
                 <div className='px-3'>
                 <Link to={`everything-is-vine/wineries/${id}/contact`} className='btn btn-light p-2 mb-1 mt-1'>Contact Us</Link>
                 </div>
+                <div className='px-3'>
+                <Link to={`everything-is-vine/wineries/${id}/request`} className='btn btn-light p-2 mb-1 mt-1'>Request</Link>
+                </div>
                 </Nav>
                 <Nav className="ms auto">
                     <div className='px-3 me-auto justify-content-end'>

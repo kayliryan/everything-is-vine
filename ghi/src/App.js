@@ -13,6 +13,7 @@ import { MainContext } from './mainContext';
 import { useState } from 'react';
 import NavbarLayout from './navLayout';
 import Contact from './contact';
+import Request from './request';
 
 function App(props) {
   let [firstName, setFirstName] = useState("")
@@ -56,6 +57,7 @@ function App(props) {
                 <Route element={<NavbarLayout />}>
                   <Route path="/everything-is-vine/wineries/:id/wines/" element={<WineList />} />
                   <Route path="/everything-is-vine/wineries/:id/contact/" element={<Contact />} />
+                  <Route path="/everything-is-vine/wineries/:id/request/" element={<Request />} />
                   <Route path="/everything-is-vine/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
                   <Route path="/everything-is-vine/wineries/:id/" element={<Winery />} /> 
                   <Route path="/everything-is-vine/wineries/:id/login/" element={<Login />} />

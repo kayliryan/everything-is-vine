@@ -29,7 +29,7 @@ function Winery () {
     return (
         <>
         <div className='px-4 py-5 mt-0 my-5 text-center bg-transparent rounded opacity-100'>
-            <h2 className='display-4'>Welcome to {winery.name}</h2>
+            <h2 className='display-5'>Welcome to {winery.name}</h2>
             <div className="rounded mt-4" style={{ 
                 backgroundImage: `url(${winery.url})`,
                 backgroundRepeat: 'no-repeat',
