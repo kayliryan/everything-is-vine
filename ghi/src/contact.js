@@ -61,8 +61,8 @@ const Contact = () => {
             setWinery(data.winery)
             setGeo(data.geo)}
         }
-    
-    useEffect( () => {fetchWinery(token)},[])
+
+    useEffect( () => {fetchWinery(token)})
         
 
 

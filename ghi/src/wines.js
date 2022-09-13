@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
-import Winery from './winery';
+
 
 function WineColumn(props) {
     const {id} = useParams()
@@ -84,8 +84,8 @@ function WineList() {
         console.error(e);
         }
     }
-
-    useEffect( () => {fetchWines(token)},[])
+ 
+    useEffect( () => {fetchWines(token)})
 
 
     return (
