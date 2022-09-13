@@ -1,12 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, clearCart, updateQuantityFromShoppingCart } from './store/cartReducer';
+import { deleteCartItem, updateQuantityFromShoppingCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
 
 
 
 
 function ShoppingCartTest(){
+  const { cartItems } = useSelector((state) => state.cart);
+    const [cust_quantity, setCustQuantity] = useState(-1)
+    const [index_state, setIndex] = useState(-1)
+    const [firstRender, hasRendered] = useState(true)
+    const dispatch = useDispatch();
   
 
 
@@ -46,13 +51,13 @@ function ShoppingCartTest(){
                     </span>
                   </div>
                   <div className="widget-header icontext">
-                    <a href="#" className="icon icon-sm rounded-circle border">
+                    <a href="https://www.duckduckgo.com/" className="icon icon-sm rounded-circle border">
                       <i className="fa fa-user" />
                     </a>
                     <div className="text">
                       <span className="text-muted">Welcome!</span>
                       <div>
-                        <a href="#">Sign in</a> |<a href="#">Register</a>
+                        <a href="https://www.duckduckgo.com/">Sign in</a> |<a href="https://www.duckduckgo.com/">Register</a>
                       </div>
                     </div>
                   </div>
@@ -95,12 +100,13 @@ function ShoppingCartTest(){
                           <figure className="itemside">
                             <div className="aside">
                               <img
+                                alt=""
                                 src={ cartItem.picture_url }
                                 className="img-sm"
                               />
                             </div>
                             <figcaption className="info">
-                              <a href="#" className="title text-dark">
+                              <a href="https://www.duckduckgo.com/" className="title text-dark">
                                 {cartItem.year} {cartItem.brand} {cartItem.varietal}
                               </a>
                               <p className="text-muted small">
@@ -128,11 +134,11 @@ function ShoppingCartTest(){
 
                 </table>
                 <div className="card-body border-top">
-                  <a href="#" className="btn btn-primary float-md-right">
+                  <a href="https://www.duckduckgo.com/" className="btn btn-primary float-md-right">
                     {" "}
                     Make Purchase <i className="fa fa-chevron-right" />{" "}
                   </a>
-                  <a href="#" className="btn btn-light">
+                  <a href="https://www.duckduckgo.com/" className="btn btn-light">
                     {" "}
                     <i className="fa fa-chevron-left" /> Continue shopping{" "}
                   </a>
@@ -202,19 +208,15 @@ function ShoppingCartTest(){
     </div>
     );
 
-    const { cartItems } = useSelector((state) => state.cart);
-    const [cust_quantity, setCustQuantity] = useState(-1)
-    const [index_state, setIndex] = useState(-1)
-    const [firstRender, hasRendered] = useState(true)
-    const dispatch = useDispatch();
+    
   
   
-    async function deleteItem(e, index=index) {
+    async function deleteItem(e, index) {
       dispatch(deleteCartItem({"index": index}))
       }
   
   
-    async function checkAndSetQuantity(e, index=index){
+    async function checkAndSetQuantity(e, index){
         // bug to fix: unable to change quantity input in front end without highlighting number
         if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
           e.target.value = 1;
