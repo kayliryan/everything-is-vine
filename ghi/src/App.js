@@ -55,18 +55,18 @@ function App(props) {
         <BrowserRouter>
             <div className="container">
               <Routes>
-                <Route path="/everything-is-vine" element={<WineryList />} />
+                <Route path="/" element={<WineryList />} />
               </Routes>
               <Routes>
                 <Route element={<NavbarLayout />}>
-                  <Route path="/everything-is-vine/wineries/:id/wines/" element={<WineList />} />
-                  <Route path="/everything-is-vine/wineries/:id/contact/" element={<Contact />} />
-                  <Route path="/everything-is-vine/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
-                  <Route path="/everything-is-vine/wineries/:id/" element={<Winery />} /> 
-                  <Route path="/everything-is-vine/wineries/:id/login/" element={<Login />} />
-                  <Route path="/everything-is-vine/wineries/:id/signup/" element={<SignUp />} />
-                  <Route path="/everything-is-vine/wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} />
-                  <Route path="/everything-is-vine/wineries/:id/shoppingcarttest/checkout" element={<Checkout />} />
+                  <Route path="/wineries/:id/wines/" element={<WineList />} />
+                  <Route path="/wineries/:id/contact/" element={<Contact />} />
+                  <Route path="/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
+                  <Route path="/wineries/:id/" element={<Winery />} /> 
+                  <Route path="/wineries/:id/login/" element={<Login />} />
+                  <Route path="/wineries/:id/signup/" element={<SignUp />} />
+                  <Route path="/wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} />
+                  <Route path="/wineries/:id/shoppingcarttest/checkout" element={<Checkout />} />
                 </Route>
               </Routes>
             </div>
