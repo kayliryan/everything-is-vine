@@ -51,8 +51,7 @@ function App(props) {
       lastFour, setLastFour,
     }}>
       <AuthProvider>
-      <BrowserRouter basename={basename}></BrowserRouter>
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
             <div className="container">
               <Routes>
                 <Route path="/" element={<WineryList />} />
