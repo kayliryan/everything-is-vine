@@ -80,7 +80,7 @@ function WineList() {
             for (let wine of data.wines){
                 list.push(wine)
             }
-            console.log(list)
+
 
             let i = 0;
             for (const wine of list) {
@@ -97,7 +97,6 @@ function WineList() {
 
             setWineryName(wineryName)
 
-            console.log(wineColumns)
             setWineColumns(wineColumns);
         }
         } catch (e) {
@@ -111,7 +110,6 @@ function WineList() {
         });
         if (response.ok) {
         const user = await response.json();
-        console.log(user.user.employee)
 
         if (user.user.employee === true && user.user.winery === parseInt(id)){
             setStaff(true)
@@ -135,7 +133,7 @@ function WineList() {
                         Please enjoy a selection of our finest wines from {wineryName}.
                         </p>
                         <p>
-                        <Link to={`wineries/${id}/wines/`} className={"btn btn-success p-2 mb-1 mt-1" + (staff ? "": " d-none")}>Add A New Wine</Link>
+                        <Link to={`/wineries/${id}/wines/new/`} className={"btn btn-success p-2 mb-1 mt-1" + (staff ? "": " d-none")}>Add A New Wine</Link>
                         </p>
                 </div>
                 </div>

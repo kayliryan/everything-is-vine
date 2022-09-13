@@ -20,8 +20,6 @@ const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
 
-console.log(data)
-
 const submitHandler = e => {
 e.preventDefault();
 login(

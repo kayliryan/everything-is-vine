@@ -189,7 +189,7 @@ def api_staff_wine(request, pk):
         )
 
 #staff login req - create new wine
-# @auth.jwt_login_required 
+@auth.jwt_login_required 
 @require_http_methods(["POST"])
 def api_staff_new_wine(request):
     if request.method == "POST":

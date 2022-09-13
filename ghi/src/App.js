@@ -11,6 +11,7 @@ import NavbarLayout from './navLayout';
 import Contact from './contact';
 import EditWinery from './winery_edit';
 import EditWine from './wine_edit';
+import NewWine from './new_wine';
 
 function App(props) {
 
@@ -32,6 +33,7 @@ function App(props) {
                 <Route path="/wineries/:id/signup/" element={<SignUp />} />
                 <Route path="/wineries/:id/edit/" element={<EditWinery />} />
                 <Route path="/wines/:id/edit/" element={<EditWine/>} />
+                <Route path="/wineries/:id/wines/new/" element={<NewWine />} />
 
               </Route>
             </Routes>

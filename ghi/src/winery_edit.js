@@ -72,7 +72,6 @@ function EditWinery() {
     async function updateWinery(event){
         event.preventDefault();
         const updateForm = {...data};
-        console.log(data)
     
         const locationUrl = `http://localhost:8000/api/wineries/${id}/edit/`;
         const fetchConfig = {
@@ -86,7 +85,6 @@ function EditWinery() {
         const response = await fetch(locationUrl, fetchConfig);
         if (response.ok) {
             navigate(`/wineries/${id}`)
-            console.log("hello")
         }
     }
 
@@ -100,6 +98,7 @@ function EditWinery() {
                     <form onSubmit={updateWinery}>
                         {/* <h3 className= 'mt-4 display-3'>Signup Here</h3> */}
                         <div className="fadeIn second">
+                        <div className='display-6 text-secondary mt-3'>Winery Name</div>
                             <input className="form-control" 
                                 type="text" 
                                 defaultValue={name}
@@ -109,6 +108,7 @@ function EditWinery() {
                                 />
                         </div>
                         <div className="fadeIn second">
+                        <div className='display-6 text-secondary mt-3'>URL for Photo</div>
                             <input className="form-control" 
                                 type="url"
                                 value={url}
@@ -118,6 +118,7 @@ function EditWinery() {
                             />
                         </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>Address</div>
                             <input className="form-control" 
                                 type="text"
                                 name="address" 
@@ -127,21 +128,23 @@ function EditWinery() {
                                 />
                         </div>
                         <div className="fadeIn third">
-                            <input className="form-control" 
-                                type="text" 
-                                name="description"
-                                value={description}
-                                onChange={changeHandler}
-                                placeholder="Enter Description"
-                                />
-                        </div>
-                        <div className="fadeIn fourth">
+                        <div className='display-6 text-secondary mt-3'>Owner Name</div>
                             <input className="form-control" 
                                 type="text" 
                                 name="owner"
                                 value={owner}
                                 onChange={changeHandler}
                                 placeholder="Owner Name"
+                                />
+                        </div>
+                        <div className="fadeIn fourth">
+                            <div className='display-6 text-secondary mt-3'>Description</div>
+                            <textarea className="form-control textarea mt-3" 
+                                type="text" 
+                                name="description"
+                                value={description}
+                                onChange={changeHandler}
+                                placeholder="Enter Description"
                                 />
                         </div>
 

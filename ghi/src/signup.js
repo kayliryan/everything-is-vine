@@ -24,7 +24,6 @@ const [token, login, logout, signup] = useToken();
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
-    console.log(data)
 
     const submitHandler = e => {
     e.preventDefault();
@@ -42,7 +41,6 @@ setData({...data,[e.target.name]:[e.target.value]});
         )
 }
 
-console.log(data);
     return (
         <div className="wrapper fadeInDown">
             <div id="formContent" className='fadeIn first'>

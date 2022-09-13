@@ -103,7 +103,7 @@ function EditWine() {
 
         const response = await fetch(locationUrl, fetchConfig);
         if (response.ok) {
-            navigate(`/wineries/${id}/wines/`)
+            navigate(`/wineries/${winery}/wines/`)
         }
     }
 
@@ -117,6 +117,7 @@ function EditWine() {
                     <form onSubmit={updateWine}>
                         {/* <h3 className= 'mt-4 display-3'>Signup Here</h3> */}
                         <div className="fadeIn second">
+                        <div className='display-6 text-secondary mt-3'>Brand or Wine Name</div>
                             <input className="form-control" 
                                 type="text" 
                                 defaultValue={brand}
@@ -126,6 +127,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>Year or Vintage</div>
                             <input className="form-control" 
                                 type="number"
                                 name="year" 
@@ -135,6 +137,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>Varietal</div>
                             <input className="form-control" 
                                 type="text" 
                                 name="varietal"
@@ -143,16 +146,8 @@ function EditWine() {
                                 placeholder="Enter Varietal"
                                 />
                         </div>
-                        <div className="fadeIn fourth">
-                            <input className="form-control" 
-                                type="text" 
-                                name="description"
-                                value={description}
-                                onChange={changeHandler}
-                                placeholder="Enter Description"
-                                />
-                        </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>Growing Region</div>
                             <input className="form-control" 
                                 type="text"
                                 name="region" 
@@ -162,6 +157,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>Alcohol by Volume</div>
                             <input className="form-control" 
                                 type="number"
                                 step="0.01" 
@@ -172,6 +168,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn fourth">
+                        <div className='display-6 text-secondary mt-3'>Bottle Volume - ml</div>
                             <input className="form-control" 
                                 type="number" 
                                 name="volume"
@@ -181,6 +178,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>City, State of Bottling</div>
                             <input className="form-control" 
                                 type="text"
                                 name="city_state" 
@@ -190,6 +188,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn third">
+                            <div className='display-6 text-secondary mt-3'>Price</div>
                             <input className="form-control" 
                                 type="number"
                                 step="0.01" 
@@ -200,6 +199,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn third">
+                        <div className='display-6 text-secondary mt-3'>Quantity</div>
                             <input className="form-control" 
                                 type="number"
                                 name="quantity"
@@ -209,6 +209,7 @@ function EditWine() {
                                 />
                         </div>
                         <div className="fadeIn second">
+                        <div className='display-6 text-secondary mt-3'>Picture URL</div>
                             <input className="form-control" 
                                 type="url"
                                 value={picture_url}
@@ -216,6 +217,16 @@ function EditWine() {
                                 onChange={changeHandler}
                                 placeholder="Enter Picture URL"
                             />
+                        </div>
+                        <div className="fadeIn fourth">
+                        <div className='display-6 text-secondary mt-3'>Description</div>
+                            <textarea className="form-control textarea mt-3" 
+                                type="text" 
+                                name="description"
+                                value={description}
+                                onChange={changeHandler}
+                                placeholder="Enter Description"
+                                />
                         </div>
 
                         <input type="submit" className="fadeIn fourth" value="Submit" />

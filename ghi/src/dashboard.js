@@ -6,7 +6,6 @@ function WineColumn(props) {
 return (
     <div className="col">
     {props.list.map(data => {
-        console.log(data)
         const winery = data;
         return (
         <div key={winery.id} className="card mb-3 mt-5 shadow">
@@ -51,7 +50,6 @@ async componentDidMount() {
         for (let winery of data.wineries){
             list.push(winery)
         }
-        console.log(list)
 
         let i = 0;
         for (const wine of list) {
@@ -66,9 +64,6 @@ async componentDidMount() {
         }
         }
 
-        // Set the state to the new list of three lists of
-        // conferences
-        console.log(wineColumns)
         this.setState({wineColumns: wineColumns});
     }
     } catch (e) {

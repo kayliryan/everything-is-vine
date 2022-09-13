@@ -57,7 +57,6 @@ const Contact = () => {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             setWinery(data.winery)
             setGeo(data.geo)}
         }
@@ -67,12 +66,10 @@ const Contact = () => {
 
 
     let {latitude,longitude} = geo
-    console.log(latitude,longitude)
 
     const position = []
     position.push(latitude)
     position.push(longitude)
-    console.log(position)
 
 
     return (
@@ -116,7 +113,7 @@ const Contact = () => {
                                         placeholder="Subject"
                                         required />
                                 </div>
-                                <div className="fadeIn fourth mb-3">
+                                <div className="fadeIn fourth mb-3 textarea">
                                     <textarea className="form-control bg-light textarea" 
                                         name="message"
                                         placeholder="Enter Message"
