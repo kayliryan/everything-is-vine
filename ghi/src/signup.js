@@ -106,7 +106,7 @@ console.log(data);
                     <input type="submit" className="fadeIn fourth" value="Sign Up" />
                     
                     <p className="forgot-password text-center mb-3">
-                        Already registered? <a href={`/wineries/${id}/login/`}>Login</a>
+                        Already registered? <a href={`/everything-is-vine/wineries/${id}/login/`}>Login</a>
                     </p>
                 </form>
             </div>
