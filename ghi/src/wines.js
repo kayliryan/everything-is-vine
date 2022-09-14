@@ -84,8 +84,8 @@ function WineList() {
         console.error(e);
         }
     }
- 
-    useEffect( () => {fetchWines(token)})
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect( () => {fetchWines(token),[]})
 
 
     return (
