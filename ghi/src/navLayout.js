@@ -4,6 +4,7 @@ import Navigation from "./nav";
 export default function NavbarLayout () {
     return (
         <div>
+            {/* <Navigation /> */}
             <Navigation />
             <div>
                 <Outlet />

@@ -7,8 +7,8 @@ import {useGetWineDetailsQuery} from '../store/salesApi';
 import './card.css';
 
 const Card = props => {
-    let { winery_id, winevo_id } = useParams();
-    const {data, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
+    let { id, winevo_id } = useParams();
+    const {data, isLoading} = useGetWineDetailsQuery({id, winevo_id});
     const [updateShoppingItems] = useState([]);
   
     if (isLoading) {

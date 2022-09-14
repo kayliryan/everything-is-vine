@@ -14,13 +14,11 @@ password:""
 const {username,password} = data;
 const {id} = useParams()
 
-const [,,login] = useToken();
+const [token,login] = useToken();
 
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
-
-console.log(data)
 
 const submitHandler = e => {
 e.preventDefault();

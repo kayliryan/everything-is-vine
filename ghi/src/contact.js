@@ -51,29 +51,25 @@ const Contact = () => {
     const { token } = useAuthContext();
 
     async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
 
         const response = await fetch(url)
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             setWinery(data.winery)
             setGeo(data.geo)}
         }
 
-    useEffect( () => {fetchWinery(token)})
+    useEffect( () => {fetchWinery(token)}, [])
         
 
 
     let {latitude,longitude} = geo
-    console.log(latitude,longitude)
 
     const position = []
     position.push(latitude)
     position.push(longitude)
-    console.log(position)
-
 
     return (
 
@@ -116,7 +112,7 @@ const Contact = () => {
                                         placeholder="Subject"
                                         required />
                                 </div>
-                                <div className="fadeIn fourth mb-3">
+                                <div className="fadeIn fourth mb-3 textarea">
                                     <textarea className="form-control bg-light textarea" 
                                         name="message"
                                         placeholder="Enter Message"

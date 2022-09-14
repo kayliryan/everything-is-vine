@@ -10,7 +10,7 @@ export const salesApi = createApi({
     keepUnusedDataFor: 10,
     endpoints: builder => ({
         getWineDetails: builder.query({
-            query: ({winery_id, winevo_id}) => `/api/wineries/${winery_id}/wines/${winevo_id}/`,
+            query: ({id, winevo_id}) => `/api/wineries/${id}/wines/${winevo_id}/`,
 
         }),
     }),
