@@ -16,8 +16,9 @@ services:
         volumes:
             - postgres-data:/var/lib/postgresql/data
         environment:
-            - POSTGRES_MULTIPLE_DATABASES=winery, sales
-            - POSTGRES_PASSWORD=test-databases
+            - POSTGRES_MULTIPLE_DATABASES: winery, sales
+            - POSTGRES_USER: postgres
+            - POSTGRES_PASSWORD: test-databases
         ports:
             - 15432:5432
     winery:
@@ -61,7 +62,7 @@ services:
             REACT_APP_DJANGO_SERVICE: http://localhost:8000
             REACT_APP_SALES_API: http://localhost:8010
             PUBLIC_URL: ""
-            
+
     sales-poller:
         build:
             context: ./sales/poll
