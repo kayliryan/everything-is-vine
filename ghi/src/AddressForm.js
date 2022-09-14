@@ -31,12 +31,7 @@ export default function AddressForm() {
     }
 
     function handleAddressTwoChange(e) {
-      // if (e.target.value === "") {
-      //   setAddressTwo(undefined);
-      //   console.log('hello')
-      // } else {
         setAddressTwo(e.target.value)
-      // }
     }
 
     function handleCityChange(e) {

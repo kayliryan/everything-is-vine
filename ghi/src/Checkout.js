@@ -62,7 +62,6 @@ export default function Checkout() {
   let [missingFieldsError, setMissingFieldsError] = React.useState(false);
   let [confNumber, setConfNumber] = React.useState(-1)
   const dispatch = useDispatch();
-  // let [shopItemsPosted, setShopItemsPosted] = React.useState()
 
   const {       
     firstName, setFirstName, 
@@ -84,10 +83,6 @@ export default function Checkout() {
     let confirmation_number = (Math.floor(Math.random() * (99999999999999999 - 10000000000000000 + 1) + 10000000000000000));
     confirmation_number = confirmation_number.toString()
     setConfNumber(confirmation_number)
-
-
-    console.log("token", token)
-    console.log("*****", loggedIn)
     
     let orderData = {
       "confirmation_number": confirmation_number, 
@@ -111,6 +106,7 @@ export default function Checkout() {
       body: JSON.stringify(orderData),
       headers: {'Content-Type': 'application/json',},
       };
+
     try {
       let response = await fetch(orderUrl, fetchConfig);
       if (response.ok) {
@@ -144,6 +140,7 @@ export default function Checkout() {
     async function postShoppingItems(order_id) {
       let shopping_items = JSON.parse(JSON.stringify(cartItems))
       let winery_id = shopping_items[0]["winery_id"]
+      let qToSubtract = []
 
       for (let i=0; i < shopping_items.length; i++) {
         shopping_items[i]["item"] = {}
@@ -151,6 +148,8 @@ export default function Checkout() {
         shopping_items[i]["item"]["winery_id"] = shopping_items[i].winery_id
         shopping_items[i]["quantity"] = shopping_items[i]["cust_quantity"]
         shopping_items[i]["order_id"] = parseInt(order_id)
+        qToSubtract[i]["quantity"] = shopping_items[i]["cust_quantity"]
+        qToSubtract[i]["wine_id"] = shopping_items[i].id
         delete shopping_items[i].id
         delete shopping_items[i].winery_id
         delete shopping_items[i].brand
@@ -183,9 +182,31 @@ export default function Checkout() {
     };
       let response2 = await fetch(shoppingItemsUrl, fetchConfig);
       if (response2.ok) {
+        updateStock(qToSubtract)
         return handleNext();
       }
     }
+
+  async function updateStock(qToSubtract) {
+    for (let i=0; i < qToSubtract.length; i++) {
+      let url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/update/${qToSubtract[i].wine_id}/`
+      let wine_id = qToSubtract[i].wine_id
+      delete qToSubtract[i].wine_id
+      let fetchConfig = {
+        method: "post",
+        body: JSON.stringify(qToSubtract[i]),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+      };
+      let response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        continue
+      } else {
+        console.log(`Stock for wine_id ${wine_id} not updated`)
+      }
+    }
+  }
 
 
   async function validateForms(){
