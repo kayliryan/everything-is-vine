@@ -9,6 +9,22 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 ## JOURNAL ENTRIES
 
 
+## Tuesday, September 13, 2022
+Today, I worked on:
+
+* sending a POST request for Order and Shopping Cart to the back-end from React
+
+Today Kayli and I pair-programmed to send data (POST request) from our React front-end 
+Shopping Cart.  We were able to get our POST request to create an order, return the
+order id created in the post, and create a POST for each item in our Shopping Cart
+using the order id.  We spent most our time figuring out and making sure that our data
+that we were spending back was in the correct format because of the nested data structure.
+
+Tonight I worked on figuring a function to validate credit card numbers.  I learned how
+credit cards use Luhn's algorithm and check digit to validate a credit card number.  It 
+was pretty interesting to learn how this algorithm works!  Will discuss with Kayli how
+much of this function we would like to utilize in our code tomorrow.  
+
 
 ## Monday, September 12, 2022
 Today, I continued working on:
