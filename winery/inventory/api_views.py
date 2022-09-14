@@ -67,12 +67,8 @@ def api_winery(request, pk):
             response.status_code = 404
             return response
 
-
-# @auth.jwt_login_required 
-# #removed so that jwt status no longer matters.
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
-    # token_data = request.payload
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
         wines = list(wines)
@@ -87,7 +83,6 @@ def api_list_wines(request, pk):
         try:
             if "winery" in content:
                 winery = Winery.objects.get(id=pk)
-                # winery = Winery.objects.get(name=content["winery"])
                 content["winery"] = winery
         except Winery.DoesNotExist:
             return JsonResponse(
@@ -118,7 +113,6 @@ def api_list_all_wines(request):
         try:
             if "winery" in content:
                 winery = Winery.objects.get(id=pk)
-                # winery = Winery.objects.get(name=content["winery"])
                 content["winery"] = winery
         except Winery.DoesNotExist:
             return JsonResponse(
@@ -133,7 +127,35 @@ def api_list_all_wines(request):
             safe=False,
         )
 
-#staff login req - update winery details 
+@require_http_methods(["PUT"])
+def api_update_wine(request, pk):
+    if request.method == "PUT":
+        content = json.loads(request.body)
+        sold = content["quantity"]
+        wine = Wine.objects.get(id=pk)
+
+        content["quantity"]= wine.quantity - sold
+
+        try:
+            if "winery" in content:
+                winery = Winery.objects.get(id=content["winery"])
+                content["winery"]=winery
+        except Winery.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid winery name"},
+                status=400,
+            )
+
+        Wine.objects.filter(id=pk).update(**content)
+        wine = Wine.objects.get(id=pk)
+
+
+        return JsonResponse(
+            wine,
+            encoder=WineListEncoder,
+            safe=False,
+        )
+
 @auth.jwt_login_required 
 @require_http_methods(["PUT"])
 def api_staff_winery(request, pk):
@@ -148,7 +170,6 @@ def api_staff_winery(request, pk):
             safe=False,
         )
 
-#staff login req - update and delete individual wines
 @auth.jwt_login_required 
 @require_http_methods(["GET", "PUT"])
 def api_staff_wine(request, pk):
@@ -188,7 +209,6 @@ def api_staff_wine(request, pk):
             safe=False,
         )
 
-#staff login req - create new wine
 @auth.jwt_login_required 
 @require_http_methods(["POST"])
 def api_staff_new_wine(request):

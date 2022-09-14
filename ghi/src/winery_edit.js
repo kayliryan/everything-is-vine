@@ -28,7 +28,7 @@ function EditWinery() {
 
 
     async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
 
         const response = await fetch(url)
 
@@ -53,7 +53,7 @@ function EditWinery() {
         });
         if (response.ok) {
         const user = await response.json();
-       
+
 
         if (user.user.employee === true && user.user.winery === parseInt(id)){
             setStaff(true)
@@ -73,7 +73,7 @@ function EditWinery() {
         event.preventDefault();
         const updateForm = {...data};
     
-        const locationUrl = `http://localhost:8000/api/wineries/${id}/edit/`;
+        const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/edit/`;
         const fetchConfig = {
             method: "put",
             body: JSON.stringify(updateForm),

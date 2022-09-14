@@ -16,7 +16,7 @@ function Winery () {
     const { token } = useAuthContext();
 
     async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
 
         const response = await fetch(url)
 
@@ -43,9 +43,9 @@ function Winery () {
     if (token) {
         getCurrentUser();
     }  
-
-    useEffect( () => {fetchWinery(token)},[])
-
+    
+    useEffect( () => {fetchWinery(token)}, [])
+    
     return (
         <>
         <div className='px-4 py-5 mt-0 my-5 text-center bg-transparent rounded opacity-100'>

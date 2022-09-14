@@ -62,7 +62,7 @@ function NewWine() {
         event.preventDefault();
         const newForm = {...data};
     
-        const locationUrl = `http://localhost:8000/api/wines/new/`;
+        const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/new/`;
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(newForm),

@@ -42,5 +42,12 @@ These two days were spent on resolving the merge conflicts with main.  We had a 
 09/08/22:
 Today I worked on user functionality, specifically the ability to grab information about the current logged in user from the user model.  I was able to successfully get this to work and also tested the ability to show and hide content on the webpage depending on if a user is designated as an "employee" for a specific winery.  This will give "staff" the ability to edit winery information, and create/update/delete specific wines for each winery as soon as those forms are created. 
 
+09/09/22:
+Today I created API endpoints for staff permissions to be able to edit winery details, wine details, create new wines, and delete wines.  I was able to get the endpoints to function properly in insomnia and created buttons to allow staff to make edits if they have the correct user permissions.
 
+09/12/22:
+Today I build the react pages to display and process the forms of editing wineries/wines, and creating new wines.  For the edit functions I needed to make a fetch call to grab the current winery details and populate them for editing in the state.  All of these endpoints I restricted access to by requiring staff permissions to be able to see and submit the forms.  I also wrote my simple unit test today and tested it out and it passed. 
+
+09/13/22:
+Today I worked on cleaning the code.  I removed duplicate code and files I had created to test features.  I updated the unit test as well.  After that I updated the CSS on the dashboard page to fall more in line with our SaaS mission for the application.  At the end of the day I created an API endpoint to subtract the order quantity from a successfully submitted order from the shopping cart.  
 

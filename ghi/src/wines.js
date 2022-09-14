@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
-import Winery from './winery';
 
 function WineColumn(props) {
     const {id} = useParams()
 
     async function delete_wine(wine_id){
 
-        const url = `http://localhost:8000/api/wines/${wine_id}/delete/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${wine_id}/delete/`;
 
         const response = await fetch(url, {method: "DELETE"});
 
@@ -65,7 +64,7 @@ function WineList() {
     const { token } = useAuthContext();
         
     async function fetchWines(){
-        const url = `http://localhost:8000/api/wineries/${id}/wines/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/wines/`;
 
         try {
         const response = await fetch(url);
@@ -126,11 +125,13 @@ function WineList() {
     return (
         <>
             <div className="px-4 py-5 my-5 mt-4 text-center bg-light">
-            <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
             <h1 className="display-5 fw-bold">Our Wines</h1>
                 <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4">
                         Please enjoy a selection of our finest wines from {wineryName}.
+                        </p>
+                        <p className='display-9' style={{color:"orchid"}}>
+                            Login or Sign Up above to get a discount at checkout!
                         </p>
                         <p>
                         <Link to={`/wineries/${id}/wines/new/`} className={"btn btn-success p-2 mb-1 mt-1" + (staff ? "": " d-none")}>Add A New Wine</Link>

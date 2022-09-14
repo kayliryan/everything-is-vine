@@ -51,7 +51,7 @@ const Contact = () => {
     const { token } = useAuthContext();
 
     async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
 
         const response = await fetch(url)
 
@@ -70,7 +70,6 @@ const Contact = () => {
     const position = []
     position.push(latitude)
     position.push(longitude)
-
 
     return (
 

@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import GetWine from './WineDetails';
 import WineList from './wines';
 import Login from './login';
 import SignUp from './signup';
@@ -15,10 +14,15 @@ import NewWine from './new_wine';
 
 function App(props) {
 
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  //gitlab ci yaml file set the public url environment variable 
+  //any of the image files need to have env variable in front of path
+
   return (
 
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
           <div className="container">
             <Routes>
               <Route path="/" element={<WineryList />} />
@@ -27,7 +31,7 @@ function App(props) {
               <Route element={<NavbarLayout />}>
                 <Route path="/wineries/:id/wines/" element={<WineList />} />
                 <Route path="/wineries/:id/contact/" element={<Contact />} />
-                <Route path="/wineries/:winery_id/wines/:winevo_id/" element={<GetWine />} />
+
                 <Route path="/wineries/:id/" element={<Winery />} /> 
                 <Route path="/wineries/:id/login/" element={<Login />} />
                 <Route path="/wineries/:id/signup/" element={<SignUp />} />

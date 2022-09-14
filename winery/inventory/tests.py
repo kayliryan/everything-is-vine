@@ -15,4 +15,4 @@ class TestWineSlug(TestCase):
         wine.price = 40
         wine.quantity = 4
         wine.save()
-        self.assertEquals(wine.brand, "test brand")
+        self.assertEquals(wine.abv, 8.5)

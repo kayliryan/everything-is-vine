@@ -38,7 +38,7 @@ function EditWine() {
 
 
     async function fetchWine(){
-        const url = `http://localhost:8000/api/wines/${id}/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${id}/`;
 
         const response = await fetch(url,{ credentials: "include",})
 
@@ -92,7 +92,7 @@ function EditWine() {
         event.preventDefault();
         const updateForm = {...data};
     
-        const locationUrl = `http://localhost:8000/api/wines/${id}/`;
+        const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${id}/`;
         const fetchConfig = {
             method: "put",
             body: JSON.stringify(updateForm),
