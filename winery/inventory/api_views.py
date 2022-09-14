@@ -6,6 +6,7 @@ from .models import Winery, Wine
 from .acls import get_geo
 import djwto.authentication as auth
 
+
 class WineryEncoder(ModelEncoder):
     model = Winery
     properties = [
@@ -16,6 +17,7 @@ class WineryEncoder(ModelEncoder):
         "description",
         "owner",
     ]
+
 
 class WineListEncoder(ModelEncoder):
     model = Wine
@@ -33,10 +35,11 @@ class WineListEncoder(ModelEncoder):
         "picture_url",
         "quantity",
         "winery",
-        ]
+    ]
     encoders = {
-        "winery" : WineryEncoder(),
+        "winery": WineryEncoder(),
     }
+
 
 @require_http_methods(["GET"])
 def api_list_winery(request):
@@ -49,6 +52,7 @@ def api_list_winery(request):
             encoder=WineryEncoder,
         )
 
+
 @require_http_methods(["GET", "PUT", "DELETE"])
 def api_winery(request, pk):
     if request.method == "GET":
@@ -58,14 +62,14 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery":winery, "geo":geo},
-                encoder=WineryEncoder,
-                safe=False
+                {"winery": winery, "geo": geo},
+                encoder=WineryEncoder, safe=False
             )
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
             response.status_code = 404
             return response
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_wines(request, pk):
@@ -78,7 +82,7 @@ def api_list_wines(request, pk):
             encoder=WineListEncoder,
         )
     else:
-        content = json.loads(request.body)  
+        content = json.loads(request.body)
 
         try:
             if "winery" in content:
@@ -96,7 +100,7 @@ def api_list_wines(request, pk):
             encoder=WineListEncoder,
             safe=False,
         )
-        
+
 
 @require_http_methods(["GET", "POST"])
 def api_list_all_wines(request):
@@ -108,7 +112,7 @@ def api_list_all_wines(request):
             encoder=WineListEncoder,
         )
     else:
-        content = json.loads(request.body)  
+        content = json.loads(request.body)
 
         try:
             if "winery" in content:
@@ -126,6 +130,7 @@ def api_list_all_wines(request):
             encoder=WineListEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["PUT"])
 def api_update_wine(request, pk):
@@ -156,6 +161,7 @@ def api_update_wine(request, pk):
             safe=False,
         )
 
+
 @auth.jwt_login_required 
 @require_http_methods(["PUT"])
 def api_staff_winery(request, pk):
@@ -169,6 +175,7 @@ def api_staff_winery(request, pk):
             encoder=WineryEncoder,
             safe=False,
         )
+
 
 @auth.jwt_login_required 
 @require_http_methods(["GET", "PUT"])
@@ -208,6 +215,7 @@ def api_staff_wine(request, pk):
             encoder=WineListEncoder,
             safe=False,
         )
+
 
 @auth.jwt_login_required 
 @require_http_methods(["POST"])

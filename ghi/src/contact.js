@@ -1,5 +1,5 @@
 import './map.css'
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
@@ -13,10 +13,10 @@ function SetCenter({center}){
 
 const Contact = () => {
 
-    const [winery,setWinery] = useState(
+    const [winery, setWinery] = useState(
         {}
     )
-    const [geo,setGeo] = useState(
+    const [geo, setGeo] = useState(
         {
         latitude: 0,
         longitude: 0
@@ -60,8 +60,8 @@ const Contact = () => {
             setWinery(data.winery)
             setGeo(data.geo)}
         }
-    
-    useEffect( () => {fetchWinery(token)},[])
+
+    useEffect( () => {fetchWinery(token)}, [])
         
 
 

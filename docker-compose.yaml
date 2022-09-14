@@ -17,6 +17,7 @@ services:
             - postgres-data:/var/lib/postgresql/data
         environment:
             - POSTGRES_MULTIPLE_DATABASES=winery, sales
+            - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=test-databases
         ports:
             - 15432:5432

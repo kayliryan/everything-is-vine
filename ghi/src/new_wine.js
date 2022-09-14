@@ -1,5 +1,5 @@
 import './App.css';
-import React,{useState, useEffect} from 'react';
+import {useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './auth.css';
 import { useAuthContext } from './auth'
@@ -55,8 +55,6 @@ function NewWine() {
     const changeHandler = e => {
         setData({...data,[e.target.name]:e.target.value});
     }
-
-    // setData({winery: id})
 
     async function newWine(event){
         event.preventDefault();

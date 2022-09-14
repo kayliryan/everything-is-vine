@@ -4,7 +4,7 @@ import { useAuthContext } from './auth'
 
 function Winery () {
 
-    const [winery,setWinery] = useState(
+    const [winery, setWinery] = useState(
         {}
     )
     const [staff, setStaff]=useState(
