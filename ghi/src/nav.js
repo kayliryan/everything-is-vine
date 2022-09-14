@@ -6,16 +6,18 @@ import { useParams, Link } from 'react-router-dom';
 import { useToken } from './auth';
 import { useAuthContext } from './auth'
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 
 function Navigation() {
+    const { cartItems } = useSelector((state) => state.cart);
 
-    const [logged,setLogged]=useState(
+    const [logged, setLogged] = useState(
         false
     )
 
-    const {id} = useParams()
+    const { id } = useParams()
 
-    const [tokencall,login,logout] = useToken();
+    const [tokencall, login, logout] = useToken();
 
     const { token } = useAuthContext();
 
@@ -37,7 +39,7 @@ function Navigation() {
         <Container fluid>
             <Navbar.Brand href="/">
                 <img
-            src={Navlogo}
+            src={ Navlogo }
             alt=""
             width="70px"
             style={{
@@ -71,6 +73,19 @@ function Navigation() {
                     <div className='px-3'>
                         <button type="submit" className={"btn btn-light p-2 mb-1 mt-1" + (logged ? "":" d-none")} onClick={submitLogoutHandler}>Logout</button>
                     </div>
+
+
+                    <div className="widgets-wrap float-md-right">
+                        <div className="widget-header  mr-3">
+                            <Link to={`wineries/${id}/shoppingcarttest`} className="icon icon-sm rounded-circle border">
+                            <i className="fa fa-shopping-cart" />
+                            </Link>
+                            <span className="badge badge-pill badge-danger notify">
+                            { cartItems.length }
+                            </span>
+                        </div>
+                    </div>
+
                 </Nav>
                 {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
