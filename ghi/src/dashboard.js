@@ -92,7 +92,11 @@ render() {
         </div>
         <div className='px-2 py-2 bg-light mt-4 mb-2 rounded text-center'>
         <p className="lead mb-3" style={{color:"black"}}>Please enjoy a selection of sample winery pages.</p>
-            <p className="lead mb-3" style={{color:"black"}}>Winery pages can be hosted as a collective or by individual winery & customized to your needs!</p>
+            <p className="lead mb-3" style={{color:"black"}}>Winery pages can be hosted as a collective or by individual winery & customized to your needs! 
+            Click the link below and one of our representatives will reach out to you. </p>
+            <h5 className="card-title">
+                <Link to={`/request/`} className="d-flex justify-content-center btn btn-lg px-4 gap-3 text-light" style={{backgroundColor:"mediumorchid"}}>Request More Info</Link>
+            </h5>
         </div>
         
     </>
