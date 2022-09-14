@@ -1,3 +1,21 @@
+## September 13, 2022
+
+* Completed Back End Major Functionality
+
+Today I completed the functionality for posting orders and shopping items to the database from React. All of the important pieces are working and all that's left now is to implement the tinier features that will enhance the user experience.
+
+Today I got a refresher on Django views. We were sending a complicated nested data structure to POST and had to dive into get_extra_data to make sure we got the correct data format out.
+
+
+## September 12, 2022
+
+* Started the Back End Major Functionality
+
+Today I began working on manipulating our Shopping Cart Data to get it ready to create an Order and then Subsequently Shopping Items. We have a lot of data coming from different places that we need to send to different parts of the program at different times. I have psuedocoded out exactly where the different pieces need to go and will work on implementation tomorrow.
+
+Today I learned how to import a specific css file to a designated JS file to avoid conflicts
+
+
 ## September 9, 2022
 
 * Completed Front End Checkout Functionality 

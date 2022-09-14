@@ -1,3 +1,4 @@
+from xmlrpc.client import boolean
 from django.db import models
 from django.conf import settings
 
@@ -37,15 +38,30 @@ class WineVO(models.Model):
 class Order(models.Model):
     confirmation_number = models.CharField(max_length=17, unique=True)
     created = models.DateTimeField(auto_now_add=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    address_one = models.CharField(max_length=100)
+    address_two = models.CharField(max_length=100, blank = True, null=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    card_name = models.CharField(max_length=150)
+    last_four = models.CharField(max_length=4)
+    exp_date = models.CharField(max_length=5)
+    discount_ten = models.BooleanField(default=False)
+    user = models.ForeignKey(
+        USER_MODEL,
+        related_name="orders",
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
+    
+
 
 
 class ShoppingItem(models.Model):
-    user = models.ForeignKey(
-        USER_MODEL,
-        related_name="shopping_items",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     order_id = models.ForeignKey(
         Order, related_name="shopping_items", on_delete=models.CASCADE
     )

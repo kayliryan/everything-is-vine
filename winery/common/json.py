@@ -9,7 +9,7 @@ from types import NoneType
 class DateEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, datetime):
-            return {"date": o.isoformat()}
+            return o.isoformat()
         else:
             return super().default(o)
 
@@ -17,7 +17,7 @@ class DateEncoder(JSONEncoder):
 class QuerySetEncoder(JSONEncoder):
     def default(self, o):
         if isinstance(o, QuerySet):
-            return {"query": list(o)}
+            return list(o)
         else:
             return super().default(o)
 

@@ -44,7 +44,7 @@ def poll():
         try:
             get_wines()
         except Exception as e:
-            print(e, file=sys.stderr)
+            print("***", e, file=sys.stderr)
         time.sleep(3)
 
 

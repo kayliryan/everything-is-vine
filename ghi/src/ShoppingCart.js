@@ -4,8 +4,6 @@ import { deleteCartItem, clearCart, updateQuantityFromShoppingCart } from './sto
 import { useState, useEffect } from 'react';
 
 
-
-
 function ShoppingCartTest(){
   const { cartItems } = useSelector((state) => state.cart);
   const [cust_quantity, setCustQuantity] = useState(-1)
@@ -14,12 +12,12 @@ function ShoppingCartTest(){
   const dispatch = useDispatch();
 
 
-  async function deleteItem(e, index=index) {
+  async function deleteItem(e, index) {
     dispatch(deleteCartItem({"index": index}))
     }
 
 
-  async function checkAndSetQuantity(e, index=index){
+  async function checkAndSetQuantity(e, index){
       // bug to fix: unable to change quantity input in front end without highlighting number
       if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
         e.target.value = 1;
@@ -31,9 +29,9 @@ function ShoppingCartTest(){
       setIndex(index)
     }
 
-  async function orderPlaced(e) {
-    dispatch(clearCart())
-  }
+  // async function orderPlaced(e) {
+  //   dispatch(clearCart())
+  // }
 
 
   useEffect(() => {
@@ -154,7 +152,7 @@ function ShoppingCartTest(){
                           </div>
                         </td>
                         <td className="text-right">
-                          <a onClick = {e => deleteItem(e,index)} type="button" className="btn btn-light"><span className="bi bi-trash"></span> Remove</a>
+                          <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-light"><span className="bi bi-trash"></span> Remove</button>
                         </td>
                       </tr>
                       );

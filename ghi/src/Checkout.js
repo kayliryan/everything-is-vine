@@ -16,8 +16,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { MainContext } from './mainContext';
+import { useDispatch, useSelector } from "react-redux";
+import { useAuthContext } from './auth'
+import { clearCart } from './store/cartReducer';
+
+
 
 function Copyright() {
   return (
@@ -50,15 +55,20 @@ function getStepContent(step) {
 const theme = createTheme();
 
 export default function Checkout() {
-  
+  const { token } = useAuthContext();
+  const [loggedIn, setLoggedIn]= React.useState(false)
+  const { cartItems } = useSelector((state) => state.cart);
   const [activeStep, setActiveStep] = React.useState(0);
   let [missingFieldsError, setMissingFieldsError] = React.useState(false);
+  let [confNumber, setConfNumber] = React.useState(-1)
+  const dispatch = useDispatch();
+  // let [shopItemsPosted, setShopItemsPosted] = React.useState()
 
   const {       
     firstName, setFirstName, 
     lastName, setLastName, 
     addressOne, setAddressOne,
-    // addressTwo, setAddressTwo,
+    addressTwo, setAddressTwo,
     city, setCity,
     state, setState,
     zipCode ,setZipCode,
@@ -66,32 +76,147 @@ export default function Checkout() {
     cardName, setCardName, 
     cardNumber, setCardNumber, 
     expDate, setExpDate,
-    cvv, setCVV } = useContext(MainContext);
+    cvv, setCVV,
+    lastFour, setLastFour} = useContext(MainContext);
 
-  function validateForms(){
+
+  async function postOrder() {
+    let confirmation_number = (Math.floor(Math.random() * (99999999999999999 - 10000000000000000 + 1) + 10000000000000000));
+    confirmation_number = confirmation_number.toString()
+    setConfNumber(confirmation_number)
+
+
+    console.log("token", token)
+    console.log("*****", loggedIn)
+    
+    let orderData = {
+      "confirmation_number": confirmation_number, 
+      "first_name": firstName,
+      "last_name": lastName,
+      "address_one": addressOne,
+      "address_two": addressTwo,
+      "city": city,
+      "state": state,
+      "zip_code": zipCode,
+      "country": country,
+      "card_name": cardName,
+      "last_four": lastFour,
+      "exp_date": expDate,
+      "discount_ten": loggedIn,
+    }
+
+    let orderUrl = "http://localhost:8010/api/orders/";
+    let fetchConfig = {
+      method: "post",
+      body: JSON.stringify(orderData),
+      headers: {'Content-Type': 'application/json',},
+      };
+    try {
+      let response = await fetch(orderUrl, fetchConfig);
+      if (response.ok) {
+          const newOrder = await response.json();
+          let order_id = newOrder["order"]
+
+          setFirstName("")
+          setLastName("")
+          setAddressOne("")
+          setAddressTwo("")
+          setCity("")
+          setState("")
+          setZipCode("")
+          setCountry("")
+          setCardName("")
+          setCardNumber("")
+          setExpDate("")
+          setCVV("")
+    
+          postShoppingItems(order_id)
+        }
+      }
+      
+    //Need to fix catch below
+    catch (IntegrityError) {
+      postOrder()
+    }
+  }
+
+
+    async function postShoppingItems(order_id) {
+      let shopping_items = JSON.parse(JSON.stringify(cartItems))
+      let winery_id = shopping_items[0]["winery_id"]
+
+      for (let i=0; i < shopping_items.length; i++) {
+        shopping_items[i]["item"] = {}
+        shopping_items[i]["item"]["id"] = shopping_items[i].id
+        shopping_items[i]["item"]["winery_id"] = shopping_items[i].winery_id
+        shopping_items[i]["quantity"] = shopping_items[i]["cust_quantity"]
+        shopping_items[i]["order_id"] = parseInt(order_id)
+        delete shopping_items[i].id
+        delete shopping_items[i].winery_id
+        delete shopping_items[i].brand
+        delete shopping_items[i].year
+        delete shopping_items[i].varietal
+        delete shopping_items[i].description
+        delete shopping_items[i].region
+        delete shopping_items[i].abv
+        delete shopping_items[i].volume
+        delete shopping_items[i].city_state 
+        delete shopping_items[i].year
+        delete shopping_items[i].picture_url
+        delete shopping_items[i].cust_quantity
+        delete shopping_items[i].import_href
+      }
+
+      let shoppingItemsData = {
+        "shopping_items": shopping_items,
+      }
+      
+      // This might be a problem
+      let shoppingItemsUrl = `http://localhost:8010/api/wineries/${winery_id}/shoppingitems/`
+
+      let fetchConfig = {
+        method: "post",
+        body: JSON.stringify(shoppingItemsData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+      let response2 = await fetch(shoppingItemsUrl, fetchConfig);
+      if (response2.ok) {
+        return handleNext();
+      }
+    }
+
+
+  async function validateForms(){
     if (activeStep == 0) {
       if (firstName === '' || lastName === '' || 
           addressOne === '' || city === '' ||
           state === '' || zipCode === '' || country === '') {
         return setMissingFieldsError(true);
       } else {
-        return handleNext();
+          return handleNext();
       }
     }
     if (activeStep == 1) {
       if (cardName === '' || cardNumber.length !== 19 ||
           expDate.length !== 5 || cvv.length !== 3) {
         return setMissingFieldsError(true);
-      } else {
-        return handleNext();
+      } 
+      // else if(passedCreditCardCheck === false) {
+      //   return invalidCreditCard(true)
+      // }
+      else {
+          return handleNext();
       }
     }
     if (activeStep == 2) {
-      //Complete logic to check against the credit card function and post an order to the database
-      //if it clears then return handleNext
-      return handleNext()
+      await postOrder()
+      dispatch(clearCart())
+      }
     }
-  }
+
+
 
   const handleNext = () => {
     setMissingFieldsError(false);
@@ -102,6 +227,14 @@ export default function Checkout() {
     setMissingFieldsError(false);
     setActiveStep(activeStep - 1);
   };
+
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true)
+    }
+    },[token])
+  // useEffect( ()=>{setLoggedIn(token)},[token])
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -140,7 +273,7 @@ export default function Checkout() {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
+                  Your order number is #{confNumber}. We have emailed your order
                   confirmation, and will send you an update when your order is ready for pickup.
                 </Typography>
               </React.Fragment>

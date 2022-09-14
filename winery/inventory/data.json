@@ -1,0 +1,62 @@
+[
+    {
+        "model": "inventory.winery",
+        "pk": 1,
+        "fields": {
+            "name": "Kayli's Winery",
+            "url": "kayliwinery.com",
+            "address": "500 Victory Way Los Angeles, CA 90000",
+            "description": "Description of Kayli's Winery",
+            "owner": "Kayli"
+        }
+    },
+    {
+        "model": "inventory.winery",
+        "pk": 2,
+        "fields": {
+            "name": "Jen's Winery",
+            "url": "Jenwinery.com",
+            "address": "1000 South Street Los Angeles, CA 90000",
+            "description": "Description of Jen's Winery",
+            "owner": "Jen"
+        }
+    },
+    {
+        "model": "inventory.wine",
+        "pk": 1,
+        "fields": {
+            "winery": 1,
+            "brand": "Duck Sauce",
+            "year": 2000,
+            "varietal": "Sauvignon Blanc",
+            "description": "A delicious white wine",
+            "region": "France",
+            "abv": 14.0,
+            "volume": 750,
+            "city_state": "Paris, France",
+            "price": 80,
+            "picture_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH2wfPGae7mZzV_wjwNGedrNUV3bA-JBYpdSeJqISFF3W2GWBrjbCJXinTJJdcWv_gL-Q&usqp=CAU",
+            "quantity": 4000
+        }
+    },
+    {
+        "model": "inventory.wine",
+        "pk": 2,
+        "fields": {
+            "winery": 1,
+            "brand": "Josh",
+            "year": 1995,
+            "varietal": "Merlot",
+            "description": "A delicious red wine",
+            "region": "Italy",
+            "abv": 17.0,
+            "volume": 750,
+            "city_state": "Milan, Italy",
+            "price": 100,
+            "picture_url":"https://images.vivino.com/thumbs/atfYEUu9S26tqYKhr0dArQ_pb_600x600.png",
+            "quantity": 5000
+        }
+    }
+
+
+]

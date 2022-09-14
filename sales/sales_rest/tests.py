@@ -7,13 +7,13 @@ class TestWineVOViews(TestCase):
     def setUp(self):
         WineVO.objects.create(
             winery_id=1,
-            brand="test_brand",
-            year=2010,
-            varietal='test_varietal',
-            abv=8.0,
+            brand="testING_brand",
+            year=2018,
+            varietal='testING_varietal',
+            abv=14.0,
             volume=750,
-            price=40.0,
-            quantity=3,
+            price=50.0,
+            quantity=1000,
         )
 
     def test_list_accounts_GET(self):
