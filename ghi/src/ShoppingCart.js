@@ -1,43 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, clearCart, updateQuantityFromShoppingCart } from './store/cartReducer';
+import { deleteCartItem, updateQuantityFromShoppingCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
 import './assets/css/bootstrap2.css'
 import './assets/css/responsive.css'
 import './assets/css/ui.css'
 
 
-
 function ShoppingCartTest(){
   const { cartItems } = useSelector((state) => state.cart);
-  const [cust_quantity, setCustQuantity] = useState(-1)
-  const [index_state, setIndex] = useState(-1)
-  const [firstRender, hasRendered] = useState(true)
-  const dispatch = useDispatch();
-
-
-  async function deleteItem(e, index=index) {
-    dispatch(deleteCartItem({"index": index}))
+    const [cust_quantity, setCustQuantity] = useState(-1)
+    const [index_state, setIndex] = useState(-1)
+    const [firstRender, hasRendered] = useState(true)
+    const dispatch = useDispatch();
+  
+    async function deleteItem(e, index) {
+      dispatch(deleteCartItem({"index": index}))
     }
+  
 
-
-  async function checkAndSetQuantity(e, index=index){
-      // bug to fix: unable to change quantity input in front end without highlighting number
-      if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
-        e.target.value = 1;
+    async function checkAndSetQuantity(e, index){
+        // bug to fix: unable to change quantity input in front end without highlighting number
+        if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+          e.target.value = 1;
+        }
+        if(parseInt(e.target.value) > parseInt(e.target.max)){
+          e.target.value = e.target.max;
+        }
+        setCustQuantity(parseInt(e.target.value))
+        setIndex(index)
       }
-      if(parseInt(e.target.value) > parseInt(e.target.max)){
-        e.target.value = e.target.max;
-      }
-      setCustQuantity(parseInt(e.target.value))
-      setIndex(index)
-    }
-
-  async function orderPlaced(e) {
-    dispatch(clearCart())
-  }
-
-
+  
   useEffect(() => {
     if (firstRender === true) {
       hasRendered(false)
@@ -47,8 +40,6 @@ function ShoppingCartTest(){
     dispatch(updateQuantityFromShoppingCart(data)) 
     }
   }, [cust_quantity, index_state]);
-
-
 
   const subTotalSum = cartItems.reduce(
     (total, currentItem) => total = total + (currentItem.price * currentItem.cust_quantity), 0
@@ -212,50 +203,3 @@ function ShoppingCartTest(){
 
   export default ShoppingCartTest;
 
-
-
-//   return(
-//       <>
-      
-//           <table className="table table-hover">
-//               <thead>
-//                   <tr>
-//                   <th>Shopping Cart</th>
-//                   <th>Wine</th>
-//                   <th>Quantity</th>
-//                   <th>Price</th>
-//                   <th>Total Price</th>
-//                   <th>Delete</th>
-//                   </tr>
-//               </thead>
-//               <tbody className="table-group-divider">
-//                       {cartItems.map((cartItem, index) => {
-//                       return (
-//                           <tr key={ cartItem.id }>
-//                             <td><img
-//                           className="mx-auto img-thumbnail"
-//                           src={ cartItem.picture_url }/></td>
-//                             <td>Index {index}</td>
-//                             <td>{cartItem.year} {cartItem.brand} {cartItem.varietal}</td>
-//                             <td>${cartItem.price} </td>
-//                             <td> ${cartItem.cust_quantity * cartItem.price}</td>
-//                             <td> <input onChange = {e => checkAndSetQuantity(e,index)} type="text" id={index} name="quantity" className="form-control input-number" value={cartItem.cust_quantity} min="1" max={cartItem.quantity} /> </td>
-//                             <td> <button onClick = {e => deleteItem(e,index)} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Delete</button> </td>
-//                             <td> <button onClick = {orderPlaced} type="button" className="btn btn-primary"><span className="bi bi-trash"></span> Clear Cart</button> </td>
-//                               {/* <td> { currentDataObj.item.year/brand/varietal } </td>
-//                               <td> { currentDataObj.item.cust_quantity } </td>
-//                               // input element?: put cust_quantity as the placeholder?
-//                               // buttons to increment up and down? left and right?
-//                               <td> { dataObj.item.price } </td> */}
-//                             </tr>
-//                       );
-//                   })}
-//               </tbody>
-//           </table>            
-//       </>
-//   )
-//   };
-
-// }
-
-// export default ShoppingCartTest;

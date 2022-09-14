@@ -4,12 +4,6 @@ from common.json import ModelEncoder
 from django.views.decorators.http import require_http_methods
 from sales_rest.models import WineVO, Order, ShoppingItem
 import json
-import random
-
-
-# class WineryVOEncoder(ModelEncoder):
-#     model = WineryVO
-#     properties = ["id", "name", "import_href"]
 
 
 class WineVOEncoder(ModelEncoder):
@@ -32,10 +26,25 @@ class WineVOEncoder(ModelEncoder):
     ]
 
 
-
 class OrderEncoder(ModelEncoder):
     model = Order
-    properties = ["id", "confirmation_number", "created"]
+    properties = [
+        "id", 
+        "confirmation_number", 
+        "created",
+        "first_name",
+        "last_name",
+        "address_one",
+        "address_two",
+        "city",
+        "state",
+        "zip_code",
+        "country",
+        "card_name",
+        "last_four",
+        "exp_date",
+        "discount_ten",
+        ]
 
 
 class ShoppingItemEncoder(ModelEncoder):
@@ -43,14 +52,16 @@ class ShoppingItemEncoder(ModelEncoder):
     properties = [
         "order_id", 
         "item",
+        "price",
+        "quantity",
     ]
 
     def get_extra_data(self, o):
-        return {"order_id": o.order_id.id }
-
-    encoders = {
-        "item": WineVOEncoder(),
-    }
+        return {"order_id": o.order_id.id,
+            "item": {
+            "id": o.item.id,
+            "winery_id": o.item.winery_id
+        }}
 
 
 # Show list of wines from a specific winery
@@ -71,10 +82,7 @@ def api_list_wines(request, pk1):
             return JsonResponse(
                 {"message": "Winery does not exist or has no list of wines"}
             )       
-
         
-
-
 # Show detail of specific wine from a specific winery
 @require_http_methods(["GET"])
 def api_show_wine(request, pk1, pk2):
@@ -98,16 +106,6 @@ def api_show_wine(request, pk1, pk2):
         )
 
 
-
-
-def create_confirmation_number():
-  a = 10000000000000000
-  b = 99999999999999999
-  num = str(round(random.uniform(a, b)))
-  return num
-
-
-# Show list of orders
 @require_http_methods(["GET", "POST"])
 def api_list_orders(request):
     if request.method == "GET":
@@ -117,24 +115,16 @@ def api_list_orders(request):
             encoder=OrderEncoder,
             )
     else:
-        try:
-            content = json.loads(request.body)
-            content["confirmation_number"] = create_confirmation_number()
-
-            orders = Order.objects.create(**content)
-            return JsonResponse(
-                orders,
-                encoder=OrderEncoder,
-                safe=False,
-            )
-        except:
-            return JsonResponse(
-                {"message": "Order unsuccessful"},
-                status=400, 
-            )
-
-    
-
+        # try:
+        content = json.loads(request.body)
+        print("***content", content)
+        order = Order.objects.create(**content)
+        return JsonResponse({"order": order.id})
+        # except:
+        #     return JsonResponse(
+        #         {"message": "Order unsuccessful"},
+        #         status=400, 
+        #     )
 
 
 # Show detail of specific order
@@ -160,7 +150,6 @@ def api_show_order(request, pk):
         )
 
 
-
 # Show list of shopping items from orders of specific winery
 @require_http_methods(["GET", "POST"])
 def api_list_shopping_items(request, pk1):
@@ -171,67 +160,23 @@ def api_list_shopping_items(request, pk1):
             encoder=ShoppingItemEncoder,
         )
     else:
-
         content = json.loads(request.body)
         shopping_cart_items = content["shopping_items"]
-        print("*******CONTENT:", content)
-        print("*******SHOPPING_CART_ITEMS:", shopping_cart_items)
-
-
         for index in range(len(shopping_cart_items)):
+            # order_id = shopping_cart_items["order_id"]
             order_id = shopping_cart_items[int(index)]["order_id"]
-            print("*******ORDER_ID:", order_id)
             order = Order.objects.get(id=order_id)
-            print("*******ORDER:", order)
-            shopping_cart_items[index]["order_id"] = order
-
+            shopping_cart_items[int(index)]["order_id"] = order
             winery = shopping_cart_items[int(index)]["item"]["winery_id"]
-            print("*******WINERY_ID:", winery)
             wine = shopping_cart_items[int(index)]["item"]["id"]
-            print("*******WINERY:", wine)
             wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
             shopping_cart_items[int(index)]["item"] = wine_id
-
-
             shopping_items = ShoppingItem.objects.create(**shopping_cart_items[int(index)])
-
         return JsonResponse(
             shopping_items,
             encoder=ShoppingItemEncoder,
             safe=False,
-        )   
-
-
-# POST FORMAT:
-# {
-# 	"shopping_items": [
-# 		{
-# 			"order_id": 2,
-# 			"item": {
-# 				"id": 1,
-# 				"winery_id": 1
-# 			}
-# 		},
-# 		{
-# 			"order_id": 2,
-# 			"item": {
-# 				"id": 2,
-# 				"winery_id": 1
-# 			}
-# 		}
-# 	]
-# }
-
-
-
-
-
-
-
-
-
-
-
+        )  
 
 
 # Show list of shopping items from specific order 
@@ -243,6 +188,3 @@ def api_list_shopping_items_order(request, pk1, pk2):
             {"shopping_items": shopping_items},
             encoder=ShoppingItemEncoder,
         )
-
-
-

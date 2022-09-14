@@ -1,8 +1,5 @@
-from django.http import JsonResponse
 from common.json import ModelEncoder
-from django.views.decorators.http import require_http_methods
 from sales_rest.models import WineVO, Order, ShoppingItem
-import json
 
 
 # class WineryVOEncoder(ModelEncoder):
@@ -16,8 +13,7 @@ class WineVOEncoder(ModelEncoder):
         "id",
         "brand",
         "year",
-        "varietal"
-        "description",
+        "varietal" "description",
         "region",
         "abv",
         "volume",
@@ -29,7 +25,6 @@ class WineVOEncoder(ModelEncoder):
     ]
 
 
-
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = ["confirmation_number", "created"]
@@ -38,7 +33,7 @@ class OrderEncoder(ModelEncoder):
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
     properties = [
-        "order_id", 
+        "order_id",
         "item",
         "quantity",
         "price",

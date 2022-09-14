@@ -1,20 +1,17 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import {useGetWineDetailsQuery} from './store/salesApi';
+import { useState } from 'react';
+import { useGetWineDetailsQuery } from './store/salesApi';
 import { useDispatch, useSelector } from "react-redux";
-import { addCartItem } from './store/cartReducer';
-// import ErrorNotification from './ErrorNotification'
-
+import { addCartItem, updateQuantityFromDetailsPage } from './store/cartReducer';
 
 
 function GetWine() {
-  let { winery_id, winevo_id } = useParams();
-  const {data, error, isLoading} = useGetWineDetailsQuery({winery_id, winevo_id});
+  let { id, winevo_id } = useParams();
+  const {data, isLoading} = useGetWineDetailsQuery({id, winevo_id});
   const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-
   if (isLoading) {
     return (
       <progress className="progress is-primary" max="100"></progress>
@@ -24,9 +21,7 @@ function GetWine() {
     // if (data.quantity === 0) {
     //   redirect to Wine List Page
     // }
-
   async function checkAndSetQuantity(e){
-
     if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
         e.target.value = 1;
     }
@@ -36,14 +31,26 @@ function GetWine() {
       setQuantity(parseInt(e.target.value))
     }
   
-
   async function addToShoppingCart(){
+    let item_exists = false
+    let index = null
     const dataCopy = {...data};
+    console.log("copy of data", dataCopy)
     dataCopy.cust_quantity = quantity;
-    dispatch(addCartItem(dataCopy))
-    // console.log(cartItems)
+    let wine_id = dataCopy.id
+    for (let i=0; i < cartItems.length; i++) {
+      if (wine_id === cartItems[i].id) {
+          item_exists = true
+          index = i
+      } 
     }
-
+    if (item_exists) {
+      dispatch(updateQuantityFromDetailsPage({"index": index, "add_cust_quantity": quantity}))
+    } else {
+      dispatch(addCartItem(dataCopy))
+      // console.log(cartItems)
+    }
+  }
 
   return (
     <div className="container-fluid">

@@ -1,19 +1,17 @@
 import React from 'react';
-import WineryLogo from './/images/Winery.png'
 import { Link } from 'react-router-dom';
 
 function WineColumn(props) {
 return (
     <div className="col">
     {props.list.map(data => {
-        console.log(data)
         const winery = data;
         return (
         <div key={winery.id} className="card mb-3 mt-5 shadow">
-            <img src={WineryLogo} className="card-img-top" />
+            <img src={winery.url} className="card-img-top" />
             <div className="card-body">
             <h5 className="card-title">
-                <Link to={`wineries/${winery.id}`} className="d-flex justify-content-center btn btn-lg px-4 gap-3 text-light" style={{backgroundColor:"orchid"}}>{winery.name}</Link>
+                <Link to={`/wineries/${winery.id}`} className="d-flex justify-content-center btn btn-lg px-4 gap-3 text-light" style={{backgroundColor:"orchid"}}>{winery.name}</Link>
             </h5>
             <p className="d-flex justify-content-center card-text">
                 {winery.address}
@@ -38,12 +36,11 @@ constructor(props) {
 }
 
 async componentDidMount() {
-    const url = 'http://localhost:8000/api/wineries/';
+    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/`;
 
     try {
     const response = await fetch(url);
     if (response.ok) {
-        // Get the list of conferences
         const data = await response.json();
 
         const wineColumns = [[], [], []];
@@ -51,7 +48,6 @@ async componentDidMount() {
         for (let winery of data.wineries){
             list.push(winery)
         }
-        console.log(list)
 
         let i = 0;
         for (const wine of list) {
@@ -66,9 +62,6 @@ async componentDidMount() {
         }
         }
 
-        // Set the state to the new list of three lists of
-        // conferences
-        console.log(wineColumns)
         this.setState({wineColumns: wineColumns});
     }
     } catch (e) {
@@ -79,13 +72,13 @@ async componentDidMount() {
 render() {
     return (
     <>
-        <div className="px-4 py-5 my-5 mt-0 text-center rounded-3" style={{backgroundColor:"darkorchid"}}>
-        <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
-        <h1 className="display-5 fw-bold text-white">Our Winery Collective</h1>
+        <div className="px-4 py-3 my-5 mt-2 text-center rounded-3" style={{backgroundColor:"darkorchid"}}>
+        <h1 className="display-5 fw-bold text-white mt-5">Everything's Vine</h1>
         <div className="col-lg-6 mx-auto">
-            <p className="lead mb-4 text-light">
-            Enjoy selections from some of the best wineries in the area. 
+            <p className="lead mb-5 text-light font-italic">
+            The premiere winery management web application.    
             </p>
+            {/* <p className="lead mb-1 text-light">Please enjoy a selection of sample winery pages</p> */}
         </div>
         </div>
         <div className="container">
@@ -97,6 +90,15 @@ render() {
             })}
         </div>
         </div>
+        <div className='px-2 py-2 bg-light mt-4 mb-2 rounded text-center'>
+        <p className="lead mb-3" style={{color:"black"}}>Please enjoy a selection of sample winery pages.</p>
+            <p className="lead mb-3" style={{color:"black"}}>Winery pages can be hosted as a collective or by individual winery & customized to your needs! 
+            Click the link below and one of our representatives will reach out to you. </p>
+            <h5 className="card-title">
+                <Link to={`/request/`} className="d-flex justify-content-center btn btn-lg px-4 gap-3 text-light" style={{backgroundColor:"mediumorchid"}}>Request More Info</Link>
+            </h5>
+        </div>
+        
     </>
     );
 }

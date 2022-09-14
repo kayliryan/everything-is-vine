@@ -1,5 +1,5 @@
 import './map.css'
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
@@ -14,10 +14,10 @@ function SetCenter({center}){
 
 const Contact = () => {
 
-    const [winery,setWinery] = useState(
+    const [winery, setWinery] = useState(
         {}
     )
-    const [geo,setGeo] = useState(
+    const [geo, setGeo] = useState(
         {
         latitude: 0,
         longitude: 0
@@ -52,29 +52,25 @@ const Contact = () => {
     const { token } = useAuthContext();
 
     async function fetchWinery(){
-        const url = `http://localhost:8000/api/wineries/${id}/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
 
         const response = await fetch(url)
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             setWinery(data.winery)
             setGeo(data.geo)}
         }
-    
-    useEffect( () => {fetchWinery(token)},[])
+
+    useEffect( () => {fetchWinery(token)}, [])
         
 
 
     let {latitude,longitude} = geo
-    console.log(latitude,longitude)
 
     const position = []
     position.push(latitude)
     position.push(longitude)
-    console.log(position)
-
 
     return (
 
@@ -118,6 +114,7 @@ const Contact = () => {
                                         required />
                                 </div>
                                 <div className="fadeIn form-input-row fourth mb-3">
+                                {/* <div className="fadeIn fourth mb-3 textarea"> */}
                                     <textarea className="form-control bg-light textarea" 
                                         name="message"
                                         placeholder="Enter Message"
