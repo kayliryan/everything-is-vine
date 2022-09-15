@@ -70,7 +70,7 @@ function App(props) {
                   <Route path="/wineries/:id/login/" element={<Login />} />
                   <Route path="/wineries/:id/signup/" element={<SignUp />} />
                   <Route path="/wineries/:id/shoppingcart/" element={<ShoppingCart />} />
-                  <Route path="/wineries/:id/shoppingcart/checkout" element={<Checkout />} />
+                  <Route path="/wineries/:id/shoppingcart/checkout/" element={<Checkout />} />
                   <Route path="/wineries/:id/edit/" element={<EditWinery />} />
                   <Route path="/wines/:id/edit/" element={<EditWine/>} />
                   <Route path="/wineries/:id/wines/new/" element={<NewWine />} />
