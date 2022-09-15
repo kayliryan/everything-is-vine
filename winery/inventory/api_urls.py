@@ -7,11 +7,13 @@ from .api_views import (
     api_staff_wine,
     api_staff_delete_wine,
     api_winery,
+    api_list_all_wines,
     api_update_wine,
 )
 
 
 urlpatterns = [
+    path("wines/", api_list_all_wines, name="api_list_all_wines"),
     path("wineries/", api_list_winery, name="api_list_wineries"),
     path("wineries/<int:pk>/wines/", api_list_wines, name="api_list_wines"),
     path("wineries/<int:pk>/", api_winery, name="api_show_winery"),
