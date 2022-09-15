@@ -21,6 +21,8 @@ import { MainContext } from './mainContext';
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthContext } from './auth'
 import { clearCart } from './store/cartReducer';
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -33,7 +35,9 @@ function Copyright() {
     </Typography>
   );
 }
+
 const steps = ['Billing address', 'Payment details', 'Review your order'];
+
 function getStepContent(step) {
   switch (step) {
     case 0:
@@ -46,7 +50,9 @@ function getStepContent(step) {
       throw new Error('Unknown step');
   }
 }
+
 const theme = createTheme();
+
 export default function Checkout() {
   const { token } = useAuthContext();
   const [loggedIn, setLoggedIn]= React.useState(false)
@@ -54,6 +60,7 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   let [missingFieldsError, setMissingFieldsError] = React.useState(false);
   let [confNumber, setConfNumber] = React.useState(-1)
+  let [userEmail, setUserEmail] = React.useState("")
   const dispatch = useDispatch();
   const {       
     firstName, setFirstName, 
@@ -88,6 +95,9 @@ export default function Checkout() {
       "last_four": lastFour,
       "exp_date": expDate,
       "discount_ten": loggedIn,
+    }
+    if (userEmail !== ""){
+      orderData["account_email"] = userEmail
     }
     let orderUrl = `${process.env.REACT_APP_SALES_API}/api/orders/`;
     let fetchConfig = {
@@ -225,11 +235,31 @@ export default function Checkout() {
     setMissingFieldsError(false);
     setActiveStep(activeStep - 1);
   };
+
+  async function getCurrentUser() {
+    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const response = await fetch(url, {
+    credentials: 'include',
+    });
+    if (response.ok) {
+    const user = await response.json();
+
+
+    setUserEmail(user.user.email)
+    
+  }
+}
+
+
+
+
   useEffect(() => {
     if (token) {
       setLoggedIn(true)
+      getCurrentUser();
     }
     },[token])
+
 
   return (
     <ThemeProvider theme={theme}>

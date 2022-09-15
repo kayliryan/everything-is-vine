@@ -2,8 +2,6 @@ from django.db import models
 from django.conf import settings
 
 
-USER_MODEL = settings.AUTH_USER_MODEL
-
 class WineVO(models.Model):
     winery_id = models.SmallIntegerField()
     brand = models.CharField(max_length=110)
@@ -38,13 +36,7 @@ class Order(models.Model):
     last_four = models.CharField(max_length=4)
     exp_date = models.CharField(max_length=5)
     discount_ten = models.BooleanField(default=False)
-    user = models.ForeignKey(
-        USER_MODEL,
-        related_name="orders",
-        on_delete=models.PROTECT,
-        blank=True,
-        null=True,
-    )
+    account_email = models.CharField(max_length=100, null=True, blank=True)
     
 
 class ShoppingItem(models.Model):
