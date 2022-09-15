@@ -12,14 +12,15 @@ import './assets/css/ui.css';
 
 function ShoppingCart() {
   const { token } = useAuthContext();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let [loggedIn, setLoggedIn] = React.useState(false);
   let [discountRate, setDiscountRate] = React.useState(0);
   const { cartItems } = useSelector((state) => state.cart);
   const [cust_quantity, setCustQuantity] = useState(-1);
   const [index_state, setIndex] = useState(-1);
   const [firstRender, hasRendered] = useState(true);
   const dispatch = useDispatch();
+/*eslint-disable */
+  let [loggedIn, setLoggedIn] = React.useState(false);
+/*eslint-enable */
 
   async function deleteItem(e, index) {
     dispatch(deleteCartItem({ index: index }));

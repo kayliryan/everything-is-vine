@@ -12,8 +12,9 @@ function Login() {
 
   const { username, password } = data;
   const { id } = useParams();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+/*eslint-disable */
   const [token, login] = useToken();
+/*eslint-enable */
 
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: [e.target.value] });

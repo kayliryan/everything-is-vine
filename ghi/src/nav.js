@@ -11,9 +11,10 @@ function Navigation() {
   const { cartItems } = useSelector((state) => state.cart);
   const [logged, setLogged] = useState(false);
   const { id } = useParams();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const [tokencall, login, logout] = useToken();
   const { token } = useAuthContext();
+/*eslint-disable */
+  const [tokencall, login, logout] = useToken();
+/*eslint-enable */
 
   function loggedIn(token) {
     if (token) {

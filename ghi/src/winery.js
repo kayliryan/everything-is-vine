@@ -36,10 +36,11 @@ function Winery() {
   if (token) {
     getCurrentUser();
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+ /*eslint-disable */
   useEffect(() => {
     fetchWinery(token);
   }, []);
+  /*eslint-enable */
 
   return (
     <>

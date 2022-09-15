@@ -57,10 +57,11 @@ const Contact = () => {
       setGeo(data.geo);
     }
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+/*eslint-disable */
   useEffect(() => {
     fetchWinery(token);
   }, []);
+/*eslint-enable */
 
   let { latitude, longitude } = geo;
 
