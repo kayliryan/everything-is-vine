@@ -99,10 +99,11 @@ function EditWine() {
       navigate(`/wineries/${winery}/wines/`);
     }
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+ /*eslint-disable */
   useEffect(() => {
     fetchWine(token);
   }, []);
+  /*eslint-enable */
 
   return (
     <>
