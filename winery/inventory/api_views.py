@@ -41,7 +41,7 @@ class WineListEncoder(ModelEncoder):
     }
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def api_list_winery(request):
     if request.method == "GET":
         wineries = Winery.objects.all()
@@ -50,6 +50,14 @@ def api_list_winery(request):
         return JsonResponse(
             {"wineries": wineries},
             encoder=WineryEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        winery = Winery.objects.create(**content)
+        return JsonResponse(
+            winery,
+            encoder=WineryEncoder,
+            safe=False,
         )
 
 

@@ -78,7 +78,9 @@ render() {
             <p className="lead mb-5 text-light font-italic">
             The premiere winery management web application.    
             </p>
-            {/* <p className="lead mb-1 text-light">Please enjoy a selection of sample winery pages</p> */}
+            <h5 className="card-title">
+                <Link to={`/newwinery/`} className="d-flex justify-content-center btn btn-lg px-4 bg-light gap-3" style={{color:"mediumorchid"}}>Try it out here!  Create a winery!</Link>
+            </h5>
         </div>
         </div>
         <div className="container">

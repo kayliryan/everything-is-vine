@@ -13,11 +13,12 @@ full_name:"",
 address:"",
 phone:"",
 email:"",
-winery:""
+winery:"",
+employee: ""
 })
 const {id} = useParams()
 
-const {username,password, full_name, address, phone, email} = data;
+const {username,password, full_name, address, phone, email, employee} = data;
 
 const [token,login,logout, signup] = useToken();
 
@@ -28,7 +29,7 @@ setData({...data,[e.target.name]:[e.target.value]});
     const submitHandler = e => {
     e.preventDefault();
     let winery = {id}.id
-
+        console.log(employee)
 
     signup(
         data.username[0], 
@@ -37,6 +38,7 @@ setData({...data,[e.target.name]:[e.target.value]});
         data.address[0],
         data.phone[0],
         data.email[0],
+        data.employee[0],
         winery
         )
 }
@@ -103,8 +105,11 @@ setData({...data,[e.target.name]:[e.target.value]});
                             placeholder="Enter Email"
                             required />
                     </div>
+                    <div className='fadeIn fourth text-secondary mt-2'>Check box to test employee functionality</div>
+                    <span><input type="checkbox" className='fadeIn fourth' value={employee} name="employee"/></span>
+                    <div>
                     <input type="submit" className="fadeIn fourth" value="Sign Up" />
-                    
+                    </div>
                     <p className="forgot-password text-center">
                         Already registered? <a href={`/wineries/${id}/login/`}>Login</a>
                     </p>
