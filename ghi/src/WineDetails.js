@@ -21,6 +21,7 @@ function GetWine() {
     // if (data.quantity === 0) {
     //   redirect to Wine List Page
     // }
+    
   async function checkAndSetQuantity(e){
     if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
         e.target.value = 1;
@@ -68,9 +69,9 @@ function GetWine() {
                     <p>ABV: { data.abv }%,  Volume: { data.volume } mL </p>
                     <p className="card-text">Price: $ { data.price }</p>
                     <p>{ data.description }</p>
-                    <p>Quantity: { data.quantity }</p>
-                    <input onChange = { checkAndSetQuantity } type="text" id="quantity" name="quantity" className="form-control input-number" value={ quantity } min="1" max={ data.quantity } />
-                    <button onClick = { addToShoppingCart } href="#" className="btn btn-info btn-lg">
+                    <p>{data.quantity < 1 ? "OUT OF STOCK" : `Quantity: ${ data.quantity }`}</p>
+                    <input onChange = { checkAndSetQuantity } type="text" id="quantity" name="quantity" className={"form-control input-number" + ( data.quantity < 1 ? " d-none": "" )} value={ quantity } min="1" max={ data.quantity } />
+                    <button onClick = { addToShoppingCart } href="#" className={"btn btn-info btn-lg" + ( data.quantity < 1 ? " d-none": "" )}>
                       <span className="glyphicon glyphicon-shopping-cart"></span> Add to Shopping Cart
                     </button>
 

@@ -2,34 +2,38 @@ import React from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, updateQuantityFromShoppingCart } from './store/cartReducer';
 import { useState, useEffect } from 'react';
+import { useAuthContext } from './auth'
 import './assets/css/bootstrap2.css'
 import './assets/css/responsive.css'
 import './assets/css/ui.css'
 
 
-function ShoppingCartTest(){
+function ShoppingCart(){
+  const { token } = useAuthContext();
+  let [loggedIn, setLoggedIn]= React.useState(false)
+  let [discountRate, setDiscountRate] = React.useState(0)
   const { cartItems } = useSelector((state) => state.cart);
-    const [cust_quantity, setCustQuantity] = useState(-1)
-    const [index_state, setIndex] = useState(-1)
-    const [firstRender, hasRendered] = useState(true)
-    const dispatch = useDispatch();
-  
-    async function deleteItem(e, index) {
-      dispatch(deleteCartItem({"index": index}))
-    }
+  const [cust_quantity, setCustQuantity] = useState(-1)
+  const [index_state, setIndex] = useState(-1)
+  const [firstRender, hasRendered] = useState(true)
+  const dispatch = useDispatch();
+
+  async function deleteItem(e, index) {
+    dispatch(deleteCartItem({"index": index}))
+  }
   
 
-    async function checkAndSetQuantity(e, index){
-        // bug to fix: unable to change quantity input in front end without highlighting number
-        if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
-          e.target.value = 1;
-        }
-        if(parseInt(e.target.value) > parseInt(e.target.max)){
-          e.target.value = e.target.max;
-        }
-        setCustQuantity(parseInt(e.target.value))
-        setIndex(index)
-      }
+  async function checkAndSetQuantity(e, index){
+    // bug to fix: unable to change quantity input in front end without highlighting number
+    if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
+      e.target.value = 1;
+    }
+    if(parseInt(e.target.value) > parseInt(e.target.max)){
+      e.target.value = e.target.max;
+    }
+    setCustQuantity(parseInt(e.target.value))
+    setIndex(index)
+  }
   
   useEffect(() => {
     if (firstRender === true) {
@@ -44,10 +48,15 @@ function ShoppingCartTest(){
   const subTotalSum = cartItems.reduce(
     (total, currentItem) => total = total + (currentItem.price * currentItem.cust_quantity), 0
     );
-  const discountRate = .10;
-  const discount = subTotalSum * discountRate;
-  const total = subTotalSum - discount;
-
+    let discount = subTotalSum * discountRate;
+    let total = subTotalSum - discount;
+    
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true)
+      setDiscountRate(.10)
+    }
+    },[token])
 
   
   return (
@@ -56,16 +65,11 @@ function ShoppingCartTest(){
         <section className="header-main border-bottom">
           <div className="container">
             <div className="shopping-cart-row align-items-center">
-
             </div>
           </div>
         </section>
       </header>
-
-              <br/>
-
-
-
+      <br/>
 
       <section className="section-pagetop bg">
         <div className="container">
@@ -84,15 +88,12 @@ function ShoppingCartTest(){
                       <th scope="col" width={180}>Product</th>
                       <th scope="col" width={120}>Quantity</th>
                       <th scope="col" width={140}>Price</th>
-                      <th scope="col" className="text-right" width={140}>
-                        {" "}
-                      </th>
+                      <th scope="col" className="text-right" width={140}>{" "}</th>
                     </tr>
                   </thead>
                   <tbody>
                     { cartItems.map((cartItem, index) => {
-                    return (
-                      <tr key={ cartItem.id }>
+                    return (<tr key={ cartItem.id }>
                         <td>
                           <figure className="itemside">
                             <div className="aside">
@@ -101,7 +102,7 @@ function ShoppingCartTest(){
                                 className="img-sml" />
                             </div>
                             <figcaption className="info">
-                              <a href="wines" className="title text-dark">
+                              <a href={`wines/${cartItem.id}`} className="title text-dark">
                                 {cartItem.year} {cartItem.brand} {cartItem.varietal}
                               </a>
                               <p className="text-muted small">
@@ -127,13 +128,10 @@ function ShoppingCartTest(){
                       );
                     })}
                   </tbody>
-
-
-
                 </table>
                 <div className="card-body border-top">
                   {/* LINK TO CHECK OUT */}
-                  <a href="wines" className="btn btn-primary float-md-right">
+                  <a href= "shoppingcart/checkout" className="btn btn-primary float-md-right">
                     {" "}
                     Make Purchase <i className="fa fa-chevron-right" />{" "}
                   </a>
@@ -145,7 +143,6 @@ function ShoppingCartTest(){
               </div>
               <div className="alert alert-success mt-3">
                 <p className="icontext">
-                  <i className="icon text-success fa fa-truck" /> 
                   Sign up and become a member to receive 10% off purchase!
                 </p>
               </div>
@@ -155,7 +152,7 @@ function ShoppingCartTest(){
                 <div className="card-body">
                   <form>
                     <div className="form-group">
-                      <label>Are you a member?</label>
+                      <label>Have a coupon?</label>
                       <div className="input-group">
                         <input
                           type="text"
@@ -189,7 +186,7 @@ function ShoppingCartTest(){
                   </dl>
                   <hr />
                   <p className="text-center mb-3">
-                    <img src="./assets/images/misc/payments.png" height={26} />
+                    <img src={`${process.env.PUBLIC_URL}/payments.png`} height={26} />
                   </p>
                 </div>
               </div>
@@ -201,5 +198,5 @@ function ShoppingCartTest(){
     );
   }
 
-  export default ShoppingCartTest;
+  export default ShoppingCart;
 

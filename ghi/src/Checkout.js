@@ -26,7 +26,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://beach-bums.gitlab.io/everything-is-vine/">
-        Your Website
+        Everything is Vine
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -89,7 +89,7 @@ export default function Checkout() {
       "exp_date": expDate,
       "discount_ten": loggedIn,
     }
-    let orderUrl = "http://localhost:8010/api/orders/";
+    let orderUrl = `${process.env.REACT_APP_SALES_API}/api/orders/`;
     let fetchConfig = {
       method: "post",
       body: JSON.stringify(orderData),
@@ -156,7 +156,7 @@ export default function Checkout() {
       }
       
       // This might be a problem
-      let shoppingItemsUrl = `http://localhost:8010/api/wineries/${winery_id}/shoppingitems/`
+      let shoppingItemsUrl = `${process.env.REACT_APP_SALES_API}/api/wineries/${winery_id}/shoppingitems/`
       let fetchConfig = {
         method: "post",
         body: JSON.stringify(shoppingItemsData),
@@ -230,7 +230,7 @@ export default function Checkout() {
       setLoggedIn(true)
     }
     },[token])
-  // useEffect( ()=>{setLoggedIn(token)},[token])
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -243,11 +243,7 @@ export default function Checkout() {
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
+
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>

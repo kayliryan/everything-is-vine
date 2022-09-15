@@ -73,7 +73,7 @@ render() {
     return (
     <>
         <div className="px-4 py-3 my-5 mt-2 text-center rounded-3" style={{backgroundColor:"darkorchid"}}>
-        <h1 className="display-5 fw-bold text-white mt-5">Everything's Vine</h1>
+        <h1 className="display-5 fw-bold text-white mt-5">Everything Is Vine</h1>
         <div className="col-lg-6 mx-auto">
             <p className="lead mb-5 text-light font-italic">
             The premiere winery management web application.    

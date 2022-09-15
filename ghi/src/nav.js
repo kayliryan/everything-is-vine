@@ -80,7 +80,7 @@ function Navigation() {
                     </div>
                     <div className="widgets-wrap float-md-right">
                         <div className="widget-header  mr-3">
-                            <Link to={`wineries/${id}/shoppingcarttest`} className="icon icon-sm rounded-circle border">
+                            <Link to={`wineries/${id}/shoppingcart`} className="icon icon-sm rounded-circle border bg-light">
                             <i className="fa fa-shopping-cart" />
                             </Link>
                             <span className="badge badge-pill badge-danger notify">
