@@ -6,55 +6,56 @@ import { useContext } from 'react';
 import { MainContext } from './mainContext';
 
 export default function AddressForm() {
+  const {
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    addressOne,
+    setAddressOne,
+    addressTwo,
+    setAddressTwo,
+    city,
+    setCity,
+    state,
+    setState,
+    zipCode,
+    setZipCode,
+    country,
+    setCountry,
+  } = useContext(MainContext);
 
-    const { 
-      firstName, setFirstName, 
-      lastName, setLastName, 
-      addressOne, setAddressOne,
-      addressTwo, setAddressTwo,
-      city, setCity,
-      state, setState,
-      zipCode ,setZipCode,
-      country, setCountry } = useContext(MainContext);
+  function handleFirstNameChange(e) {
+    setFirstName(e.target.value);
+  }
 
+  function handleLastNameChange(e) {
+    setLastName(e.target.value);
+  }
 
-    function handleFirstNameChange(e) {
-        setFirstName(e.target.value)
-    }
+  function handleAddressOneChange(e) {
+    setAddressOne(e.target.value);
+  }
 
-    function handleLastNameChange(e) {
-        setLastName(e.target.value)
-    }
+  function handleAddressTwoChange(e) {
+    setAddressTwo(e.target.value);
+  }
 
-    function handleAddressOneChange(e) {
-        setAddressOne(e.target.value)
-    }
+  function handleCityChange(e) {
+    setCity(e.target.value);
+  }
 
-    function handleAddressTwoChange(e) {
-      // if (e.target.value === "") {
-      //   setAddressTwo(undefined);
-      //   console.log('hello')
-      // } else {
-        setAddressTwo(e.target.value)
-      // }
-    }
+  function handleStateChange(e) {
+    setState(e.target.value);
+  }
 
-    function handleCityChange(e) {
-        setCity(e.target.value)
-    }
+  function handleZipCodeChange(e) {
+    setZipCode(e.target.value);
+  }
 
-    function handleStateChange(e) {
-        setState(e.target.value)
-    }
-    
-    function handleZipCodeChange(e) {
-        setZipCode(e.target.value)
-    }
-
-    function handleCountryChange(e) {
-        setCountry(e.target.value)
-    }
-
+  function handleCountryChange(e) {
+    setCountry(e.target.value);
+  }
 
   return (
     <React.Fragment>
@@ -68,7 +69,7 @@ export default function AddressForm() {
             id="firstName"
             name="firstName"
             label="First name"
-            value = {firstName}
+            value={firstName}
             onChange={handleFirstNameChange}
             fullWidth
             autoComplete="given-name"
@@ -81,7 +82,7 @@ export default function AddressForm() {
             id="lastName"
             name="lastName"
             label="Last name"
-            value = {lastName}
+            value={lastName}
             onChange={handleLastNameChange}
             fullWidth
             autoComplete="family-name"
@@ -94,7 +95,7 @@ export default function AddressForm() {
             id="address1"
             name="address1"
             label="Address line 1"
-            value = {addressOne}
+            value={addressOne}
             onChange={handleAddressOneChange}
             fullWidth
             autoComplete="shipping address-line1"
@@ -106,7 +107,7 @@ export default function AddressForm() {
             id="address2"
             name="address2"
             label="Address line 2"
-            value = {addressTwo}
+            value={addressTwo}
             onChange={handleAddressTwoChange}
             fullWidth
             autoComplete="shipping address-line2"
@@ -119,7 +120,7 @@ export default function AddressForm() {
             id="city"
             name="city"
             label="City"
-            value = {city}
+            value={city}
             onChange={handleCityChange}
             fullWidth
             autoComplete="shipping address-level2"
@@ -131,7 +132,7 @@ export default function AddressForm() {
             id="state"
             name="state"
             label="State/Province/Region"
-            value = {state}
+            value={state}
             onChange={handleStateChange}
             fullWidth
             variant="standard"
@@ -139,11 +140,11 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required = {true}
+            required={true}
             id="zip"
             name="zip"
             label="Zip / Postal code"
-            value = {zipCode}
+            value={zipCode}
             onChange={handleZipCodeChange}
             fullWidth
             autoComplete="shipping postal-code"
@@ -156,7 +157,7 @@ export default function AddressForm() {
             id="country"
             name="country"
             label="Country"
-            value = {country}
+            value={country}
             onChange={handleCountryChange}
             fullWidth
             autoComplete="shipping country"
