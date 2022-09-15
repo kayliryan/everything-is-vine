@@ -63,7 +63,7 @@ function Winery () {
                 boxShadow: "5px 5px 10px lightgrey"
                 }}>
             </div>
-            <h2 className='display-6'>About us</h2>
+            <h1 className='display-5 mt-4'>About us</h1>
             <p className='px-4 py-5 bg-light mt-4 rounded'>{winery.description}</p>
         </div>
     </>    

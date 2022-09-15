@@ -79,11 +79,11 @@ const Contact = () => {
                 <img className="bg-white rounded shadow d-block mx-auto mb-1" src="/logo.svg" alt="" width="600" />
                 {/* <h1 className="display-5 fw-bold">Contact Us</h1> */}
                 <div className="col-lg-6 mx-auto">
-                        <p className="lead mb-4">
+                        <p className="lead mb-2">
                         We thank you for your patronage and hope to see you soon at...
                         </p>
-                        <h5 className='display-4'>{winery.name}</h5>
-                        <p>{winery.owner} - OWNER</p>
+                        <h1 className='display-5'>{winery.name}</h1>
+                        <p className="mt-2">Owner: {winery.owner}</p>
                 </div>
             </div>
             <div className='container'>      
