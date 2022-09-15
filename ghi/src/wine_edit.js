@@ -228,8 +228,10 @@ function EditWine() {
                                 placeholder="Enter Description"
                                 />
                         </div>
-
                         <input type="submit" className="fadeIn fourth" value="Submit" />
+                        <p className="forgot-password text-center">
+                        Change your mind about editing? => <a href={`/wineries/${winery}/wines/`}>Back to Wine List</a>
+                        </p>
                     </form>
                 </div>
             </div>
