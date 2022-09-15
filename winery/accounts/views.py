@@ -77,6 +77,7 @@ def api_list_users(request):
             address=content["address"],
             phone=content["phone"],
             winery=content["winery"],
+            employee=content["employee"]
         )
         return JsonResponse(
             {"users": users},

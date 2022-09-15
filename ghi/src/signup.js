@@ -14,8 +14,9 @@ address:"",
 phone:"",
 email:"",
 winery:"",
-employee: ""
+employee: false
 })
+
 const {id} = useParams()
 
 const {username,password, full_name, address, phone, email, employee} = data;
@@ -29,7 +30,7 @@ setData({...data,[e.target.name]:[e.target.value]});
     const submitHandler = e => {
     e.preventDefault();
     let winery = {id}.id
-        console.log(employee)
+        console.log(data)
 
     signup(
         data.username[0], 
@@ -38,10 +39,14 @@ setData({...data,[e.target.name]:[e.target.value]});
         data.address[0],
         data.phone[0],
         data.email[0],
-        data.employee[0],
+        data.employee,
         winery
         )
 }
+
+// useEffect(() => {
+
+// })
 
     return (
         <div className="wrapper fadeInDown">
@@ -106,7 +111,7 @@ setData({...data,[e.target.name]:[e.target.value]});
                             required />
                     </div>
                     <div className='fadeIn fourth text-secondary mt-2'>Check box to test employee functionality</div>
-                    <span><input type="checkbox" className='fadeIn fourth' value={employee} name="employee"/></span>
+                    <span><input type="checkbox" className='fadeIn fourth' value={employee} onClick={() => {setData({...data, employee:!data.employee})}} name="employee"/></span>
                     <div>
                     <input type="submit" className="fadeIn fourth" value="Sign Up" />
                     </div>

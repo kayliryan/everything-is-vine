@@ -103,7 +103,7 @@ export function useToken() {
         return handleErrorMessage(error);
     }
 
-    async function signup(username, password, full_name,address,phone,email,winery) {
+    async function signup(username, password, full_name,address,phone,email, employee, winery) {
         const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/users/`;
         const response = await fetch(url, {
         method: "post",
@@ -114,6 +114,7 @@ export function useToken() {
             address,
             phone,
             email,
+            employee,
             winery,
         }),
         headers: {
