@@ -8,7 +8,7 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 ## JOURNAL ENTRIES
 
-## Wednes, September 14, 2022
+## Wednesday, September 14, 2022
 Today, our group worked on:
 
 * merging and resolving conflicts to main to make sure all MVP functionality is present
