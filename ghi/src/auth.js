@@ -64,13 +64,10 @@ export function useToken() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("use token effect called")
         async function fetchToken() {
-            console.log('fetch token called')
             const token = await getTokenInternal();
             setToken(token);
         } 
-        console.log(token)
         if (!token) {
         fetchToken();
         }

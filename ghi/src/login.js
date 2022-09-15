@@ -14,13 +14,11 @@ password:""
 const {username,password} = data;
 const {id} = useParams()
 
-const [,,login] = useToken();
+const [token,login] = useToken();
 
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
-
-console.log(data)
 
 const submitHandler = e => {
 e.preventDefault();
@@ -42,7 +40,7 @@ return (
                     value={password} onChange={changeHandler}/>
                     <input type="submit" className="fadeIn fourth" value="Sign In" />
                 </form>
-                <p className="forgot-password text-right">
+                <p className="forgot-password text-center">
                             Need to create an account? <a href={`/wineries/${id}/signup/`}>Sign Up</a>
                 </p>
             </div>

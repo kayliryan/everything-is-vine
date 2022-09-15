@@ -19,29 +19,28 @@ const {id} = useParams()
 
 const {username,password, full_name, address, phone, email} = data;
 
-const [,,, signup] = useToken();
+const [token,login,logout, signup] = useToken();
 
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
-console.log(data)
 
-const submitHandler = e => {
-e.preventDefault();
-let winery = {id}.id
+    const submitHandler = e => {
+    e.preventDefault();
+    let winery = {id}.id
 
-signup(
-    data.username[0], 
-    data.password[0],
-    data.full_name[0],
-    data.address[0],
-    data.phone[0],
-    data.email[0],
-    winery
-    )
+
+    signup(
+        data.username[0], 
+        data.password[0],
+        data.full_name[0],
+        data.address[0],
+        data.phone[0],
+        data.email[0],
+        winery
+        )
 }
 
-console.log(data);
     return (
         <div className="wrapper fadeInDown">
             <div id="formContent" className='fadeIn first'>
@@ -88,6 +87,7 @@ console.log(data);
                         <input className="form-control" 
                             type="text" 
                             name="phone"
+                            maxLength={10}
                             value={phone}
                             onChange={changeHandler}
                             placeholder="Enter Phone Number"
@@ -105,7 +105,7 @@ console.log(data);
                     </div>
                     <input type="submit" className="fadeIn fourth" value="Sign Up" />
                     
-                    <p className="forgot-password text-right">
+                    <p className="forgot-password text-center">
                         Already registered? <a href={`/wineries/${id}/login/`}>Login</a>
                     </p>
                 </form>

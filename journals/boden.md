@@ -34,6 +34,20 @@ Today was a long day working on react front end.  I was able to successfully sty
 Today was productive.  I was able to add the login,logout,signup buttons to the nav.  I verified that they all worked correctly and then added the functionality to grab the jwt, set logged in state as true or false, and display/hide those nav buttons appropriately depending on logged in state. 
 
 09/02/22:
-Today I created the contact page.  I started by using a free map API to grab coordinates depending on an input address and used that to populate a map in react.  I also setup the functionality for sending an email to the winery.  There was an issue where the map api was taking too long and react was loading without it but i found a way to update the map state once the api call came in.  The rest of the time was spent using CSS, CSS grid, and styling the page.  
+Today I created the contact page.  I started by using a free map API to grab coordinates depending on an input address and used that to populate a map in react.  I also setup the functionality for sending an email to the winery.  There was an issue where the map api was taking too long and react was loading without it but I found a way to update the map state once the api call came in.  The rest of the time was spent using CSS, CSS grid, and styling the page.  
 
+09/06/22-09/07/22:
+These two days were spent on resolving the merge conflicts with main.  We had a lot of competing CSS that needed to be cleaned up and it took some time to figure out why all of the front end api calls stopped working.  It ended up being that some of the encoders were changed so that the values were put into a separate dictionary.  Adding a function to list the encoded response fixed this issue.  After many hours of working through these conflicts I was able to successfully merge.
+
+09/08/22:
+Today I worked on user functionality, specifically the ability to grab information about the current logged in user from the user model.  I was able to successfully get this to work and also tested the ability to show and hide content on the webpage depending on if a user is designated as an "employee" for a specific winery.  This will give "staff" the ability to edit winery information, and create/update/delete specific wines for each winery as soon as those forms are created. 
+
+09/09/22:
+Today I created API endpoints for staff permissions to be able to edit winery details, wine details, create new wines, and delete wines.  I was able to get the endpoints to function properly in insomnia and created buttons to allow staff to make edits if they have the correct user permissions.
+
+09/12/22:
+Today I build the react pages to display and process the forms of editing wineries/wines, and creating new wines.  For the edit functions I needed to make a fetch call to grab the current winery details and populate them for editing in the state.  All of these endpoints I restricted access to by requiring staff permissions to be able to see and submit the forms.  I also wrote my simple unit test today and tested it out and it passed. 
+
+09/13/22:
+Today I worked on cleaning the code.  I removed duplicate code and files I had created to test features.  I updated the unit test as well.  After that I updated the CSS on the dashboard page to fall more in line with our SaaS mission for the application.  At the end of the day I created an API endpoint to subtract the order quantity from a successfully submitted order from the shopping cart.  
 

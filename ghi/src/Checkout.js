@@ -16,15 +16,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { MainContext } from './mainContext';
+import { useDispatch, useSelector } from "react-redux";
+import { useAuthContext } from './auth'
+import { clearCart } from './store/cartReducer';
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://beach-bums.gitlab.io/everything-is-vine/">
-        Your Website
+        Everything is Vine
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -50,58 +54,212 @@ function getStepContent(step) {
 const theme = createTheme();
 
 export default function Checkout() {
-  
+  const { token } = useAuthContext();
+  const [loggedIn, setLoggedIn]= React.useState(false)
+  const { cartItems } = useSelector((state) => state.cart);
   const [activeStep, setActiveStep] = React.useState(0);
   let [missingFieldsError, setMissingFieldsError] = React.useState(false);
-
+  let [confNumber, setConfNumber] = React.useState(-1)
+  let [userEmail, setUserEmail] = React.useState("")
+  const dispatch = useDispatch();
   const {       
-    firstName, 
-    lastName, 
-    addressOne,
-    // addressTwo, setAddressTwo,
-    city,
-    state,
-    zipCode,
-    country,
-    cardName,
-    cardNumber,
-    expDate,
-    cvv,} = useContext(MainContext);
-
-  function validateForms(){
-    if (activeStep === 0) {
+    firstName, setFirstName, 
+    lastName, setLastName, 
+    addressOne, setAddressOne,
+    addressTwo, setAddressTwo,
+    city, setCity,
+    state, setState,
+    zipCode ,setZipCode,
+    country, setCountry,
+    cardName, setCardName, 
+    cardNumber, setCardNumber, 
+    expDate, setExpDate,
+    cvv, setCVV,
+    lastFour, setLastFour} = useContext(MainContext);
+  async function postOrder() {
+    let confirmation_number = (Math.floor(Math.random() * (99999999999999999 - 10000000000000000 + 1) + 10000000000000000));
+    confirmation_number = confirmation_number.toString()
+    setConfNumber(confirmation_number)
+    
+    let orderData = {
+      "confirmation_number": confirmation_number, 
+      "first_name": firstName,
+      "last_name": lastName,
+      "address_one": addressOne,
+      "address_two": addressTwo,
+      "city": city,
+      "state": state,
+      "zip_code": zipCode,
+      "country": country,
+      "card_name": cardName,
+      "last_four": lastFour,
+      "exp_date": expDate,
+      "discount_ten": loggedIn,
+    }
+    if (userEmail !== ""){
+      orderData["account_email"] = userEmail
+    }
+    let orderUrl = `${process.env.REACT_APP_SALES_API}/api/orders/`;
+    let fetchConfig = {
+      method: "post",
+      body: JSON.stringify(orderData),
+      headers: {'Content-Type': 'application/json',},
+      };
+    try {
+      let response = await fetch(orderUrl, fetchConfig);
+      if (response.ok) {
+          const newOrder = await response.json();
+          let order_id = newOrder["order"]
+          setFirstName("")
+          setLastName("")
+          setAddressOne("")
+          setAddressTwo("")
+          setCity("")
+          setState("")
+          setZipCode("")
+          setCountry("")
+          setCardName("")
+          setCardNumber("")
+          setExpDate("")
+          setCVV("")
+    
+          postShoppingItems(order_id)
+        }
+      }
+      
+    //Need to fix catch below
+    catch (IntegrityError) {
+      postOrder()
+    }
+  }
+    async function postShoppingItems(order_id) {
+      let shopping_items = JSON.parse(JSON.stringify(cartItems))
+      let winery_id = shopping_items[0]["winery_id"]
+      let qToSubtract = []
+      for (let i=0; i < shopping_items.length; i++) {
+        let newDict = {}
+        shopping_items[i]["item"] = {}
+        shopping_items[i]["item"]["id"] = shopping_items[i].id
+        shopping_items[i]["item"]["winery_id"] = shopping_items[i].winery_id
+        shopping_items[i]["quantity"] = shopping_items[i]["cust_quantity"]
+        shopping_items[i]["order_id"] = parseInt(order_id)
+        newDict["quantity"] = shopping_items[i]["cust_quantity"]
+        newDict["wine_id"] = shopping_items[i].id
+        qToSubtract.push(newDict)
+        delete shopping_items[i].id
+        delete shopping_items[i].winery_id
+        delete shopping_items[i].brand
+        delete shopping_items[i].year
+        delete shopping_items[i].varietal
+        delete shopping_items[i].description
+        delete shopping_items[i].region
+        delete shopping_items[i].abv
+        delete shopping_items[i].volume
+        delete shopping_items[i].city_state 
+        delete shopping_items[i].year
+        delete shopping_items[i].picture_url
+        delete shopping_items[i].cust_quantity
+        delete shopping_items[i].import_href
+      }
+      let shoppingItemsData = {
+        "shopping_items": shopping_items,
+      }
+      
+      // This might be a problem
+      let shoppingItemsUrl = `${process.env.REACT_APP_SALES_API}/api/wineries/${winery_id}/shoppingitems/`
+      let fetchConfig = {
+        method: "post",
+        body: JSON.stringify(shoppingItemsData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+      let response2 = await fetch(shoppingItemsUrl, fetchConfig);
+      if (response2.ok) {
+        updateStock(qToSubtract)
+        return handleNext();
+      }
+    }
+  async function updateStock(qToSubtract) {
+    for (let i=0; i < qToSubtract.length; i++) {
+      let url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/update/${qToSubtract[i].wine_id}/`
+      let wine_id = qToSubtract[i].wine_id
+      delete qToSubtract[i].wine_id
+      let fetchConfig = {
+        method: "put",
+        body: JSON.stringify(qToSubtract[i]),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+      };
+      let response = await fetch(url, fetchConfig);
+      if (response.ok) {
+        continue
+      } else {
+        console.log(`Stock for wine_id ${wine_id} not updated`)
+      }
+    }
+  }
+  async function validateForms(){
+    if (activeStep == 0) {
       if (firstName === '' || lastName === '' || 
           addressOne === '' || city === '' ||
           state === '' || zipCode === '' || country === '') {
         return setMissingFieldsError(true);
       } else {
-        return handleNext();
+          return handleNext();
       }
     }
     if (activeStep === 1) {
       if (cardName === '' || cardNumber.length !== 19 ||
           expDate.length !== 5 || cvv.length !== 3) {
         return setMissingFieldsError(true);
-      } else {
-        return handleNext();
+      } 
+      // else if(passedCreditCardCheck === false) {
+      //   return invalidCreditCard(true)
+      // }
+      else {
+          return handleNext();
       }
     }
-    if (activeStep === 2) {
-      //Complete logic to check against the credit card function and post an order to the database
-      //if it clears then return handleNext
-      return handleNext()
+    if (activeStep == 2) {
+      await postOrder()
+      dispatch(clearCart())
+      }
     }
-  }
-
   const handleNext = () => {
     setMissingFieldsError(false);
     setActiveStep(activeStep + 1);
   };
-
   const handleBack = () => {
     setMissingFieldsError(false);
     setActiveStep(activeStep - 1);
   };
+
+  async function getCurrentUser() {
+    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const response = await fetch(url, {
+    credentials: 'include',
+    });
+    if (response.ok) {
+    const user = await response.json();
+
+
+    setUserEmail(user.user.email)
+    
+  }
+}
+
+
+
+
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true)
+      getCurrentUser();
+    }
+    },[token])
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -115,11 +273,7 @@ export default function Checkout() {
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
         }}
       >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
+
       </AppBar>
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -140,7 +294,7 @@ export default function Checkout() {
                   Thank you for your order.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
+                  Your order number is #{confNumber}. We have emailed your order
                   confirmation, and will send you an update when your order is ready for pickup.
                 </Typography>
               </React.Fragment>

@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAuthContext } from './auth'
 
-
 function WineColumn(props) {
     const {id} = useParams()
+
+    async function delete_wine(wine_id){
+
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${wine_id}/delete/`;
+
+        const response = await fetch(url, {method: "DELETE"});
+
+        if (response.ok) {
+            window.location.reload()
+    }}
 return (
     <div className="col">
-    {props.list.map(data => {
-        console.log(data)
-        const wine = data;
+    {props.list.map(wine => {
+
         return (
         <div key={wine.id} className="card mb-3 shadow mt-4">
             <img src={wine.picture_url} alt="" className="card-img-top mt-3" />
@@ -23,7 +31,15 @@ return (
             </p>
             </div>
             <div className="d-flex justify-content-center card-footer">
-            Alcohol By Volume: {wine.abv}%
+                <div>Alcohol By Volume: {wine.abv}%</div>
+                <div className='px-1'>
+                    <span>
+                    <Link to={`/wines/${wine.id}/edit`} className={"btn btn-warning p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Edit</Link>
+                    </span>
+                    <span className='px-1'>
+                    <button onClick={()=> {delete_wine(wine.id)}} className={"btn btn-danger p-2 mb-1 mt-1" + (props.staff ? "": " d-none")}>Delete</button>  
+                    </span>
+                </div>
             </div>
         </div>
         );
@@ -39,13 +55,16 @@ function WineList() {
     const [wineryName, setWineryName] = useState(
         ''
     )
+    const [staff, setStaff]=useState(
+        false
+    )
 
     const {id} = useParams()
     
     const { token } = useAuthContext();
         
     async function fetchWines(){
-        const url = `http://localhost:8000/api/wineries/${id}/wines/`;
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/wines/`;
 
         try {
         const response = await fetch(url);
@@ -60,7 +79,7 @@ function WineList() {
             for (let wine of data.wines){
                 list.push(wine)
             }
-            console.log(list)
+
 
             let i = 0;
             for (const wine of list) {
@@ -77,25 +96,45 @@ function WineList() {
 
             setWineryName(wineryName)
 
-            console.log(wineColumns)
             setWineColumns(wineColumns);
         }
         } catch (e) {
         console.error(e);
         }
     }
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect( () => {fetchWines(token),[]})
+    async function getCurrentUser() {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+        const response = await fetch(url, {
+        credentials: 'include',
+        });
+        if (response.ok) {
+        const user = await response.json();
+
+        if (user.user.employee === true && user.user.winery === parseInt(id)){
+            setStaff(true)
+        }
+        }
+    }
+    if (token) {
+        getCurrentUser();
+    }  
+// eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect( () => {fetchWines(token)},[])
 
 
     return (
         <>
             <div className="px-4 py-5 my-5 mt-4 text-center bg-light">
-            <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
             <h1 className="display-5 fw-bold">Our Wines</h1>
                 <div className="col-lg-6 mx-auto">
                         <p className="lead mb-4">
                         Please enjoy a selection of our finest wines from {wineryName}.
+                        </p>
+                        <p className='display-9' style={{color:"orchid"}}>
+                            Login or Sign Up above to get a discount at checkout!
+                        </p>
+                        <p>
+                        <Link to={`/wineries/${id}/wines/new/`} className={"btn btn-success p-2 mb-1 mt-1" + (staff ? "": " d-none")}>Add A New Wine</Link>
                         </p>
                 </div>
                 </div>
@@ -103,7 +142,7 @@ function WineList() {
                     <div className="row mt-2">
                         {wineColumns.map((wineList, index) => {
                         return (
-                            <WineColumn id={id} key={index} list={wineList} />
+                            <WineColumn id={id} key={index} list={wineList} staff={staff}/>
                         );
                         })}
                 </div>

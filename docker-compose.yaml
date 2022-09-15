@@ -62,7 +62,6 @@ services:
             REACT_APP_DJANGO_SERVICE: http://localhost:8000
             REACT_APP_SALES_API: http://localhost:8010
             PUBLIC_URL: ""
-
     sales-poller:
         build:
             context: ./sales/poll

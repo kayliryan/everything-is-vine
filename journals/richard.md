@@ -40,3 +40,17 @@ Today I worked on deployment with heroku.
 ## September 8, 2022
 
 Today I finally got our site to deploy to heroku. You can't see the page yet, but the link is working! From the best that I can tell, I was able to manipulate the CI jobs, push to my branch and gitlab was reading it, but even though I had changed the protection settings on my branch in gitlab and set it to deploy when pushed to my branch the deployment was still unsuccessful. I even tried editing the pipeline directly on the main branch in gitlab and it didn't seem to do the trick. I changed the COMMIT_BRANCH in the CI file back to default branch, merged with main and was able to see the changes that I made. Seeing all of those green check marks were incredibly satisfying. 
+
+## September 10, 2022
+
+I ended up changing the paths in react from '/' to everything-is-vine. I added the path the every path in app.js and in nav.js which got our page to show up in deployment. 
+
+## September 12, 2022
+
+Today we figured out how to use regex to change the public url for our deployment page so that we didn't have to change all of the paths in react. 
+
+
+## September 14, 2022
+
+Today we worked on finishing touches and merging all of our changes with main. 
+
