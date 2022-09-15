@@ -87,6 +87,7 @@ setData({...data,[e.target.name]:[e.target.value]});
                         <input className="form-control" 
                             type="text" 
                             name="phone"
+                            maxLength={10}
                             value={phone}
                             onChange={changeHandler}
                             placeholder="Enter Phone Number"
