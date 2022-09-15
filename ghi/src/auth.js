@@ -1,159 +1,152 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 let internalToken = null;
 
 export function getToken() {
-  return internalToken;
+return internalToken;
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/me/token/`;
-  try {
+const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/me/token/`;
+try {
     const response = await fetch(url, {
-      credentials: 'include',
+    credentials: "include",
     });
     if (response.ok) {
-      const data = await response.json();
-      internalToken = data.token;
-      return internalToken;
+    const data = await response.json();
+    internalToken = data.token;
+    return internalToken;
     }
-  } catch (e) {}
-  return false;
+} catch (e) {}
+return false;
 }
 
 function handleErrorMessage(error) {
-  if ('error' in error) {
+if ("error" in error) {
     error = error.error;
     try {
-      error = JSON.parse(error);
-      if ('__all__' in error) {
+    error = JSON.parse(error);
+    if ("__all__" in error) {
         error = error.__all__;
-      }
+    }
     } catch {}
-  }
-  if (Array.isArray(error)) {
-    error = error.join('<br>');
-  } else if (typeof error === 'object') {
+}
+if (Array.isArray(error)) {
+    error = error.join("<br>");
+} else if (typeof error === "object") {
     error = Object.entries(error).reduce(
-      (acc, x) => `${acc}<br>${x[0]}: ${x[1]}`,
-      ''
+    (acc, x) => `${acc}<br>${x[0]}: ${x[1]}`,
+    ""
     );
-  }
-  return error;
+}
+return error;
 }
 
 export const AuthContext = createContext({
-  token: null,
-  setToken: () => null,
+token: null,
+setToken: () => null,
 });
 
-export const AuthProvider = (props) => {
-  const [token, setToken] = useState(null);
+export const AuthProvider = ( props ) => {
+const [token, setToken] = useState(null);
 
-  return (
+return (
     <AuthContext.Provider value={{ token, setToken }}>
-      {props.children}
+    {props.children}
     </AuthContext.Provider>
-  );
+);
 };
 
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
-  const { token, setToken } = useAuthContext();
-  const navigate = useNavigate();
+    const { token, setToken } = useAuthContext();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchToken() {
-      const token = await getTokenInternal();
-      setToken(token);
-    }
-    if (!token) {
-      fetchToken();
-    }
-  }, [setToken, token]);
+    useEffect(() => {
+        async function fetchToken() {
+            const token = await getTokenInternal();
+            setToken(token);
+        } 
+        if (!token) {
+        fetchToken();
+        }
+    }, [setToken, token]);
 
-  async function logout(id) {
-    if (token) {
-      const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/token/refresh/logout/`;
-      await fetch(url, { method: 'delete', credentials: 'include' });
-      internalToken = null;
-      setToken(null);
-      navigate(`/wineries/${id}/`);
+    async function logout(id) {
+        if (token) {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/token/refresh/logout/`;
+        await fetch(url, { method: "delete", credentials: "include" });
+        internalToken = null;
+        setToken(null);
+        navigate(`/wineries/${id}/`);
+        }
     }
-  }
 
-  async function login(username, password, id) {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/login/`;
-    const form = new FormData();
-    form.append('username', username);
-    form.append('password', password);
-    const response = await fetch(url, {
-      method: 'post',
-      credentials: 'include',
-      body: form,
-    });
-    if (response.ok) {
-      const token = await getTokenInternal();
-      setToken(token);
-      navigate(`/wineries/${id}/`);
-      return;
+    async function login(username, password, id) {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/login/`;
+        const form = new FormData();
+        form.append("username", username);
+        form.append("password", password);
+        const response = await fetch(url, {
+        method: "post",
+        credentials: "include",
+        body: form,
+        });
+        if (response.ok) {
+        const token = await getTokenInternal();
+        setToken(token);
+        navigate(`/wineries/${id}/`)
+        return;
+        }
+        let error = await response.json();
+        return handleErrorMessage(error);
     }
-    let error = await response.json();
-    return handleErrorMessage(error);
-  }
 
-  async function signup(
-    username,
-    password,
-    full_name,
-    address,
-    phone,
-    email,
-    winery
-  ) {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/users/`;
-    const response = await fetch(url, {
-      method: 'post',
-      body: JSON.stringify({
-        username,
-        password,
-        full_name,
-        address,
-        phone,
-        email,
-        winery,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      await login(username, password, winery);
+    async function signup(username, password, full_name,address,phone,email, employee, winery) {
+        const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/users/`;
+        const response = await fetch(url, {
+        method: "post",
+        body: JSON.stringify({
+            username,
+            password,
+            full_name,
+            address,
+            phone,
+            email,
+            employee,
+            winery,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        });
+        if (response.ok) {
+        await login(username, password, winery);
+        }
+        return false;
     }
-    return false;
-  }
 
-  async function update(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
-    const response = await fetch(url, {
-      method: 'post',
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      await login(username, password);
+    async function update(username, password, email, firstName, lastName) {
+        const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
+        const response = await fetch(url, {
+        method: "post",
+        body: JSON.stringify({
+            username,
+            password,
+            email,
+            first_name: firstName,
+            last_name: lastName,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        });
+        if (response.ok) {
+        await login(username, password);
+        }
+        return false;
     }
-    return false;
-  }
 
-  return [token, login, logout, signup, update];
+    return [token, login, logout, signup, update];
 }
