@@ -71,6 +71,7 @@ def api_winery(request, pk):
             response.status_code = 404
             return response
 
+
 @require_http_methods(["GET"])
 def api_list_all_wines(request):
     if request.method == "GET":
