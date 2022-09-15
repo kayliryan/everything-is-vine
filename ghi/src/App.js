@@ -17,7 +17,7 @@ import EditWine from './wine_edit';
 import NewWine from './new_wine';
 import Request from './request';
 import GetWine from './WineDetails';
-import NewWinery from './newwinery';
+import NewWinery from './newWinery';
 
 function App(props) {
   const domain = /https:\/\/[^/]+/;
