@@ -1,5 +1,3 @@
-import Navlogo from './/images/Navlogo.png'
-//may need env variable where logo is used
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,13 +6,13 @@ import { useToken } from './auth';
 import { useAuthContext } from './auth'
 import React, { useEffect, useState } from 'react';
 
-function NavigationAuth() {
+function Navigation() {
 
     const [logged,setLogged]=useState(
         false
     )
 
-    const {id, winevo_id} = useParams()
+    const {id} = useParams()
 
     const [tokencall,login,logout] = useToken();
 
@@ -82,6 +80,6 @@ function NavigationAuth() {
 }
 
 
-export default NavigationAuth;
+export default Navigation;
 
 

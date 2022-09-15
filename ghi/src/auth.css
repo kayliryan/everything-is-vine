@@ -176,7 +176,7 @@ input[type=password] {
     border-radius: 5px 5px 5px 5px;
 }
 
-input[type=url], input[type=number], input[type=textarea] {
+input[type=url], input[type=number], input[type=textarea]{
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;

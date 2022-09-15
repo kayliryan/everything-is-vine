@@ -51,3 +51,5 @@ Today I build the react pages to display and process the forms of editing wineri
 09/13/22:
 Today I worked on cleaning the code.  I removed duplicate code and files I had created to test features.  I updated the unit test as well.  After that I updated the CSS on the dashboard page to fall more in line with our SaaS mission for the application.  At the end of the day I created an API endpoint to subtract the order quantity from a successfully submitted order from the shopping cart.  
 
+09/14/22:
+Today we worked as a team to merge all of the features together and were able to get through it all by the end of the day. We pair-programed to fine tune some of the features of the webpage and prepped it for deployment.  

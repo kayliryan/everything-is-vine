@@ -17,7 +17,7 @@ const [,,request] = useToken();
 const changeHandler = e => {
 setData({...data,[e.target.name]:[e.target.value]});
 }
-console.log(data)
+
 const submitHandler = e => {
 e.preventDefault();
 request(
@@ -34,12 +34,15 @@ return (
                 </div>
                 <form onSubmit={submitHandler}>
                     <input type="text" id="name" className="fadeIn second" name="name" placeholder="Enter Name" 
-                    value={name} onChange={changeHandler}/>
-                    <input type="text" id="phone" className="fadeIn third" name="phone" placeholder="Enter Phone Number"  
-                    value={phone} onChange={changeHandler}/>
+                    value={name} onChange={changeHandler} required/>
+                    <input maxLength={10} type="text" id="phone" className="fadeIn third" name="phone" placeholder="Enter Phone Number"  
+                    value={phone} onChange={changeHandler} required/>
                     <input type="email" id="email" className="fadeIn third" name="email" placeholder="Enter Email"  
-                    value={email} onChange={changeHandler}/>
+                    value={email} onChange={changeHandler} required/>
                     <input type="submit" className="fadeIn fourth" value="Submit Request" />
+                    <p className="forgot-password text-center">
+                        Change your mind? <a href={`/`}>Home</a>
+                        </p>
                 </form>
             </div>
         </div>

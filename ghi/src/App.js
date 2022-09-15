@@ -59,6 +59,8 @@ function App(props) {
             <div className="container">
               <Routes>
                 <Route path="/" element={<WineryList />} />
+                <Route path="/request/" element={<Request />} />
+                <Route path="/wines/:id/edit/" element={<EditWine/>} />
               </Routes>
               <Routes>
                 <Route element={<NavbarLayout />}>
@@ -71,9 +73,7 @@ function App(props) {
                   <Route path="/wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} />
                   <Route path="/wineries/:id/shoppingcarttest/checkout" element={<Checkout />} />
                   <Route path="/wineries/:id/edit/" element={<EditWinery />} />
-                  <Route path="/wines/:id/edit/" element={<EditWine/>} />
                   <Route path="/wineries/:id/wines/new/" element={<NewWine />} />
-                  <Route path="/request/" element={<Request />} />
                 </Route>
               </Routes>
             </div>
