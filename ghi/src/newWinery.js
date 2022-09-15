@@ -5,7 +5,11 @@ import './auth.css';
 import { useAuthContext } from './auth';
 
 function NewWinery() {
+    
+/*eslint-disable */
   const { id } = useParams();
+/*eslint-enable */
+
 
   const [data, setData] = useState({
     name: '',
