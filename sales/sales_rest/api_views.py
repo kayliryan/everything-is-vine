@@ -63,10 +63,6 @@ class ShoppingItemEncoder(ModelEncoder):
         }
 
 
-# Show list of wines from a specific winery
-# note: because there is no WineryVO, API endpoint
-# does not know if winery doesn't exist or if
-# if winery exists and has no wines to list
 @require_http_methods(["GET"])
 def api_list_wines(request, pk1):
     if request.method == "GET":
@@ -76,14 +72,12 @@ def api_list_wines(request, pk1):
                 {"wines": wines},
                 encoder=WineVOEncoder,
             )
-        # usually would check if WineryVO.DoesNotExist:
         else:
             return JsonResponse(
                 {"message": "Winery does not exist or has no list of wines"}
             )
 
 
-# Show detail of specific wine from a specific winery
 @require_http_methods(["GET"])
 def api_show_wine(request, pk1, pk2):
     if request.method == "GET":
@@ -115,19 +109,12 @@ def api_list_orders(request):
             encoder=OrderEncoder,
         )
     else:
-        # try:
         content = json.loads(request.body)
         print("***content", content)
         order = Order.objects.create(**content)
         return JsonResponse({"order": order.id})
-        # except:
-        #     return JsonResponse(
-        #         {"message": "Order unsuccessful"},
-        #         status=400,
-        #     )
 
 
-# Show detail of specific order
 @require_http_methods(["GET"])
 def api_show_order(request, pk):
     if request.method == "GET":
@@ -150,7 +137,6 @@ def api_show_order(request, pk):
         )
 
 
-# Show list of shopping items from orders of specific winery
 @require_http_methods(["GET", "POST"])
 def api_list_shopping_items(request, pk1):
     if request.method == "GET":
@@ -163,7 +149,6 @@ def api_list_shopping_items(request, pk1):
         content = json.loads(request.body)
         shopping_cart_items = content["shopping_items"]
         for index in range(len(shopping_cart_items)):
-            # order_id = shopping_cart_items["order_id"]
             order_id = shopping_cart_items[int(index)]["order_id"]
             order = Order.objects.get(id=order_id)
             shopping_cart_items[int(index)]["order_id"] = order
@@ -181,7 +166,6 @@ def api_list_shopping_items(request, pk1):
         )
 
 
-# Show list of shopping items from specific order
 @require_http_methods(["GET", "POST"])
 def api_list_shopping_items_order(request, pk1, pk2):
     if request.method == "GET":

@@ -62,7 +62,9 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery": winery, "geo": geo}, encoder=WineryEncoder, safe=False
+                {"winery": winery,
+                 "geo": geo},
+                encoder=WineryEncoder, safe=False
             )
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
@@ -75,36 +77,6 @@ def api_list_wines(request, pk):
     if request.method == "GET":
         wines = Wine.objects.filter(winery_id=pk)
         wines = list(wines)
-
-        return JsonResponse(
-            {"wines": wines},
-            encoder=WineListEncoder,
-        )
-    else:
-        content = json.loads(request.body)
-
-        try:
-            if "winery" in content:
-                winery = Winery.objects.get(id=pk)
-                content["winery"] = winery
-        except Winery.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid winery name"},
-                status=400,
-            )
-
-        wine = Wine.objects.create(**content)
-        return JsonResponse(
-            wine,
-            encoder=WineListEncoder,
-            safe=False,
-        )
-
-
-@require_http_methods(["GET", "POST"])
-def api_list_all_wines(request):
-    if request.method == "GET":
-        wines = Wine.objects.all()
 
         return JsonResponse(
             {"wines": wines},
@@ -182,7 +154,10 @@ def api_staff_wine(request, pk):
         try:
             wine = Wine.objects.filter(id=pk)
             wine = list(wine)
-            return JsonResponse({"wine": wine}, encoder=WineListEncoder, safe=False)
+            return JsonResponse(
+                {"wine": wine},
+                encoder=WineListEncoder,
+                safe=False)
         except Wine.DoesNotExist:
             response = JsonResponse({"message": "Wine does not exist"})
             response.status_code = 404
