@@ -8,7 +8,7 @@ function WineColumn(props) {
         const winery = data;
         return (
           <div key={winery.id} className="card mb-3 mt-5 shadow">
-            <img src={winery.url} alt="" className="card-img-top" />
+            <img src={winery.url} className="card-img-top" />
             <div className="card-body">
               <h5 className="card-title">
                 <Link
@@ -83,12 +83,21 @@ class WineryList extends React.Component {
           style={{ backgroundColor: 'darkorchid' }}
         >
           <h1 className="display-5 fw-bold text-white mt-5">
-            Everything Is Vine
+            Everything's Vine
           </h1>
           <div className="col-lg-6 mx-auto">
             <p className="lead mb-5 text-light font-italic">
               The premiere winery management web application.
             </p>
+            <h5 className="card-title">
+              <Link
+                to={`/newwinery/`}
+                className="d-flex justify-content-center btn btn-lg px-4 bg-light gap-3"
+                style={{ color: 'mediumorchid' }}
+              >
+                Try it out here! Create a winery!
+              </Link>
+            </h5>
           </div>
         </div>
         <div className="container">

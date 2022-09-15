@@ -17,6 +17,7 @@ import EditWine from './wine_edit';
 import NewWine from './new_wine';
 import Request from './request';
 import GetWine from './WineDetails';
+import NewWinery from './newwinery';
 
 function App(props) {
   const domain = /https:\/\/[^/]+/;
@@ -74,6 +75,7 @@ function App(props) {
               <Route path="/" element={<WineryList />} />
               <Route path="/request/" element={<Request />} />
               <Route path="/wines/:id/edit/" element={<EditWine />} />
+              <Route path="/newwinery/" element={<NewWinery />} />
             </Routes>
             <Routes>
               <Route element={<NavbarLayout />}>

@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from .models import User
 
-
+# Jennifer's test
 class TestUserViews(TestCase):
     def setUp(self):
         User.objects.create(

@@ -41,7 +41,7 @@ class WineListEncoder(ModelEncoder):
     }
 
 
-@require_http_methods(["GET"])
+@require_http_methods(["GET", "POST"])
 def api_list_winery(request):
     if request.method == "GET":
         wineries = Winery.objects.all()
@@ -50,6 +50,14 @@ def api_list_winery(request):
         return JsonResponse(
             {"wineries": wineries},
             encoder=WineryEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        winery = Winery.objects.create(**content)
+        return JsonResponse(
+            winery,
+            encoder=WineryEncoder,
+            safe=False,
         )
 
 
@@ -62,25 +70,12 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery": winery,
-                 "geo": geo},
-                encoder=WineryEncoder, safe=False
+                {"winery": winery, "geo": geo}, encoder=WineryEncoder, safe=False
             )
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
             response.status_code = 404
             return response
-
-
-@require_http_methods(["GET"])
-def api_list_all_wines(request):
-    if request.method == "GET":
-        wines = Wine.objects.all()
-
-        return JsonResponse(
-            {"wines": wines},
-            encoder=WineListEncoder,
-        )
 
 
 @require_http_methods(["GET", "POST"])
@@ -111,6 +106,17 @@ def api_list_wines(request, pk):
             wine,
             encoder=WineListEncoder,
             safe=False,
+        )
+
+
+@require_http_methods(["GET"])
+def api_list_all_wines(request):
+    if request.method == "GET":
+        wines = Wine.objects.all()
+
+        return JsonResponse(
+            {"wines": wines},
+            encoder=WineListEncoder,
         )
 
 
@@ -165,10 +171,7 @@ def api_staff_wine(request, pk):
         try:
             wine = Wine.objects.filter(id=pk)
             wine = list(wine)
-            return JsonResponse(
-                {"wine": wine},
-                encoder=WineListEncoder,
-                safe=False)
+            return JsonResponse({"wine": wine}, encoder=WineListEncoder, safe=False)
         except Wine.DoesNotExist:
             response = JsonResponse({"message": "Wine does not exist"})
             response.status_code = 404

@@ -18,16 +18,17 @@ class TestWineSlug(TestCase):
         self.assertEquals(wine.abv, 8.5)
 
 
+# Kayli's Test
 class TestWinesViews(TestCase):
     def setUp(self):
         Wine.objects.create(
             brand="test_brand",
             year=2007,
             varietal="test_varietal",
-            abv=8.5,
-            volume=123,
+            abv=14.0,
+            volume=750,
             price=40,
-            quantity=3,
+            quantity=3000,
         )
 
     def test_list_wines(self):
@@ -36,6 +37,7 @@ class TestWinesViews(TestCase):
         self.assertEquals(response.status_code, 200)
 
 
+# Richard's Test
 class TestWineriesViews(TestCase):
     def setUp(self):
         Winery.objects.create(

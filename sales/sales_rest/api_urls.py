@@ -9,22 +9,10 @@ from .api_views import (
 )
 
 urlpatterns = [
-    path(
-        "wineries/<int:pk1>/wines/",
-        api_list_wines,
-        name="api_list_wines"),
-    path(
-        "wineries/<int:pk1>/wines/<int:pk2>/",
-        api_show_wine,
-        name="api_show_wine"),
-    path(
-        "orders/",
-        api_list_orders,
-        name="api_list_orders"),
-    path(
-        "orders/<int:pk>/",
-        api_show_order,
-        name="api_show_order"),
+    path("wineries/<int:pk1>/wines/", api_list_wines, name="api_list_wines"),
+    path("wineries/<int:pk1>/wines/<int:pk2>/", api_show_wine, name="api_show_wine"),
+    path("orders/", api_list_orders, name="api_list_orders"),
+    path("orders/<int:pk>/", api_show_order, name="api_show_order"),
     path(
         "wineries/<int:pk1>/shoppingitems/",
         api_list_shopping_items,
