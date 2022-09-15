@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useAuthContext } from './auth'
+import './map.css'
 
 function SetCenter({center}){
     const map = useMap()
@@ -90,14 +91,14 @@ const Contact = () => {
                     <div id="formContent" className='fadeInDown contact' style={{backgroundColor:"orchid"}}>
                         <form ref={refForm} onSubmit={sendEmail}>
                             <h3 className= 'mt-4 display-5 text-light'>Contact Us</h3>
-                                <div className="fadeIn second">
+                                <div className="fadeIn form-input-row second">
                                     <input className="form-control" 
                                         type="text" 
                                         name="name"
                                         placeholder="Name"
                                         required />
                                 </div>
-                                <div className="fadeIn second">
+                                <div className="fadeIn form-input-row second">
                                     <input className="form-control" 
                                         type="email"
                                         name="email"
@@ -105,20 +106,23 @@ const Contact = () => {
                                         required
                                         />
                                 </div>
-                                <div className="fadeIn third mb-3">
+                                <div className="fadeIn form-input-row third mb-3">
                                     <input className="form-control" 
                                         type="text"
                                         name="subject" 
                                         placeholder="Subject"
                                         required />
                                 </div>
-                                <div className="fadeIn fourth mb-3 textarea">
+                                <div className="fadeIn form-input-row fourth mb-3">
+                                {/* <div className="fadeIn fourth mb-3 textarea"> */}
                                     <textarea className="form-control bg-light textarea" 
                                         name="message"
                                         placeholder="Enter Message"
                                         required />
                                 </div>
+                                <div className="contact-btn-container">
                                 <button type="submit" className="btn bg-light btn-lg btn-block text-dark mb-3">Submit</button>
+                                </div>
                         </form>
                     </div>
                     <MapContainer className="map fadeIn third" center={[0, 0]} zoom={13}>

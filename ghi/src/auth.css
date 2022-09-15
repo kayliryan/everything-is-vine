@@ -323,6 +323,11 @@ input[type=text]:placeholder {
     width:60%;
 }
 
+.form-input-row {
+    width: 100%;
+    
+}
+
 .textarea {
     width: 90%;
     margin-left: auto;

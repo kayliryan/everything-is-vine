@@ -93,4 +93,3 @@ def api_current_user(request):
         {"user": user},
         encoder=UserEncoder,
     )
-

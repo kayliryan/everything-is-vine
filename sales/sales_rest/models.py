@@ -1,14 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-USER_MODEL = settings.AUTH_USER_MODEL
-# Create your models here.
-
-
-# class WineryVO(models.Model):
-#     name = models.CharField(max_length=254)
-#     import_href = models.CharField(max_length=200, unique=True)
-
 
 class WineVO(models.Model):
     winery_id = models.SmallIntegerField()
@@ -24,11 +16,6 @@ class WineVO(models.Model):
     picture_url = models.URLField(max_length=220, null=True)
     quantity = models.SmallIntegerField()
     import_href = models.CharField(max_length=200, unique=True)
-    # winery_id = models.ForeignKey(
-    # WineryVO,
-    # related_name="wines",
-    # on_delete=models.CASCADE
-    # )
 
     def __str__(self):
         return f"Winery {self.winery_id} / Wine {self.id}"
@@ -37,15 +24,22 @@ class WineVO(models.Model):
 class Order(models.Model):
     confirmation_number = models.CharField(max_length=17, unique=True)
     created = models.DateTimeField(auto_now_add=True)
-
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    address_one = models.CharField(max_length=100)
+    address_two = models.CharField(max_length=100, blank = True, null=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    card_name = models.CharField(max_length=150)
+    last_four = models.CharField(max_length=4)
+    exp_date = models.CharField(max_length=5)
+    discount_ten = models.BooleanField(default=False)
+    account_email = models.CharField(max_length=100, null=True, blank=True)
+    
 
 class ShoppingItem(models.Model):
-    user = models.ForeignKey(
-        USER_MODEL,
-        related_name="shopping_items",
-        on_delete=models.CASCADE,
-        null=True,
-    )
     order_id = models.ForeignKey(
         Order, related_name="shopping_items", on_delete=models.CASCADE
     )

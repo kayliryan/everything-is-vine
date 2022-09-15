@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useGetWineDetailsQuery } from './store/salesApi';
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem, updateQuantityFromDetailsPage } from './store/cartReducer';
-// import ErrorNotification from './ErrorNotification'
+
+
 function GetWine() {
   let { id, winevo_id } = useParams();
   const {data, isLoading} = useGetWineDetailsQuery({id, winevo_id});
@@ -20,6 +21,7 @@ function GetWine() {
     // if (data.quantity === 0) {
     //   redirect to Wine List Page
     // }
+    
   async function checkAndSetQuantity(e){
     if(parseInt(e.target.value) < 1 || isNaN(parseInt(e.target.value))){
         e.target.value = 1;
@@ -50,26 +52,29 @@ function GetWine() {
       // console.log(cartItems)
     }
   }
+
   return (
     <div className="container-fluid">
         <div className="card mx-auto col-md-3 col-10 mt-5">
+            
             <img
             className="mx-auto img-thumbnail"
-            src={data.picture_url}
+            src={ data.picture_url }
             height={300}
             />
             <div className="card-body text-center mx-auto">
                 <div className="cvp">
                     <h5 className="card-title font-weight-bold">{ data.brand } { data.year }</h5>
-                    <h6>{ data.varietal }, { data.region }</h6>
+                    <h6>{ data.varietal } , { data.region }</h6>
                     <p>ABV: { data.abv }%,  Volume: { data.volume } mL </p>
-                    <p className="card-text">Price: ${ data.price }</p>
+                    <p className="card-text">Price: $ { data.price }</p>
                     <p>{ data.description }</p>
-                    <p>Quantity: { data.quantity }</p>
-                    <input onChange = { checkAndSetQuantity } type="text" id="quantity" name="quantity" className="form-control input-number" value={ quantity } min="1" max={ data.quantity } />
-                    <button onClick = { addToShoppingCart } href="#" className="btn btn-info btn-lg">
-                      <span className="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                    <p>{data.quantity < 1 ? "OUT OF STOCK" : `Quantity: ${ data.quantity }`}</p>
+                    <input onChange = { checkAndSetQuantity } type="text" id="quantity" name="quantity" className={"form-control input-number" + ( data.quantity < 1 ? " d-none": "" )} value={ quantity } min="1" max={ data.quantity } />
+                    <button onClick = { addToShoppingCart } href="#" className={"btn btn-info btn-lg" + ( data.quantity < 1 ? " d-none": "" )}>
+                      <span className="glyphicon glyphicon-shopping-cart"></span> Add to Shopping Cart
                     </button>
+
                 </div>
             </div>
         </div>

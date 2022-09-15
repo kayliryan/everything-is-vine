@@ -38,20 +38,16 @@ export default function Review() {
         { name: 'Expiry date', detail: expDate },
     ];
 
-    
-    const formatter = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2,      
-        maximumFractionDigits: 2,
-    });
 
     let subTotalSum = cartItems.reduce(
         (total, currentItem) => total = total + (currentItem.price * currentItem.cust_quantity), 0
         );
-    subTotalSum = parseFloat(formatter.format(subTotalSum));
+
+    let floatSubTotalSum = subTotalSum;
     const discountRate = .10;
-    let discount = formatter.format(subTotalSum * discountRate);
-    let tax = parseFloat(formatter.format(.0725 * (parseFloat(subTotalSum)-discount)));
-    let total = formatter.format(subTotalSum + tax - discount);
+    let discount = (floatSubTotalSum * discountRate);
+    let tax = (.0725 * (floatSubTotalSum - discount));
+    let total = (floatSubTotalSum + tax - discount);
 
     const subCosts = [
         { name: 'SubTotal', detail: subTotalSum},
@@ -67,6 +63,7 @@ return (
         </Typography>
         <List disablePadding>
             {cartItems.map((cartItem) => (
+    
             <ListItem key={cartItem.brand} sx={{ py: 1, px: 0 }}>
                 <ListItemText primary={`${cartItem.year} ${cartItem.brand}`} secondary={cartItem.varietal} />
                 <Typography variant="body2">{`${cartItem.cust_quantity} @ $${cartItem.price} = $${cartItem.cust_quantity*cartItem.price}`}</Typography>
@@ -74,14 +71,15 @@ return (
             ))}
             {subCosts.map((subCost) => (
                 <ListItem key={subCost.name} sx={{ py: 0, px: 0 }}>
-                <ListItemText primary={subCost.name} /> {subCost.name === "Discount" ? 
-                    <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                <ListItemText primary={subCost.name} /> 
+                    {/* <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
                         -${subCost.detail}
                     </Typography>
-                    :
+                    : */}
                     <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                        ${subCost.detail}
-                    </Typography> }
+                        {/* if left of the && is true RETURN what's on the right of && */}
+                        {subCost.name === "Discount" && "-" }${subCost.detail.toFixed(2)}
+                    </Typography> 
                 </ListItem>
             ))}
         </List>

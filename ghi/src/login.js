@@ -40,8 +40,8 @@ return (
                     value={password} onChange={changeHandler}/>
                     <input type="submit" className="fadeIn fourth" value="Sign In" />
                 </form>
-                <p className="forgot-password text-center mb-3">
-                            Need to create an account? <a href={`/everything-is-vine/wineries/${id}/signup/`}>Sign Up</a>
+                <p className="forgot-password text-center">
+                            Need to create an account? <a href={`/wineries/${id}/signup/`}>Sign Up</a>
                 </p>
             </div>
         </div>

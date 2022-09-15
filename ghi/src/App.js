@@ -6,7 +6,7 @@ import SignUp from './signup';
 import Winery from './winery';
 import WineryList from './dashboard';
 import { AuthProvider } from './auth';
-import ShoppingCartTest from './ShoppingCart';
+import ShoppingCart from './ShoppingCart';
 import Checkout from './Checkout';
 import { MainContext } from './mainContext';
 import { useState } from 'react';
@@ -59,6 +59,8 @@ function App(props) {
             <div className="container">
               <Routes>
                 <Route path="/" element={<WineryList />} />
+                <Route path="/request/" element={<Request />} />
+                <Route path="/wines/:id/edit/" element={<EditWine/>} />
               </Routes>
               <Routes>
                 <Route element={<NavbarLayout />}>
@@ -68,12 +70,10 @@ function App(props) {
                   <Route path="/wineries/:id/" element={<Winery />} /> 
                   <Route path="/wineries/:id/login/" element={<Login />} />
                   <Route path="/wineries/:id/signup/" element={<SignUp />} />
-                  <Route path="/wineries/:id/shoppingcarttest/" element={<ShoppingCartTest />} />
-                  <Route path="/wineries/:id/shoppingcarttest/checkout" element={<Checkout />} />
+                  <Route path="/wineries/:id/shoppingcart/" element={<ShoppingCart />} />
+                  <Route path="/wineries/:id/shoppingcart/checkout" element={<Checkout />} />
                   <Route path="/wineries/:id/edit/" element={<EditWinery />} />
-                  <Route path="/wines/:id/edit/" element={<EditWine/>} />
                   <Route path="/wineries/:id/wines/new/" element={<NewWine />} />
-                  <Route path="/request/" element={<Request />} />
                 </Route>
               </Routes>
             </div>

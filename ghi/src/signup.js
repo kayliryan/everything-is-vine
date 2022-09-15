@@ -87,6 +87,7 @@ setData({...data,[e.target.name]:[e.target.value]});
                         <input className="form-control" 
                             type="text" 
                             name="phone"
+                            maxLength={10}
                             value={phone}
                             onChange={changeHandler}
                             placeholder="Enter Phone Number"
@@ -104,8 +105,8 @@ setData({...data,[e.target.name]:[e.target.value]});
                     </div>
                     <input type="submit" className="fadeIn fourth" value="Sign Up" />
                     
-                    <p className="forgot-password text-center mb-3">
-                        Already registered? <a href={`/everything-is-vine/wineries/${id}/login/`}>Login</a>
+                    <p className="forgot-password text-center">
+                        Already registered? <a href={`/wineries/${id}/login/`}>Login</a>
                     </p>
                 </form>
             </div>

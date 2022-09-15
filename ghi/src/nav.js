@@ -7,16 +7,21 @@ import { useParams, Link } from 'react-router-dom';
 import { useToken } from './auth';
 import { useAuthContext } from './auth'
 import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 
-function NavigationAuth() {
+function Navigation() {
+    const { cartItems } = useSelector((state) => state.cart);
 
-    const [logged,setLogged]=useState(
+// function NavigationAuth() {
+
+    
+    const [logged, setLogged] = useState(
         false
     )
 
-    const {id, winevo_id} = useParams()
+    const {id} = useParams()
 
-    const [tokencall,login,logout] = useToken();
+    const [tokencall, login, logout] = useToken();
 
     const { token } = useAuthContext();
 
@@ -39,13 +44,12 @@ function NavigationAuth() {
         <Navbar variant='dark' expand="lg" className="rounded" style={{backgroundColor:"mediumorchid"}}>
         <Container fluid>
             <Navbar.Brand href="/">
-                <img
-            src={`${process.env.PUBLIC_URL}/Navlogo.png`}
-            alt=""
-            width="70px"
-            style={{
-            marginRight: "50px"
-            }}/>
+                <img src={`${process.env.PUBLIC_URL}/Navlogo.png`}
+                    alt=""
+                    width="70px"
+                    style={{
+                    marginRight: "50px"
+                    }}/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
@@ -74,6 +78,17 @@ function NavigationAuth() {
                     <div className='px-3'>
                         <button type="submit" className={"btn btn-light p-2 mb-1 mt-1" + (logged ? "":" d-none")} onClick={submitLogoutHandler}>Logout</button>
                     </div>
+                    <div className="widgets-wrap float-md-right">
+                        <div className="widget-header  mr-3">
+                            <Link to={`wineries/${id}/shoppingcart`} className="icon icon-sm rounded-circle border bg-light">
+                            <i className="fa fa-shopping-cart" />
+                            </Link>
+                            <span className="badge badge-pill badge-danger notify">
+                            { cartItems.length }
+                            </span>
+                        </div>
+                    </div>
+
                 </Nav>
             </Navbar.Collapse>
         </Container>
@@ -82,6 +97,6 @@ function NavigationAuth() {
 }
 
 
-export default NavigationAuth;
+export default Navigation;
 
 
