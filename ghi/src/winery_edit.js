@@ -72,11 +72,11 @@ function EditWinery() {
       navigate(`/wineries/${id}`);
     }
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+/*eslint-disable */
   useEffect(() => {
-    fetchWinery(token);
+fetchWinery(token);
   }, []);
-
+/*eslint-enable */
   return (
     <>
       <div className={'wrapper fadeInDown' + (staff ? ' d-none' : '')}>
