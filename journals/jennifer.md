@@ -8,6 +8,22 @@ Keep your journal in reverse chronological order. Always put new entries at the 
 
 ## JOURNAL ENTRIES
 
+## Wednes, September 14, 2022
+Today, our group worked on:
+
+* merging and resolving conflicts to main to make sure all MVP functionality is present
+
+The majority of the day was spent dealing with resolving merge conflicts and pushing to 
+main between Boden, Kayli, and I.  We were having issues with what was being saved after 
+we had resolved issues, added, and committed.  It seemed like some files were not getting
+pushed to main, so we spent a great deal of time going through files to make sure that
+they were correct.  Kayli and I spent some time fixing an issue we had in our Checkout with 
+our math calculations being displayed in the correct format we wanted, a number to 2 decimal
+places.  I was able to resolve the issue by adding toFixed(2) in the return variable, rather
+than using it in our calculations.  I rechecked to see that the features on our front-end 
+were working correctly.  Tomorrow, the plan is to review all the small details and work on 
+deployment as a group.
+
 
 ## Tuesday, September 13, 2022
 Today, I worked on:
