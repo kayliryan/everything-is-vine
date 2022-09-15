@@ -6,36 +6,36 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sales_rest', '0001_initial'),
+        ("sales_rest", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='shoppingitem',
-            name='price',
+            model_name="shoppingitem",
+            name="price",
         ),
         migrations.RemoveField(
-            model_name='shoppingitem',
-            name='quantity',
+            model_name="shoppingitem",
+            name="quantity",
         ),
         migrations.AlterField(
-            model_name='winevo',
-            name='city_state',
+            model_name="winevo",
+            name="city_state",
             field=models.CharField(blank=True, max_length=110, null=True),
         ),
         migrations.AlterField(
-            model_name='winevo',
-            name='description',
+            model_name="winevo",
+            name="description",
             field=models.TextField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='winevo',
-            name='picture_url',
+            model_name="winevo",
+            name="picture_url",
             field=models.URLField(blank=True, max_length=220, null=True),
         ),
         migrations.AlterField(
-            model_name='winevo',
-            name='region',
+            model_name="winevo",
+            name="region",
             field=models.CharField(blank=True, max_length=110, null=True),
         ),
     ]

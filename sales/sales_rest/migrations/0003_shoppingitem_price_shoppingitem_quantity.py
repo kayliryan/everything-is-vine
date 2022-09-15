@@ -6,19 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sales_rest', '0002_remove_shoppingitem_price_and_more'),
+        ("sales_rest", "0002_remove_shoppingitem_price_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='shoppingitem',
-            name='price',
+            model_name="shoppingitem",
+            name="price",
             field=models.FloatField(default=20),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='shoppingitem',
-            name='quantity',
+            model_name="shoppingitem",
+            name="quantity",
             field=models.SmallIntegerField(default=2),
             preserve_default=False,
         ),

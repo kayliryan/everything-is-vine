@@ -4,10 +4,13 @@ import sys
 import time
 import json
 import requests
+
 sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 from sales_rest.models import WineVO
+
+
 def get_wines():
     response = requests.get("http://winery:8000/api/wines/")
     content = json.loads(response.content)
@@ -32,6 +35,8 @@ def get_wines():
                 "import_href": "/wines/" + str(wine["id"]) + "/",
             },
         )
+
+
 def poll():
     while True:
         print("Service poller polling for data")
@@ -40,5 +45,7 @@ def poll():
         except Exception as e:
             print("***", e, file=sys.stderr)
         time.sleep(3)
+
+
 if __name__ == "__main__":
     poll()

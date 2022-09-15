@@ -27,7 +27,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     address_one = models.CharField(max_length=100)
-    address_two = models.CharField(max_length=100, blank = True, null=True)
+    address_two = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
@@ -37,7 +37,7 @@ class Order(models.Model):
     exp_date = models.CharField(max_length=5)
     discount_ten = models.BooleanField(default=False)
     account_email = models.CharField(max_length=100, null=True, blank=True)
-    
+
 
 class ShoppingItem(models.Model):
     order_id = models.ForeignKey(

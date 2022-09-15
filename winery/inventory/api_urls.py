@@ -1,15 +1,15 @@
 from django.urls import path
 from .api_views import (
-    api_list_wines, 
+    api_list_wines,
     api_list_winery,
     api_staff_new_wine,
-    api_staff_winery, 
+    api_staff_winery,
     api_staff_wine,
     api_staff_delete_wine,
-    api_winery, 
+    api_winery,
     api_list_all_wines,
-    api_update_wine
-    )
+    api_update_wine,
+)
 
 
 urlpatterns = [

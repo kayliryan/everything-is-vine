@@ -28,8 +28,8 @@ class WineVOEncoder(ModelEncoder):
 class OrderEncoder(ModelEncoder):
     model = Order
     properties = [
-        "id", 
-        "confirmation_number", 
+        "id",
+        "confirmation_number",
         "created",
         "first_name",
         "last_name",
@@ -44,23 +44,23 @@ class OrderEncoder(ModelEncoder):
         "exp_date",
         "discount_ten",
         "account_email",
-        ]
+    ]
 
 
 class ShoppingItemEncoder(ModelEncoder):
     model = ShoppingItem
     properties = [
-        "order_id", 
+        "order_id",
         "item",
         "price",
         "quantity",
     ]
+
     def get_extra_data(self, o):
-        return {"order_id": o.order_id.id,
-            "item": {
-            "id": o.item.id,
-            "winery_id": o.item.winery_id
-        }}
+        return {
+            "order_id": o.order_id.id,
+            "item": {"id": o.item.id, "winery_id": o.item.winery_id},
+        }
 
 
 # Show list of wines from a specific winery
@@ -75,13 +75,13 @@ def api_list_wines(request, pk1):
             return JsonResponse(
                 {"wines": wines},
                 encoder=WineVOEncoder,
-                )
+            )
         # usually would check if WineryVO.DoesNotExist:
         else:
             return JsonResponse(
                 {"message": "Winery does not exist or has no list of wines"}
-            )       
-        
+            )
+
 
 # Show detail of specific wine from a specific winery
 @require_http_methods(["GET"])
@@ -113,7 +113,7 @@ def api_list_orders(request):
         return JsonResponse(
             {"orders": orders},
             encoder=OrderEncoder,
-            )
+        )
     else:
         # try:
         content = json.loads(request.body)
@@ -123,9 +123,9 @@ def api_list_orders(request):
         # except:
         #     return JsonResponse(
         #         {"message": "Order unsuccessful"},
-        #         status=400, 
+        #         status=400,
         #     )
-    
+
 
 # Show detail of specific order
 @require_http_methods(["GET"])
@@ -171,15 +171,17 @@ def api_list_shopping_items(request, pk1):
             wine = shopping_cart_items[int(index)]["item"]["id"]
             wine_id = WineVO.objects.filter(winery_id=winery).get(id=wine)
             shopping_cart_items[int(index)]["item"] = wine_id
-            shopping_items = ShoppingItem.objects.create(**shopping_cart_items[int(index)])
+            shopping_items = ShoppingItem.objects.create(
+                **shopping_cart_items[int(index)]
+            )
         return JsonResponse(
             shopping_items,
             encoder=ShoppingItemEncoder,
             safe=False,
-        )  
+        )
 
 
-# Show list of shopping items from specific order 
+# Show list of shopping items from specific order
 @require_http_methods(["GET", "POST"])
 def api_list_shopping_items_order(request, pk1, pk2):
     if request.method == "GET":
