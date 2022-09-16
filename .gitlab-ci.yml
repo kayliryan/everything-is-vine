@@ -12,10 +12,15 @@ variables:
   POSTGRES_USER: test_user
   POSTGRES_PASSWORD: test_password
   POSTGRES_HOST_AUTH_METHOD: trust
-  # DJWTO_SIGNING_KEY: 75409d14ded3a885a8318cc049b7670ba2698494116912adba020612e88f51f6
-  # GEO_API_KEY: 8a212ea665a25e9903f10ab1b88845aa
+  CORS_HOST: https://beach-bums.gitlab.io
+  REACT_APP_WINERY_API: $REACT_APP_WINERY_API
+  REACT_APP_SALES_API: $REACT_APP_SALES_API
+  REACT_APP_SALES_POLLER: $REACT_APP_SALES_POLLER
 
-  # DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  DJWTO_SIGNING_KEY: 75409d14ded3a885a8318cc049b7670ba2698494116912adba020612e88f51f6
+  GEO_API_KEY: 8a212ea665a25e9903f10ab1b88845aa
+
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
   # DATABASE_URL: postgres://rkicmfokzbtwzd:57a2191e583382ebeecca27f2448f8de500ef5b75d08bf8f08a265f1061cd9bf@ec2-52-205-61-230.compute-1.amazonaws.com:5432/defnpn8u6v5m5e
 
 winery-unit-test-job:
@@ -195,8 +200,8 @@ deploy-sales-api-image-job:  # RENAME THIS
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker pull ${CI_REGISTRY_IMAGE}/sales:latest
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
-    - docker push registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/sales:latest registry.heroku.com/$HEROKU_SALES/web:latest
+    - docker push registry.heroku.com/$HEROKU_SALES/web:latest
 
     # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
     # TO THE NAME YOU CHOSE FOR THE BUILD STEP (2 PLACES)
@@ -214,6 +219,79 @@ release-sales-api-image-job:  # RENAME THIS
   needs:
     # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
     - deploy-sales-api-image-job
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apk add curl bash
+    - curl https://cli-assets.heroku.com/install.sh | sh
+  script:
+    # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
+    # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
+    # SETTINGS (1 PLACE)
+
+    # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
+    # CHANGE web TO worker (1 PLACE)
+    - heroku container:release worker --app $HEROKU_SALES
+
+
+# Sales Poller
+
+
+build-sales-poller-api-image-job:  # RENAME THIS
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  needs:
+    - build-front-end-job
+  services:
+    - docker:20.10.16-dind
+  script:
+    # CHANGE THIS TO THE DIRECTORY THAT HAS YOUR Dockerfile
+    - cd sales
+
+    # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
+    # TO A MORE MEANINGFUL SERVICE NAME (5 PLACES)
+    - docker build -t ${CI_REGISTRY_IMAGE}/sales_poller:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/sales_poller:latest ${CI_REGISTRY_IMAGE}/sales_poller:$CI_PIPELINE_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/sales_poller:$CI_PIPELINE_ID
+    - docker push ${CI_REGISTRY_IMAGE}/sales_poller:latest
+
+
+deploy-sales-poller-api-image-job:  # RENAME THIS
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: deploy
+  image: docker:20.10.16
+  needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+    - build-sales-poller-api-image-job
+  services:
+    - docker:20.10.16-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker pull ${CI_REGISTRY_IMAGE}/sales_poller:latest
+    - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+    - docker tag ${CI_REGISTRY_IMAGE}/sales_poller:latest registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
+    - docker push registry.heroku.com/$HEROKU_SALES_POLLER/worker:latest
+
+    # EVERYWHERE IT SHOWS fastapi_api BELOW, CHANGE THOSE
+    # TO THE NAME YOU CHOSE FOR THE BUILD STEP (2 PLACES)
+
+    # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
+    # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
+    # SETTINGS (2 PLACES)
+
+    # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
+    # CHANGE /web TO /worker (2 PLACES)
+
+release-sales-poller-api-image-job:  # RENAME THIS
+  stage: deploy
+  image: node:10.17-alpine
+  needs:
+    # CHANGE THIS TO THE JOB NAME FROM THE LAST STEP
+    - deploy-sales-poller-api-image-job
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:

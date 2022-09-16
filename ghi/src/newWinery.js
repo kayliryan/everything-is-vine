@@ -33,8 +33,9 @@ function NewWinery() {
   async function submitWinery(event) {
     event.preventDefault();
     const newForm = { ...data };
-
-    const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/`;
+    const locationHost = `${process.env.REACT_APP_WINERY_API}`
+    // const locationHost = "http://localhost:8000"
+    const locationUrl = locationHost + `/api/wineries/`;
     const fetchConfig = {
 
       method: 'post',
