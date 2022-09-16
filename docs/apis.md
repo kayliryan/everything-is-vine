@@ -147,34 +147,6 @@ Output:
 }
 ```
 
-## Create Shopping Item
-* **Method**: `POST`
-* **Path**: /sales/sales_rest
-
-Input:
-
-```JSON
-{
-  "order_id": Many To One,
-  "item": Foreign Key to WineVO,
-  "quantity": int,
-  "price": float,
-}
-```
-
-Output:
-
-```JSON
-{
-  "id": int,
-  "order_id": Many To One,
-  "item": Foreign Key to WineVO,
-  "quantity": int,
-  "price": float,
-}
-```
-
-
 ## Create New Order
 * **Method**: `POST`
 * **Path**: /sales/sales_rest
@@ -224,3 +196,29 @@ Output:
 }
 ```
 
+## Create Shopping Item
+* **Method**: `POST`
+* **Path**: /sales/sales_rest
+
+Input:
+
+```JSON
+{
+  "order_id": Many To One,
+  "item": Foreign Key to WineVO,
+  "quantity": int,
+  "price": float,
+}
+```
+
+Output:
+
+```JSON
+{
+  "id": int,
+  "order_id": Many To One,
+  "item": Foreign Key to WineVO,
+  "quantity": int,
+  "price": float,
+}
+```
