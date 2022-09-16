@@ -41,7 +41,6 @@ sales-unit-test-job:
   allow_failure: true
   
 
-
 lint-job:
   image: python:3-bullseye
   stage: test
