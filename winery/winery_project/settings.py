@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     "winery",
     "https://eiv-sales.herokuapp.com",
     "https://everything-is-vine.herokuapp.com",
+    "https://eiv-sales-poller.herokuapp.com",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -76,6 +77,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://beach-bums.gitlab.io",
     "https://eiv-sales.herokuapp.com",
     "https://everything-is-vine.herokuapp.com",
+    "https://eiv-sales-poller.herokuapp.com",
     
 ]
 
@@ -84,6 +86,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://beach-bums.gitlab.io",
     "https://eiv-sales.herokuapp.com",
     "https://everything-is-vine.herokuapp.com",
+    "https://eiv-sales-poller.herokuapp.com",
     
 ]
 CORS_ALLOW_CREDENTIALS = True
