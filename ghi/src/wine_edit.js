@@ -38,8 +38,9 @@ function EditWine() {
   const navigate = useNavigate();
 
   async function fetchWine() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${id}/`;
-
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wines/${id}/`;
     const response = await fetch(url, { credentials: 'include' });
 
     if (response.ok) {
@@ -65,7 +66,9 @@ function EditWine() {
   }
 
   async function getCurrentUser() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/accounts/user/`;
     const response = await fetch(url, {
       credentials: 'include',
     });
@@ -87,7 +90,9 @@ function EditWine() {
   async function updateWine(event) {
     event.preventDefault();
     const updateForm = { ...data };
-    const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${id}/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const locationUrl = host + `/api/wines/${id}/`;
     const fetchConfig = {
       method: 'put',
       body: JSON.stringify(updateForm),
@@ -99,7 +104,7 @@ function EditWine() {
       navigate(`/wineries/${winery}/wines/`);
     }
   }
- /*eslint-disable */
+  /*eslint-disable */
   useEffect(() => {
     fetchWine(token);
   }, []);
@@ -250,7 +255,7 @@ function EditWine() {
             </div>
             <input type="submit" className="fadeIn fourth" value="Submit" />
             <p className="forgot-password text-center">
-              Change your mind about editing? {' '}
+              Change your mind about editing?{' '}
               <a href={`/wineries/${winery}/wines/`}>Back to Wine List</a>
             </p>
           </form>

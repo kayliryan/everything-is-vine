@@ -70,7 +70,10 @@ def api_winery(request, pk):
             geo = get_geo(winery.address)
 
             return JsonResponse(
-                {"winery": winery, "geo": geo}, encoder=WineryEncoder, safe=False
+                {"winery": winery,
+                 "geo": geo},
+                encoder=WineryEncoder,
+                safe=False
             )
         except Winery.DoesNotExist:
             response = JsonResponse({"message": "Winery does not exist"})
@@ -171,7 +174,9 @@ def api_staff_wine(request, pk):
         try:
             wine = Wine.objects.filter(id=pk)
             wine = list(wine)
-            return JsonResponse({"wine": wine}, encoder=WineListEncoder, safe=False)
+            return JsonResponse({"wine": wine},
+                                encoder=WineListEncoder,
+                                safe=False)
         except Wine.DoesNotExist:
             response = JsonResponse({"message": "Wine does not exist"})
             response.status_code = 404

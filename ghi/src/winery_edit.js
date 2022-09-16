@@ -19,7 +19,9 @@ function EditWinery() {
   const navigate = useNavigate();
 
   async function fetchWinery() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wineries/${id}/`;
     const response = await fetch(url);
 
     if (response.ok) {
@@ -36,7 +38,9 @@ function EditWinery() {
   }
 
   async function getCurrentUser() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/accounts/user/`;
     const response = await fetch(url, {
       credentials: 'include',
     });
@@ -59,7 +63,9 @@ function EditWinery() {
   async function updateWinery(event) {
     event.preventDefault();
     const updateForm = { ...data };
-    const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/edit/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const locationUrl = host + `/api/wineries/${id}/edit/`;
     const fetchConfig = {
       method: 'put',
       body: JSON.stringify(updateForm),
@@ -72,11 +78,11 @@ function EditWinery() {
       navigate(`/wineries/${id}`);
     }
   }
-/*eslint-disable */
+  /*eslint-disable */
   useEffect(() => {
-fetchWinery(token);
+    fetchWinery(token);
   }, []);
-/*eslint-enable */
+  /*eslint-enable */
   return (
     <>
       <div className={'wrapper fadeInDown' + (staff ? ' d-none' : '')}>

@@ -8,43 +8,66 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Winery',
+            name="Winery",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=254)),
-                ('url', models.URLField(max_length=220, null=True)),
-                ('address', models.CharField(max_length=254)),
-                ('description', models.TextField()),
-                ('owner', models.CharField(max_length=110, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=254)),
+                ("url", models.URLField(max_length=220, null=True)),
+                ("address", models.CharField(max_length=254)),
+                ("description", models.TextField()),
+                ("owner", models.CharField(max_length=110, null=True)),
             ],
             options={
-                'ordering': ('name',),
+                "ordering": ("name",),
             },
         ),
         migrations.CreateModel(
-            name='Wine',
+            name="Wine",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('brand', models.CharField(max_length=110)),
-                ('year', models.SmallIntegerField()),
-                ('varietal', models.CharField(max_length=110)),
-                ('description', models.TextField(null=True)),
-                ('region', models.CharField(max_length=110, null=True)),
-                ('abv', models.FloatField()),
-                ('volume', models.SmallIntegerField()),
-                ('city_state', models.CharField(max_length=110, null=True)),
-                ('price', models.FloatField()),
-                ('picture_url', models.URLField(max_length=220, null=True)),
-                ('quantity', models.SmallIntegerField()),
-                ('winery', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='wines', to='inventory.winery')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("brand", models.CharField(max_length=110)),
+                ("year", models.SmallIntegerField()),
+                ("varietal", models.CharField(max_length=110)),
+                ("description", models.TextField(null=True)),
+                ("region", models.CharField(max_length=110, null=True)),
+                ("abv", models.FloatField()),
+                ("volume", models.SmallIntegerField()),
+                ("city_state", models.CharField(max_length=110, null=True)),
+                ("price", models.FloatField()),
+                ("picture_url", models.URLField(max_length=220, null=True)),
+                ("quantity", models.SmallIntegerField()),
+                (
+                    "winery",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="wines",
+                        to="inventory.winery",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('year',),
+                "ordering": ("year",),
             },
         ),
     ]

@@ -8,7 +8,7 @@ function WineColumn(props) {
         const winery = data;
         return (
           <div key={winery.id} className="card mb-3 mt-5 shadow">
-            <img src={winery.url} className="card-img-top" alt=""/>
+            <img src={winery.url} className="card-img-top" alt="" />
             <div className="card-body">
               <h5 className="card-title">
                 <Link
@@ -42,7 +42,9 @@ class WineryList extends React.Component {
   }
 
   async componentDidMount() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wineries/`;
 
     try {
       const response = await fetch(url);

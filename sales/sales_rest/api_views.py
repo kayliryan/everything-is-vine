@@ -169,7 +169,9 @@ def api_list_shopping_items(request, pk1):
 @require_http_methods(["GET", "POST"])
 def api_list_shopping_items_order(request, pk1, pk2):
     if request.method == "GET":
-        shopping_items = ShoppingItem.objects.filter(item__winery_id=pk1, order_id=pk2)
+        shopping_items = ShoppingItem.objects.filter(
+            item__winery_id=pk1,
+            order_id=pk2)
         return JsonResponse(
             {"shopping_items": shopping_items},
             encoder=ShoppingItemEncoder,

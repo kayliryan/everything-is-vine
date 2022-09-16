@@ -38,7 +38,9 @@ function NewWine() {
   const navigate = useNavigate();
 
   async function getCurrentUser() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/accounts/user/`;
     const response = await fetch(url, {
       credentials: 'include',
     });
@@ -61,7 +63,10 @@ function NewWine() {
   async function newWine(event) {
     event.preventDefault();
     const newForm = { ...data };
-    const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/new/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const locationUrl = host + `/api/wines/new/`;
+
     const fetchConfig = {
       method: 'post',
       body: JSON.stringify(newForm),

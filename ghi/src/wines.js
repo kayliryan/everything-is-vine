@@ -6,7 +6,9 @@ function WineColumn(props) {
   const { id } = useParams();
 
   async function delete_wine(wine_id) {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/${wine_id}/delete/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wines/${wine_id}/delete/`;
     const response = await fetch(url, { method: 'DELETE' });
 
     if (response.ok) {
@@ -18,7 +20,7 @@ function WineColumn(props) {
     <div className="col">
       {props.list.map((wine) => {
         return (
-          <div key={wine.id} className="card mb-3 shadow mt-4">
+          <div key={wine.id} className="card col-lg-10 mb-3 shadow mt-4">
             <img src={wine.picture_url} alt="" className="card-img-top mt-3" />
             <div className="card-body">
               <h5 className="d-flex justify-content-center card-title">
@@ -81,7 +83,9 @@ function WineList() {
   const { token } = useAuthContext();
 
   async function fetchWines() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/wines/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wineries/${id}/wines/`;
 
     try {
       const response = await fetch(url);
@@ -117,7 +121,9 @@ function WineList() {
     }
   }
   async function getCurrentUser() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/accounts/user/`;
     const response = await fetch(url, {
       credentials: 'include',
     });
@@ -132,8 +138,10 @@ function WineList() {
   if (token) {
     getCurrentUser();
   }
-/* eslint-disable-next-line react-hooks/exhaustive-deps */
-  useEffect(() => { fetchWines(token); }, []);
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  useEffect(() => {
+    fetchWines(token);
+  }, []);
 
   return (
     <>

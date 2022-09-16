@@ -9,6 +9,7 @@ COPY inventory inventory
 COPY accounts accounts
 COPY winery_project winery_project
 
+COPY data.json data.json
 RUN python -m pip install -r requirements.txt
 
 # ENTRYPOINT ["./generate_data.py"]

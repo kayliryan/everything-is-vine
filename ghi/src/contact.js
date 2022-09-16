@@ -47,7 +47,9 @@ const Contact = () => {
   const { token } = useAuthContext();
 
   async function fetchWinery() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wineries/${id}/`;
 
     const response = await fetch(url);
 
@@ -57,11 +59,11 @@ const Contact = () => {
       setGeo(data.geo);
     }
   }
-/*eslint-disable */
+  /*eslint-disable */
   useEffect(() => {
     fetchWinery(token);
   }, []);
-/*eslint-enable */
+  /*eslint-enable */
 
   let { latitude, longitude } = geo;
 

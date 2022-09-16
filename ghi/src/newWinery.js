@@ -5,11 +5,9 @@ import './auth.css';
 import { useAuthContext } from './auth';
 
 function NewWinery() {
-    
-/*eslint-disable */
+  /*eslint-disable */
   const { id } = useParams();
-/*eslint-enable */
-
+  /*eslint-enable */
 
   const [data, setData] = useState({
     name: '',
@@ -33,14 +31,13 @@ function NewWinery() {
   async function submitWinery(event) {
     event.preventDefault();
     const newForm = { ...data };
-    const locationHost = `${process.env.REACT_APP_WINERY_API}`
+    const locationHost = `${process.env.REACT_APP_WINERY_API}`;
     // const locationHost = "http://localhost:8000"
     const locationUrl = locationHost + `/api/wineries/`;
-    console.log(locationUrl)
+    console.log(locationUrl);
     const fetchConfig = {
-
       method: 'post',
-      mode: "cors",
+      mode: 'cors',
       body: JSON.stringify(newForm),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

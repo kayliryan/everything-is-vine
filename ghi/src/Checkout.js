@@ -116,7 +116,9 @@ export default function Checkout() {
     if (userEmail !== '') {
       orderData['account_email'] = userEmail;
     }
-    let orderUrl = `${process.env.REACT_APP_SALES_API}/api/orders/`;
+    const host = `${process.env.REACT_APP_SALES_API}`;
+    // const host = "http://localhost:8010"
+    const orderUrl = host + `/api/orders/`;
     let fetchConfig = {
       method: 'post',
       body: JSON.stringify(orderData),
@@ -179,7 +181,9 @@ export default function Checkout() {
       shopping_items: shopping_items,
     };
 
-    let shoppingItemsUrl = `${process.env.REACT_APP_SALES_API}/api/wineries/${winery_id}/shoppingitems/`;
+    const host = `${process.env.REACT_APP_SALES_API}`;
+    // const host = "http://localhost:8010"
+    const shoppingItemsUrl = host + `/api/wineries/${winery_id}/shoppingitems/`;
     let fetchConfig = {
       method: 'post',
       body: JSON.stringify(shoppingItemsData),
@@ -195,7 +199,10 @@ export default function Checkout() {
   }
   async function updateStock(qToSubtract) {
     for (let i = 0; i < qToSubtract.length; i++) {
-      let url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wines/update/${qToSubtract[i].wine_id}/`;
+      const host = `${process.env.REACT_APP_WINERY_API}`;
+      // const host = "http://localhost:8000"
+      const url = host + `/api/wines/update/${qToSubtract[i].wine_id}/`;
+
       let wine_id = qToSubtract[i].wine_id;
       delete qToSubtract[i].wine_id;
       let fetchConfig = {
@@ -256,7 +263,10 @@ export default function Checkout() {
   };
 
   async function getCurrentUser() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const host = `${process.env.REACT_APP_SALES_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/accounts/user/`;
+
     const response = await fetch(url, {
       credentials: 'include',
     });

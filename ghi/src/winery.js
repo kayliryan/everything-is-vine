@@ -9,7 +9,9 @@ function Winery() {
   const { token } = useAuthContext();
 
   async function fetchWinery() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/${id}/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/wineries/${id}/`;
     const response = await fetch(url);
 
     if (response.ok) {
@@ -20,7 +22,9 @@ function Winery() {
   }
 
   async function getCurrentUser() {
-    const url = `${process.env.REACT_APP_DJANGO_SERVICE}/api/accounts/user/`;
+    const host = `${process.env.REACT_APP_WINERY_API}`;
+    // const host = "http://localhost:8000"
+    const url = host + `/api/accounts/user/`;
     const response = await fetch(url, {
       credentials: 'include',
     });
@@ -36,7 +40,7 @@ function Winery() {
   if (token) {
     getCurrentUser();
   }
- /*eslint-disable */
+  /*eslint-disable */
   useEffect(() => {
     fetchWinery(token);
   }, []);
