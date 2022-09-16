@@ -95,6 +95,7 @@ function EditWine() {
     const locationUrl = host + `/api/wines/${id}/`;
     const fetchConfig = {
       method: 'put',
+      mode: 'cors',
       body: JSON.stringify(updateForm),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

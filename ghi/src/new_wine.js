@@ -69,6 +69,7 @@ function NewWine() {
 
     const fetchConfig = {
       method: 'post',
+      mode: 'cors',
       body: JSON.stringify(newForm),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

@@ -121,6 +121,7 @@ export default function Checkout() {
     const orderUrl = host + `/api/orders/`;
     let fetchConfig = {
       method: 'post',
+      mode: 'cors',
       body: JSON.stringify(orderData),
       headers: { 'Content-Type': 'application/json' },
     };
@@ -186,6 +187,7 @@ export default function Checkout() {
     const shoppingItemsUrl = host + `/api/wineries/${winery_id}/shoppingitems/`;
     let fetchConfig = {
       method: 'post',
+      mode: 'cors',
       body: JSON.stringify(shoppingItemsData),
       headers: {
         'Content-Type': 'application/json',
@@ -207,6 +209,7 @@ export default function Checkout() {
       delete qToSubtract[i].wine_id;
       let fetchConfig = {
         method: 'put',
+        mode: 'cors',
         body: JSON.stringify(qToSubtract[i]),
         headers: {
           'Content-Type': 'application/json',

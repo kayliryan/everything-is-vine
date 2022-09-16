@@ -6,18 +6,20 @@ import json
 import requests
 
 sys.path.append("")
+host = os.environ.get('REACT_APP_WINERY_API', 'MISCONFIGURED!')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 from sales_rest.models import WineVO
 
 
 def get_wines():
-    response = requests.get("http://winery:8000/api/wines/")
+    url = host + "/api/wines/"
+    response = requests.get(url)
+    # response = requests.get("http://winery:8000/api/wines/")
     content = json.loads(response.content)
     for wine in content["wines"]["query"]:
         WineVO.objects.update_or_create(
             id=wine["id"],
-            # import_href=wine["href"],
             defaults={
                 "id": wine["id"],
                 "winery_id": wine["winery"]["id"],
