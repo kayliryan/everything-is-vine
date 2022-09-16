@@ -138,10 +138,12 @@ function WineList() {
   if (token) {
     getCurrentUser();
   }
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  /*eslint-disable */
+
   useEffect(() => {
     fetchWines(token);
   }, []);
+  /*eslint-enable */
 
   return (
     <>
