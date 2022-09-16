@@ -1,106 +1,226 @@
-## Create a new wine
+## Create New User
+* **Method**: `POST`
+* **Path**: /winery/accounts
 
+Input:
+
+```JSON
+{
+  "name": str,
+  "address": str,
+  "phone": str,
+  "email": email,
+  "winery": Foreign Key,
+  "employee": bool,
+}
+```
+
+Output:
+
+```JSON
+{
+  "id": int,
+  "name": str,
+  "address": str,
+  "phone": str,
+  "email": email,
+  "winery": Foreign Key,
+  "employee": bool,
+}
+```
+
+## Create New Winery
 * **Method**: `POST`
 * **Path**: /winery/inventory
 
 Input:
 
-```json
+```JSON
 {
-  "brand": string,
-  "year": int,
-  "varietal": string,
-  "description": text NULL,
-  "region": str NULL,
-  "abv": float,
-  "volume": int,
-  "city_state": char NULL,
-  "price": float,
-  "picture": url NULL,
-  "quantity": int,
-  "winery_id": FK,
+  "name": str,
+  "url": url,
+  "address": str,
+  "description": text,
+  "owner": str, 
 }
 ```
 
 Output:
 
-```json
+```JSON
 {
+  "id": int,
+  "name": str,
+  "url": url,
+  "address": str,
+  "description": text,
+  "owner": str, 
+}
+```
+
+## Create New Wine
+* **Method**: `POST`
+* **Path**: /winery/inventory
+
+Input:
+
+```JSON
+{
+  "winery_id": Foreign Key,
+  "brand": string,
+  "year": int,
+  "varietal": string,
+  "description": text,
+  "region": str,
+  "abv": float,
+  "volume": int,
+  "city_state": char,
+  "price": float,
+  "picture_url": url,
+  "quantity": int,
+}
+```
+
+Output:
+
+```JSON
+{
+  "id": int, (Confirm)
+  "winery_id": Foreign Key,
   "id": int,
   "brand": string,
   "year": int,
   "varietal": string,
-  "description": text NULL,
-  "region": str NULL,
+  "description": text,
+  "region": str,
   "abv": float,
   "volume": int,
-  "city_state": char NULL,
+  "city_state": char,
   "price": float,
-  "picture": url NULL,
+  "picture_url": url,
   "quantity": int,
-  "winery_id": FK,
 }
 ```
 
+## Create Wine Value Object
+* **Method**: `POST`
+* **Path**: /sales/sales_rest
 
+Input: 
 
-## Create a new Shopping Item
+```JSON
+{
+  "winery_id": int,
+  "brand": str,
+  "year": int, 
+  "varietal": str, 
+  "description": text, 
+  "region": str,
+  "abv": float, 
+  "volume": int, 
+  "city_state": str,
+  "price": float,
+  "picture_url": url, 
+  "quantity": int,
+  "import_href": str,
+}
+```
 
+Output:
+
+```JSON
+{
+  "id": int,
+  "winery_id": int,
+  "brand": str,
+  "year": int, 
+  "varietal": str, 
+  "description": text, 
+  "region": str,
+  "abv": float, 
+  "volume": int, 
+  "city_state": str,
+  "price": float,
+  "picture_url": url, 
+  "quantity": int,
+  "import_href": str,
+}
+```
+
+## Create Shopping Item
 * **Method**: `POST`
 * **Path**: /sales/sales_rest
 
 Input:
 
-```json
+```JSON
 {
-  "user_id": FK,
-  "order_id": MtO,
-  "item": FK to wine,
+  "order_id": Many To One,
+  "item": Foreign Key to WineVO,
   "quantity": int,
   "price": float,
-  "active": bool,
 }
 ```
 
 Output:
 
-```json
+```JSON
 {
   "id": int,
-  "user_id": FK,
-  "order_id": MtO,
-  "item": FK to wine,
+  "order_id": Many To One,
+  "item": Foreign Key to WineVO,
   "quantity": int,
   "price": float,
-  "active": bool,
 }
 ```
 
 
-## Create a new Order
-
+## Create New Order
 * **Method**: `POST`
 * **Path**: /sales/sales_rest
 
 Input:
 
-```json
+```JSON
 {
-  "confirmation_num": int,
-  "created": datetime,
-  "item": OtM,
+    "confirmation_number": str,
+    "created": datetime,
+    "first_name": str,
+    "last_name": str,
+    "address_one": str,
+    "address_two": str,
+    "city": str,
+    "state": str,
+    "zip_code": str,
+    "country": str,
+    "card_name": str, 
+    "last_four": str,
+    "exp_date": str,
+    "discount_ten": bool,
+    "account_email": str,
 }
 ```
 
 Output:
 
-```json
+```JSON
 {
-  "id": int,
-  "confirmation_num": int,
-  "created": datetime,
-  "item": OtM,
+    "id": int,
+    "confirmation_number": str,
+    "created": datetime,
+    "first_name": str,
+    "last_name": str,
+    "address_one": str,
+    "address_two": str,
+    "city": str,
+    "state": str,
+    "zip_code": str,
+    "country": str,
+    "card_name": str, 
+    "last_four": str,
+    "exp_date": str,
+    "discount_ten": bool,
+    "account_email": str,
 }
 ```
-
 
