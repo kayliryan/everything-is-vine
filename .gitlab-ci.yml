@@ -19,7 +19,7 @@ variables:
   DJWTO_SIGNING_KEY: 75409d14ded3a885a8318cc049b7670ba2698494116912adba020612e88f51f6
   GEO_API_KEY: 8a212ea665a25e9903f10ab1b88845aa
 
-  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+  # DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
 
 winery-unit-test-job:
   image: python:3-bullseye
@@ -27,7 +27,8 @@ winery-unit-test-job:
   script: 
     - cd winery
     - pip install -r requirements.txt
-    - export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB"
+    # - export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB"
+    - export DATABASE_URL=$DATABASE_URL
     - python manage.py migrate  # Migrate the database
     - python manage.py test  # Run the tests
   allow_failure: true
@@ -38,7 +39,8 @@ sales-unit-test-job:
   script: 
     - cd sales
     - pip install -r requirements.txt
-    - export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB"
+    # - export DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres/$POSTGRES_DB"
+    - export DATABASE_URL=$HEROKU_SALES_DATABASE_URL
     - python manage.py migrate  # Migrate the database
     - python manage.py test  # Run the tests
   allow_failure: true
