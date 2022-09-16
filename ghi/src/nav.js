@@ -41,7 +41,8 @@ function Navigation() {
       style={{ backgroundColor: 'mediumorchid' }}
     >
       <Container fluid>
-        <Navbar.Brand href="/">
+        {/* <Navbar.Brand href="/"> */}
+        <Navbar.Brand href={`${process.env.REACT_APP_WINERY_API}`}>
           <img
             src={`${process.env.PUBLIC_URL}/Navlogo.png`}
             alt=""
