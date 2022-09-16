@@ -240,3 +240,5 @@ release-sales-api-build-job:
 
 
 # psql --host=ec2-52-205-61-230.compute-1.amazonaws.com --port=5432 --username=rkicmfokzbtwzd --password --dbname=defnpn8u6v5m5e
+
+

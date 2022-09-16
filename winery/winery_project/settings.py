@@ -115,8 +115,12 @@ WSGI_APPLICATION = "winery_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {}
-DATABASES["default"] = dj_database_url.config()
+# DATABASES = {} **
+# DATABASES["default"] = dj_database_url.config() **
+DATABASES = {
+    "default": dj_database_url.config(default="postgres://user:pass@localhost/dbname")
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
