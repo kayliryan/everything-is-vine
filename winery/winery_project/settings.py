@@ -70,7 +70,7 @@ DJWTO_CSRF = False
 DJWTO_ACCESS_TOKEN_LIFETIME = timedelta(days=1)
 
 # Your DEBUG value MUST be False in production
-DJWTO_SAME_SITE = "NONE" #LAX" if DEBUG else "NONE"
+DJWTO_SAME_SITE = "NONE"  # LAX" if DEBUG else "NONE"
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
@@ -78,7 +78,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://eiv-sales.herokuapp.com",
     "https://everything-is-vine.herokuapp.com",
     "https://eiv-sales-poller.herokuapp.com",
-    
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -87,7 +86,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://eiv-sales.herokuapp.com",
     "https://everything-is-vine.herokuapp.com",
     "https://eiv-sales-poller.herokuapp.com",
-    
 ]
 CORS_ALLOW_CREDENTIALS = True
 

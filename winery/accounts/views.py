@@ -24,6 +24,7 @@ class UserListEncoder(ModelEncoder):
     def get_extra_data(self, o):
         return {"winery": o.winery_id}
 
+
 class UserEncoder(ModelEncoder):
     model = User
     properties = [
@@ -34,10 +35,10 @@ class UserEncoder(ModelEncoder):
         "email",
         "employee",
         "winery",
-        ]
+    ]
+
     def get_extra_data(self, o):
         return {"winery": o.winery_id}
-
 
 
 @require_http_methods(["GET"])
@@ -77,7 +78,7 @@ def api_list_users(request):
             address=content["address"],
             phone=content["phone"],
             winery=content["winery"],
-            employee=content["employee"]
+            employee=content["employee"],
         )
         return JsonResponse(
             {"users": users},
@@ -94,4 +95,3 @@ def api_current_user(request):
         {"user": user},
         encoder=UserEncoder,
     )
-
