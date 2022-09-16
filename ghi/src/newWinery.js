@@ -38,7 +38,7 @@ function NewWinery() {
     const fetchConfig = {
 
       method: 'post',
-      mode: "no-cors",
+      mode: "cors",
       body: JSON.stringify(newForm),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
