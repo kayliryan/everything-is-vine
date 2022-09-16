@@ -204,9 +204,11 @@ release-sales-api-image-job:  # RENAME THIS
     # EVERYWHERE IT SHOWS HEROKU_SERVICE_APP BELOW, CHANGE
     # THOSE TO THE VARIABLE NAME YOU CREATED FOR THE CI/CD
     # SETTINGS (1 PLACE)
+    
 
     # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
     # CHANGE web TO worker (1 PLACE)
     - heroku container:release worker --app $HEROKU_SALES_POLLER
+
 
 
