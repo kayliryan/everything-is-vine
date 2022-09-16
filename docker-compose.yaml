@@ -35,6 +35,7 @@ services:
             DJWTO_SIGNING_KEY: 75409d14ded3a885a8318cc049b7670ba2698494116912adba020612e88f51f6
             GEO_API_KEY: 8a212ea665a25e9903f10ab1b88845aa
 
+
     sales:
         build:
             context: ./sales
