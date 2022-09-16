@@ -172,16 +172,16 @@ function ShoppingCart(){
                 <div className="card-body">
                   <dl className="dlist-align">
                     <dt>Subtotal</dt>
-                    <dd className="text-right">$ { subTotalSum } </dd>
+                    <dd className="text-right">$ { subTotalSum.toFixed(2) } </dd>
                   </dl>
                   <dl className="dlist-align">
                     <dt>Discount:</dt>
-                    <dd className="text-right">$ { discount }</dd>
+                    <dd className="text-right">$ { discount.toFixed(2) }</dd>
                   </dl>
                   <dl className="dlist-align">
                     <dt>Total:</dt>
                     <dd className="text-right  h5">
-                      $ <strong>{ total }</strong>
+                      $ <strong>{ total.toFixed(2) }</strong>
                     </dd>
                   </dl>
                   <hr />
