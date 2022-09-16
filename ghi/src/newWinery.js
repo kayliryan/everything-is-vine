@@ -36,6 +36,7 @@ function NewWinery() {
     const locationHost = `${process.env.REACT_APP_WINERY_API}`
     // const locationHost = "http://localhost:8000"
     const locationUrl = locationHost + `/api/wineries/`;
+    console.log(locationUrl)
     const fetchConfig = {
 
       method: 'post',
