@@ -30,6 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "winery",
+    "https://eiv-sales-poller.herokuapp.com/",
+    "https://everything-is-vine.herokuapp.com/",
 ]
 
 AUTH_USER_MODEL = "accounts.User"

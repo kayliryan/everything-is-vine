@@ -29,6 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "sales",
+    "https://eiv-sales-poller.herokuapp.com/",
+    "https://everything-is-vine.herokuapp.com/",
 ]
 
 
