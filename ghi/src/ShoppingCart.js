@@ -223,7 +223,7 @@ function ShoppingCart() {
                     <dd className="text-right">$ {discount}</dd>
                   </dl>
                   <dl className="dlist-align">
-                    <dt>Total:</dt>
+                    <dt>Pre-Tax Total:</dt>
                     <dd className="text-right  h5">
                       $ <strong>{total}</strong>
                     </dd>

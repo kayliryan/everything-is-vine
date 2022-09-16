@@ -36,7 +36,9 @@ function NewWinery() {
 
     const locationUrl = `${process.env.REACT_APP_DJANGO_SERVICE}/api/wineries/`;
     const fetchConfig = {
+
       method: 'post',
+      mode: "cors",
       body: JSON.stringify(newForm),
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
