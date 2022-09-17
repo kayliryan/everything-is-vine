@@ -227,7 +227,7 @@ release-sales-api-image-job:  # RENAME THIS
 
     # IF THIS IS FOR A BACKGROUND SERVICE LIKE A POLLER,
     # CHANGE web TO worker (1 PLACE)
-    - heroku container:release worker --app $HEROKU_SALES
+    - heroku container:release web --app $HEROKU_SALES
 
 
 # Sales Poller
