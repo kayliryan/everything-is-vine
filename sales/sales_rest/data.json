@@ -1,0 +1,647 @@
+[
+    
+    {
+        "model": "sales_rest.winevo",
+        "pk": 1,
+        "fields": {
+            "winery": 1,
+            "brand": "Reserve",
+            "year": 2017,
+            "varietal": "Merlot",
+            "description": "This wine offers bright red cherry and raspberry aromas, accompanied by dried floral tones intertwined with hints of mocha, vanilla, and cola. On the palate, this wine is supple and invigorating with a wonderful round mid-palate that is well-balanced on a beam of acidity. The framework of gentle tannins leads into a lingering finish that is both full and bright.","region": "Napa Valley","abv": 14.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 80,
+            "picture_url": "https://i.imgur.com/49oDOvV.png",
+            "quantity": 4000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 2,
+        "fields": {
+            "winery": 1,
+            "brand": "Full Throttle",
+            "year": 2020,
+            "varietal": "Cabernet Sauvignon",
+            "description": "This vintage represents another year of phenomenal quality wines from our vineyards. The near-perfect growing season started a little later than typical and saw ideal weather conditions through a mild and moderate summer. The steady and moderate growing season allowed the fruit to develop slowly and steadily, with lower sugar accumulation at ripeness and maintaining a nice acidity with great structure and balance.",
+            "region": "Napa Valley",
+            "abv": 15.6,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 70,
+            "picture_url": "https://i.imgur.com/yeSCa3o.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 3,
+        "fields": {
+            "winery": 1,
+            "brand": "Rich Stock",
+            "year": 2016,
+            "varietal": "Zinfandel",
+            "description": "The late-ripening red Zinfandel wine produces a jammy flavor bursting with fruity aromas of blackberry, cherry, plums, black pepper, and cinnamon with varying levels of oak. A fuller bodied wine that is high in alcohol content, Zinfandel is known for its fruity meets spicy kick with a smoky body.",
+            "region": "Amador",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 49,
+            "picture_url": "https://i.imgur.com/SeQGlS0.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 4,
+        "fields": {
+            "winery": 1,
+            "brand": "Josh",
+            "year": 2018,
+            "varietal": "Chardonnay",
+            "description": "This wine displays a rich golden tone, with brilliant clarity. The expressive aromas of golden apple, figs and ripe pears integrate nicely with richer aromas of light caramel, truffle, and toasted vanillin oak. This wine is rich and full, encompassed by a full-bodied creamy texture, which leads seamlessly into the lingering finish.",
+            "region": "Sonoma Valley",
+            "abv": 12.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 20,
+            "picture_url": "https://i.imgur.com/4IEb69O.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 5,
+        "fields": {
+            "winery": 1,
+            "brand": "Josh",
+            "year": 2017,
+            "varietal": "Sauvignon Blanc",
+            "description": "This wine boasts of fruit flavors such as white peach, grapefruit, lime, pear, passion fruit, and other tropical fruit. Herbaceous hints of cut grass, lemongrass, and tarragon. Spicy notes of green bell pepper, jalapeño, vanilla, nutmeg, and clove.",
+            "region": "Sonoma",
+            "abv": 11.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/KXvfXsc.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 6,
+        "fields": {
+            "winery": 1,
+            "brand": "Josh",
+            "year": 2018,
+            "varietal": "Semillon",
+            "description": "This wine exhibits flavors of lemon, apple, stone fruit, white florals, and beeswax. Its weight and texture allow it to stand up to a variety of dishes but seared scallops, shrimp, and other richer seafood dishes work beautifully with it.",
+            "region": "Amador",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/c7trcXJ.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 7,
+        "fields": {
+            "winery": 2,
+            "brand": "Reserve",
+            "year": 2019,
+            "varietal": "Merlot",
+            "description": "This wine offers bright red cherry and raspberry aromas, accompanied by dried floral tones intertwined with hints of mocha, vanilla, and cola. On the palate, this wine is supple and invigorating with a wonderful round mid-palate that is well-balanced on a beam of acidity. The framework of gentle tannins leads into a lingering finish that is both full and bright.",
+            "region": "Napa Valley",
+            "abv": 14.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 80,
+            "picture_url": "https://i.imgur.com/wE2QdhJ.png",
+            "quantity": 4000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 8,
+        "fields": {
+            "winery": 2,
+            "brand": "Full Throttle",
+            "year": 2018,
+            "varietal": "Cabernet Sauvignon",
+            "description": "This vintage represents another year of phenomenal quality wines from our vineyards. The near-perfect growing season started a little later than typical and saw ideal weather conditions through a mild and moderate summer. The steady and moderate growing season allowed the fruit to develop slowly and steadily, with lower sugar accumulation at ripeness and maintaining a nice acidity with great structure and balance.",
+            "region": "Napa Valley",
+            "abv": 15.6,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 70,
+            "picture_url": "https://i.imgur.com/Pj3QXqz.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 9,
+        "fields": {
+            "winery": 2,
+            "brand": "Rich Stock",
+            "year": 2017,
+            "varietal": "Zinfandel",
+            "description": "The late-ripening red Zinfandel wine produces a jammy flavor bursting with fruity aromas of blackberry, cherry, plums, black pepper, and cinnamon with varying levels of oak. A fuller bodied wine that is high in alcohol content, Zinfandel is known for its fruity meets spicy kick with a smoky body.",
+            "region": "Amador",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 49,
+            "picture_url": "https://i.imgur.com/eJCqkzh.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 10,
+        "fields": {
+            "winery": 2,
+            "brand": "Josh",
+            "year": 2020,
+            "varietal": "Chardonnay",
+            "description": "This wine displays a rich golden tone, with brilliant clarity. The expressive aromas of golden apple, figs and ripe pears integrate nicely with richer aromas of light caramel, truffle, and toasted vanillin oak. This wine is rich and full, encompassed by a full-bodied creamy texture, which leads seamlessly into the lingering finish.","region": "Sonoma Valley","abv": 12.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 20,
+            "picture_url": "https://i.imgur.com/8wwhkIS.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 11,
+        "fields": {
+            "winery": 2,
+            "brand": "Josh",
+            "year": 2017,
+            "varietal": "Sauvignon blanc",
+            "description": "This wine boasts of fruit flavors such as white peach, grapefruit, lime, pear, passion fruit, and other tropical fruit. Herbaceous hints of cut grass, lemongrass, and tarragon. Spicy notes of green bell pepper, jalapeño, vanilla, nutmeg, and clove.",
+            "region": "Sonoma",
+            "abv": 11.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/KO1Bvs4.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 12,
+        "fields": {
+            "winery": 2,
+            "brand": "Josh",
+            "year": 2019,
+            "varietal": "Semillon",
+            "description": "This wine exhibits flavors of lemon, apple, stone fruit, white florals, and beeswax. Its weight and texture allow it to stand up to a variety of dishes but seared scallops, shrimp, and other richer seafood dishes work beautifully with it.",
+            "region": "Amador",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Los Angeles, CA",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/E0Y87rU.png",
+            "quantity": 5000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 13,
+        "fields": {
+            "winery": 3,
+            "brand": "Savoy",
+            "year": 2016,
+            "varietal": "Merlot",
+            "description": "Vibrant ruby in color, the wine opens with layers of perfumed aromas of lavender, blueberry, dark cherry, smoked paprika, and pennyroyal. On the palate, this wine is delicate in body with flavors of ripe cherry, violet, lavender, white pepper, and freshly turned earth. The finish is lengthy and balanced.",
+            "region": "Pasadena",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Pasadena, California",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/Sxj4mAA.png",
+            "quantity": 2000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 14,
+        "fields": {
+            "winery": 3,
+            "brand": "Rosen Family",
+            "year": 2014,
+            "varietal": "Cabernet Sauvignon",
+            "description": "Dark, bold red. The aromas are subtle at first, but then open into warm 5-spice, strawberry coulis, white flowers, and RC cola. Soft and dense on the palate with flavors of dark concentrated red fruits, fresh earth, and hints of Rooibos tea. Subtle warm oak notes support the lush tannin structure, and the wine finishes with a spicy note.",
+            "region": "California",
+            "abv": 12.0,
+            "volume": 750,
+            "city_state": "Pasedena, California",
+            "price": 115,
+            "picture_url": "https://i.imgur.com/ZlqeSg3.png",
+            "quantity": 3000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 15,
+        "fields": {
+            "winery": 3,
+            "brand": "Ashley Crawford Wines",
+            "year": 2017,
+            "varietal": "Zinfandel",
+            "description": "Bright ruby in hue, the wine opens with distinctive aromatics of fresh raspberry, elderberry, black tea leaves and dried flowers. The vineyard's coast influence is evident in the vibrancy of the palate. The unique, calcareous soils of the site bring out mineral and umami flavors in the wine, while the high elevation exposure drives concentration. The finish is bold and full of energy.",
+            "region": "California",
+            "abv": 12.0,
+            "volume": 750,
+            "city_state": "Pasadena, California",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/Kv8psVx.png",
+            "quantity": 1200
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 16,
+        "fields": {
+            "winery": 3,
+            "brand": "Angeleno Company",
+            "year": 2019,
+            "varietal": "Chardonnay",
+            "description": "Our Chardonnay opens with inviting aromas of juicy pear, creamy vanilla**, lemon, honeysuckle, and a hit of nutmeg. The palate is plush and flavorful, with a rich and layered finish that is lengthened by fresh acidity.",
+            "region": "California",
+            "abv": 14.0,
+            "volume": 750,
+            "city_state": "Pasadena, California",
+            "price": 130,
+            "picture_url": "https://i.imgur.com/mbf7czc.png",
+            "quantity": 300
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 17,
+        "fields": {
+            "winery": 3,
+            "brand": "Haven Wines",
+            "year": 2017,
+            "varietal": "Sauvignon Blanc",
+            "description": "Our Chardonnay opens with vibrant aromas of ripe lemon, fresh cream, slate, and subtle, spicy oak. The palate is broad and flavorful, with a rich and layered finish that is balanced by racy minerality. The unique mix of heritage and clonal selections brings depth and nuance to this lively blend.",
+            "region": "Washington",
+            "abv": 11.0,
+            "volume": 750,
+            "city_state": "Ridgefield, Washington",
+            "price": 120,
+            "picture_url": "https://i.imgur.com/6soZf9m.png",
+            "quantity": 1000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 18,
+        "fields": {
+            "winery": 3,
+            "brand": "Foggy Bay",
+            "year": 2016,
+            "varietal": "Semillon",
+            "description": "Pale in color, the wine offers a vivid perfume of strawberries and peaches in cream, and fresh-cut flowers. The silky elegance of the palate is accented with lively notes of raspberry and kiwi.",
+            "region": "France",
+            "abv": 11.5,
+            "volume": 750,
+            "city_state": "Bordeaux, France",
+            "price": 130,
+            "picture_url": "https://i.imgur.com/ahwPqgI.png",
+            "quantity": 800
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 19,
+        "fields": {
+            "winery": 4,
+            "brand": "Savoy",
+            "year": 2020,
+            "varietal": "Merlot",
+            "description": "Vibrant ruby in color, the wine opens with layers of perfumed aromas of lavender, blueberry, dark cherry, smoked paprika, and pennyroyal. On the palate, this wine is delicate in body with flavors of ripe cherry, violet, lavender, white pepper, and freshly turned earth. The finish is lengthy and balanced.",
+            "region": "Italy",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Milan, Italy",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/OiaY6HE.png",
+            "quantity": 2000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 20,
+        "fields": {
+            "winery": 4,
+            "brand": "Rosen Family",
+            "year": 2016,
+            "varietal": "Cabernet Sauvignon",
+            "description": "Dark, bold red. The aromas are subtle at first, but then open into warm 5-spice, strawberry coulis, white flowers, and RC cola. Soft and dense on the palate with flavors of dark concentrated red fruits, fresh earth, and hints of Rooibos tea. Subtle warm oak notes support the lush tannin structure, and the wine finishes with a spicy note.",
+            "region": "California",
+            "abv": 12.0,
+            "volume": 750,
+            "city_state": "Sonoma County, California",
+            "price": 115,
+            "picture_url": "https://i.imgur.com/PtbSq2f.png",
+            "quantity": 3000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 21,
+        "fields": {
+            "winery": 4,
+            "brand": "Ashley Crawford Wines",
+            "year": 2018,
+            "varietal": "Zinfandel",
+            "description": "Bright ruby in hue, the wine opens with distinctive aromatics of fresh raspberry, elderberry, black tea leaves and dried flowers. The vineyard's coast influence is evident in the vibrancy of the palate. The unique, calcareous soils of the site bring out mineral and umami flavors in the wine, while the high elevation exposure drives concentration. The finish is bold and full of energy.",
+            "region": "California",
+            "abv": 12.0,
+            "volume": 750,
+            "city_state": "Oregon, California",
+            "price": 100,
+            "picture_url": "https://i.imgur.com/3iCfbp9.png",
+            "quantity": 1200
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 22,
+        "fields": {
+            "winery": 4,
+            "brand": "Angeleno Company",
+            "year": 2013,
+            "varietal": "Chardonnay",
+            "description": "Our Chardonnay opens with inviting aromas of juicy pear, creamy vanilla**, lemon, honeysuckle, and a hit of nutmeg. The palate is plush and flavorful, with a rich and layered finish that is lengthened by fresh acidity.",
+            "region": "California",
+            "abv": 14.0,
+            "volume": 750,
+            "city_state": "Los Angeles, California",
+            "price": 130,
+            "picture_url": "https://i.imgur.com/CwzI1Kp.png",
+            "quantity": 300
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 23,
+        "fields": {
+            "winery": 4,
+            "brand": "Haven Wines",
+            "year": 2016,
+            "varietal": "Chardonnay",
+            "description": "Our Chardonnay opens with vibrant aromas of ripe lemon, fresh cream, slate, and subtle, spicy oak. The palate is broad and flavorful, with a rich and layered finish that is balanced by racy minerality. The unique mix of heritage and clonal selections brings depth and nuance to this lively blend.",
+            "region": "Washington",
+            "abv": 11.0,
+            "volume": 750,
+            "city_state": "Ridgefield, Washington",
+            "price": 120,
+            "picture_url": "https://i.imgur.com/nlK60zc.png",
+            "quantity": 1000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 24,
+        "fields": {
+            "winery": 4,
+            "brand": "Foggy Bay",
+            "year": 2012,
+            "varietal": "Sauvignon Blanc",
+            "description": "Pale in color, the wine offers a vivid perfume of strawberries and peaches in cream, and fresh-cut flowers. The silky elegance of the palate is accented with lively notes of raspberry and kiwi.",
+            "region": "France",
+            "abv": 11.5,
+            "volume": 750,
+            "city_state": "Bordeaux, France",
+            "price": 130,
+            "picture_url": "https://i.imgur.com/76PKDP3.png",
+            "quantity": 800
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 25,
+        "fields": {
+            "winery": 5,
+            "brand": "Reserve",
+            "year": 2019,
+            "varietal": "Merlot",
+            "description": "Deep garnet in color, the intense fruit aromas of black cherry and ripe pomegranate are infused with toasty oak. The palate opens to a beautifully rich and lush texture laced with hints of salinity - a distinguishing characteristic of the site. The minerality and warm, spicy character of the vineyard is brought forward by fermentation in concrete tank and whole cluster fermentation.",
+            "region": "Oak Knoll District",
+            "abv": 14.3,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 42,
+            "picture_url": "https://i.imgur.com/JycxhOY.png",
+            "quantity": 1800
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 26,
+        "fields": {
+            "winery": 5,
+            "brand": "Four Graces Estate",
+            "year": 2018,
+            "varietal": "Cabernet Sauvignon",
+            "description": "Deep ruby in color, the wine carries luscious fruit aromas of blackberry preserves and dark cherry, infused with exotic notes of spice, black tea and pomegranate. The palate opens to a dense and velvety texture laced with flavors of barrel char and salinity, leading to a structured and focused finish.",
+            "region": "Napa Valley",
+            "abv": 14.6,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 60,
+            "picture_url": "https://i.imgur.com/5HCTloC.png",
+            "quantity": 2000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 27,
+        "fields": {
+            "winery": 5,
+            "brand": "Four Graces Estate ",
+            "year": 2012,
+            "varietal": "Zinfandel",
+            "description": "Vibrant ruby in color, expressive aromas of pomegranate, raspberry and nougat candy jump out of the glass. A lively, fleshy structure compliments the fruit and ripeness. Bold and charged with energy, the wine finishes with well-integrated toasty oak notes.",
+            "region": "Oak Knoll District",
+            "abv": 14.2,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 30,
+            "picture_url": "https://i.imgur.com/4t6khAX.png",
+            "quantity": 1500
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 28,
+        "fields": {
+            "winery": 5,
+            "brand": "Four Graces Estate",
+            "year": 2016,
+            "varietal": "Chardonnay",
+            "description": "This chardonnay opens with vibrant aromas of ripe lemon, fresh cream, slate, and subtle, spicy oak. The palate is broad and flavorful, with a rich and layered finish that is balanced by racy minerality. The unique mix of heritage and clonal selections brings depth and nuance to this lively blend.",
+            "region": "Napa Valley",
+            "abv": 12.8,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 36,
+            "picture_url": "https://i.imgur.com/KdRB4l0.png",
+            "quantity": 2000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 29,
+        "fields": {
+            "winery": 5,
+            "brand": "Four Graces Estate",
+            "year": 2018,
+            "varietal": "Sauvignon blanc",
+            "description": "Pale in color, the wine offers a vivid perfume of strawberries and peaches in cream, and fresh-cut flowers. The silky elegance of the palate is accented with lively notes of raspberry and kiwi.",
+            "region": "Oak Knoll District",
+            "abv": 13.6,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 36,
+            "picture_url": "https://i.imgur.com/nIPhSsv.png",
+            "quantity": 2200
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 30,
+        "fields": {
+            "winery": 5,
+            "brand": "Four Graces Estate",
+            "year": 2010,
+            "varietal": "Semillon",
+            "description": "The wine opens with a dominant flinty, aroma, layered with complex notes of orchard fruit, lightly toasted grain, and lime zest. The palate brings a big, weighty texture and the understated fruit is balanced with vivid acidity. ",
+            "region": "Napa Valley",
+            "abv": 13.2,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 30,
+            "picture_url": "https://i.imgur.com/LKd5yIy.png",
+            "quantity": 2200
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 31,
+        "fields": {
+            "winery": 6,
+            "brand": "Reserve",
+            "year": 2011,
+            "varietal": "Merlot",
+            "description": "This merlot opens with layers of perfumed aromas of lavender, blueberry, dark cherry, smoked paprika, and pennyroyal. On the palate, this wine is delicate in body with flavors of ripe cherry, violet, lavender, white pepper, and freshly turned earth. The finish is lengthy and balanced.",
+            "region": "Napa Valley",
+            "abv": 14.6,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 52,
+            "picture_url": "https://i.imgur.com/9ouaqzO.png",
+            "quantity": 2000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 32,
+        "fields": {
+            "winery": 6,
+            "brand": "Angry Grape Winery",
+            "year": 2013,
+            "varietal": "Cabernet Sauvignon",
+            "description": "This cabernet sauvignon is a deep, yet vibrant garnet in color with effusive aromas of ripe strawberry and black cherry. Concentrated on the palate, with flavors 5-spice, intense dark berry fruit, and hints of earthiness. This is a precise and focused wine with a rich, dense tannin and lively acidity on the finish.",
+            "region": "Napa Valley",
+            "abv": 14.8,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 58,
+            "picture_url": "https://i.imgur.com/5K7NOtB.png",
+            "quantity": 3000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 33,
+        "fields": {
+            "winery": 6,
+            "brand": "Angry Grape Winery",
+            "year": 2018,
+            "varietal": "Zinfandel",
+            "description": "The wine opens with a dominant flinty aroma, layered with complex notes of orchard fruit, lightly toasted grain, and orange zest. The palate brings a big, weighty texture and the understated fruit is balanced with vivid acidity. This wine will continue to develop and delight with age over time.",
+            "region": "Napa Valley",
+            "abv": 17.0,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 42,
+            "picture_url": "https://i.imgur.com/0EWjR1f.png",
+            "quantity": 2000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 34,
+        "fields": {
+            "winery": 6,
+            "brand": "Angry Grape Winery",
+            "year": 2015,
+            "varietal": "Chardonnay",
+            "description": "A delicious red wine",
+            "region": "Napa Valley",
+            "abv": 12.8,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 26,
+            "picture_url": "https://i.imgur.com/N3Vm0cx.png",
+            "quantity": 3000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 35,
+        "fields": {
+            "winery": 6,
+            "brand": "Angry Grape Winery",
+            "year": 2019,
+            "varietal": "Sauvignon blanc",
+            "description": "This wine opens with vibrant aromas of ripe lemon, fresh cream, slate, and subtle, spicy oak. The palate is broad and flavorful, with a rich and layered finish that is balanced by racy minerality. The long and generous finish is layered with beautiful, lifted minerality and verve.",
+            "region": "Napa Valley",
+            "abv": 13.0,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 28,
+            "picture_url": "https://i.imgur.com/vOJdPNd.png",
+            "quantity": 3000
+        }
+    },
+    {
+        "model": "sales_rest.winevo",
+        "pk": 36,
+        "fields": {
+            "winery": 6,
+            "brand": "Angry Grape Winery",
+            "year": 2010,
+            "varietal": "Semillon",
+            "description": "This wine opens with inviting aromas of juicy pear, creamy vanilla, lemon, honeysuckle, and a hit of nutmeg. The palate is plush and flavorful, with a rich and layered finish that is lengthened by fresh acidity.",
+            "region": "Napa Valley",
+            "abv": 12.6,
+            "volume": 750,
+            "city_state": "Napa, California",
+            "price": 28,
+            "picture_url": "https://i.imgur.com/p5oRNMz.png",
+            "quantity": 3000
+        }
+    }
+]
