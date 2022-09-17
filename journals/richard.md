@@ -52,5 +52,9 @@ Today we figured out how to use regex to change the public url for our deploymen
 
 ## September 14, 2022
 
-Today we worked on finishing touches and merging all of our changes with main. 
+Today we spent all day resolving merge conflicts.
+
+## September 16th, 2022
+
+Today we spent all day sorting out database issues we were having with our postgres database. We finally sorted it out and at this point we are all deployed but we seem to still have an unresolved issue with our poller. 
 
