@@ -6,7 +6,7 @@ import json
 import requests
 
 sys.path.append("")
-host = os.environ.get('REACT_APP_WINERY_API', 'MISCONFIGURED!')
+host = os.environ.get('WINERY_SERVICE', 'MISCONFIGURED!')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
 django.setup()
 from sales_rest.models import WineVO
