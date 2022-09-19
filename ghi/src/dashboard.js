@@ -7,8 +7,8 @@ return (
     {props.list.map(data => {
         const winery = data;
         return (
-        <div key={winery.id} className="card mb-3 mt-5 shadow">
-            <img src={winery.url} className="card-img-top" />
+        <div key={winery.id} className="card mb-3 mt-5 shadow h-100">
+            <img src={winery.url} className="card-img-top crop-image" />
             <div className="card-body">
             <h5 className="card-title">
                 <Link to={`/wineries/${winery.id}`} className="d-flex justify-content-center btn btn-lg px-4 gap-3 text-light" style={{backgroundColor:"orchid"}}>{winery.name}</Link>

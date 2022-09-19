@@ -53,3 +53,11 @@ Today I worked on cleaning the code.  I removed duplicate code and files I had c
 
 09/14/22:
 Today we worked as a team to merge all of the features together and were able to get through it all by the end of the day. We pair-programed to fine tune some of the features of the webpage and prepped it for deployment.  
+
+09/15/22:
+Today we worked all day on deployment trying to get the website to function properly.  I also was tasked to quickly create a winery creation page and update the sign up form to allow checking a box to have staff credentials for testing functionality on the site. 
+
+09/16/22:
+Working on deployment as a team today.  I worked for an hour refining the readme. 
+
+
