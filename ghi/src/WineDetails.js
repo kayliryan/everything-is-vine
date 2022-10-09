@@ -68,12 +68,12 @@ function GetWine() {
               {data.brand} {data.year}
             </h5>
             <h6>
-              {data.varietal} , {data.region}
+              {data.varietal}, {data.region}
             </h6>
             <p>
               ABV: {data.abv}%, Volume: {data.volume} mL{' '}
             </p>
-            <p className="card-text">Price: $ {data.price}</p>
+            <p className="card-text">Price: ${data.price}</p>
             <p>{data.description}</p>
             <p>
               {data.quantity < 1

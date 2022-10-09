@@ -42,8 +42,8 @@ class WineryList extends React.Component {
   }
 
   async componentDidMount() {
-    const host = `${process.env.REACT_APP_WINERY_API}`;
-    // const host = "http://localhost:8000"
+    // const host = `${process.env.REACT_APP_WINERY_API}`;
+    const host = "http://localhost:8000"
     const url = host + `/api/wineries/`;
 
     try {
@@ -114,9 +114,9 @@ class WineryList extends React.Component {
             Please enjoy a selection of sample winery pages.
           </p>
           <p className="lead mb-3" style={{ color: 'black' }}>
-            Winery pages can be hosted as a collective or by individual winery &
+            Winery pages can be hosted as a collective or by individual winery and
             customized to your needs! Click the link below and one of our
-            representatives will reach out to you.{' '}
+            representatives will reach out to you with pricing and additional information.{' '}
           </p>
           <h5 className="card-title">
             <Link
